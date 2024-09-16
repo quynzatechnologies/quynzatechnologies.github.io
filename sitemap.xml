@@ -67,12 +67,28 @@
   </url><url>
     <loc>http://localhost:1313/quehacemos/</loc>
   </url><url>
+    <loc>http://localhost:1313/quienessomos/</loc>
+  </url><url>
+    <loc>http://localhost:1313/servicios/consultoria_ia/</loc>
+  </url><url>
+    <loc>http://localhost:1313/servicios/consultoria_robotica/</loc>
+  </url><url>
     <loc>http://localhost:1313/contact/</loc>
+  </url><url>
+    <loc>http://localhost:1313/products/curso_ia/</loc>
+  </url><url>
+    <loc>http://localhost:1313/products/entrenadorlogica/</loc>
   </url><url>
     <loc>http://localhost:1313/faq/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/ipsum/</loc>
   </url><url>
     <loc>http://localhost:1313/blog/1/01/01/migrate-from-jekyll/</loc>
+  </url><url>
+    <loc>http://localhost:1313/products/</loc>
+  </url><url>
+    <loc>http://localhost:1313/servicios/</loc>
+  </url><url>
+    <loc>http://localhost:1313/products/tractomula/</loc>
   </url>
 </urlset>

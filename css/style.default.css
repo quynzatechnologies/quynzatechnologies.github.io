@@ -3180,6 +3180,22 @@ body {
   line-height: 1.42857143;
   color: #555555;
 }
+.toctree-l1 {
+  list-style: none;
+}
+main {
+  display: flex; /* Use flexbox for layout */
+  padding: 20px;
+}
+.sidebar {
+  flex: 0.5; /* 1/3 of the main content area */
+  background-color: #f9f9f9;
+  padding: 20px;
+  background: #e2e4e6;
+}
+.content {
+   flex: 2; /* 2/3 of the main content area */
+}
 a {
   color: var(--primary-accent);
   text-decoration: none;

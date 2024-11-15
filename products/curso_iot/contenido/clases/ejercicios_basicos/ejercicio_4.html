@@ -7,7 +7,7 @@
     <meta name="googlebot" content="index,follow,snippet,archive">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Tags</title>
+    <title>Ejercicio 4: Crear servidor web en ESP32 e interfaz web</title>
     <meta name="author" content="" />
     <meta name="description" content="Página web de Quynza Technologies">
     <meta name="generator" content="Hugo 0.134.1">
@@ -184,75 +184,306 @@
             </div>
         </header>
 
-        <div id="heading-breadcrumbs">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Tags</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <main>
+			<aside class="sidebar">
+				<ul class="current" aria-expanded="true">
+                    <li class="toctree-l1" aria-expanded="true">
+                        <a href="/products/curso_iot/contenido/index.html">
+							Inicio
+						</a>
+                    </li>
+					<li class="toctree-l1" aria-expanded="false">
+						<a href="/products/curso_iot/contenido/introduccion_iot/index.html">
+							Introducción al IoT
+						</a>
+						<ul>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/introduccion_iot/que_es/index.html">¿Qué es el Internet de las Cosas (IoT)?</a>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/introduccion_iot/historia/index.html">Historia y Evolución del IoT</a>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/introduccion_iot/impacto/index.html">Impacto en la Electrónica y la Programación</a>
+							</li>
+						</ul>
+					</li>
+					<li class="toctree-l1" aria-expanded="true">
+						<a href="/products/curso_iot/contenido/componentes_claves/index.html">Componentes Claves IoT</a>
+						<ul>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/componentes_claves/sensores/index.html">Sensores</a>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/componentes_claves/actuadores/index.html">Actuadores</a>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/componentes_claves/conectividad/index.html">Conectividad</a>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/componentes_claves/procesamiento/index.html">Plataforma de procesamiento y análisis de datos</a>
+								<ul>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/componentes_claves/procesamiento/node_red.html">Node-RED</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="toctree-l1" aria-expanded="true">
+						<a href="/products/curso_iot/contenido/clases/index.html">Clases y Actividades Prácticas</a>
+						<ul>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/clases/general.html">Vision general del curso</a>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/clases/ejercicios_basicos/index.html">Ejercicios básicos comunicación ESP32</a>
+								<ul>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_1.html">Ejercicio 1: Visualizar lista redes WiFi</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_2.html">Ejercicio 2: Conectarse a red WiFi</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_3.html">Ejercicio 3: Crear red WiFi</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_4.html">Ejercicio 4: Crear servidor web en ESP32 e interfaz web</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_5.html">Ejercicio 5: Utilizar módulo Bluetooth de ESP32</a>
+									</li>
+								</ul>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/clases/ejercicios_servidor/index.html">Implementación de un servidor útil</a>
+								<ul>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_servidor/ejercicio_6.html">Ejercicio 6: Monitoreo de Temperatura y Humedad con DHT11</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_servidor/ejercicio_7.html">Ejercicio 7: Sistema de Alarma con Sensor Infrarrojo y Notificación Web</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_servidor/ejercicio_8.html">Ejercicio 8: Control de LEDs con Interfaz Web Básica</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_servidor/ejercicio_9.html">Ejercicio 9: Interfaz Web para Controlar un Display de 7 Segmentos</a>
+									</li>
+								</ul>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/clases/ejercicios_node_red/index.html">Uso de Node-RED</a>
+								<ul>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_node_red/ejercicio_10.html">Ejercicio 10: Plataforma de Monitoreo en la Nube con Node-RED</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_node_red/ejercicio_11.html">Ejercicio 11: Sistema con Sensor Infrarrojo y Alertas en Node-RED</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_node_red/ejercicio_12.html">Ejercicio 12: Automatización del Riego Basado en Humedad con Node-RED</a>
+									</li>
+								</ul>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/clases/ejercicios_bluetooth/">Uso de Bluetooth</a>
+								<ul>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/clases/ejercicios_bluetooth/ejercicio_13.html">Ejercicio 13: Control de Dispositivos a través de Bluetooth con el ESP32</a>
+									</li>
+								</ul>
+							</li>
+							<li class="toctree-l1">
+								<a href="/products/curso_iot/contenido/clases/proyectos/index.html">Proyecto</a>
+							</li>
+						</ul>
+					</li>
+					<li class="toctree-l1" aria-expanded="true">
+						<a href="/products/curso_iot/contenido/futuro/index.html">Futuro de IoT y Próximos Pasos</a>
+						<ul>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/futuro/tendencias/index.html">Tendencias Emergentes en IoT</a>
+								<ul>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/futuro/tendencias/ia_ml.html	">Inteligencia Artificial y Machine Learning</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/futuro/tendencias/edge.html">Computación en el Borde (Edge Computing)</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/futuro/tendencias/avanzada.html">5G y Conectividad Avanzada</a>
+									</li>
+									<li class="toctree-l3">
+										<a href="/products/curso_iot/contenido/futuro/tendencias/seguridad.html">Seguridad en IoT</a>
+									</li>
+								</ul>
+							</li>
+							<li class="toctree-l2">
+								<a href="/products/curso_iot/contenido/futuro/recursos/index.html">Recursos Adicionales y Continuación del Aprendizaje</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</aside>
 
-        <div id="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-9" id="blog-listing-medium">
-                        <ul class="pager">
-                            <li class="previous disabled"><a href="#">&larr; Más reciente</a></li>
-                            <li class="next disabled"><a href="#">Más antiguo &rarr;</a></li>
+            <div class="content">
+                <section>
+                    <div id="heading-breadcrumbs">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Ejercicio 4: Crear servidor web en ESP32 e interfaz web</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="navegation" arial-label="Page navigation">
+                        <ul class="wy-breadcrumbs">
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/index.html">Inicio</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/clases/index.html">Clases y Actividades Prácticas</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/index.html">Ejercicios básicos comunicación ESP32</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_4.html" class="not-active">Ejercicio 4: Crear servidor web en ESP32 e interfaz web</a>
+                            </li>
                         </ul>
+                        <hr>
                     </div>
-                    <div class="col-md-3">
-                        <div class="panel panel-default sidebar-menu">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Buscar</h3>
-                            </div>
+                </section>
+            
+                <section>
+                    <div id="content">
+                        <div class="container" id="contact">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <section>
+                                        <p>Todas las páginas web que se ven en internet están alojadas en un servidor, que continuamente esperar conexiones de clientes. En el caso de un ESP32, se crea un objeto tipo socket.socket que están escucha para atender solicitudes externas y el servidor debe dar respuestas a estas. Tantos las solicitudes como las respuestas de deben dar en un formato HTML.
+                                        </p>
+                                        <p>El programa se va a dividir en tres partes:
+                                        </p>
+                                        <ol>
+                                            <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32.</li>
+                                            <li>main.py: Script principal de Python.</li>
+                                            <li>html_led.html: Texto HTML para interfaz gráfica del ejercicio.</li>
+                                        </ol>
+
+                                        <p>boot.py:</p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
+    <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #658b00">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;connecting to network...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
     
-                            <div class="panel-body">
-                                <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
-                                    <div class="input-group">
-                                        <input type="search" name="q" class="form-control" placeholder="Buscar">
-                                        <input type="hidden" name="sitesearch" value="http://localhost:1313/">
-                                        <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-template-main"><i class="fas fa-search"></i></button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="panel panel-default sidebar-menu">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Categorias</h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="/categories/lorem">LOREM (2)</a></li>
-                                    <li><a href="/categories/programming">PROGRAMMING (3)</a></li>
-                                    <li><a href="/categories/pseudo">PSEUDO (2)</a></li>
-                                    <li><a href="/categories/starting">STARTING (1)</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel sidebar-menu">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Palabras clave</h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="tag-cloud">
-                                    <li><a href="/tags/go"><i class="fas fa-tags"></i> go</a></li>
-                                    <li><a href="/tags/golang"><i class="fas fa-tags"></i> golang</a></li>
-                                    <li><a href="/tags/hugo"><i class="fas fa-tags"></i> hugo</a></li>
-                                    <li><a href="/tags/ipsum"><i class="fas fa-tags"></i> ipsum</a></li>
-                                    <li><a href="/tags/programming"><i class="fas fa-tags"></i> programming</a></li>
-                                    <li><a href="/tags/theme"><i class="fas fa-tags"></i> theme</a></li>
-                                </ul>
+                                        <p>main.py:</p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
+    <span style="color: #8B008B; font-weight: bold">if</span> led.value() == <span style="color: #B452CD">1</span>:
+        gpio_state=<span style="color: #CD5555">&quot;ON&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        gpio_state=<span style="color: #CD5555">&quot;OFF&quot;</span>
+    
+    f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_led.txt&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = text <span style="color: #a61717; background-color: #e3d2d2">$</span>{gpio_state}
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;web-server-led.com&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+    conn, addr = s.accept()
+    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Got a connection from %s&#39;</span> % <span style="color: #658b00">str</span>(addr))
+    
+    <span style="color: #228B22"># Get the received request of the client</span>
+    request = conn.recv(<span style="color: #B452CD">1024</span>)
+    request = <span style="color: #658b00">str</span>(request)
+    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Content = %s&#39;</span> % request)
+    
+    <span style="color: #228B22"># Find commands of client to turn ON/OFF the led</span>
+    led_on = request.find(<span style="color: #CD5555">&#39;/?led=on&#39;</span>)
+    led_off = request.find(<span style="color: #CD5555">&#39;/?led=off&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> led_on == <span style="color: #B452CD">6</span>:
+        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;LED ON&#39;</span>)
+        led.value(<span style="color: #B452CD">1</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> led_off == <span style="color: #B452CD">6</span>:
+        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;LED OFF&#39;</span>)
+        led.value(<span style="color: #B452CD">0</span>)
+        
+    <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+    response = web_page()
+    
+    <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+    conn.send(<span style="color: #CD5555">&#39;HTTP/1.1 200 OK\n&#39;</span>)
+    conn.send(<span style="color: #CD5555">&#39;Content-Type: text/html\n&#39;</span>)
+    conn.send(<span style="color: #CD5555">&#39;Connection: close\n\n&#39;</span>)
+    conn.sendall(response)
+    
+    <span style="color: #228B22"># Close Socket</span>
+    conn.close()
+</pre>
+</div>
+
+                                        <p>El script </p>
+                                    </section>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
+
+                <footer>
+                    <hr>
+                    <div role="navegation" arial-label="Button navigation">
+                        <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_3.html" class="btn btn-neutral float-left" title="Ejercicio 3: Crear red WiFi" accesskey="p" rel="prev">
+                            <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                            Anterior
+                        </a>
+                        <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_5.html" class="btn btn-neutral float-right" title="Ejercicio 5: Utilizar módulo Bluetooth de ESP32" accesskey="n" rel="next">
+                            <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                            Siguiente
+                        </a>
+                    </div>
+                </footer>
             </div>
-        </div>
+        </main>
 
         <footer id="footer">
             <div class="container">

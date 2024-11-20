@@ -3196,6 +3196,7 @@ body {
 }
 ul {
   padding: 0px;
+  text-align: justify;
 }
 .wy-breadcrumbs {
   padding: 10px;
@@ -3486,7 +3487,8 @@ h3,
   margin-bottom: 20px;
 }
 p {
-  margin: 0 0 10px;
+  margin: 10px 0 10px;
+  text-align: justify;
 }
 .lead {
   margin-bottom: 20px;

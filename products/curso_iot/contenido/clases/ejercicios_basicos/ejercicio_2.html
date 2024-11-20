@@ -295,7 +295,7 @@
 									</li>
 								</ul>
 							</li>
-							<li class="toctree-l1">
+							<li class="toctree-l2">
 								<a href="/products/curso_iot/contenido/clases/proyectos/index.html">Proyecto</a>
 							</li>
 						</ul>
@@ -365,15 +365,37 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <section>
-                                        <p>Luego de confirmar que la red WiFi deseada para conectar ha sido correctamente detectada por el ESP32, se ejecuta el siguiente código:</p>
+                                        <h1>Descripción</h1>
+                                        <p> Usando Micropython, con el <strong>Ejercicio 2: Conectarse a red WiFi</strong> se va aprender a conectar al ESP32 a una red WiFi 
+                                            disponible y cuando se realice una conexión exitosa entonces se encenderá el LED conectado a la placa ESP32.
+                                        </p>
 
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/index.html">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Entrenador_ESP32.jpg" width ="608" height="auto">
+                                        </p>
+
+                                        <h1>Código</h1>
+                                        <p>Para este ejercicio se necesitará el archivo:</p>
+                                        <ul>
+                                            <li><strong>main.py</strong>: Script principal que contiene el código para conexión a una red WiFi específica.</li>
+                                        </ul>
+
+                                        <h2>main.py</h2>
+
+                                        <p>Luego de confirmar que la red WiFi deseada para conectar ha sido correctamente detectada por el ESP32 con el 
+                                        <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_1.html">Ejercicio 1: Visualizar lista redes WiFi</a> se debe 
+                                        crear el archivo <strong>main.py</strong> que contiene el siguiente código:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
 
 p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 
 <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-    <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
     wlan = network.WLAN(network.STA_IF)
     wlan.active(<span style="color: #658b00">False</span>)
     wlan.active(<span style="color: #658b00">True</span>)
@@ -393,7 +415,30 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </div>
 
                                         <p>Donde “XXX” es el nombre de su red WiFi y “YYY” es la contraseña de su red.</p>
-                                        <p>Este programa realizara un intento de conexión a su red WiFi y en caso de ser exitosa se va a encender el LED conectado a la placa ESP32.</p>
+
+                                        <h3>Explicación paso a paso:</h3>
+                                        <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan">network</a></em>. Esta librería permite al ESP32 conectarse a una red WiFi.</p>
+                                        
+                                        <h1>Testeo en ESP32</h1>
+                                        Se debe cargar el archivo <em>main.py</em> a nuestro dispositivo ESP32 del entrenador.
+    
+                                        <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+    
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Con_ESP32_ejercicio_1.png" width ="608" height="auto">
+                                        </p>
+                                        
+                                        <p>Luego ejecutamos el código mediante el software Thonny, y se va mostrar un mensaje como este:</p>
+    
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/resultado_ejercicio_2.png" width ="608" height="auto">
+                                        </p>
+                                        
+                                        <p>Y el entrenador se podrá ver de esta manera:</p>
+    
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Testeo_ESP32_ejercicio_2.png" width ="608" height="auto">
+                                        </p>
                                     </section>
                                 </div>
                             </div>

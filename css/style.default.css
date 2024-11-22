@@ -2534,37 +2534,37 @@ fieldset[disabled] .btn-template-primary.active {
 #get-it p {
   margin: 0 0 20px;
 }
-#footer {
+.footer {
   background: #555555;
   padding: 50px 0;
   color: #999999;
 }
-#footer h1,
-#footer h2,
-#footer h3,
-#footer h4,
-#footer h5,
-#footer h6 {
+.footer h1,
+.footer h2,
+.footer h3,
+.footer h4,
+.footer h5,
+.footer h6 {
   color: #eeeeee;
 }
-#footer h4 {
+.footer h4 {
   font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
-#footer ul {
+.footer ul {
   padding-left: 0;
   list-style: none;
 }
-#footer ul a {
+.footer ul a {
   color: #999999;
 }
-#footer ul a:hover {
+.footer ul a:hover {
   color: var(--primary-accent);
   text-decoration: none;
 }
-#footer .photostream div {
+.footer .photostream div {
   float: left;
   display: block;
   -webkit-box-sizing: border-box;
@@ -2574,74 +2574,74 @@ fieldset[disabled] .btn-template-primary.active {
   padding: 7.5px;
   overflow: hidden;
 }
-#footer .photostream div a {
+.footer .photostream div a {
   border: solid 1 px #eeeeee;
 }
-#footer .photostream div img {
+.footer .photostream div img {
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
-#footer .photostream div:hover img {
+.footer .photostream div:hover img {
   -webkit-transform: scale(1.1, 1.1);
   -ms-transform: scale(1.1, 1.1);
   -o-transform: scale(1.1, 1.1);
   transform: scale(1.1, 1.1);
 }
-#footer .blog-entries .item {
+.footer .blog-entries .item {
   clear: both;
   padding: 5px 0;
   margin-bottom: 10px;
   border-bottom: solid 1px #555555;
 }
-#footer .blog-entries .item .image {
+.footer .blog-entries .item .image {
   float: left;
   width: 15%;
   margin-right: 10px;
 }
-#footer .blog-entries .item .name {
+.footer .blog-entries .item .name {
   width: 75%;
   margin-left: 10px;
   display: table-cell;
   vertical-align: middle;
 }
-#footer .blog-entries .item .name h5 {
+.footer .blog-entries .item .name h5 {
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 12px;
 }
-#footer .blog-entries .item .name h5 a {
+.footer .blog-entries .item .name h5 a {
   color: #eeeeee;
 }
-#footer .blog-entries .item .text {
+.footer .blog-entries .item .text {
   width: 100%;
   clear: both;
 }
-#footer .blog-entries .item:last-child {
+.footer .blog-entries .item:last-child {
   border-bottom: none;
   margin-bottom: 0;
 }
-#footer .social a {
+.footer .social a {
   color: #555555;
   font-size: 25px;
   margin: 0 10px 0 0;
 }
-#footer .social a:hover {
+.footer .social a:hover {
   color: var(--primary-accent);
 }
-#copyright {
+.copyright {
   background: #333;
   color: #ccc;
   padding: 50px 0;
   font-size: 12px;
   line-height: 28px;
 }
-#copyright p {
+.copyright p {
   margin: 0;
 }
 @media (max-width: 991px) {
-  #copyright p {
+  .copyright p {
     float: none !important;
     text-align: center;
     margin-bottom: 10px;
@@ -3208,7 +3208,19 @@ ul {
   padding-bottom: 3px;
   text-indent: 10px;
 }
+.toctree-l1:hover {
+  list-style: none;
+  background: #8b8b8b;
+  padding-top: 3px;
+  padding-bottom: 3px;  
+  text-indent: 10px;
+}
 .toctree-l1>a {
+  color: black;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.toctree-l1:hover>a {
   color: black;
   margin-left: 10px;
   margin-right: 10px;
@@ -3220,7 +3232,19 @@ ul {
   padding-bottom: 3px;
   text-indent: 25px;
 }
+.toctree-l2:hover {
+  list-style: none;
+  background: #b1b1b1;
+  padding-top: 3px;
+  padding-bottom: 3px;  
+  text-indent: 25px;
+}
 .toctree-l2>a {
+  color: black;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.toctree-l2:hover>a {
   color: black;
   margin-left: 10px;
   margin-right: 10px;
@@ -3232,7 +3256,20 @@ ul {
   padding-bottom: 3px;
   text-indent: 40px;
 }
+.toctree-l3:hover {
+  list-style: none;
+  background: #dddddd;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-indent: 40px;
+}
 .toctree-l3>a {
+  color: black;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 12px;
+}
+.toctree-l3:hover>a {
   color: black;
   margin-left: 10px;
   margin-right: 10px;

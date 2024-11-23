@@ -520,6 +520,39 @@ ul.list-style-none {
   margin-bottom: 20px;
   font-size: 13px;
 }
+/* Textbox styles */
+.textbox {
+  margin: 15px 0;
+  display: flex;
+  justify-content: left;
+}
+
+.textbox input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
+
+.textbox input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+/* Link styles for signup */
+.signup-link {
+  margin-top: 20px;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
 /* buttons  */
 .btn {
   font-weight: 700;
@@ -533,6 +566,9 @@ ul.list-style-none {
 }
 .btn-neutral {
   background-color: #f3f6f6 !important;
+}
+.btn-neutral:hover {
+  background-color: #e0e3e3 !important;
 }
 .float-right {
   float: right;

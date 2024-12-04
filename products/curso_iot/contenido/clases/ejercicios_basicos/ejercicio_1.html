@@ -72,7 +72,7 @@
                                         </p>
 
                                         <p style="text-align:center;">
-                                            <img src="/img/entrenador_esp32.jpg" width ="608" height="auto">
+                                            <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
                                         </p>
 
                                         <h1>Código</h1>
@@ -81,7 +81,7 @@
                                             <li><strong>main.py</strong>: Script principal que contiene el código para la visualización de la lista de redes WiFi disponibles</li>
                                         </ul>
 
-                                        <h2>main.py</h2>
+                                        <h3>main.py</h3>
 
                                         <p>Se debe crear el archivo <strong>main.py</strong> que contiene el siguiente código:</p>
                                         
@@ -103,8 +103,12 @@ listWifi = wlan.scan()              <span style="color: #228B22"># scan for acce
     <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;SSID: &quot;</span>+ ssid + <span style="color: #CD5555">&quot;, Canal: &quot;</span>+ channel + <span style="color: #CD5555">&quot;, RSSI: &quot;</span>+ rssi + <span style="color: #CD5555">&quot;, Securidad: &quot;</span>+ security + <span style="color: #CD5555">&quot;, Oculto: &quot;</span>+ hidden)
 </pre>
 </div>    
-                                        <h3>Explicación paso a paso:</h3>
-                                        <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan">network</a></em>. Esta librería permite al ESP32 conectarse a una red WiFi.</p>
+                                        <h1>Explicación paso a paso:</h1>
+
+                                        <h3>main.py</h3>
+                                        <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan">network</a></em>. 
+                                            Esta librería permite al ESP32 conectarse a una red WiFi:
+                                        </p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -128,7 +132,7 @@ wlan.active(<span style="color: #658b00">True</span>)                   <span st
 </div>  
 
                                         <p>Finalmente, se llama al método <em>scan</em> de la clase <em><a href="https://docs.micropython.org/en/latest/library/network.WLAN.html">WLAN</a></em>
-                                            para generar la lista de redes WiFi que el módulo WLAN del ESP32 detecta.
+                                            para generar la lista de redes WiFi que el módulo WLAN del ESP32 detecta:
                                         </p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -154,7 +158,10 @@ listWifi = wlan.scan()              <span style="color: #228B22"># scan for acce
                                             <li>Oculto: Determina si la red Wi-Fi tiene su transmisión SSID desactivada</li>
                                         </ol>
                                         
-                                        <p>Se recorre cada item de la lista generada por medio de un ciclo <em>for</em>, y para cada uno se muestra en consola los valores de sus especificaciones: </p>
+                                        <p>Se recorre cada item de la lista generada por medio de un ciclo <em>for</em>, y para cada uno se muestra en consola los valores de sus 
+                                            especificaciones: 
+                                        </p>
+
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
 <span style="color: #8B008B; font-weight: bold">for</span> item <span style="color: #8B008B">in</span> listWifi:
@@ -169,18 +176,16 @@ listWifi = wlan.scan()              <span style="color: #228B22"># scan for acce
 </div>    
 
                                     <h1>Testeo en ESP32</h1>
-                                    Se debe cargar el archivo <em>main.py</em> a nuestro dispositivo ESP32 del entrenador.
-
                                     <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
 
                                     <p style="text-align:center;">
-                                        <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Con_ESP32_ejercicio_1.png" width ="608" height="auto">
+                                        <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
                                     </p>
                                     
-                                    <p>Luego ejecutamos el código mediante el software Thonny, y se va mostrar un mensaje como este:</p>
+                                    <p>Luego ejecutamos el script <em>main.py</em> mediante el software Thonny, y se va mostrar un mensaje como este:</p>
 
                                     <p style="text-align:center;">
-                                        <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/resultado_ejercicio_1.png" width ="608" height="auto">
+                                        <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/resultado_ejercicio_1.png" width ="100%" height="auto">
                                     </p>
 
                                     </section>

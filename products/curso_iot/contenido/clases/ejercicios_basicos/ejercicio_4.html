@@ -13,7 +13,7 @@
     <script src="/js/front.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
     
-    <title>Ejercicio 4: Crear servidor web en ESP32 e interfaz web</title>
+    <title>Ejercicio 4: Acceder a dirección Web</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h1>Ejercicio 4: Crear servidor web en ESP32 e interfaz web</h1>
+                                    <h1>Ejercicio 4: Acceder a dirección Web</h1>
                                     <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
 								</div>
                             </div>
@@ -50,7 +50,7 @@
                                 <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/index.html">Ejercicios básicos comunicación ESP32</a>
                             </li>
                             <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_4.html" class="not-active">Ejercicio 4: Crear servidor web en ESP32 e interfaz web</a>
+                                <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_4.html" class="not-active">Ejercicio 4: Acceder a dirección Web</a>
                             </li>
                         </ul>
                         <hr>
@@ -63,26 +63,36 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <section>
-                                        <p>Todas las páginas web que se ven en internet están alojadas en un servidor, que continuamente esperar conexiones de clientes. En el caso de un ESP32, se crea un objeto tipo socket.socket que están escucha para atender solicitudes externas y el servidor debe dar respuestas a estas. Tantos las solicitudes como las respuestas de deben dar en un formato HTML.
+                                        <h1>Descripción</h1>
+                                        <p>Usando Micropython, con el <strong>Ejercicio 4: Acceder a dirección Web</strong> se va a aprender a acceder a una dirección Web 
+                                            con protocolo <em>HTTP</em> y que se retorne el contenido de este.
                                         </p>
-                                        <p>El programa se va a dividir en tres partes:
+
+                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/index.html">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
                                         </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+                                        </p>
+
+                                        <h1>Código</h1>
+                                        <p>Para este ejercicio se necesitará el archivo:</p>
                                         <ol>
-                                            <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32.</li>
-                                            <li>main.py: Script principal de Python.</li>
-                                            <li>html_led.html: Texto HTML para interfaz gráfica del ejercicio.</li>
+                                            <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32. Contiene el código para conexión a una red WiFi 
+                                                específica</li>
+                                            <li>main.py: Script principal de Python. Contiene el código para acceder a la página web con protocolo <em>HTTP</em>.</li>
                                         </ol>
 
-                                        <p>boot.py:</p>
+                                        <h3>boot.py:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<pre style="margin: 0; line-height: 125%">
 <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
 
 p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 
 <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-    <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
     wlan = network.WLAN(network.STA_IF)
     wlan.active(<span style="color: #658b00">True</span>)
     <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
@@ -97,69 +107,239 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
     
-                                        <p>main.py:</p>
+                                        <h3>main.py:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<pre style="margin: 0; line-height: 125%">
 <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
 
-p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">http_get</span>(url):
+    _, _, host, path = url.split(<span style="color: #CD5555">&#39;/&#39;</span>, <span style="color: #B452CD">3</span>)
+    addr = socket.getaddrinfo(host, <span style="color: #B452CD">80</span>)[<span style="color: #B452CD">0</span>][-<span style="color: #B452CD">1</span>]
+    s = socket.socket()
+    s.connect(addr)
+    s.send(<span style="color: #658b00">bytes</span>(<span style="color: #CD5555">&#39;GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n&#39;</span> % (path, host), <span style="color: #CD5555">&#39;utf8&#39;</span>))
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+        data = s.recv(<span style="color: #B452CD">100</span>)
+        <span style="color: #8B008B; font-weight: bold">if</span> data:
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #658b00">str</span>(data, <span style="color: #CD5555">&#39;utf8&#39;</span>), end=<span style="color: #CD5555">&#39;&#39;</span>)
+        <span style="color: #8B008B; font-weight: bold">else</span>:
+            <span style="color: #8B008B; font-weight: bold">break</span>
+    s.close()
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
-    <span style="color: #8B008B; font-weight: bold">if</span> led.value() == <span style="color: #B452CD">1</span>:
-        gpio_state=<span style="color: #CD5555">&quot;ON&quot;</span>
-    <span style="color: #8B008B; font-weight: bold">else</span>:
-        gpio_state=<span style="color: #CD5555">&quot;OFF&quot;</span>
-    
-    f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_led.txt&#39;</span>)
-    text = f.read()
-    f.close()
-    
-    html = text <span style="color: #a61717; background-color: #e3d2d2">$</span>{gpio_state}
-    <span style="color: #8B008B; font-weight: bold">return</span> html
-
-<span style="color: #228B22"># Create a Socket</span>
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
-s.bind((<span style="color: #CD5555">&#39;web-server-led.com&#39;</span>, <span style="color: #B452CD">80</span>))
-<span style="color: #228B22"># Accept maximum 5 connections</span>
-s.listen(<span style="color: #B452CD">5</span>)
-
-<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-    <span style="color: #228B22"># When a client connects, the connection is accepted</span>
-    conn, addr = s.accept()
-    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Got a connection from %s&#39;</span> % <span style="color: #658b00">str</span>(addr))
-    
-    <span style="color: #228B22"># Get the received request of the client</span>
-    request = conn.recv(<span style="color: #B452CD">1024</span>)
-    request = <span style="color: #658b00">str</span>(request)
-    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Content = %s&#39;</span> % request)
-    
-    <span style="color: #228B22"># Find commands of client to turn ON/OFF the led</span>
-    led_on = request.find(<span style="color: #CD5555">&#39;/?led=on&#39;</span>)
-    led_off = request.find(<span style="color: #CD5555">&#39;/?led=off&#39;</span>)
-    <span style="color: #8B008B; font-weight: bold">if</span> led_on == <span style="color: #B452CD">6</span>:
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;LED ON&#39;</span>)
-        led.value(<span style="color: #B452CD">1</span>)
-    <span style="color: #8B008B; font-weight: bold">if</span> led_off == <span style="color: #B452CD">6</span>:
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;LED OFF&#39;</span>)
-        led.value(<span style="color: #B452CD">0</span>)
-        
-    <span style="color: #228B22"># Generate the HTML text of Web Site</span>
-    response = web_page()
-    
-    <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
-    conn.send(<span style="color: #CD5555">&#39;HTTP/1.1 200 OK\n&#39;</span>)
-    conn.send(<span style="color: #CD5555">&#39;Content-Type: text/html\n&#39;</span>)
-    conn.send(<span style="color: #CD5555">&#39;Connection: close\n\n&#39;</span>)
-    conn.sendall(response)
-    
-    <span style="color: #228B22"># Close Socket</span>
-    conn.close()
+http_get(<span style="color: #CD5555">&#39;http://XXX/ZZZ&#39;</span>)
 </pre>
 </div>
 
-                                        <p>El script </p>
+                                        <h1>Explicación paso a paso:</h1>
+
+                                        <h3>boot.py</h3>
+                                        <p>Este es el mismo código definido en el <strong>Ejercicio 2: Conectarse a red WiFi</strong>, en el cual se da una 
+                                            <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_2.html#explicacion">explicación paso a paso</a>. Se debe tener
+                                            en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+                                        </p>
+
+                                        <ul>
+                                            <li>XXX: Nombre de su red WiFi</li>
+                                            <li>YYY: Contraseña de su red WiFi</li>
+                                        </ul>
+
+                                        <h3>main.py</h3>
+
+                                        <h4>Introducción a las páginas web y el comando GET:</h4>
+
+                                        <p>Para comprender este ejercicio, es importante saber que toda página web tiene un código fuente que define su contenido. Este código es 
+                                            accesible a través de peticiones realizadas por el navegador al servidor que aloja la página. En este ejercicio, el ESP32 actuará como 
+                                            un cliente que envía una petición GET a un servidor para obtener el contenido de una página web específica. El comando GET es uno de 
+                                            los métodos más comunes del protocolo <em>HTTP</em>, utilizado para solicitar datos de un servidor.
+                                        </p>      
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Diagrama1_ejercicio_5.png" width ="100%" height="auto">
+                                        </p>    
+
+                                        <p>Cuando un navegador accede a una página web, recibe el código fuente que define su contenido. En este ejercicio, el ESP32 actuará como 
+                                            cliente y recibirá este código, que luego será mostrado en consola. Un ejemplo de código HTML que podría recibirse es el siguiente:
+                                        </p> 
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><span style="color: #1e889b">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;head&gt;&lt;title&gt;</span>Example Page<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;&lt;/head&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>Welcome to Example.com!<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;p&gt;</span>This is a sample page.<span style="color: #8B008B; font-weight: bold">&lt;/p&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
+</pre>
+</div>
+    
+                                        <p>Este código define una página con un título, un encabezado principal y un párrafo. En la consola del ESP32, veremos este contenido en 
+                                            formato de texto plano.
+                                        </p>
+
+                                        <p>El siguiente diagrama ilustra el flujo de datos en este ejercicio. El ESP32 actúa como cliente, enviando una solicitud GET al servidor. 
+                                            El servidor responde con el contenido de la página web, que el ESP32 muestra en su consola.
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Diagrama2_ejercicio_5.png" width ="100%" height="auto">
+                                        </p>    
+
+                                        <p>Este flujo representa la interacción típica en la comunicación cliente-servidor en IoT, donde los dispositivos recopilan información de 
+                                            servidores remotos para procesarla localmente o presentarla al usuario.
+                                        </p>
+
+                                        <h4>Sockets y su papel en la conexión cliente-servidor:</h4>
+
+                                        <p>Los sockets son un componente esencial en la comunicación entre dispositivos en una red. En el contexto de IoT y en este ejercicio en 
+                                            particular, el socket actúa como un punto de comunicación entre el ESP32 (cliente) y el servidor web. El socket permite al ESP32 enviar 
+                                            y recibir datos utilizando protocolos de red, como HTTP, que es el protocolo que estamos empleando para realizar la solicitud GET.
+                                        </p>
+
+                                        <p>Un socket se puede imaginar como una "tubería" a través de la cual los datos fluyen entre el cliente y el servidor. El ESP32 utiliza un 
+                                            socket para:
+                                        </p>
+
+                                        <ul>
+                                            <li><strong>Conectarse al servidor web:</strong>  Especifica la dirección IP del servidor y el puerto que se usará para la comunicación (en este caso, el puerto 80, que es el estándar para HTTP).</li>
+                                            <li><strong>Enviar solicitudes:</strong> El ESP32 envía una solicitud GET a través del socket, indicando al servidor qué recurso desea obtener.</li>
+                                            <li><strong>Recibir respuestas:</strong> El servidor utiliza el mismo socket para enviar de vuelta el contenido solicitado, como el código HTML de la página web.</li>
+                                        </ul>
+                                            
+                                        <h4>Socket con ESP32:</h4>
+                                             
+                                        <p> Siguiendo el <a href="https://docs.micropython.org/en/latest/esp8266/tutorial/network_tcp.html#simple-http-server">tutorial</a> 
+                                            oficial de módulo socket, para crear un servidor web se necesita crear un socket que escuche las solicitudes de clientes que requieran 
+                                            entablar comunicación. Para redes de servidores TCP se sigue una serie de pasos para crear el socket, el cual se muestra en el siguiente 
+                                            diagrama de flujo:
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Diagrama_ejercicio_4.png" width ="300" height="auto">
+                                        </p>
+
+                                        <ol>
+                                            <li>Se crea el objeto <em>socket.socket(af=AF_INET, type=SOCK_STREAM, proto=IPPROTO_TCP, /)</em> con una configuración TCP</li>
+                                            <li>Se llama la función <em>socket.bind(address)</em> para vincular el socket a una dirección</li>
+                                            <li>Se llama la función <em>socket.listen([backlog])</em> para habilitar al servidor web para aceptar conexiones y delimita un máximo
+                                            número de conexiones</li>
+                                            <li>Se llama la función <em>socket.accept()</em> para aceptar una solicitud de conexión entrante de un cliente. El cual retorna un
+                                            nuevo objeto socket, usado para enviar y recibir datos, y la dirección vinculada al socket</li>
+                                            <li>Se llama las funciones <em>socket.send()</em> y <em>socket.recv()</em> para enviar y recibir datos al cliente, respectivamente.</li>
+                                            <li>Se llama la función <em>socket.close()</em> para marcar el socket como cerrado y liberar todos los recursos</li>
+                                        </ol>
+
+                                        <p>Para más información de las diferentes funciones disponibles en la clase <em>socket</em> véase la 
+                                            <a href="https://docs.micropython.org/en/latest/library/socket.html">documentación oficial</a>.
+                                        </p>
+
+                                        <p>Con lo anterior en claro, se procede a explicar el código desarrollado:
+                                        </p>
+
+                                        <p>En primer lugar importamos la librería socket:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+</pre>
+</div>
+
+                                        <p> Se crea una función llamada <em>http_get</em> que recibe un parámetro: <em>url</em> que corresponde a la dirección web de la página
+                                            <em>HTTP</em> deseada:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">http_get</span>(url):
+</pre>
+</div>
+
+                                        <p> Luego se divide esta dirección recibida en dos partes:
+                                        </p>
+
+                                        <ul>
+                                            <li><em>host</em>: nombre de dominio</li>
+                                            <li><em>path</em>: ruta de acceso de un archivo dentro del dominio</li>
+                                        </ul>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Diagrama3_ejercicio_5.png" width ="100%" height="auto">
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    _, _, host, path = url.split(<span style="color: #CD5555">&#39;/&#39;</span>, <span style="color: #B452CD">3</span>)
+</pre>
+</div>
+
+                                        <p> Se utiliza la función <em>socket.getaddrinfo()</em> para obtener la dirección IP y puerto al cual se va a conectar el socket teniendo
+                                            en cuenta que se va a conectar a un host (de la dirección ingresada) y puerto (80 para el caso de protocolo <em>HTTP</em>) específico:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    addr = socket.getaddrinfo(host, <span style="color: #B452CD">80</span>)[<span style="color: #B452CD">0</span>][-<span style="color: #B452CD">1</span>]
+</pre>
+</div>
+
+                                        <p> Luego se crea el objeto <em>s</em> de clase <em>socket.socket</em> y se conecta a la dirección IP del obtenida en el códigoo anterior.
+                                            Se procede a enviar el comando <em>GET</em>:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    s = socket.socket()
+    s.connect(addr)
+    s.send(<span style="color: #658b00">bytes</span>(<span style="color: #CD5555">&#39;GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n&#39;</span> % (path, host), <span style="color: #CD5555">&#39;utf8&#39;</span>))
+</pre>
+</div>
+
+                                        <p>Y en un ciclo se va imprimiendo en consola toda la respuesta dada por el servidor, que contiene el código fuente de la página solicitada:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+        data = s.recv(<span style="color: #B452CD">100</span>)
+        <span style="color: #8B008B; font-weight: bold">if</span> data:
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #658b00">str</span>(data, <span style="color: #CD5555">&#39;utf8&#39;</span>), end=<span style="color: #CD5555">&#39;&#39;</span>)
+        <span style="color: #8B008B; font-weight: bold">else</span>:
+            <span style="color: #8B008B; font-weight: bold">break</span>
+    s.close()
+</pre>
+</div>
+
+                                        <p> Por último se llama a la función <em>http_get</em>. Se debe tener muy en cuenta de reemplazar la url para que siga la estructura de:
+                                            <em>http://host/path</em>, es decir que esta función solo funciona para páginas con protocolo <em>HTTP</em>:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+http_get(<span style="color: #CD5555">&#39;http://XXX/ZZZ&#39;</span>)
+</pre>
+</div>                                  
+
+                                        <h1>Testeo en ESP32</h1>
+                                        <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p>Luego de subir el archivo <em>boot.py</em> al dispositivo ESP32, en consola se va a mostrar:</p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/resultado1_ejercicio_4.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p>Después ejecutamos el archivo <em>main.py</em> al dispositivo ESP32 y en consola se va a mostrar:</p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_basicos/img/resultado_ejercicio_5.png" width ="100%" height="auto">
+                                        </p>
+
                                     </section>
                                 </div>
                             </div>
@@ -174,7 +354,7 @@ s.listen(<span style="color: #B452CD">5</span>)
                             <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
                             Anterior
                         </a>
-                        <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_5.html" class="btn btn-neutral float-right" title="Ejercicio 5: Utilizar módulo Bluetooth de ESP32" accesskey="n" rel="next">
+                        <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_5.html" class="btn btn-neutral float-right" title="Ejercicio 5: Crear servidor web en ESP32 e interfaz web" accesskey="n" rel="next">
                             <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
                             Siguiente
                         </a>

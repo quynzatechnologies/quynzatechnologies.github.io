@@ -63,13 +63,376 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <section>
-                                        <p> Descripción: Configurar un sistema de alarma que detecta movimiento con un sensor infrarrojo y envía una notificación a una interfaz web 
-                                            en el ESP32 cuando se detecta movimiento.
+                                        <h1>Descripción</h1>
+                                        <p> Usando Micropython, con el <strong>Ejercicio 7: Sistema de Alarma con Sensor Infrarrojo y Notificación Web</strong> se va a aprender
+                                            a realizar un monitoreo de movimiento mendiante la lectura del sensor infrarrojo, el cual por medio de ESP32 se hará
+                                            una visualización con interfaz web de un sistema de alarmas.
                                         </p>
-                                        <p> Objetivos: Aprender a combinar sensores con notificaciones web en el servidor del ESP32.
+
+                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/index.html">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
                                         </p>
-                                        <p> Tecnologías: Sensor infrarrojo, LEDs, servidor web en ESP32, HTML. 
+
+                                        <p style="text-align:center;">
+                                            <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
                                         </p>
+
+                                        <h1>Código</h1>
+
+                                        <p>Para este ejercicio se necesitará el archivo:</p>
+                                        <ol>
+                                            <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32. Contiene el código para conexión a una red WiFi 
+                                                específica</li>
+                                            <li>main.py: Script principal de Python. Contiene el código para crear el servidor web para visualización de las notificaciones de alarmas
+                                                y comunicarse con los clientes que se conecten.</li>
+                                            <li>html_dht11.html: Texto HTML para interfaz gráfica del ejercicio, con la característica que se actualiza automáticamente cada 5 seg.</li>
+                                        </ol>
+
+                                        <h3>boot.py:</h3>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #658b00">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;connecting to network...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
+
+                                        <h3>main.py:</h3>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">uselect</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">select</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+
+sensor_ir = Pin(<span style="color: #B452CD">23</span>, Pin.IN)  <span style="color: #228B22"># Pin para el sensor infrarrojo</span>
+actual_value = <span style="color: #B452CD">0</span>
+last_value = <span style="color: #B452CD">0</span>
+detections = [] <span style="color: #228B22"># Historial de detecciones</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
+    background_color = <span style="color: #CD5555">&quot;red&quot;</span> <span style="color: #8B008B; font-weight: bold">if</span> actual_value <span style="color: #8B008B; font-weight: bold">else</span> <span style="color: #CD5555">&quot;white&quot;</span>
+    alarm_status = <span style="color: #CD5555">&quot;Movimiento detectado&quot;</span> <span style="color: #8B008B; font-weight: bold">if</span> actual_value <span style="color: #8B008B; font-weight: bold">else</span> <span style="color: #CD5555">&quot;No se detecta movimiento&quot;</span>
+    detection_list = <span style="color: #CD5555">&quot;&quot;</span>.join([f<span style="color: #CD5555">&quot;&lt;li&gt;{d}&lt;/li&gt;&quot;</span> <span style="color: #8B008B; font-weight: bold">for</span> d <span style="color: #8B008B">in</span> detections])
+    
+    f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_IR.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658b00">str</span>(text)
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%bg_color&quot;</span>, <span style="color: #658b00">str</span>(background_color))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%status&quot;</span>, <span style="color: #658b00">str</span>(alarm_status))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%detect_list&quot;</span>, <span style="color: #658b00">str</span>(detection_list))
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+
+time1 = time.ticks_us()
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    time2 = time.ticks_us()
+    <span style="color: #8B008B; font-weight: bold">if</span> time.ticks_diff(time2, time1) &gt;= <span style="color: #B452CD">2000000</span>:
+        time1 = time.ticks_us()
+        <span style="color: #8B008B; font-weight: bold">try</span>:
+            last_value = actual_value
+            <span style="color: #228B22"># Detectar movimiento</span>
+            actual_value = <span style="color: #8B008B">not</span> sensor_ir.value()
+            <span style="color: #8B008B; font-weight: bold">if</span> actual_value <span style="color: #8B008B">and</span> <span style="color: #8B008B">not</span> last_value:
+                now = time.localtime()
+                current_time = <span style="color: #CD5555">&quot;{}-{}-{} {}:{}:{}&quot;</span>.format(now[<span style="color: #B452CD">0</span>], now[<span style="color: #B452CD">1</span>], now[<span style="color: #B452CD">2</span>], now[<span style="color: #B452CD">3</span>], now[<span style="color: #B452CD">4</span>], now[<span style="color: #B452CD">5</span>])
+                detections.append(f<span style="color: #CD5555">&quot;Movimiento detectado a las {current_time}&quot;</span>)
+                <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">len</span>(detections) &gt; <span style="color: #B452CD">10</span>:  <span style="color: #228B22"># Limitar a las últimas 10 detecciones</span>
+                    detections.pop(<span style="color: #B452CD">0</span>)
+            
+            
+        <span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008b45; font-weight: bold">Exception</span> <span style="color: #8B008B; font-weight: bold">as</span> e:
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;Error: &quot;</span>, e)
+            
+    <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
+    r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r:
+        <span style="color: #8B008B; font-weight: bold">for</span> readable <span style="color: #8B008B">in</span> r:
+            <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+            conn, addr = s.accept()
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Got a connection from %s&#39;</span> % <span style="color: #658b00">str</span>(addr))
+            
+            <span style="color: #228B22"># Get the received request of the client</span>
+            request = conn.recv(<span style="color: #B452CD">1024</span>)
+            request = <span style="color: #658b00">str</span>(request)
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Content = %s&#39;</span> % request)
+                
+            <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+            response = web_page()
+            
+            <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+            conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+            conn.sendall(response)
+            
+            <span style="color: #228B22"># Close Socket</span>
+            conn.close()
+</pre>
+</div>   
+
+                                        <h3>html_dht11.html:</h3>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #1e889b">&lt;!DOCTYPE HTML&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;head&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;title&gt;</span>ESP Web Server<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;</span> 
+    <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;viewport&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">http-equiv=</span><span style="color: #CD5555">&quot;refresh&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;link</span> <span style="color: #658b00">rel=</span><span style="color: #CD5555">&quot;stylesheet&quot;</span> <span style="color: #658b00">href=</span><span style="color: #CD5555">&quot;https://use.fontawesome.com/releases/v5.7.2/css/all.css&quot;</span> <span style="color: #658b00">integrity=</span><span style="color: #CD5555">&quot;sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr&quot;</span> <span style="color: #658b00">crossorigin=</span><span style="color: #CD5555">&quot;anonymous&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;style&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">body</span> {<span style="color: #8B008B; font-weight: bold">font-family</span>: Arial, <span style="color: #8B008B; font-weight: bold">sans-serif</span>; <span style="color: #8B008B; font-weight: bold">margin</span>: <span style="color: #B452CD">20px</span>;}
+        <span style="color: #8B008B; font-weight: bold">h1</span> {<span style="color: #8B008B; font-weight: bold">font-size</span>: <span style="color: #B452CD">3</span>.<span style="color: #B452CD">0</span>rem; <span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #658b00">black</span>; <span style="color: #8B008B; font-weight: bold">text-align</span>: <span style="color: #8B008B; font-weight: bold">center</span>;}
+        <span style="color: #8B008B; font-weight: bold">h2</span> {<span style="color: #8B008B; font-weight: bold">font-size</span>: <span style="color: #B452CD">3</span>.<span style="color: #B452CD">0</span>rem; <span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #658b00">black</span>;}
+        <span style="color: #8B008B; font-weight: bold">table</span> {<span style="color: #8B008B; font-weight: bold">width</span>: <span style="color: #B452CD">100</span>%; <span style="color: #8B008B; font-weight: bold">border-collapse</span>: <span style="color: #8B008B; font-weight: bold">collapse</span>;}
+        <span style="color: #8B008B; font-weight: bold">th</span>, <span style="color: #8B008B; font-weight: bold">td</span> {<span style="color: #8B008B; font-weight: bold">padding</span>: <span style="color: #B452CD">10px</span>; <span style="color: #8B008B; font-weight: bold">border</span>: <span style="color: #B452CD">1px</span> <span style="color: #8B008B; font-weight: bold">solid</span> <span style="color: #658b00">black</span>; <span style="color: #8B008B; font-weight: bold">text-align</span>: <span style="color: #8B008B; font-weight: bold">center</span>;}
+        <span style="color: #8B008B; font-weight: bold">th</span> {<span style="color: #8B008B; font-weight: bold">background-color</span>: <span style="color: #B452CD">#f2f2f2</span>;}
+        <span style="color: #008b45">#status</span> {<span style="color: #8B008B; font-weight: bold">background-color</span>: %bg_color;}
+    <span style="color: #8B008B; font-weight: bold">&lt;/style&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/head&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>Sistema de Alarma IR Server<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;h2&gt;</span>Estatus Alarma<span style="color: #8B008B; font-weight: bold">&lt;/h2&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;p</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;status&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>%status<span style="color: #8B008B; font-weight: bold">&lt;/p&gt;</span>
+
+    <span style="color: #8B008B; font-weight: bold">&lt;h2&gt;</span>Historial de Eventos<span style="color: #8B008B; font-weight: bold">&lt;/h2&gt;</span>
+
+    <span style="color: #8B008B; font-weight: bold">&lt;ul</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;eventos&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+        %detect_list
+    <span style="color: #8B008B; font-weight: bold">&lt;/ul&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
+</pre></div>
+
+                                        <h1>Explicación paso a paso:</h1>
+
+                                        <h3>boot.py:</h3>
+
+                                        <p>Este es el mismo código definido en el <strong>Ejercicio 2: Conectarse a red WiFi</strong>, en el cual se da una 
+                                            <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_2.html#explicacion">explicación paso a paso</a>. Se debe tener
+                                            en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+                                        </p>
+
+                                        <ul>
+                                            <li>XXX: Nombre de su red WiFi</li>
+                                            <li>YYY: Contraseña de su red WiFi</li>
+                                        </ul>
+                                        
+                                        <h3>main.py:</h3>
+
+                                        <p> Teniendo en claro el funcionamiento de los socket para creación de servidores web con ESP32 (véase 
+                                            <a href="/products/curso_iot/contenido/clases/ejercicios_basicos/ejercicio_5.html#socket_p5">explicación</a>), se procede a explicar el 
+                                            código desarrollado:
+                                        </p>
+
+                                        <p> En primer lugar importamos las librerías necesarias para este ejercicio: 
+                                        </p>
+
+                                        <ul>
+                                            <li><em>socket</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html">socket</a></em> es usado para
+                                            la creación se sockets con ESP32</li>
+                                            <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em> es usado para
+                                            controlar los pines GPIO (General-purpose Input-Output) del ESP32</li>
+                                            <li><em>uselect</em>: La librería <em><a href="https://docs.micropython.org/en/v1.15/library/uselect.html">uselect</a></em> es para esperar 
+                                            eficientemente eventos en múltiples transmisiones. En este ejercicio se utiliza para esperar las conexiones de clientes entrantes sin 
+                                            necesidad de detener la operación del ESP32</li>
+                                            <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html">time</a></em> proporciona funciones 
+                                            para obtener la hora y fecha actuales, medir intervalos de tiempo y retrasos. En este ejercicio se va a utilizar para hacer un temporizador
+                                            y medir con el sensor a intervalos fijos, además de obtener la fecha/hora actual.</li>
+                                        </ul>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">uselect</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">select</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+</pre>
+</div>
+
+                                        <p> Luego un objeto llamado <em>sensor_ir</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO23</em> del ESP32 con una 
+                                            configuración en modo entrada (<em>Pin.IN</em>). También se crean las variables globales <em>actual_value</em>, <em>last_value</em> y
+                                            <em>detections</em>:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+sensor_ir = Pin(<span style="color: #B452CD">23</span>, Pin.IN)  <span style="color: #228B22"># Pin para el sensor infrarrojo</span>
+actual_value = <span style="color: #B452CD">0</span>
+last_value = <span style="color: #B452CD">0</span>
+detections = [] <span style="color: #228B22"># Historial de detecciones</span>
+</pre>
+</div>
+
+                                        <p> Se crea una función llamada <em>web_page</em>. En este se lee el valor último valor del sensor leido <em>actual_value</em>:
+                                            si se encuentra activo entonces el mensaje a mostrar en la página es "Movimiento detectado" en fondo rojo, en caso contrario
+                                            el mensaje a mostrar en la página es "No se detecta movimiento" en fondo blanco. Además se va a desplegar el contenido de la lista de
+                                            detección <em>detection_list</em> en un formato de tablas <em>HTML</em>. 
+                                            Luego se procede a leer el archivo <em>html_IR.html</em> que contiene la pagina web a mostrar en el servidor web, se convierte en un
+                                            variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para reemplazar el string <em>%bg_color</em> por el valor de 
+                                            la variable <em>background_color</em>, el string <em>%status</em> por la variable <em>alarm_status</em> y el string <em>%detect_list</em>
+                                            por la variable <em>detection_list</em>. Por último se retorna la pagina web modificada:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
+    background_color = <span style="color: #CD5555">&quot;red&quot;</span> <span style="color: #8B008B; font-weight: bold">if</span> actual_value <span style="color: #8B008B; font-weight: bold">else</span> <span style="color: #CD5555">&quot;white&quot;</span>
+    alarm_status = <span style="color: #CD5555">&quot;Movimiento detectado&quot;</span> <span style="color: #8B008B; font-weight: bold">if</span> actual_value <span style="color: #8B008B; font-weight: bold">else</span> <span style="color: #CD5555">&quot;No se detecta movimiento&quot;</span>
+    detection_list = <span style="color: #CD5555">&quot;&quot;</span>.join([f<span style="color: #CD5555">&quot;&lt;li&gt;{d}&lt;/li&gt;&quot;</span> <span style="color: #8B008B; font-weight: bold">for</span> d <span style="color: #8B008B">in</span> detections])
+    
+    f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_IR.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658b00">str</span>(text)
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%bg_color&quot;</span>, <span style="color: #658b00">str</span>(background_color))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%status&quot;</span>, <span style="color: #658b00">str</span>(alarm_status))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%detect_list&quot;</span>, <span style="color: #658b00">str</span>(detection_list))
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+</pre>
+</div>
+
+                                        <p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
+                                            <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
+                                            definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
+                                            el socket para recibir máximo 5 conexiones de manera simultanea:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+</pre>
+</div>
+
+                                        <p> Utilizando la función <em>time.ticks_us()</em> que retorna el número de microsegundos transcurridos desde el encendido del ESP32,
+                                            en un ciclo, cada 5000000us (equivalente a 5 seg), se ejecutará una medición del sensor infrarrojo y se guarda en la variable 
+                                            <em>actual_value</em> y el anterior en <em>anterior_value</em>. En caso que haya un cambio de estado (desactivado a activado) entonces
+                                            se guarda el registro de la fecha actual en la lista <em>detections</em> en un formato de fechas "YYYY-MM-DD HH:mm:SS", si el número
+                                            de registros guardados supera a 10 entonces se borra el registro mas antiguo:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+time1 = time.ticks_us()
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    time2 = time.ticks_us()
+    <span style="color: #8B008B; font-weight: bold">if</span> time.ticks_diff(time2, time1) &gt;= <span style="color: #B452CD">2000000</span>:
+        time1 = time.ticks_us()
+        <span style="color: #8B008B; font-weight: bold">try</span>:
+            last_value = actual_value
+            <span style="color: #228B22"># Detectar movimiento</span>
+            actual_value = <span style="color: #8B008B">not</span> sensor_ir.value()
+            <span style="color: #8B008B; font-weight: bold">if</span> actual_value <span style="color: #8B008B">and</span> <span style="color: #8B008B">not</span> last_value:
+                now = time.localtime()
+                current_time = <span style="color: #CD5555">&quot;{}-{}-{} {}:{}:{}&quot;</span>.format(now[<span style="color: #B452CD">0</span>], now[<span style="color: #B452CD">1</span>], now[<span style="color: #B452CD">2</span>], now[<span style="color: #B452CD">3</span>], now[<span style="color: #B452CD">4</span>], now[<span style="color: #B452CD">5</span>])
+                detections.append(f<span style="color: #CD5555">&quot;Movimiento detectado a las {current_time}&quot;</span>)
+                <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">len</span>(detections) &gt; <span style="color: #B452CD">10</span>:  <span style="color: #228B22"># Limitar a las últimas 10 detecciones</span>
+                    detections.pop(<span style="color: #B452CD">0</span>)
+            
+        <span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008b45; font-weight: bold">Exception</span> <span style="color: #8B008B; font-weight: bold">as</span> e:
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;Error: &quot;</span>, e)
+</pre>
+</div>
+
+                                        <p>  Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
+                                            entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente. Luego se recibe los datos del socket 
+                                            enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se imprime en consola. Se llama a la 
+                                            función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con los valores actual de temperatura 
+                                            y humedad. Después se envía los datos requeridos por el navegador del cliente para mostrar la página web (Encabezado + Contenido) y se 
+                                            cierra el socket creado para el cliente:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">    
+    <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
+    r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r:
+        <span style="color: #8B008B; font-weight: bold">for</span> readable <span style="color: #8B008B">in</span> r:
+            <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+            conn, addr = s.accept()
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Got a connection from %s&#39;</span> % <span style="color: #658b00">str</span>(addr))
+            
+            <span style="color: #228B22"># Get the received request of the client</span>
+            request = conn.recv(<span style="color: #B452CD">1024</span>)
+            request = <span style="color: #658b00">str</span>(request)
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Content = %s&#39;</span> % request)
+                
+            <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+            response = web_page()
+            
+            <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+            conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+            conn.sendall(response)
+            
+            <span style="color: #228B22"># Close Socket</span>
+            conn.close()
+</pre>
+</div>
+
+                                        <h1>Testeo en ESP32</h1>
+                                        <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_servidor/img/Con_ESP32_ejercicio_7.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p>Luego de subir los archivos <em>boot.py</em> y <em>html_IR.html</em> al dispositivo ESP32, en consola se va a mostrar:</p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_servidor/img/resultado1_ejercicio_6.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p>Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p>
+
+                                        <p>Luego ejecutamos el script <em>main.py</em> mediante el software Thonny. Y con un computador o dispositivo móvil que esté conectado
+                                            en la misma red WiFi que el ESP32, por medio de un navegador se debe conectar a la dirección web anotada en pasos anteriores:
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_servidor/img/resultado2_ejercicio_7.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p> Si cubrimos con los dedos el sensor, se podrá observar que cada 5 seg se actualiza el estado del estatus de la alarma y se agregará
+                                            el registro de detección en una lista en el historial:
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/ejercicios_servidor/img/resultado3_ejercicio_7.png" width ="100%" height="auto">
+                                        </p>
+
                                     </section>
                                 </div>
                             </div>

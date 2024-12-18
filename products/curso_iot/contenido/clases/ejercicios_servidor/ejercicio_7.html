@@ -275,7 +275,7 @@ time1 = time.ticks_us()
 </pre>
 </div>
 
-                                        <p> Luego un objeto llamado <em>sensor_ir</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO23</em> del ESP32 con una 
+                                        <p> Luego se crea un objeto llamado <em>sensor_ir</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO23</em> del ESP32 con una 
                                             configuración en modo entrada (<em>Pin.IN</em>). También se crean las variables globales <em>actual_value</em>, <em>last_value</em> y
                                             <em>detections</em>:
                                         </p>
@@ -289,7 +289,7 @@ detections = [] <span style="color: #228B22"># Historial de detecciones</span>
 </pre>
 </div>
 
-                                        <p> Se crea una función llamada <em>web_page</em>. En este se lee el valor último valor del sensor leido <em>actual_value</em>:
+                                        <p> Se crea una función llamada <em>web_page</em>. En este se lee el último valor del sensor leido <em>actual_value</em>:
                                             si se encuentra activo entonces el mensaje a mostrar en la página es "Movimiento detectado" en fondo rojo, en caso contrario
                                             el mensaje a mostrar en la página es "No se detecta movimiento" en fondo blanco. Además se va a desplegar el contenido de la lista de
                                             detección <em>detection_list</em> en un formato de tablas <em>HTML</em>. 
@@ -447,7 +447,7 @@ time1 = time.ticks_us()
                             <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
                             Anterior
                         </a>
-                        <a href="/products/curso_iot/contenido/clases/ejercicios_servidor/ejercicio_8.html" class="btn btn-neutral float-right" title="Ejercicio 8: Control de LEDs con Interfaz Web Básica" accesskey="n" rel="next">
+                        <a href="/products/curso_iot/contenido/clases/ejercicios_servidor/ejercicio_8.html" class="btn btn-neutral float-right" title="Ejercicio 8: Control de LEDs RGB con Interfaz Web" accesskey="n" rel="next">
                             <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
                             Siguiente
                         </a>

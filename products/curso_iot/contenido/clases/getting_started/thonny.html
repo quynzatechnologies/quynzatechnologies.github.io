@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script src="/js/load_html_created.js" defer></script>
+    <script src="/js/logout_iot.js" defer></script>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
+    <script src="/js/front.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    
+    <title>Getting Started: Thonny MicroPython IDE para ESP32</title>
+</head>
+
+<body>
+    <div id="all">
+        <header id="header-comm-container"></header>
+
+        <header id="header-nav-main-container"></header>
+
+        <main>
+			<div id="aside-nav-curso-iot-container"></div>
+
+            <div class="content">
+                <section>
+                    <div id="heading-breadcrumbs">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Getting Started: Thonny MicroPython IDE para ESP32</h1>
+                                    <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="navegation" arial-label="Page navigation">
+                        <ul class="wy-breadcrumbs">
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/index.html">Inicio</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/clases/index.html">Clases y Actividades Prácticas</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/clases/getting_started/index.html">Getting Started</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/clases/getting_started/thonny.html" class="not-active">Thonny MicroPython IDE para ESP32</a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                </section>
+            
+                <section>
+                    <div id="content">
+                        <div class="container" id="contact">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <section>
+                                        <h1>Descripción</h1>
+                                        <p> Si se quiere programar la tarjeta de desarrollo ESP32 con el firmware de MicroPython, una IDE facilita mucho esta labor.
+                                            Entre las tantas opciones <em>Thonny</em> se destaca por su facilitad y soporte con sus constantes actualizaciones. En esta
+                                            guía <strong>Getting Started: Thonny MicroPython IDE para ESP32</strong> se va a aprender a como instalar la IDE de Thonny,
+                                            y realizar la configuración para programar un sencillo Script.
+                                        </p>
+
+                                        <p> Para esta guía se necesita el <a href="/products/entrenadoresp32/index.html">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+                                        </p>
+
+                                        <h1>Introducción</h1>
+                                        
+                                        <h3>¿Qué es Micropython?</h3>
+                                        <p> Como dice su documentación <a href="https://micropython.org">oficial</a>, MicroPython es una implementación sencilla y 
+                                            eficiente del lenguaje de programación Python 3 que incluye un pequeño subconjunto de la biblioteca estándar de Python y 
+                                            está optimizado para ejecutarse en microcontroladores y en entornos restringidos, como es el caso de la tarjeta de desarrollo
+                                            ESP32.</p>
+                                        <p> MicroPython se esfuerza por ser lo más compatible posible con Python normal (conocido como CPython), de modo que si conoce 
+                                            Python, ya conoce MicroPython. Por otro lado, cuanto más aprenda sobre MicroPython, mejor será en Python.
+                                        </p>
+                                        <p> Además de implementar una selección de bibliotecas principales de Python, MicroPython incluye módulos como <em>machine</em> 
+                                            para acceder a hardware de bajo nivel (GPIO, PWM, etc.).
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/micropython.jpg" width ="70%" height="auto">
+                                        </p>
+
+                                        <h3>Instalación</h3>
+                                        <p>A continuación se proveerá un paso a paso sobre la instalación de Thonny en Windows:</p>
+
+                                        <ol>
+                                            <li> Ve a la página web de <a href="https://thonny.org">thonny.org</a></li>
+                                            <li> Descargar la versión más reciente de Windows (descargue la versión recomendada) y espera unos segundos mientras se 
+                                                descarga:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/thonny-1.png" width ="70%" height="auto">
+                                                </p>
+                                                <ul>
+                                                    <li>NOTA: La IDE de Thonny está en constante actualización. Todos los ejercicios del curso se ha realizado en 
+                                                        la versión Thonny 4.1.4. Para evitar problemas inesperados durante el desarrollo de los ejercicios prácticos
+                                                        del curso, se recomienda usar esa <a href="https://github.com/thonny/thonny/releases/tag/v4.1.4">versión</a>.
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li> Dar doble clic en el ejecutable descargado:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/thonny-2.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Cuando se abra el ejecutable hacer clic en siguiente:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/thonny-3.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Acepta los terminos y condiciones y hacer clic en siguiente:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/thonny-4.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Selecciona el lugar la dirección de instalación de Thonny y hacer clic en siguiente:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/thonny-5.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Hacer clic en instalar:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/thonny-6.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Luego de terminar el proceso de instalación, abre el Thonny IDE, el cual se mostrará como a continuación:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/thonny-6.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                        </ol>
+
+                                        <h3>Explorando Thonny</h3>
+                                        <p> Con el fin de que puedan correr los programas se requieren algunos ajustes. Para ello vamos a detallar las opciones 
+                                            que nos ofrece:
+                                        </p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/explorando-1.png" width ="70%" height="auto">
+                                        </p>
+
+                                        <p> Hace referencia a la trayectoria en el computador de la carpeta donde va a guardar los programas o archivos con terminación 
+                                            <em>.py</em>.  En el ejemplo se tiene una carpeta que se llama Ejercicios, que se encuentra en la carpeta MicroPython en 
+                                            Documentos. Para comenzar a escribir el primer programa le da el icono de nuevo o en File le da Nuevo. Y le presenta la 
+                                            siguiente pantalla:
+                                        </p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/explorando-2.png" width ="40%" height="auto">
+                                        </p>
+
+                                        <p>El 1, corresponde a la primera instrucción del programa que se va a escribir: </p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/explorando-3.png" width ="40%" height="auto">
+                                        </p>
+
+                                        <p>Ahora vamos a ejecutar este programa. Para esto podemos hacer click en la flecha verde o ir a Run. Vamos a hacer click en la 
+                                            flecha verde y luego volveremos a Run.  Al hacer click, en la flecha verde, se produce la salida del programa en la zona 
+                                            que llamamos Consola. 
+                                        </p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/explorando-4.png" width ="40%" height="auto">
+                                        </p>
+
+                                        <p>Ahora vamos a guardar el programa, hacemos click sobre <em>Fichero</em> (<em>Files</em>) y nos abre:</p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/explorando-5.png" width ="40%" height="auto">
+                                        </p>
+
+                                        <p>Hacemos click en <em>Guardar como</em> (<em>Save as...</em>). Nos presenta esta pantalla, para ver donde lo vamos a guardar. 
+                                            Si en el computador o en el ESP32: 
+                                        </p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/explorando-6.png" width ="40%" height="auto">
+                                        </p>
+
+                                        <p>Vamos aguardarlo en el computador, lo vamos a llamar <em>Saludos</em>:</p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/explorando-7.png" width ="40%" height="auto">
+                                        </p>
+
+                                        <p>Ahora tenemos:</p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/explorando-8.png" width ="40%" height="auto">
+                                        </p>
+
+                                        <h3>Driver del <em>USB to UART Bridge</em> del ESP32</h3>
+                                        <p> La tarjeta de desarrollo del ESP32 contiene un chip que convierte el protocolo USB, manejado por la mayoría de los
+                                            ordenadores, en el protocolo UART, manejado por el chip del ESP32:
+                                        </p>
+                                        <p style="text-align:center;">
+                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-1.png" width ="70%" height="auto">
+                                        </p>
+                                        <p> Hay varias referencias de chips USB-UART usados en las tarjetas de desarrollo ESP32 (SILABS CP2102, CH340G, FT232 etc.). En 
+                                            primera instancia se debe determinar cual es el chip usado en la tarjeta de desarrollo que se posee. Hay dos métodos:
+                                        </p>
+                                        <ol>
+                                            <li>Inspección visual: Se puede examinar la tarjeta de desarrollo y determinar que chips posee
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-2.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Administrador dispositivos: Si se conecta al ordenador el ESP32 y no se tiene instalado el driver correspondiente, entonces
+                                                esté será reconocido como un dispositivo con un signo de advertencia, cuyo significado radica en que no se tiene instalado 
+                                                su respectivo driver-controlador.
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-3.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                        </ol>
+                                        <p> Luego de identificar la referencia del chips que posee el ESP32, se procede a realizar el paso a paso del proceso de instalación:</p>
+                                        <ol>
+                                            <li>Ir a la pagina respectiva de descarga del controlador para el chip:
+                                                <ul>
+                                                    <li>CP2102: En la pagina web de 
+                                                        <a href="https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads">Silicon Labs</a> se enlista
+                                                        las diferentes versiones del driver disponible. Hacer clic en la siguiente opción:
+                                                        <p style="text-align:center;">
+                                                            <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-4.png" width ="70%" height="auto">
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li> Descomprimir el archivo .zip descargado:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-7.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Hacer clic derecho en el dispositivo correspondiente al ESP32 en el <em>Administrador de Dispositivos</em> del ordenador, 
+                                                y dar clic en <em>Actualizar controlador</em>:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-5.png" width ="50%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Hacer clic en la opción de <em>Examinar mi PC en busca de controladores:</em>
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-6.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Seleccionar la ubicación de la carpeta descomprimida del controlador:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-8.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> En caso de completar exitosamente el proceso se mostrará la siguiente ventana:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/UART-9.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                        </ol>
+
+                                        <h3>Firmware Micropython</h3>
+                                        <p> Con el fin de que se puedan correr los programas en el micro-controlador ESP32, se requiere un firmware, un programa básico 
+                                            que hace que el ESP32 se comporte como un pequeño computador para controlar sus funciones y sus periféricos, tales como los 
+                                            GPIO o pines de entrada y salida de propósito general;  WiFi;  Bluetooth; las entradas DAC y ADC. En el caso del entrenador 
+                                            QM020, el micro-controlador ya viene con un firmware, lo que permite entrar a programar directamente. Además, se pueden 
+                                            almacenar los programas que se van escribiendo.
+                                        </p>
+                                        <p> Hay muchas maneras de instalar el firmware de MicroPython en el ESP32. Thonny ofrece una manera intuitiva. A continuación se
+                                            describe el paso a paso del proceso:
+                                        </p>
+                                        <ol>
+                                            <li>En primer lugar se debe descargar el archivo de la Firmware. En la pagina de 
+                                                <a href="https://micropython.org/download/">descargas</a> de MicroPython se tiene todos los firmware dependiendo del tipo
+                                                tarjeta de desarrollo que está usando. Si se usa el entrenador QMT-020 se utiliza la versión convencional del 
+                                                <a href="https://micropython.org/download/ESP32_GENERIC/">ESP32</a>. Dar clic a la última versión disponible del Firmware
+                                                en su versión de archivo <em>.bin</em>.
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/micropython-1.png" width ="70%" height="auto">
+                                                </p>
+                                                <ul>
+                                                    <li>NOTA: Continuamente los firmware de MicroPython están en constante actualización. Todos los ejercicios del curso
+                                                        han sido desarrollados en una versión específica. Para evitar problemas inesperados durante el desarrollo de los 
+                                                        ejercicios prácticos, se recomienda usar la versión 1.18, que se puede conseguir en la pagina web anterior o 
+                                                        mediante el siguiente link de 
+                                                        <a href="/products/curso_iot/contenido/clases/getting_started/files/esp32-20220117-v1.18.bin" download="esp32-v1.18">descarga</a>.
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li> Conectar la tarjeta de desarollo ESP32 al ordenador.
+                                            </li>
+                                            <li> Abrir el Thonny IDE. E ir al menú Ejecutar > Configurar Intérprete. Seleccionar como tipo de intérpreter la opción de 
+                                                <em>MicroPython (ESP32)</em>:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/micropython-2.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Hacer clic en <em>Instala o actualiza MicroPython (esptool)</em> y se abrirá una nueva ventana como la siguiente:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/micropython-3.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Seleccionar el puerto USB correspondiente al ESP32, la familia de Micropython <em>ESP32</em>:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/micropython-4.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Pulsar el botón en el costado inferior derecho y hacer clic a la opción <em>Select local MicroPython image</em>, buscar
+                                                el archivo del firmware descargado y hacer clic en <em>install</em>:
+                                                <p style="text-align:center;">
+                                                    <img src="/products/curso_iot/contenido/clases/getting_started/img/micropython-5.png" width ="70%" height="auto">
+                                                </p>
+                                            </li>
+                                            <li> Después de unos segundos el proceso de instalación se completará.
+                                                <ul>
+                                                    <li>NOTA: A veces, para la instalación del firmware en la tarjeta de desarrollo ESP32, al comienzo del proceso se
+                                                        necesita mantener pulsado el botón <em>BOOT</em> del ESP32.
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <footer>
+                <hr>
+                <div role="navegation" arial-label="Button navigation">
+                    <a href="/products/curso_iot/contenido/clases/getting_started/index.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev">
+                        <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                        Anterior
+                    </a>
+                    <a href="/products/curso_iot/contenido/clases/getting_started/node-red.html" class="btn btn-neutral float-right" title="Getting Started: Node-RED" accesskey="n" rel="next">
+                        <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                        Siguiente
+                    </a>
+                </div>
+            </footer>
+            </div>
+        </main>
+
+        <footer class="footer" id="footer-main-container"></footer>
+
+        <div class="copyright" id="footer-copyright-container"></div>
+    </div>
+</body>
+</html>

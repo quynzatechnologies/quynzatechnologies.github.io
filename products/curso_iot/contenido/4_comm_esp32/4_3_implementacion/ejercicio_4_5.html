@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script src="/js/load_html_created.js" defer></script>
+    <script src="/js/logout_iot.js" defer></script>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
+    <script src="/js/front.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    
+    <title>Ejercicio 4-5: Control de LEDs RGB con Interfaz Web</title>
+</head>
+
+<body>
+    <div id="all">
+        <header id="header-comm-container"></header>
+
+        <header id="header-nav-main-container"></header>
+
+        <main>
+			<div id="aside-nav-curso-iot-container"></div>
+
+            <div class="content">
+                <section>
+                    <div id="heading-breadcrumbs">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Ejercicio 4-5: Control de LEDs RGB con Interfaz Web</h1>
+                                    <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="navegation" arial-label="Page navigation">
+                        <ul class="wy-breadcrumbs">
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/index.html">Inicio</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/4_comm_esp32/index.html">4. Desarrollo de interfaces web y control local en ESP32</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/index.html">4.3. Implementación de control local con sensores y actuadores</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/ejercicio_4_5.html" class="not-active">Ejercicio 4-5: Control de LEDs RGB con Interfaz Web</a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                </section>
+            
+                <section>
+                    <div id="content">
+                        <div class="container" id="contact">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <section>
+                                        <h1>Ejercicio 4-5: Control de LEDs RGB con Interfaz Web</h1>
+                                        <h2>Descripción</h2>
+                                        <p> Usando Micropython, con el <strong>Ejercicio 4-5: Control de LEDs RGB con Interfaz Web</strong> se va a aprender
+                                            a controlar el color de un led RGB por medio de una interfaz conectada a un servidor Web administrado por el ESP32.
+                                        </p>
+
+                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/index.html">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+                                        </p>
+
+                                        <h2>Código</h2>
+
+                                        <p>Para este ejercicio se necesitará el archivo:</p>
+                                        <ol>
+                                            <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32. Contiene el código para conexión a una red WiFi 
+                                                específica</li>
+                                            <li>main.py: Script principal de Python. Contiene el código para crear el servidor web para controlar el color del LED RGB.</li>
+                                            <li>html_dht11.html: Texto HTML para interfaz gráfica del ejercicio.</li>
+                                        </ol>
+
+                                        <h3>boot.py:</h3>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #658b00">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;connecting to network...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
+                                 
+                                        <h3>main.py:</h3>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin, PWM
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">uselect</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">select</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+
+r = <span style="color: #B452CD">0</span>
+g = <span style="color: #B452CD">0</span>
+b = <span style="color: #B452CD">0</span>
+<span style="color: #228B22"># Configuración de pines PWM para el LED RGB</span>
+red = PWM(Pin(<span style="color: #B452CD">14</span>), freq=<span style="color: #B452CD">5000</span>)
+green = PWM(Pin(<span style="color: #B452CD">12</span>), freq=<span style="color: #B452CD">5000</span>)
+blue = PWM(Pin(<span style="color: #B452CD">13</span>), freq=<span style="color: #B452CD">5000</span>)
+
+<span style="color: #228B22"># Función para ajustar el brillo de cada canal RGB</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">set_color</span>(r, g, b):
+    red.duty_u16(<span style="color: #658b00">int</span>(r * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+    green.duty_u16(<span style="color: #658b00">int</span>(g * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+    blue.duty_u16(<span style="color: #658b00">int</span>(b * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
+    f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_rgb_control.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658b00">str</span>(text)
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%r&quot;</span>, <span style="color: #658b00">str</span>(r))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%g&quot;</span>, <span style="color: #658b00">str</span>(g))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%b&quot;</span>, <span style="color: #658b00">str</span>(b))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%color&quot;</span>, <span style="color: #CD5555">&#39;rgb(&#39;</span>+<span style="color: #658b00">str</span>(r)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(g)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(b)+<span style="color: #CD5555">&#39;)&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+<span style="color: #228B22"># Tiempo mínimo entre mensajes (en segundos)</span>
+last_request_time = time.ticks_ms()
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
+    r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r:
+        <span style="color: #8B008B; font-weight: bold">for</span> readable <span style="color: #8B008B">in</span> r:
+            <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+            conn, addr = s.accept()
+            
+            <span style="color: #228B22"># Get the received request of the client</span>
+            request = conn.recv(<span style="color: #B452CD">1024</span>)
+            request = request.decode()
+            
+            <span style="color: #228B22"># Extraer datos del formulario si es POST</span>
+            <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
+                <span style="color: #228B22"># Obtener tiempo actual</span>
+                current_time = time.ticks_ms()
+                <span style="color: #228B22"># Ignorar solicitudes si no ha pasado el intervalo mínimo</span>
+                <span style="color: #8B008B; font-weight: bold">if</span> time.ticks_diff(current_time, last_request_time) &lt; <span style="color: #B452CD">200</span>:
+                    conn.close()
+                    <span style="color: #8B008B; font-weight: bold">continue</span>
+                <span style="color: #8B008B; font-weight: bold">else</span>:
+                    <span style="color: #228B22"># Actualizar el tiempo de la última solicitud procesada</span>
+                    last_request_time = current_time
+                    body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
+                    params = {param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">0</span>]: <span style="color: #658b00">int</span>(param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">1</span>]) <span style="color: #8B008B; font-weight: bold">for</span> param <span style="color: #8B008B">in</span> body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>)}
+                    r = params.get(<span style="color: #CD5555">&#39;red&#39;</span>, <span style="color: #B452CD">0</span>)
+                    g = params.get(<span style="color: #CD5555">&#39;green&#39;</span>, <span style="color: #B452CD">0</span>)
+                    b = params.get(<span style="color: #CD5555">&#39;blue&#39;</span>, <span style="color: #B452CD">0</span>)
+                    set_color(r, g, b)
+            
+            <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+            response = web_page()
+            <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+            conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+            conn.sendall(response)
+            
+            <span style="color: #228B22"># Close Socket</span>
+            conn.close()
+</pre>
+</div>
+
+                                        <h3>html_rgb_control.html:</h3>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #1e889b">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;head&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;title&gt;</span>LED RGB Control<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;viewport&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;style&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">body</span> { <span style="color: #8B008B; font-weight: bold">font-family</span>: Arial;}
+        <span style="color: #8B008B; font-weight: bold">h1</span> { <span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #B452CD">#333</span>; }
+        <span style="color: #008b45; font-weight: bold">.format</span> {<span style="color: #8B008B; font-weight: bold">width</span>: <span style="color: #B452CD">50</span>%;}
+        <span style="color: #008b45; font-weight: bold">.slider</span> {<span style="color: #8B008B; font-weight: bold">width</span>: <span style="color: #B452CD">100</span>%;}
+        <span style="color: #008b45">#square</span> {<span style="color: #8B008B; font-weight: bold">height</span>: <span style="color: #B452CD">50px</span>; <span style="color: #8B008B; font-weight: bold">width</span>: <span style="color: #B452CD">50</span>%; <span style="color: #8B008B; font-weight: bold">background-color</span>: %<span style="color: #8B008B; font-weight: bold">color</span>; <span style="color: #8B008B; font-weight: bold">float</span>: <span style="color: #8B008B; font-weight: bold">center</span>;<span style="color: #8B008B; font-weight: bold">margin-bottom</span>: <span style="color: #B452CD">15px</span>;<span style="color: #8B008B; font-weight: bold">border</span>: <span style="color: #B452CD">1px</span> <span style="color: #8B008B; font-weight: bold">solid</span> <span style="color: #658b00">black</span>;}
+    <span style="color: #8B008B; font-weight: bold">&lt;/style&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/head&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>Control de LED RGB<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;div</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;square&quot;</span> <span style="color: #8B008B; font-weight: bold">&gt;&lt;/div&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;form</span> <span style="color: #658b00">class =</span><span style="color: #a61717; background-color: #e3d2d2"> </span><span style="color: #CD5555">&quot;format&quot;</span> <span style="color: #658b00">action=</span><span style="color: #CD5555">&quot;/&quot;</span> <span style="color: #658b00">method=</span><span style="color: #CD5555">&quot;post&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;red&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Rojo:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">&lt;input</span> <span style="color: #658b00">type=</span><span style="color: #CD5555">&quot;range&quot;</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;red&quot;</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;red&quot;</span> <span style="color: #658b00">min=</span><span style="color: #CD5555">&quot;0&quot;</span> <span style="color: #658b00">max=</span><span style="color: #CD5555">&quot;255&quot;</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;%r&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;slider&quot;</span> <span style="color: #658b00">oninput=</span><span style="color: #CD5555">&quot;changeColor()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;br&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;green&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Verde:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">&lt;input</span> <span style="color: #658b00">type=</span><span style="color: #CD5555">&quot;range&quot;</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;green&quot;</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;green&quot;</span> <span style="color: #658b00">min=</span><span style="color: #CD5555">&quot;0&quot;</span> <span style="color: #658b00">max=</span><span style="color: #CD5555">&quot;255&quot;</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;%g&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;slider&quot;</span> <span style="color: #658b00">oninput=</span><span style="color: #CD5555">&quot;changeColor()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;br&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;blue&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Azul:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">&lt;input</span> <span style="color: #658b00">type=</span><span style="color: #CD5555">&quot;range&quot;</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;blue&quot;</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;blue&quot;</span> <span style="color: #658b00">min=</span><span style="color: #CD5555">&quot;0&quot;</span> <span style="color: #658b00">max=</span><span style="color: #CD5555">&quot;255&quot;</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;%b&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;slider&quot;</span> <span style="color: #658b00">oninput=</span><span style="color: #CD5555">&quot;changeColor()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;br&gt;&lt;br&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;/form&gt;</span>
+
+    <span style="color: #8B008B; font-weight: bold">&lt;script&gt;</span>
+        <span style="color: #8B008B; font-weight: bold">function</span> changeColor() {
+            <span style="color: #8B008B; font-weight: bold">let</span> slider = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;square&quot;</span>);
+            <span style="color: #8B008B; font-weight: bold">let</span> r = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;red&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> g = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;green&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> b = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;blue&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> color = <span style="color: #CD5555">&#39;rgb(&#39;</span> + r + <span style="color: #CD5555">&#39;,&#39;</span> + g +<span style="color: #CD5555">&#39;,&#39;</span> + b + <span style="color: #CD5555">&#39;)&#39;</span>;
+            slider.style.backgroundColor = color;
+
+            <span style="color: #228B22">// Enviar valores al servidor</span>
+            <span style="color: #8B008B; font-weight: bold">let</span> xhr = <span style="color: #8B008B; font-weight: bold">new</span> XMLHttpRequest();
+            xhr.open(<span style="color: #CD5555">&quot;POST&quot;</span>, <span style="color: #CD5555">&quot;/&quot;</span>, <span style="color: #8B008B; font-weight: bold">true</span>);
+            xhr.setRequestHeader(<span style="color: #CD5555">&quot;Content-Type&quot;</span>, <span style="color: #CD5555">&quot;application/x-www-form-urlencoded&quot;</span>);
+            xhr.send(<span style="color: #CD5555">&quot;red=&quot;</span> + r + <span style="color: #CD5555">&quot;&amp;green=&quot;</span> + g + <span style="color: #CD5555">&quot;&amp;blue=&quot;</span> + b);
+        }
+    <span style="color: #8B008B; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
+</pre>
+</div>    
+
+                                        <h2>Explicación paso a paso:</h2>
+
+                                        <h3>boot.py:</h3>
+
+                                        <p>Este es el mismo código definido en el <strong>Ejercicio 2: Conectarse a red WiFi</strong>, en el cual se da una 
+                                            <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
+                                            en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+                                        </p>
+
+                                        <ul>
+                                            <li>XXX: Nombre de su red WiFi</li>
+                                            <li>YYY: Contraseña de su red WiFi</li>
+                                        </ul>
+                                        
+                                        <h3>main.py:</h3>
+
+                                        <p> Teniendo en claro el funcionamiento de los socket para creación de servidores web con ESP32 (véase 
+                                            <a href="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/ejercicio_4_1.html#socket_p5">explicación</a>), se procede a explicar el 
+                                            código desarrollado:
+                                        </p>
+
+                                        <p> En primer lugar importamos las librerías necesarias para este ejercicio: 
+                                        </p>
+
+                                        <ul>
+                                            <li><em>socket</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html">socket</a></em> es usado para
+                                            la creación se sockets con ESP32</li>
+                                            <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em> 
+                                            es usado para controlar los pines GPIO (General-purpose Input-Output) del ESP32</li>
+                                            <li><em>machine.PWM</em>: La clase 
+                                            <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#pwm-pulse-width-modulation">machine.PWM</a></em> es usado para
+                                            habilitar el módulo PWM para los pines GPIO (General-purpose Input-Output) del ESP32</li>
+                                            <li><em>uselect</em>: La librería <em><a href="https://docs.micropython.org/en/v1.15/library/uselect.html">uselect</a></em> es para esperar 
+                                            eficientemente eventos en múltiples transmisiones. En este ejercicio se utiliza para esperar las conexiones de clientes entrantes sin 
+                                            necesidad de detener la operación del ESP32</li>
+                                            <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html">time</a></em> proporciona funciones 
+                                            para obtener la hora y fecha actuales, medir intervalos de tiempo y retrasos. En este ejercicio se va a utilizar para hacer un temporizador
+                                            y solo aceptar solicitudes <em>POST</em> con un tiempo mínimo entre solicitudes.</li>
+                                        </ul>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin, PWM
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">uselect</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">select</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+</div>
+
+                                        <p> Luego se crea 3 objetos llamados <em>red</em>, <em>green</em> y <em>blue</em> con clase <em>PWM</em>, el cual se va a vincular con los 
+                                            <em>GPIO14</em>, <em>GPIO12</em> y <em>GPIO13</em>, respectivamente, del ESP32 con una configuración en modo salida (<em>Pin.OUT</em>).
+                                            También se crean las variables globales <em>r</em>, <em>g</em> y <em>b</em>:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+r = <span style="color: #B452CD">0</span>
+g = <span style="color: #B452CD">0</span>
+b = <span style="color: #B452CD">0</span>
+<span style="color: #228B22"># Configuración de pines PWM para el LED RGB</span>
+red = PWM(Pin(<span style="color: #B452CD">14</span>), freq=<span style="color: #B452CD">5000</span>)
+green = PWM(Pin(<span style="color: #B452CD">12</span>), freq=<span style="color: #B452CD">5000</span>)
+blue = PWM(Pin(<span style="color: #B452CD">13</span>), freq=<span style="color: #B452CD">5000</span>)
+</pre>
+</div>
+
+                                        <p> Se crea una función llamada <em>set_color</em>. En este se lee los valores <em>r</em>, <em>g</em> y <em>b</em>, que guardan los valores
+                                            obtenidos por los slider de la interfaz web. Y se asignan a los 3 pines PWM del ESP32 mediante la función <em>PWM.duty_u16</em>
+                                            en una escala de 16 bits (0 - 65535):
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #228B22"># Función para ajustar el brillo de cada canal RGB</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">set_color</span>(r, g, b):
+    red.duty_u16(<span style="color: #658b00">int</span>(r * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+    green.duty_u16(<span style="color: #658b00">int</span>(g * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+    blue.duty_u16(<span style="color: #658b00">int</span>(b * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+</pre>
+</div>
+
+                                        <p> Se crea una función llamada <em>web_page</em>. Se procede a leer el archivo <em>html_rgb_control.html</em> que contiene la pagina web 
+                                            a mostrar en el servidor web, se convierte en un variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para 
+                                            reemplazar el string <em>%r</em> por el valor de la variable <em>r</em>, el string <em>%g</em> por la variable <em>g</em> y el string 
+                                            <em>%b</em> por la variable <em>b</em>. Por último se retorna la pagina web modificada:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
+    f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_rgb_control.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658b00">str</span>(text)
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%r&quot;</span>, <span style="color: #658b00">str</span>(r))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%g&quot;</span>, <span style="color: #658b00">str</span>(g))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%b&quot;</span>, <span style="color: #658b00">str</span>(b))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%color&quot;</span>, <span style="color: #CD5555">&#39;rgb(&#39;</span>+<span style="color: #658b00">str</span>(r)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(g)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(b)+<span style="color: #CD5555">&#39;)&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+</pre>
+</div>
+
+                                        <p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
+                                            <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
+                                            definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
+                                            el socket para recibir máximo 5 conexiones de manera simultanea. Además se inicializa la variable <em>last_request_time</em> con
+                                            el número de ms actual de ESP32 mediante la función <em>time.ticks_ms()</em>:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+<span style="color: #228B22"># Tiempo mínimo entre mensajes (en segundos)</span>
+last_request_time = time.ticks_ms()
+</pre>
+</div>
+
+                                        <p> Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
+                                            entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente. Luego se recibe los datos del socket 
+                                            enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se decodifica:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
+    r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r:
+        <span style="color: #8B008B; font-weight: bold">for</span> readable <span style="color: #8B008B">in</span> r:
+            <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+            conn, addr = s.accept()
+            
+            <span style="color: #228B22"># Get the received request of the client</span>
+            request = conn.recv(<span style="color: #B452CD">1024</span>)
+            request = request.decode()
+</pre>
+</div>
+
+                                        <p> Si se recibe una solicitud de tipo <em>POST</em> entonces se verifica si ha pasado más de 200ms desde la última solicitud procesada.
+                                            En caso negativo entonces se cierra la conexión y se pasa a un nuevo ciclo. En caso afirmativo entonces se guarda el tiempo, y se Extraer
+                                            los valores de los slider de la interfaz web, se guardan en las variables globales <em>r</em>, <em>g</em> y <em>b</em> se usa la función
+                                            <em>set_color</em> para cambiar los valores de los PWM de los pines correspondientes del ESP32: 
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+            <span style="color: #228B22"># Extraer datos del formulario si es POST</span>
+            <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
+                <span style="color: #228B22"># Obtener tiempo actual</span>
+                current_time = time.ticks_ms()
+                <span style="color: #228B22"># Ignorar solicitudes si no ha pasado el intervalo mínimo</span>
+                <span style="color: #8B008B; font-weight: bold">if</span> time.ticks_diff(current_time, last_request_time) &lt; <span style="color: #B452CD">200</span>:
+                    conn.close()
+                    <span style="color: #8B008B; font-weight: bold">continue</span>
+                <span style="color: #8B008B; font-weight: bold">else</span>:
+                    <span style="color: #228B22"># Actualizar el tiempo de la última solicitud procesada</span>
+                    last_request_time = current_time
+                    body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
+                    params = {param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">0</span>]: <span style="color: #658b00">int</span>(param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">1</span>]) <span style="color: #8B008B; font-weight: bold">for</span> param <span style="color: #8B008B">in</span> body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>)}
+                    r = params.get(<span style="color: #CD5555">&#39;red&#39;</span>, <span style="color: #B452CD">0</span>)
+                    g = params.get(<span style="color: #CD5555">&#39;green&#39;</span>, <span style="color: #B452CD">0</span>)
+                    b = params.get(<span style="color: #CD5555">&#39;blue&#39;</span>, <span style="color: #B452CD">0</span>)
+                    set_color(r, g, b)
+</pre>
+</div>
+
+                                        <p> Después de procesar la solicitud se llama a la función <em>web_page</em>, se llama y este automáticamente va a generar el html de la 
+                                            página web con los valores actual de temperatura y humedad. Después se envía los datos requeridos por el navegador del cliente para 
+                                            mostrar la página web (Encabezado + Contenido) y se cierra el socket creado para el cliente:
+                                        </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+            <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+            response = web_page()
+            <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+            conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+            conn.sendall(response)
+            
+            <span style="color: #228B22"># Close Socket</span>
+            conn.close()
+</pre>
+</div>
+
+                                        
+                                        <h2>Testeo en ESP32</h2>
+                                        <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/Con_ESP32_ejercicio_8.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p>Luego de subir los archivos <em>boot.py</em> y <em>html_rgb_control.html</em> al dispositivo ESP32, en consola se va a mostrar:</p>
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/resultado1_ejercicio_8.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p>Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p>
+
+                                        <p>Luego ejecutamos el script <em>main.py</em> mediante el software Thonny. Y con un computador o dispositivo móvil que esté conectado
+                                            en la misma red WiFi que el ESP32, por medio de un navegador se debe conectar a la dirección web anotada en pasos anteriores:
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/resultado2_ejercicio_8.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p> Si deslizamos los diferentes slider se cambiará el color del LED RGB simultáneamente:
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/resultado3_ejercicio_8.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/resultado4_ejercicio_8.png" width ="100%" height="auto">
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/resultado5_ejercicio_8.png" width ="100%" height="auto">
+                                        </p>
+
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <footer>
+                    <hr>
+                    <div role="navegation" arial-label="Button navigation">
+                        <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/ejercicio_4_4.html" class="btn btn-neutral float-left" title="Ejercicio 4-4: Sistema de Alarma con Sensor Infrarrojo y Notificación Web" accesskey="p" rel="prev">
+                            <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                            Anterior
+                        </a>
+                        <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/ejercicio_4_6.html" class="btn btn-neutral float-right" title="Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos" accesskey="n" rel="next">
+                            <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                            Siguiente
+                        </a>
+                    </div>
+                </footer>
+            </div>
+        </main>
+
+        <footer class="footer" id="footer-main-container"></footer>
+
+        <div class="copyright" id="footer-copyright-container"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script src="/js/load_html_created.js" defer></script>
+    <script src="/js/logout_iot.js" defer></script>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
+    <script src="/js/front.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    
+    <title>6. Protocolos y conectividad en IoT</title>
+</head>
+
+<body>
+    <div id="all">
+        <header id="header-comm-container"></header>
+
+        <header id="header-nav-main-container"></header>
+
+        <main>
+			<div id="aside-nav-curso-iot-container"></div>
+	
+			<div class="content">
+				<section>
+					<div id="heading-breadcrumbs">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<h1>Protocolos y conectividad en IoT</h1>
+                                    <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+                    <div role="navegation" arial-label="Page navigation">
+                        <ul class="wy-breadcrumbs">
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/index.html">Inicio</a>
+                            </li>
+                            <li class="wy-li">
+                                <a href="/products/curso_iot/contenido/6_conectividad/index.html" class="not-active">6. Protocolos y conectividad en IoT</a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+				</section>
+			
+				<section>
+					<div id="content">
+						<div class="container" id="contact">
+							<div class="row">
+								<div class="col-md-8">
+									<section>
+                                        <h1>Módulo 6. Protocolos y conectividad en IoT</h1>
+                                        <p>
+                                            Duración estimada: XX horas
+                                        </p>
+
+                                        <h2>Planteamiento general</h2>
+										<table class="table-objetive-module">
+											<thead>
+												<tr>
+												<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo general</span></th>
+												<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="tg-cly1">Analizar los distintos protocolos de comunicación usados en IoT y sus características según aplicación</td>
+													<td class="tg-cly1">Compara protocolos (MQTT, CoAP, HTTP) y aplica uno en un flujo funcional</td>
+												</tr>
+											</tbody>
+                                        </table>
+
+                                        <h2>Metodología:</h2>
+                                        <table class="table-objetive-module">
+											<thead>
+												<tr>
+												<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo específico</span></th>
+												<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+												<th class="tg-vyu2"><span style="font-weight:bold;">Evidencias de aprendizaje</span></th>
+												<th class="tg-vyu2"><span style="font-weight:bold;">Actividades de aprendizaje</span></th>
+												<th class="tg-vyu2"><span style="font-weight:bold;">Link</span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="tg-cly1">Diferenciar las redes de comunicación utilizadas en IoT según su alcance, velocidad y consumo</td>
+													<td class="tg-cly1">Clasifica correctamente tipos de redes aplicadas a IoT y ejemplifica su uso según la necesidad del sistema</td>
+													<td class="tg-cly1">
+														<ul>
+															<li>Tabla comparativa</li>
+															<li>Análisis de caso: selección de red según aplicación</li>
+														</ul>
+													</td>
+													<td class="tg-cly1">
+														<ul>
+															<li>Actividad de análisis: "¿Qué red usarías en un sistema de agricultura remota?"</li>
+															<li>Mini juego de clasificación de redes</li>
+														</ul>
+													</td>
+													<td class="tg-cly1"><a href="/products/curso_iot/contenido/6_conectividad/6_1_redes/index.html">6.1. Tipos de redes aplicadas en IoT</a></td>
+												</tr>
+												<tr>
+													<td class="tg-cly1">Comparar protocolos IoT (HTTP, MQTT, CoAP) en términos de arquitectura, eficiencia y confiabilidad</td>
+													<td class="tg-cly1">Establece ventajas y desventajas de cada protocolo y selecciona el más adecuado para un caso de aplicación dado</td>
+													<td class="tg-cly1">
+														<ul>
+															<li>Cuadro comparativo de protocolos</li>
+															<li>Justificación escrita de selección de protocolo</li>
+														</ul>
+													</td>
+													<td class="tg-cly1">
+														<ul>
+															<li>Estudio de caso por grupo</li>
+															<li>Lluvia de ideas: protocolos en el hogar, la industria y la salud</li>
+														</ul>
+													</td>
+													<td class="tg-cly1"><a href="/products/curso_iot/contenido/6_conectividad/6_2_protocolos/index.html">6.2. Protocolos de comunicación en IoT</a></td>
+												</tr>
+												<tr>
+													<td class="tg-cly1">Implementar un flujo de comunicación básica usando el protocolo MQTT entre ESP32 y un broker local</td>
+													<td class="tg-cly1">Publica y suscribe correctamente mensajes MQTT entre ESP32 y una interfaz de monitoreo</td>
+													<td class="tg-cly1">
+														<ul>
+															<li>Captura de consola y dashboard</li>
+															<li>Código funcional de publicación y suscripción MQTT</li>
+														</ul>
+													</td>
+													<td class="tg-cly1">
+														<ul>
+															<li>Taller práctico con Mosquitto o Node-RED</li>
+															<li>Actividad: prueba de sensores enviando datos periódicos</li>
+														</ul>
+													</td>
+													<td class="tg-cly1"><a href="/products/curso_iot/contenido/6_conectividad/6_3_implementacion/index.html">6.3. Implementación práctica con MQTT</a></td>
+												</tr>
+											</tbody>
+                                        </table>
+										
+
+									</section>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+                <footer>
+                    <hr>
+                    <div role="navegation" arial-label="Button navigation">
+                        <a href="/products/curso_iot/contenido/5_node_red/5_6_bluetooth/index.html" class="btn btn-neutral float-left" title="5.6. Integración con Bluetooth y app móvil" accesskey="p" rel="prev">
+                            <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                            Anterior
+                        </a>
+                        <a href="/products/curso_iot/contenido/6_conectividad/6_1_redes/index.html" class="btn btn-neutral float-right" title="6.1. Tipos de redes aplicadas en IoT" accesskey="n" rel="next">
+                            <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                            Siguiente
+                        </a>
+                    </div>
+                </footer>
+			</div>
+		</main>
+
+        <footer class="footer" id="footer-main-container"></footer>
+
+        <div class="copyright" id="footer-copyright-container"></div>
+    </div>
+</body>
+</html>

@@ -17,7 +17,7 @@ function md5(text) {
 window.addEventListener('DOMContentLoaded', function() {
     const logueado = sessionStorage.getItem("logueado-micropython");
     if (logueado === "true") {
-        window.location.href = "/products/curso_micropython/contenido/index.html";  // Redirigir a la página de login
+        window.location.href = "/products/curso_micropython/contenido/";  // Redirigir a la página de login
     }
 });
 
@@ -40,7 +40,7 @@ document.getElementById("login-form-micropython").addEventListener("submit", asy
     if (usuarios[userHash] === pwdHash) {
         sessionStorage.setItem("logueado-micropython", "true");
         alert("Inicio de sesión exitoso");
-        window.location.href = "/products/curso_micropython/contenido/index.html";
+        window.location.href = "/products/curso_micropython/contenido/";
     } else {
         alert("Usuario o contraseña incorrectos");
     }

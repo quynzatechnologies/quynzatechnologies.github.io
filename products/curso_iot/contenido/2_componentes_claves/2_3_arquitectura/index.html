@@ -41,13 +41,13 @@
                     <div role="navegation" arial-label="Page navigation">
                         <ul class="wy-breadcrumbs">
                             <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/index.html">Inicio</a>
+                                <a href="/products/curso_iot/contenido/">Inicio</a>
                             </li>
                             <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/2_componentes_claves/index.html">2. Componentes Claves del IoT</a>
+                                <a href="/products/curso_iot/contenido/2_componentes_claves/">2. Componentes Claves del IoT</a>
                             </li>
                             <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/2_componentes_claves/2_3_arquitectura/index.html" class="not-active">2.3. Arquitectura general de un sistema IoT</a>
+                                <a href="/products/curso_iot/contenido/2_componentes_claves/2_3_arquitectura/" class="not-active">2.3. Arquitectura general de un sistema IoT</a>
                             </li>
                         </ul>
                         <hr>
@@ -59,102 +59,7 @@
 						<div class="container" id="contact">
 							<div class="row">
 								<div class="col-md-8">
-									<section>
-										<h1>Importancia de la conectividad en IoT: </h1>
-                                        <p>La conectividad es un elemento esencial en el ecosistema del Internet de las Cosas (IoT), ya que permite que los dispositivos se 
-                                            comuniquen entre sí y con plataformas de análisis de datos. Esta comunicación es fundamental para la recopilación, transmisión y 
-                                            procesamiento de información en tiempo real, lo que posibilita la toma de decisiones informadas y la automatización de procesos. 
-                                            Las tecnologías de conectividad pueden variar significativamente según las necesidades y características del proyecto, desde redes 
-                                            locales de área amplia (WAN) hasta conexiones a Internet mediante protocolos específicos. Sin una conectividad adecuada, los 
-                                            dispositivos IoT no podrían funcionar de manera efectiva, limitando su utilidad y el impacto que pueden tener en diversos entornos.
-                                        </p>
-                                        <p>El ESP32 se destaca especialmente en términos de conectividad, ya que integra tanto Wi-Fi como Bluetooth Low Energy (BLE), lo que 
-                                            proporciona una gran flexibilidad para conectar una amplia variedad de dispositivos en distintos contextos. Esta dualidad de opciones 
-                                            permite a los usuarios elegir el tipo de conexión que mejor se adapte a sus necesidades específicas, ya sea que requieran un acceso a 
-                                            Internet robusto o una comunicación de corto alcance entre dispositivos. Gracias a esta capacidad, el ESP32 facilita el desarrollo de 
-                                            aplicaciones IoT que pueden interconectar múltiples sensores y actuadores, así como enviar datos a plataformas de análisis en la nube, 
-                                            maximizando así el potencial de los proyectos y fomentando una mayor innovación en el campo del IoT.
-                                        </p>
-                                        
-                                        <h1>Tipos de redes en IoT:</h1>
-                                        <ul>
-                                            <li> Redes de Área Personal (PAN)
-                                                <ul>
-                                                    <li>Bluetooth Low Energy (BLE): Esta tecnología es adecuada para conexiones de corto alcance y se caracteriza por su bajo 
-                                                        consumo de energía. Es ideal para aplicaciones donde la duración de la batería es crucial, como dispositivos portátiles y 
-                                                        sensores de salud.
-                                                    </li>
-                                                    <li>Zigbee: Zigbee es un protocolo de comunicación basado en estándares de la industria que permite la creación de redes de 
-                                                        dispositivos en un área personal. Es muy eficiente en términos de energía y se utiliza comúnmente en aplicaciones de 
-                                                        domótica y automatización del hogar.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li> Redes de Área Local (LAN)
-                                                <ul>
-                                                    <li>Wi-Fi: Esta tecnología proporciona una alta velocidad de conexión y es ideal para dispositivos que se encuentran dentro 
-                                                        del rango de un enrutador. Permite la transmisión de grandes volúmenes de datos y es comúnmente utilizada en entornos 
-                                                        domésticos y empresariales, donde se requiere acceso a Internet.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li> Redes de Área Amplia (WAN)
-                                                <ul>
-                                                    <li>LTE y 5G: Estas tecnologías permiten conectar dispositivos a través de grandes distancias, ofreciendo una velocidad de 
-                                                        transferencia de datos significativamente mayor en comparación con sus predecesores. Son ideales para aplicaciones que 
-                                                        requieren comunicación en tiempo real y donde la movilidad es un factor importante.
-                                                    </li>
-                                                    <li>LoRa (Long Range): LoRa es una tecnología que ofrece comunicaciones de largo alcance con un bajo consumo de energía. 
-                                                        Es particularmente útil para aplicaciones en entornos rurales o industriales, donde la cobertura de red puede ser 
-                                                        limitada y se necesita transmitir datos de manera eficiente sin agotar rápidamente la batería de los dispositivos.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-
-                                        <h1>Protocolos de comunicación en IoT:</h1>
-                                        <p>Los protocolos de comunicación en el Internet de las Cosas (IoT) son conjuntos de reglas y estándares que permiten a los dispositivos 
-                                            IoT intercambiar información de manera efectiva y eficiente. Estos protocolos son fundamentales para garantizar que los datos se 
-                                            transmitan de forma segura y rápida entre los dispositivos, así como entre los dispositivos y las plataformas de análisis o servidores. 
-                                            La elección del protocolo adecuado puede influir significativamente en el rendimiento, la escalabilidad y la eficiencia de una red IoT.
-                                        </p>
-                                        <p>Entre los beneficios del uso de protocolos de comunicación específicos para IoT se incluyen la reducción del consumo de energía, la 
-                                            optimización del uso del ancho de banda y la mejora de la latencia en la comunicación. Esto es especialmente importante en entornos 
-                                            donde los recursos son limitados y la conexión de red puede ser inestable. Además, los protocolos permiten la interoperabilidad entre 
-                                            diferentes dispositivos y plataformas, facilitando la integración de tecnologías diversas en un mismo sistema.
-                                        </p>
-                                        <ul>
-                                            <li> MQTT (Message Queuing Telemetry Transport)
-                                                <ul>
-                                                    <li>Descripción: Protocolo de mensajería ligero diseñado para la transmisión de datos entre dispositivos y servidores.</li>
-                                                    <li>Características: Utiliza un modelo de publicación/suscripción que permite una comunicación eficiente en redes con ancho de 
-                                                        banda limitado y alta latencia. Es ideal para aplicaciones donde se necesita un intercambio frecuente de datos y baja 
-                                                        sobrecarga de red.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li> CoAP (Constrained Application Protocol)
-                                                <ul>
-                                                    <li>Descripción: Protocolo ligero destinado a dispositivos con recursos limitados, diseñado para facilitar la comunicación en 
-                                                        entornos con restricciones.
-                                                    </li>
-                                                    <li>Características: CoAP es un protocolo orientado a la solicitud/respuesta, similar a HTTP, pero optimizado para operaciones 
-                                                        de bajo consumo. Su diseño permite su uso en dispositivos que operan con poca potencia y en redes de baja velocidad.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li> HTTP/HTTPS
-                                                <ul>
-                                                    <li>Descripción: Protocolo de transferencia de hipertexto utilizado comúnmente en aplicaciones IoT para la comunicación con 
-                                                        servidores web.
-                                                    </li>
-                                                    <li>Características: A pesar de ser más pesado que otros protocolos como MQTT y CoAP, HTTP/HTTPS es ampliamente reconocido y 
-                                                        utilizado en la web. Su uso en IoT permite la interacción con servicios en la nube y la integración con aplicaciones web, 
-                                                        facilitando el acceso a datos y recursos desde dispositivos IoT.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>                                    
+									<section>                          
 									</section>
 								</div>
 							</div>
@@ -165,11 +70,11 @@
                 <footer>
                     <hr>
                     <div role="navegation" arial-label="Button navigation">
-                        <a href="/products/curso_iot/contenido/2_componentes_claves/2_2_actuadores/index.html" class="btn btn-neutral float-left" title="2.2. Actuadores en IoT" accesskey="p" rel="prev">
+                        <a href="/products/curso_iot/contenido/2_componentes_claves/2_2_actuadores/" class="btn btn-neutral float-left" title="2.2. Actuadores en IoT" accesskey="p" rel="prev">
                             <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
                             Anterior
                         </a>
-                        <a href="/products/curso_iot/contenido/2_componentes_claves/2_4_procesamiento/index.html" class="btn btn-neutral float-right" title="2.4. Procesamiento de datos: Edge, Cloud y Fog" accesskey="n" rel="next">
+                        <a href="/products/curso_iot/contenido/2_componentes_claves/2_4_procesamiento/" class="btn btn-neutral float-right" title="2.4. Procesamiento de datos: Edge, Cloud y Fog" accesskey="n" rel="next">
                             <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
                             Siguiente
                         </a>

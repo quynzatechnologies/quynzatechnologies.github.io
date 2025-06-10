@@ -60,6 +60,236 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <section>
+                                        <h1>Módulo 2.4. Plataformas de Procesamiento y Análisis de Datos: </h1>
+                                        <p>
+                                            A medida que los sistemas IoT crecen en complejidad y volumen de datos, se hace imprescindible elegir con criterio el modelo de 
+                                            procesamiento adecuado. Existen tres modelos principales: procesamiento en la nube (cloud), en el borde (edge) y en la niebla (fog). 
+                                            Cada uno responde a diferentes necesidades según el tipo de aplicación, el tiempo de respuesta requerido, la arquitectura de red y 
+                                            la capacidad de cómputo disponible.
+                                        </p>
+
+                                        <iframe style="display: block;margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/aKoIPbb_rCs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                        <p style="text-align: center">Video 4: 
+                                            <a href="https://www.youtube.com/watch?v=aKoIPbb_rCs">Diferencias entre fog computing, edge computing y cloud computing</a><br>
+                                            <i>Ver desde 00:30</i>
+                                        </p>
+
+                                        <h2>Procesamiento en la nube (Cloud Computing)</h2>
+                                        <p>
+                                            Este modelo centraliza el procesamiento de datos en servidores remotos de gran capacidad. Es ideal cuando se necesita realizar 
+                                            análisis complejos, almacenamiento masivo o aplicaciones que no exigen respuesta inmediata. Plataformas como AWS IoT, Microsoft 
+                                            Azure IoT Hub, Google Cloud IoT o ThingWorx son ejemplos típicos.
+                                        </p>
+                                        <p>Ventajas principales:</p>
+                                        <p>
+                                            <ul>
+                                                <li>Gran capacidad de cómputo y almacenamiento.</li>
+                                                <li>Acceso a herramientas avanzadas de analítica e inteligencia artificial.</li>
+                                                <li>Escalabilidad global.</li>
+                                            </ul>
+                                        </p>
+                                        <p>Desventajas</p>
+                                        <p>
+                                            <ul>
+                                                <li>Mayor latencia.</li>
+                                                <li>Dependencia de conexión a Internet.</li>
+                                                <li>Posibles preocupaciones de privacidad y seguridad de datos.</li>
+                                            </ul>
+                                        </p>
+
+                                        <h2>Procesamiento en el borde (Edge Computing)</h2>
+                                        <p>
+                                            En este modelo, el análisis de los datos ocurre cerca del dispositivo que los genera, usualmente en gateways o microcontroladores 
+                                            avanzados como el ESP32.
+                                        </p>
+                                        <p>Ventajas principales</p>
+                                        <p>
+                                            <ul>
+                                                <li>Baja latencia, ideal para respuestas en tiempo real.</li>
+                                                <li>Menor carga en la red y en la nube.</li>
+                                                <li>Mejora la privacidad, ya que los datos pueden no salir del entorno local.</li>
+                                            </ul>
+                                        </p>
+                                        <p>Desventajas:</p>
+                                        <p>
+                                            <ul>
+                                                <li>Limitaciones en capacidad de procesamiento.</li>
+                                                <li>Mayor complejidad de mantenimiento y actualizaciones.</li>
+                                            </ul>
+                                        </p>
+
+                                        <h2>Fog Computing: Un modelo intermedio</h2>
+                                        <p>
+                                            Ubicado entre el edge y la nube, el modelo fog permite distribuir parte del procesamiento en nodos intermedios, como routers inteligentes 
+                                            o microservidores. Es útil en escenarios que requieren procesamiento distribuido con cierta capacidad de coordinación.
+                                        </p>
+                                        <p>Ventajas principales:</p>
+                                        <p>
+                                            <ul>
+                                                <li>Equilibrio entre latencia, capacidad y escalabilidad.</li>
+                                                <li>Aumenta la resiliencia y reduce congestión en la nube.</li>
+                                            </ul>
+                                        </p>
+                                        <p>Desventajas:</p>
+                                        <p>
+                                            <ul>
+                                                <li>Requiere infraestructura adicional.</li>
+                                                <li>Aún en evolución y con menos estandarización que cloud o edge.</li>
+                                            </ul>
+                                        </p>
+
+                                        <h2>Ejemplos de plataformas asociadas</h2>
+                                        <p>
+                                            <ul>
+                                                <li>Cloud: AWS IoT Core, Microsoft Azure IoT Hub, Google Cloud IoT, IBM Watson IoT.</li>
+                                                <li>Fog: Cisco IOx, Dell Edge Gateways, OpenFog.</li>
+                                                <li>Edge: Raspberry Pi, NVIDIA Jetson, ESP32 local con MicroPython o Node-RED embebido.</li>
+                                            </ul>
+                                        </p>
+                                        <p>Entre las plataformas más representativas están:</p>
+                                        <p>
+                                            <ul>
+                                                <li>AWS IoT: Plataforma escalable basada en la nube, integra servicios de analítica, machine learning y visualización.</li>
+                                                <li>Microsoft Azure IoT Hub: Comunicación segura entre millones de dispositivos, integración con servicios de datos.</li>
+                                                <li>Google Cloud IoT Core: Administración eficiente de dispositivos, almacenamiento y analítica con BigQuery.</li>
+                                                <li>ThingWorx: Solución industrial robusta que permite crear aplicaciones IoT rápidamente.</li>
+                                                <li>Node-RED (local): Herramienta visual para flujos de datos que puede correr en bordes como Raspberry Pi o en gateways industriales.</li>
+                                            </ul>
+                                        </p>
+
+                                        <table style="margin: auto;" class="table-objetive-module">
+                                            <thead>
+                                                <tr>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Plataforma</span></th>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Tipo de procesamiento</span></th>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Lenguajes/Soporte</span></th>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Ventajas destacadas</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="tg-cly1">AWS IoT Core</td>
+                                                    <td class="tg-cly1">Cloud + Edge (Greengrass)</td>
+                                                    <td class="tg-cly1">Python, Node.js, Java</td>
+                                                    <td class="tg-cly1">Alta escalabilidad, integración con servicios AWS</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-cly1">Microsoft Azure IoT Hub</td>
+                                                    <td class="tg-cly1">Cloud + Edge</td>
+                                                    <td class="tg-cly1">C#, Python, JavaScript</td>
+                                                    <td class="tg-cly1">Seguridad avanzada, integración con Power BI</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-cly1">Google Cloud IoT</td>
+                                                    <td class="tg-cly1">Cloud</td>
+                                                    <td class="tg-cly1">Python, Go, Java</td>
+                                                    <td class="tg-cly1">Integración con BigQuery y AI/ML</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-cly1">ThingWorx (PTC)</td>
+                                                    <td class="tg-cly1">Cloud + On-premise</td>
+                                                    <td class="tg-cly1">Java, REST API</td>
+                                                    <td class="tg-cly1">Enfoque industrial, dashboards intuitivos</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-cly1">Node-RED (local)</td>
+                                                    <td class="tg-cly1">Edge / Fog (on-device)</td>
+                                                    <td class="tg-cly1">JavaScript, Python</td>
+                                                    <td class="tg-cly1">Fácil de usar, sin necesidad de nube</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <!--
+                                        <h2>Actividades</h2>
+                                        <p>Actividad 1: Mini-debate "¿Cloud o Edge?"</p>
+                                        <p>
+                                            <ul>
+                                                <li></li>
+                                                <li></li>
+                                                <li></li>
+                                            </ul>
+                                        </p>
+                                        <p>Actividad 2: Casos tipo</p>
+                                        <p>
+                                            <ul>
+                                                <li>
+                                                    Formato: Selección de modelo según escenarios:
+                                                    <ul>
+                                                        <li>Dispositivo médico portátil</li>
+                                                        <li>Planta industrial remota sin Internet estable</li>
+                                                        <li>Sistema de videovigilancia con análisis facial</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Evidencia: Justificación escrita de modelo seleccionado.</li>
+                                            </ul>
+                                        </p>
+                                        <p>Actividad 3: Exploración de plataformas</p>
+                                        <p>
+                                            <ul>
+                                                <li>Formato: Mini-investigación guiada (fichas de AWS, Azure, ThingWorx).</li>
+                                                <li>Producto: Tabla comparativa simple o presentación rápida de hallazgos.</li>
+                                            </ul>
+                                        </p>
+                                        -->
+
+                                        <h2>Conclusiones</h2>
+                                        <p>
+                                            Comprender los modelos de procesamiento de datos en IoT permite tomar decisiones acertadas para cada tipo de aplicación. 
+                                            Mientras que el cloud computing aporta poder analítico masivo, el edge computing ofrece inmediatez y eficiencia. El fog 
+                                            computing, por su parte, se posiciona como una solución intermedia ideal para entornos distribuidos que requieren 
+                                            escalabilidad y latencia reducida.
+                                        </p>
+
+                                        <table style="margin: auto;" class="table-objetive-module">
+                                            <thead>
+                                                <tr>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Modelo</span></th>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Ubicación del procesamiento</span></th>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Latencia</span></th>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Costos operativos</span></th>
+                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Escalabilidad</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="tg-cly1">Cloud</td>
+                                                    <td class="tg-cly1">Nube (servidores remotos)</td>
+                                                    <td class="tg-cly1">Alta</td>
+                                                    <td class="tg-cly1">Medio-Alto</td>
+                                                    <td class="tg-cly1">Alta</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-cly1">Edge</td>
+                                                    <td class="tg-cly1">Dispositivo o gateway local</td>
+                                                    <td class="tg-cly1">Muy baja</td>
+                                                    <td class="tg-cly1">Bajo</td>
+                                                    <td class="tg-cly1">Limitada</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-cly1">Fog</td>
+                                                    <td class="tg-cly1">Dispositivo intermedio</td>
+                                                    <td class="tg-cly1">Baja</td>
+                                                    <td class="tg-cly1">Medio</td>
+                                                    <td class="tg-cly1">Media</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <hr>
+
+                                        <img style="display: block;margin: auto;width: 75%;" src="./img/seleccion.png" alt="Mapa conceptual decisiones" class="img-fluid icon-hover">
+                                        <p style="text-align: center">Figura 11: Flujo de decisión por escenario de aplicación. Elaboración propia</p>
+
+                                        <h2>Referencias</h2>
+                                        <p>
+                                            <ol>
+                                                <li>A. Čolaković and M. Hadžialić, "Internet of Things (IoT): A review of enabling technologies, challenges, and open research issues," Computer Networks, vol. 144, pp. 17-39, 2018.</li>
+                                                <li>R. Mehta, J. Sahni, and K. Khanna, "Internet of Things: Vision, Applications and Challenges," Procedia Computer Science, vol. 132, pp. 1263-1269, 2018.</li>
+                                                <li>A. Al-Fuqaha, M. Guizani, M. Mohammadi, M. Aledhari, and M. Ayyash, "Internet of Things: A Survey on Enabling Technologies, Protocols and Applications," IEEE Communications Surveys & Tutorials, vol. 17, no. 4, pp. 2347-2376, 2015.</li>
+                                            </ol>
+                                        </p>
+
+                                        <!--
                                         <p>En el contexto del Internet de las Cosas (IoT), los datos recopilados por los dispositivos deben ser procesados y analizados para convertirlos 
                                             en información útil que permita tomar decisiones informadas. Este procesamiento puede llevarse a cabo en diferentes entornos, siendo los más 
                                             destacados Cloud Computing, Edge Computing y Fog Computing. Cada uno de estos enfoques tiene características y beneficios que los hacen 
@@ -109,7 +339,8 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                        </ul>                   
+                                        </ul>     
+                                        -->              
                                     </section>
                                 </div>
                             </div>

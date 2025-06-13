@@ -69,7 +69,7 @@
                                             donde otros dispositivos pueden conectarse.
                                         </p>
 
-                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
+                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
                                         </p>
 
                                         <p style="text-align:center;">
@@ -116,11 +116,11 @@ ap.config(max_clients=<span style="color: #B452CD">10</span>) <span style="color
                                             de su red.
                                         </p>
 
-                                        <h2>Explicación paso a paso:</h2>
+                                        <h2>Explicación paso a paso</h2>
 
                                         <h3>main.py</h3>
-                                        <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan">network</a></em> y la clase
-                                            <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em>. La clase <em>Pin</em> es usado para controlar
+                                        <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan" target="_blank">network</a></em> y la clase
+                                            <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em>. La clase <em>Pin</em> es usada para controlar
                                             los pines GPIO (General-purpose Input-Output) del ESP32:
                                         </p>
 
@@ -132,7 +132,7 @@ ap.config(max_clients=<span style="color: #B452CD">10</span>) <span style="color
 </div>
 
                                         <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
-                                            en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al led interno:
+                                            en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
                                         </p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -163,7 +163,7 @@ ap.config(max_clients=<span style="color: #B452CD">10</span>) <span style="color
 
                                         <ul>
                                             <li><em>essid</em>: Identificador de la red WiFi</li>
-                                            <li><em>channel</em>: <a href="https://www.adslzone.net/reportajes/wifi/canales-wifi/">Canal</a> de red WiFi. Número entre 1 al 13.</li>
+                                            <li><em>channel</em>: <a href="https://www.adslzone.net/reportajes/wifi/canales-wifi/" target="_blank">Canal</a> de red WiFi. Número entre 1 al 13.</li>
                                             <li><em>authmode</em>: 
                                                 <ul>
                                                     <li>0: Abierto</li>
@@ -178,7 +178,7 @@ ap.config(max_clients=<span style="color: #B452CD">10</span>) <span style="color
                                         </ul>
 
                                         <p> Se crea una función llamada <em>printClients</em>. En este se llama la función <em>ap.status("stations")</em> retorna la lista de clientes
-                                            conectados a la red WiFi. Si el número de clientes es mayor a 0 se enciende el led integrado en el ESP32, en caso contrario se apaga:
+                                            conectados a la red WiFi. Si el número de clientes es mayor a 0 se enciende el LED integrado en el ESP32, en caso contrario se apaga:
                                         </p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">

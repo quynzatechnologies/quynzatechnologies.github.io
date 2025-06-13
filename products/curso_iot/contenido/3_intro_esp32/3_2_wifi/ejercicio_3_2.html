@@ -69,7 +69,7 @@
                                             disponible y cuando se realice una conexión exitosa entonces se encenderá el LED conectado a la placa ESP32.
                                         </p>
 
-                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
+                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
                                         </p>
 
                                         <p style="text-align:center;">
@@ -118,10 +118,10 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
                                         <p>Donde "XXX" es el nombre de su red WiFi y "YYY" es la contraseña de su red.</p>
 
                                         <section id="explicacion">
-                                            <h2>Explicación paso a paso:</h2>
+                                            <h2>Explicación paso a paso</h2>
 
                                             <h3>main.py</h3>
-                                            <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan">network</a></em> y la clase
+                                            <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan" target="_blank">network</a></em> y la clase
                                                 <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em>. La clase <em>Pin</em> es usado para controlar
                                                 los pines GPIO (General-purpose Input-Output) del ESP32:
                                             </p>
@@ -134,7 +134,7 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </div>
     
                                             <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
-                                                en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al led interno:
+                                                en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
                                             </p>
     
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -157,9 +157,9 @@ p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 </pre>
 </div>
     
-                                            <p> Si el ESP32 no está conectado a ninguna red, entonces se apaga el led interno del ESP32 y se procede a intentar conectar a la red WiFi
+                                            <p> Si el ESP32 no está conectado a ninguna red, entonces se apaga el LED interno del ESP32 y se procede a intentar conectar a la red WiFi
                                                 con SSID: <em>ssid</em> y Contraseña: <em>pwd</em>. Mientras no se haga la conexión de manera exitosa, el ESP32 queda en espera,
-                                                cuando se conecte entonces se enciende el led interno y se muestra en consola la información de la conexión:
+                                                cuando se conecte entonces se enciende el LED interno y se muestra en consola la información de la conexión:
                                             </p>
     
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -177,7 +177,7 @@ p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 </pre>
 </div>
     
-                                            <p> La clase <em><a href="https://docs.micropython.org/en/latest/library/network.WLAN.html">WLAN</a></em> tiene una función llamada 
+                                            <p> La clase <em><a href="https://docs.micropython.org/en/latest/library/network.WLAN.html" target="_blank">WLAN</a></em> tiene una función llamada 
                                                 <em>ifconfig</em> el cual retorna/configura los parámetros a nivel IP de la red conectada. Estos parámetros están organizados en 
                                                 una tupla de tamaño 4 con la siguiente información:
                                             </p>

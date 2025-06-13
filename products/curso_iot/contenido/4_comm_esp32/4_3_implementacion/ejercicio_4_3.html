@@ -70,7 +70,7 @@
                                             una visualización con interfaz web.
                                         </p>
 
-                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
+                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
                                         </p>
 
                                         <p style="text-align:center;">
@@ -226,10 +226,10 @@ time1 = time.ticks_us()
 </pre>
 </div>
 
-                                        <h2>Explicación paso a paso:</h2>
+                                        <h2>Explicación paso a paso</h2>
 
                                         <h3>boot.py:</h3>
-                                        <p>Este es el mismo código definido en el <strong>Ejercicio 2: Conectarse a red WiFi</strong>, en el cual se da una 
+                                        <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
                                             <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
                                             en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
                                         </p>
@@ -250,17 +250,17 @@ time1 = time.ticks_us()
                                         </p>
 
                                         <ul>
-                                            <li><em>socket</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html">socket</a></em> es usado para
+                                            <li><em>socket</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">socket</a></em> es usado para
                                             la creación se sockets con ESP32</li>
-                                            <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em> es usado para
+                                            <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em> es usado para
                                             controlar los pines GPIO (General-purpose Input-Output) del ESP32</li>
-                                            <li><em>uselect</em>: La librería <em><a href="https://docs.micropython.org/en/v1.15/library/uselect.html">uselect</a></em> es para esperar 
+                                            <li><em>uselect</em>: La librería <em><a href="https://docs.micropython.org/en/v1.15/library/uselect.html" target="_blank">uselect</a></em> es para esperar 
                                             eficientemente eventos en múltiples transmisiones. En este ejercicio se utiliza para esperar las conexiones de clientes entrantes sin 
                                             necesidad de detener la operación del ESP32</li>
-                                            <li><em>dht</em>: La librería <em><a href="https://docs.micropython.org/en/latest/esp8266/tutorial/dht.html">dht</a></em> es usado para
+                                            <li><em>dht</em>: La librería <em><a href="https://docs.micropython.org/en/latest/esp8266/tutorial/dht.html" target="_blank">dht</a></em> es usado para
                                             leer sensores digitales de bajo coste con sensores de humedad capacitivos y termistores para medir el aire circundante (Digital humidity
                                             /& Temperature). En este ejercicio se está utilizando el sensor <em>DHT11</em></li>
-                                            <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html">time</a></em> proporciona funciones 
+                                            <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html" target="_blank">time</a></em> proporciona funciones
                                             para obtener la hora y fecha actuales, medir intervalos de tiempo y retrasos. En este ejercicio se va a utilizar para hacer un temporizador
                                             y medir con el sensor a intervalos fijos</li>
                                         </ul>
@@ -287,10 +287,10 @@ humi = <span style="color: #B452CD">0</span>
 </pre>
 </div> 
 
-                                        <p> Se crea una función llamada <em>web_page</em>. En este se lee el archivo <em>html_dht11.html</em> que contiene la pagina web a mostrar 
+                                        <p> Se crea una función llamada <em>web_page</em>. En este se lee el archivo <em>html_dht11.html</em> que contiene la página web a mostrar 
                                             en el servidor web, se convierte en un variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para reemplazar el 
                                             string <em>%temp</em> por el valor de la variable <em>temp</em>, que contiene el valor de temperatura leído por el sensor, y el string
-                                            <em>%hum</em> por el valor de la variable <em>humi</em>, que contiene el valor leído por el sensor. Por último se retorna la pagina web 
+                                            <em>%hum</em> por el valor de la variable <em>humi</em>, que contiene el valor leído por el sensor. Por último se retorna la página web 
                                             modificada:
                                         </p>
 
@@ -311,7 +311,7 @@ humi = <span style="color: #B452CD">0</span>
                                         <p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
                                             <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
                                             definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
-                                            el socket para recibir máximo 5 conexiones de manera simultanea:
+                                            el socket para recibir máximo 5 conexiones de manera simultánea:
                                         </p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -373,7 +373,7 @@ time1 = time.ticks_us()
 
                                         <p> Luego se recibe los datos del socket enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se 
                                             imprime en consola. Se llama a la función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con los 
-                                            valores actual de temperatura y humedad. Después se envía los datos requeridos por el navegador del cliente para mostrar la página web 
+                                            valores actuales de temperatura y humedad. Después se envía los datos requeridos por el navegador del cliente para mostrar la página web 
                                             (Encabezado + Contenido) y se cierra el socket creado para el cliente:
                                         </p>
 

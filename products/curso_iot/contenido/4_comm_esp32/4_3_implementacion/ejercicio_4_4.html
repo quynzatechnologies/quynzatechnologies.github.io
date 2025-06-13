@@ -70,7 +70,7 @@
                                             una visualización con interfaz web de un sistema de alarmas.
                                         </p>
 
-                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, el cual puede ser adquirido en este link al mejor precio!
+                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
                                         </p>
 
                                         <p style="text-align:center;">
@@ -230,11 +230,11 @@ time1 = time.ticks_us()
 <span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
 </pre></div>
 
-                                        <h2>Explicación paso a paso:</h2>
+                                        <h2>Explicación paso a paso</h2>
 
                                         <h3>boot.py:</h3>
 
-                                        <p>Este es el mismo código definido en el <strong>Ejercicio 2: Conectarse a red WiFi</strong>, en el cual se da una 
+                                        <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
                                             <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
                                             en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
                                         </p>
@@ -255,14 +255,14 @@ time1 = time.ticks_us()
                                         </p>
 
                                         <ul>
-                                            <li><em>socket</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html">socket</a></em> es usado para
+                                            <li><em>socket</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">socket</a></em> es usado para
                                             la creación se sockets con ESP32</li>
-                                            <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em> es usado para
+                                            <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em> es usado para
                                             controlar los pines GPIO (General-purpose Input-Output) del ESP32</li>
-                                            <li><em>uselect</em>: La librería <em><a href="https://docs.micropython.org/en/v1.15/library/uselect.html">uselect</a></em> es para esperar 
+                                            <li><em>uselect</em>: La librería <em><a href="https://docs.micropython.org/en/v1.15/library/uselect.html" target="_blank">uselect</a></em> es para esperar
                                             eficientemente eventos en múltiples transmisiones. En este ejercicio se utiliza para esperar las conexiones de clientes entrantes sin 
                                             necesidad de detener la operación del ESP32</li>
-                                            <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html">time</a></em> proporciona funciones 
+                                            <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html" target="_blank">time</a></em> proporciona funciones
                                             para obtener la hora y fecha actuales, medir intervalos de tiempo y retrasos. En este ejercicio se va a utilizar para hacer un temporizador
                                             y medir con el sensor a intervalos fijos, además de obtener la fecha/hora actual.</li>
                                         </ul>
@@ -294,10 +294,10 @@ detections = [] <span style="color: #228B22"># Historial de detecciones</span>
                                             si se encuentra activo entonces el mensaje a mostrar en la página es "Movimiento detectado" en fondo rojo, en caso contrario
                                             el mensaje a mostrar en la página es "No se detecta movimiento" en fondo blanco. Además se va a desplegar el contenido de la lista de
                                             detección <em>detection_list</em> en un formato de tablas <em>HTML</em>. 
-                                            Luego se procede a leer el archivo <em>html_IR.html</em> que contiene la pagina web a mostrar en el servidor web, se convierte en un
+                                            Luego se procede a leer el archivo <em>html_IR.html</em> que contiene la página web a mostrar en el servidor web, se convierte en un
                                             variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para reemplazar el string <em>%bg_color</em> por el valor de 
                                             la variable <em>background_color</em>, el string <em>%status</em> por la variable <em>alarm_status</em> y el string <em>%detect_list</em>
-                                            por la variable <em>detection_list</em>. Por último se retorna la pagina web modificada:
+                                            por la variable <em>detection_list</em>. Por último se retorna la página web modificada:
                                         </p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -322,7 +322,7 @@ detections = [] <span style="color: #228B22"># Historial de detecciones</span>
                                         <p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
                                             <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
                                             definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
-                                            el socket para recibir máximo 5 conexiones de manera simultanea:
+                                            el socket para recibir máximo 5 conexiones de manera simultánea:
                                         </p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -340,9 +340,9 @@ s.listen(<span style="color: #B452CD">5</span>)
 
                                         <p> Utilizando la función <em>time.ticks_us()</em> que retorna el número de microsegundos transcurridos desde el encendido del ESP32,
                                             en un ciclo, cada 5000000us (equivalente a 5 seg), se ejecutará una medición del sensor infrarrojo y se guarda en la variable 
-                                            <em>actual_value</em> y el anterior en <em>anterior_value</em>. En caso que haya un cambio de estado (desactivado a activado) entonces
+                                            <em>actual_value</em> y el anterior en <em>anterior_value</em>. En caso que haya un cambio de estado (de desactivado a activado) entonces
                                             se guarda el registro de la fecha actual en la lista <em>detections</em> en un formato de fechas "YYYY-MM-DD HH:mm:SS", si el número
-                                            de registros guardados supera a 10 entonces se borra el registro mas antiguo:
+                                            de registros guardados supera a 10 entonces se borra el registro más antiguo:
                                         </p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -368,10 +368,10 @@ time1 = time.ticks_us()
 </pre>
 </div>
 
-                                        <p>  Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
+                                        <p>  Utilizando la función <em>select.select()</em> se estará revisando la conexión del socket <em>s</em>. En caso de haber una conexión
                                             entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente. Luego se recibe los datos del socket 
                                             enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se imprime en consola. Se llama a la 
-                                            función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con los valores actual de temperatura 
+                                            función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con los valores actuales de temperatura 
                                             y humedad. Después se envía los datos requeridos por el navegador del cliente para mostrar la página web (Encabezado + Contenido) y se 
                                             cierra el socket creado para el cliente:
                                         </p>

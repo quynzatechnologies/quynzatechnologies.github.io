@@ -60,6 +60,95 @@
 							<div class="row">
 								<div class="col-md-8">
 									<section>
+                                        <h1>Principios de comunicación cliente-servidor en IoT</h1>
+
+                                        <h2>Introducción a las páginas web y el comando GET:</h2>
+
+                                        <p>Para comprender este ejercicio, es importante saber que toda página web tiene un código fuente que define su contenido. Este código es 
+                                            accesible a través de peticiones realizadas por el navegador al servidor que aloja la página. En este ejercicio, el ESP32 actuará como 
+                                            un cliente que envía una petición GET a un servidor para obtener el contenido de una página web específica. El comando GET es uno de 
+                                            los métodos más comunes del protocolo <em>HTTP</em>, utilizado para solicitar datos de un servidor.
+                                        </p>      
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/Diagrama1_ejercicio_5.png" width ="100%" height="auto">
+                                        </p>    
+
+                                        <p>Cuando un navegador accede a una página web, recibe el código fuente que define su contenido. En este ejercicio, el ESP32 actuará como 
+                                            cliente y recibirá este código, que luego será mostrado en consola. Un ejemplo de código HTML que podría recibirse es el siguiente:
+                                        </p> 
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><span style="color: #1e889b">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;head&gt;&lt;title&gt;</span>Example Page<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;&lt;/head&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>Welcome to Example.com!<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;p&gt;</span>This is a sample page.<span style="color: #8B008B; font-weight: bold">&lt;/p&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
+</pre>
+</div>
+    
+                                        <p>Este código define una página con un título, un encabezado principal y un párrafo. En la consola del ESP32, veremos este contenido en 
+                                            formato de texto plano.
+                                        </p>
+
+                                        <p>El siguiente diagrama ilustra el flujo de datos en este ejercicio. El ESP32 actúa como cliente, enviando una solicitud GET al servidor. 
+                                            El servidor responde con el contenido de la página web, que el ESP32 muestra en su consola.
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/Diagrama2_ejercicio_5.png" width ="100%" height="auto">
+                                        </p>    
+
+                                        <p>Este flujo representa la interacción típica en la comunicación cliente-servidor en IoT, donde los dispositivos recopilan información de 
+                                            servidores remotos para procesarla localmente o presentarla al usuario.
+                                        </p>
+
+                                        <h2>Sockets y su papel en la conexión cliente-servidor:</h2>
+
+                                        <p>Los sockets son un componente esencial en la comunicación entre dispositivos en una red. En el contexto de IoT y en este ejercicio en 
+                                            particular, el socket actúa como un punto de comunicación entre el ESP32 (cliente) y el servidor web. El socket permite al ESP32 enviar 
+                                            y recibir datos utilizando protocolos de red, como HTTP, que es el protocolo que estamos empleando para realizar la solicitud GET.
+                                        </p>
+
+                                        <p>Un socket se puede imaginar como una "tubería" a través de la cual los datos fluyen entre el cliente y el servidor. El ESP32 utiliza un 
+                                            socket para:
+                                        </p>
+
+                                        <ul>
+                                            <li><strong>Conectarse al servidor web:</strong>  Especifica la dirección IP del servidor y el puerto que se usará para la comunicación (en este caso, el puerto 80, que es el estándar para HTTP).</li>
+                                            <li><strong>Enviar solicitudes:</strong> El ESP32 envía una solicitud GET a través del socket, indicando al servidor qué recurso desea obtener.</li>
+                                            <li><strong>Recibir respuestas:</strong> El servidor utiliza el mismo socket para enviar de vuelta el contenido solicitado, como el código HTML de la página web.</li>
+                                        </ul>
+                                            
+                                        <h3>Socket con ESP32:</h3>
+                                             
+                                        <p> Siguiendo el <a href="https://docs.micropython.org/en/latest/esp8266/tutorial/network_tcp.html#simple-http-server" target="_blank">tutorial</a> 
+                                            oficial de módulo socket, para crear un servidor web se necesita crear un socket que escuche las solicitudes de clientes que requieran 
+                                            entablar comunicación. Para redes de servidores TCP se sigue una serie de pasos para crear el socket, el cual se muestra en el siguiente 
+                                            diagrama de flujo:
+                                        </p>
+
+                                        <p style="text-align:center;">
+                                            <img src="./img/Diagrama_ejercicio_4.png" width ="300" height="auto">
+                                        </p>
+
+                                        <ol>
+                                            <li>Se crea el objeto <em>socket.socket(af=AF_INET, type=SOCK_STREAM, proto=IPPROTO_TCP, /)</em> con una configuración TCP</li>
+                                            <li>Se llama la función <em>socket.bind(address)</em> para vincular el socket a una dirección</li>
+                                            <li>Se llama la función <em>socket.listen([backlog])</em> para habilitar al servidor web para aceptar conexiones y delimita un máximo
+                                            número de conexiones</li>
+                                            <li>Se llama la función <em>socket.accept()</em> para aceptar una solicitud de conexión entrante de un cliente. El cual retorna un
+                                            nuevo objeto socket, usado para enviar y recibir datos, y la dirección vinculada al socket</li>
+                                            <li>Se llama las funciones <em>socket.send()</em> y <em>socket.recv()</em> para enviar y recibir datos al cliente, respectivamente.</li>
+                                            <li>Se llama la función <em>socket.close()</em> para marcar el socket como cerrado y liberar todos los recursos</li>
+                                        </ol>
+
+                                        <p>Para más información de las diferentes funciones disponibles en la clase <em>socket</em> véase la 
+                                            <a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">documentación oficial</a>.
+                                        </p>
 									</section>
 								</div>
 							</div>

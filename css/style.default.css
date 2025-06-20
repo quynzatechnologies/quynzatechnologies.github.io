@@ -905,16 +905,6 @@ ul.list-style-none {
   padding: 10px 20px;
 }
 
-
-/* Características */
-#content {
-  padding: 50px 0;
-  background-color: var(--white);
-}
-#content h2 {
-  color: var(--green-730);
-  margin-bottom: 40px;
-}
 .image-container {
   margin: 20px auto;
   padding: 20px;
@@ -944,6 +934,27 @@ ul.list-style-none {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }*/
 
+/* Características */
+#content {
+  padding: 50px 0;
+  background-color: var(--white);
+}
+#content h2 {
+  color: var(--green-730);
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+#content h3 {
+  color: var(--baby-blue-da);
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+#content h4 {
+  color: var(--red-f45);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 #content .image-container {
   padding: 20px;
   border-bottom: 3px solid var(--black);
@@ -954,6 +965,9 @@ ul.list-style-none {
 #content .image-container:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#content a{
+  color: var(--link-hover-bg);
 }
 
 /* Caracteristicas */

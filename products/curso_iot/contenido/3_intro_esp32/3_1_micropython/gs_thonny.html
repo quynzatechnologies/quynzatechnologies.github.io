@@ -79,22 +79,6 @@
                                         </p>
 
                                         <h2>Thonny</h2>
-                                        
-                                        <h3>¿Qué es Micropython?</h3>
-                                        <p> Como dice su documentación <a href="https://micropython.org" target="_blank">oficial</a>, MicroPython es una implementación sencilla y 
-                                            eficiente del lenguaje de programación Python 3 que incluye un pequeño subconjunto de la biblioteca estándar de Python y 
-                                            está optimizado para ejecutarse en microcontroladores y en entornos restringidos, como es el caso de la tarjeta de desarrollo
-                                            ESP32.</p>
-                                        <p> MicroPython se esfuerza por ser lo más compatible posible con Python normal (conocido como CPython), de modo que si conoce 
-                                            Python, ya conoce MicroPython. Por otro lado, cuanto más aprenda sobre MicroPython, mejor será en Python.
-                                        </p>
-                                        <p> Además de implementar una selección de bibliotecas principales de Python, MicroPython incluye módulos como <em>machine</em> 
-                                            para acceder a hardware de bajo nivel (GPIO, PWM, etc.).
-                                        </p>
-
-                                        <p style="text-align:center;">
-                                            <img src="./img/micropython.jpg" width ="70%" height="auto">
-                                        </p>
 
                                         <h3>Instalación</h3>
                                         <p>A continuación se proveerá un paso a paso sobre la instalación de Thonny en Windows:</p>
@@ -200,30 +184,6 @@
                                         </p>
 
                                         <h2>Driver del <em>USB to UART Bridge</em> del ESP32</h2>
-                                        <h3>¿Qué es el USB to UART Bridge?</h3>
-                                        <p> La tarjeta de desarrollo del ESP32 contiene un chip que convierte el protocolo USB, manejado por la mayoría de los
-                                            ordenadores, en el protocolo UART, manejado por el chip del ESP32:
-                                        </p>
-                                        <p style="text-align:center;">
-                                            <img src="./img/UART-1.png" width ="70%" height="auto">
-                                        </p>
-                                        <p> Hay varias referencias de chips USB-UART usados en las tarjetas de desarrollo ESP32 (SILABS CP2102, CH340G, FT232 etc.). En 
-                                            primera instancia se debe determinar cual es el chip usado en la tarjeta de desarrollo que se posee. Hay dos métodos:
-                                        </p>
-                                        <ol>
-                                            <li>Inspección visual: Se puede examinar la tarjeta de desarrollo y determinar que chips posee
-                                                <p style="text-align:center;">
-                                                    <img src="./img/UART-2.png" width ="70%" height="auto">
-                                                </p>
-                                            </li>
-                                            <li> Administrador dispositivos: Si se conecta al ordenador el ESP32 y no se tiene instalado el driver correspondiente, entonces
-                                                esté será reconocido como un dispositivo con un signo de advertencia, cuyo significado radica en que no se tiene instalado 
-                                                su respectivo driver-controlador.
-                                                <p style="text-align:center;">
-                                                    <img src="./img/UART-3.png" width ="70%" height="auto">
-                                                </p>
-                                            </li>
-                                        </ol>
                                         
                                         <h3>Instalación driver</h3>
                                         <p> Luego de identificar la referencia del chip que posee el ESP32, se procede a realizar el paso a paso del proceso de instalación:</p>
@@ -268,13 +228,6 @@
                                         </ol>
 
                                         <h2>Firmware Micropython</h2>
-                                        <h3>¿Qué es el firmware?</h3>
-                                        <p> Con el fin de que se puedan correr los programas en el micro-controlador ESP32, se requiere un firmware, un programa básico 
-                                            que hace que el ESP32 se comporte como un pequeño computador para controlar sus funciones y sus periféricos, tales como los 
-                                            GPIO o pines de entrada y salida de propósito general;  WiFi;  Bluetooth; las entradas DAC y ADC. En el caso del entrenador 
-                                            QM020, el micro-controlador ya viene con un firmware, lo que permite entrar a programar directamente. Además, se pueden 
-                                            almacenar los programas que se van escribiendo.
-                                        </p>
 
                                         <h3>Instalación</h3>
                                         <p> Hay muchas maneras de instalar el firmware de MicroPython en el ESP32. Thonny ofrece una manera intuitiva. A continuación se

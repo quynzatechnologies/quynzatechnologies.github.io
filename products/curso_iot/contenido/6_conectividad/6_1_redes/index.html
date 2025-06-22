@@ -23,439 +23,427 @@
         <header id="header-nav-main-container"></header>
 
         <main>
-			<div id="aside-nav-curso-iot-container"></div>
-	
-			<div class="content">
-				<section>
-					<div id="heading-breadcrumbs">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12">
-									<h1>Tipos de redes aplicadas en IoT</h1>
-                                    <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-								</div>
-							</div>
-						</div>
-					</div>
+			<div class="main">
+                <div class="div-content">
+                    <div id="content-curso">
+                        <div id="heading-breadcrumbs">
+                            <div class="row">
+                                <h1>Tipos de redes aplicadas en IoT</h1>
+                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
+                            </div>
+                        </div>
 
-                    <div role="navegation" arial-label="Page navigation">
-                        <ul class="wy-breadcrumbs">
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/">Inicio</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/6_conectividad/">6. Protocolos y conectividad en IoT</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/6_conectividad/6_1_redes/" class="not-active">6.1. Tipos de redes aplicadas en IoT</a>
-                            </li>
-                        </ul>
-                        <hr>
-                    </div>
-				</section>
-			
-				<section>
-					<div id="content">
-						<div class="container" id="contact">
-							<div class="row">
-								<div class="col-md-8">
-									<section>
-                                        <h1>Tipos de redes aplicadas en IoT</h1>
-                                        <p>
-                                            En el contexto del Internet de las Cosas (IoT), la conectividad entre dispositivos es una piedra angular para el funcionamiento 
-                                            eficiente de cualquier sistema. Las redes de comunicación permiten que sensores, actuadores, controladores y plataformas en la 
-                                            nube intercambien información en tiempo real, habilitando aplicaciones tan diversas como el monitoreo ambiental, la automatización 
-                                            industrial, la gestión urbana y la salud inteligente. Comprender las distintas categorías de redes utilizadas en IoT y sus 
-                                            características técnicas es esencial para tomar decisiones acertadas en el diseño de soluciones.
-                                        </p>
+                        <div role="navegation" arial-label="Page navigation">
+                            <ul class="wy-breadcrumbs">
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/">Inicio</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/6_conectividad/">6. Protocolos y conectividad en IoT</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/6_conectividad/6_1_redes/" class="not-active">6.1. Tipos de redes aplicadas en IoT</a>
+                                </li>
+                            </ul>
+                            <hr>
+                        </div>
+                        
+                        <div id="content">
+                            <h1>Tipos de redes aplicadas en IoT</h1>
+                            <p>
+                                En el contexto del Internet de las Cosas (IoT), la conectividad entre dispositivos es una piedra angular para el funcionamiento 
+                                eficiente de cualquier sistema. Las redes de comunicación permiten que sensores, actuadores, controladores y plataformas en la 
+                                nube intercambien información en tiempo real, habilitando aplicaciones tan diversas como el monitoreo ambiental, la automatización 
+                                industrial, la gestión urbana y la salud inteligente. Comprender las distintas categorías de redes utilizadas en IoT y sus 
+                                características técnicas es esencial para tomar decisiones acertadas en el diseño de soluciones.
+                            </p>
 
-                                        <h2>Clasificación de redes por alcance</h2>
+                            <h2>Clasificación de redes por alcance</h2>
 
-                                        <img style="display: block;margin: auto;width: 50%;" src="./img/tipo_redes.png" alt="Clasificación de redes" class="img-fluid icon-hover">
-                                        <p style="text-align: center">Figura 1: Clasificación jerárquica de redes IoT por alcance. Elaboración propia</p>
+                            <img style="display: block;margin: auto;width: 50%;" src="./img/tipo_redes.png" alt="Clasificación de redes" class="img-fluid icon-hover">
+                            <p style="text-align: center">Figura 1: Clasificación jerárquica de redes IoT por alcance. Elaboración propia</p>
 
-                                        <p>
-                                            Las redes utilizadas en sistemas IoT pueden clasificarse según su cobertura geográfica, lo que influye directamente en el tipo 
-                                            de aplicaciones que pueden soportar. Se reconocen cuatro tipos principales:
-                                        </p>
+                            <p>
+                                Las redes utilizadas en sistemas IoT pueden clasificarse según su cobertura geográfica, lo que influye directamente en el tipo 
+                                de aplicaciones que pueden soportar. Se reconocen cuatro tipos principales:
+                            </p>
 
-                                        <p>
-                                            <ul>
-                                                <li>
-                                                    Redes de área personal (PAN): Suelen cubrir distancias de unos pocos centímetros a metros. Se utilizan para comunicación 
-                                                    entre dispositivos portátiles, sensores personales o en aplicaciones donde la proximidad es clave.
-                                                </li>
-                                                <li>
-                                                    Redes de área local (LAN): Se extienden hasta unos 100 metros. Son comunes en hogares inteligentes, oficinas y entornos 
-                                                    industriales donde se requiere conectividad de alta velocidad y moderada cobertura.
-                                                </li>
-                                                <li>
-                                                    Redes de área amplia (WAN): Alcanzan varios kilómetros y son utilizadas para conectar dispositivos distribuidos en zonas 
-                                                    urbanas o rurales.
-                                                    </li>
-                                                <li>
-                                                    Redes de área amplia de baja potencia (LPWAN): Diseñadas para cubrir largas distancias (hasta decenas de kilómetros) con 
-                                                    un consumo energético extremadamente bajo, ideales para sensores en ubicaciones remotas.
-                                                </li>
-                                            </ul>
-                                        </p>
+                            <p>
+                                <ul>
+                                    <li>
+                                        Redes de área personal (PAN): Suelen cubrir distancias de unos pocos centímetros a metros. Se utilizan para comunicación 
+                                        entre dispositivos portátiles, sensores personales o en aplicaciones donde la proximidad es clave.
+                                    </li>
+                                    <li>
+                                        Redes de área local (LAN): Se extienden hasta unos 100 metros. Son comunes en hogares inteligentes, oficinas y entornos 
+                                        industriales donde se requiere conectividad de alta velocidad y moderada cobertura.
+                                    </li>
+                                    <li>
+                                        Redes de área amplia (WAN): Alcanzan varios kilómetros y son utilizadas para conectar dispositivos distribuidos en zonas 
+                                        urbanas o rurales.
+                                        </li>
+                                    <li>
+                                        Redes de área amplia de baja potencia (LPWAN): Diseñadas para cubrir largas distancias (hasta decenas de kilómetros) con 
+                                        un consumo energético extremadamente bajo, ideales para sensores en ubicaciones remotas.
+                                    </li>
+                                </ul>
+                            </p>
 
-                                        <table style="margin: auto;" class="table-objetive-module">
-											<thead>
-												<tr>
-												<th class="tg-vyu2"><span style="font-weight:bold;">Tipo de red</span></th>
-												<th class="tg-vyu2"><span style="font-weight:bold;">Alcance típico</span></th>
-												<th class="tg-vyu2"><span style="font-weight:bold;">Aplicación general</span></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="tg-cly1">PAN (Personal Area Network)</td>
-													<td class="tg-cly1">Centímetros a pocos metros</td>
-													<td class="tg-cly1">Wearables, sensores personales, comunicación entre microcontroladores</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">LAN (Local Area Network)</td>
-													<td class="tg-cly1">Hasta 100 m</td>
-													<td class="tg-cly1">Hogar inteligente, sistemas multimedia, nodos centralizados en plantas</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">WAN (Wide Area Network)</td>
-													<td class="tg-cly1">Varios kilómetros</td>
-													<td class="tg-cly1">Vehículos conectados, ciudades inteligentes, logística</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">LPWAN (Low Power WAN)</td>
-													<td class="tg-cly1">Hasta 10-15 km</td>
-													<td class="tg-cly1">Agricultura, monitoreo ambiental, infraestructuras remotas</td>
-												</tr>
-											</tbody>
-                                        </table>
+                            <table style="margin: auto;" class="table-objetive-module">
+                                <thead>
+                                    <tr>
+                                    <th class="tg-vyu2"><span style="font-weight:bold;">Tipo de red</span></th>
+                                    <th class="tg-vyu2"><span style="font-weight:bold;">Alcance típico</span></th>
+                                    <th class="tg-vyu2"><span style="font-weight:bold;">Aplicación general</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">PAN (Personal Area Network)</td>
+                                        <td class="tg-cly1">Centímetros a pocos metros</td>
+                                        <td class="tg-cly1">Wearables, sensores personales, comunicación entre microcontroladores</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">LAN (Local Area Network)</td>
+                                        <td class="tg-cly1">Hasta 100 m</td>
+                                        <td class="tg-cly1">Hogar inteligente, sistemas multimedia, nodos centralizados en plantas</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">WAN (Wide Area Network)</td>
+                                        <td class="tg-cly1">Varios kilómetros</td>
+                                        <td class="tg-cly1">Vehículos conectados, ciudades inteligentes, logística</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">LPWAN (Low Power WAN)</td>
+                                        <td class="tg-cly1">Hasta 10-15 km</td>
+                                        <td class="tg-cly1">Agricultura, monitoreo ambiental, infraestructuras remotas</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                                        <h2>Descripción y ejemplos por tipo de red</h2>
-                                        
-                                        <iframe style="display: block;margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/P4B7XRlzFJk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                        <p style="text-align: center">Video 1: 
-                                            <a href="https://www.youtube.com/watch?v=P4B7XRlzFJk" target="_blank">Conceptos básicos de Redes inalámbricas</a><br>
-                                            <i>Ver desde 1:10</i>
-                                        </p>
+                            <h2>Descripción y ejemplos por tipo de red</h2>
+                            
+                            <iframe style="display: block;margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/P4B7XRlzFJk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <p style="text-align: center">Video 1: 
+                                <a href="https://www.youtube.com/watch?v=P4B7XRlzFJk" target="_blank">Conceptos básicos de Redes inalámbricas</a><br>
+                                <i>Ver desde 1:10</i>
+                            </p>
 
-                                        <p>
-                                            <ol>
-                                                <li>
-                                                    PAN (Red de Área Personal):
-                                                    <ul>
-                                                        <li>
-                                                            Bluetooth Low Energy (BLE): Bajo consumo, ideal para wearables y sensores portátiles. BLE se posiciona como 
-                                                            una tecnología crítica para la comunicación interpersonal entre dispositivos de salud o deportivos.
-                                                        </li>
-                                                        <li>
-                                                            ZigBee: Permite redes en malla robustas. En entornos de domótica es valorado por su escalabilidad y tolerancia 
-                                                            a fallos.
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    LAN (Red de Área Local):
-                                                    <ul>
-                                                        <li>
-                                                            Wi-Fi: Alta velocidad, alta demanda energética. Recomendado en entornos con acceso a alimentación eléctrica. 
-                                                            Se identifica como una tecnología clave en la capa de red del IoT tradicional.
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    WAN (Red de Área Amplia):
-                                                    <ul>
-                                                        <li>
-                                                            LTE / 5G: Ofrece alta velocidad y baja latencia, adecuado para video, telemetría móvil y logística. Estas 
-                                                            tecnologías son necesarias para las aplicaciones urbanas masivas.
-                                                        </li>
-                                                        <li>
-                                                            NB-IoT (Narrowband IoT): Red de banda angosta para sensores con bajo volumen de datos. Ideal para medidores 
-                                                            inteligentes o monitoreo de activos fijos.
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    LPWAN (Red de Área Amplia de Baja Potencia):
-                                                    <ul>
-                                                        <li>
-                                                            LoRa (Long Range): Extremadamente bajo consumo y gran alcance. Es tecnología habilitadora para monitoreo de 
-                                                            cultivos, forestación o redes de sensores dispersos.
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ol>
-                                        </p>
-
-                                        <table style="margin: auto;" class="table-objetive-module">
-											<thead>
-												<tr>
-                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Tecnología</span></th>
-                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Cobertura</span></th>
-                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Velocidad</span></th>
-                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Consumo energético</span></th>
-                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Aplicaciones</span></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="tg-cly1">BLE</td>
-													<td class="tg-cly1">Baja</td>
-													<td class="tg-cly1">Media</td>
-													<td class="tg-cly1">Muy bajo</td>
-													<td class="tg-cly1">Wearables, sensores personales</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">ZigBee</td>
-													<td class="tg-cly1">Media</td>
-													<td class="tg-cly1">Media</td>
-													<td class="tg-cly1">Bajo</td>
-													<td class="tg-cly1">Domótica, automatización local</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">Wi-Fi</td>
-													<td class="tg-cly1">Media</td>
-													<td class="tg-cly1">Alta</td>
-													<td class="tg-cly1">Alto</td>
-													<td class="tg-cly1">Streaming local, mashups en sitio</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">LoRa</td>
-													<td class="tg-cly1">Alta</td>
-													<td class="tg-cly1">Baja</td>
-													<td class="tg-cly1">Muy bajo</td>
-													<td class="tg-cly1">Agricultura, sensores ambientales</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">NB-IoT</td>
-													<td class="tg-cly1">Alta</td>
-													<td class="tg-cly1">Baja</td>
-													<td class="tg-cly1">Bajo</td>
-													<td class="tg-cly1">Infraestructura urbana, servicios públicos</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">LTE-5G</td>
-													<td class="tg-cly1">Muy alta</td>
-													<td class="tg-cly1">Muy alta</td>
-													<td class="tg-cly1">Medio/alto</td>
-													<td class="tg-cly1">Vehículos conectados, vigilancia en tiempo real</td>
-												</tr>
-											</tbody>
-                                        </table>
-
-                                        <img style="display: block;margin: auto;width: 50%;" src="./img/comparacion_redes.png" alt="Comparación de redes" class="img-fluid icon-hover">
-                                        <p style="text-align: center">Figura 2: Comparación de especificaciones de cada red.</p>
-
-                                        <h2>Criterios metodológicos para la selección de tecnología de red</h2>
-                                        <p>
-                                            Seleccionar la tecnología de red adecuada para una solución IoT no es una tarea trivial. Existen múltiples factores que deben 
-                                            ser analizados simultáneamente para asegurar que la conectividad sea eficiente, sostenible y funcional según los objetivos 
-                                            del sistema. Una de las metodologías más útiles para este fin es el diseño de un espacio tridimensional de decisión, el cual 
-                                            contempla tres ejes principales:
-                                        </p>
-
-                                        <p>
-                                            <ul>
-                                                <li>
-                                                    Duración de batería: Evalúa la autonomía energética requerida. Algunas tecnologías están diseñadas para operar durante 
-                                                    años sin intervención (como LoRa o NB-IoT), mientras que otras como Wi-Fi necesitan fuentes de energía constantes.
-                                                </li>
-                                                <li>
-                                                    Tasa de transmisión o duty cycle: Mide cuántos datos se transmiten y con qué frecuencia. Dispositivos que solo envían 
-                                                    unos pocos bytes por día requieren tecnologías muy distintas a aquellos que transmiten imágenes o video en tiempo real.
-                                                </li>
-                                                <li>
-                                                    Distancia al gateway o estación base: Determina el alcance requerido entre el nodo IoT y el punto de acceso a la red. 
-                                                    Algunas soluciones se limitan a entornos de proximidad, mientras que otras deben operar a kilómetros de distancia.
-                                                </li>
-                                            </ul>
-                                        </p>
-
-                                        <p>
-                                            Visualizar estas variables en un modelo 3D permite comparar tecnologías de manera sistemática. Por ejemplo, BLE tiene una duración 
-                                            de batería excelente, pero cobertura limitada. LTE puede enviar grandes volúmenes de datos, pero a un alto costo energético. 
-                                            Este enfoque ayuda a los desarrolladores y diseñadores a alinear las capacidades tecnológicas con los requerimientos del caso de uso.
-                                        </p>
-
-                                        <p>
-                                            Además, esta metodología permite anticipar escenarios futuros, como el escalamiento del sistema o la integración con nuevas 
-                                            plataformas. Pensar en estos tres ejes desde el inicio del diseño contribuye a implementar soluciones más robustas, sostenibles 
-                                            y adaptables.
-                                        </p>
-
-                                        <h2>Aplicación práctica</h2>
-                                        <p>La correcta selección de la red depende del caso de uso. Por ejemplo:</p>
-
-                                        <table style="margin: auto;" class="table-objetive-module">
-											<thead>
-												<tr>
-                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Aplicación</span></th>
-                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Tecnología recomendada</span></th>
-                                                    <th class="tg-vyu2"><span style="font-weight:bold;">Justificación</span></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="tg-cly1">Agricultura remota</td>
-													<td class="tg-cly1">LoRa o NB-IoT</td>
-													<td class="tg-cly1">Bajo consumo, alta cobertura, mínimo mantenimiento</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">Hogar inteligente</td>
-													<td class="tg-cly1">ZigBee, Wi-Fi</td>
-													<td class="tg-cly1">Alta velocidad, redes en malla, buena integración</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">Seguimiento de flotas</td>
-													<td class="tg-cly1">LTE/5G</td>
-													<td class="tg-cly1">Alta disponibilidad, velocidad, movilidad</td>
-												</tr>
-												<tr>
-													<td class="tg-cly1">Wearables de salud</td>
-													<td class="tg-cly1">BLE</td>
-													<td class="tg-cly1">Comunicación segura, bajo consumo, cercanía técnica</td>
-												</tr>
-											</tbody>
-                                        </table>
-
-                                        <p>
-                                            La elección de la red depende de factores como la autonomía energética, la cantidad de datos transmitidos, la ubicación geográfica 
-                                            del sistema y la disponibilidad de infraestructura. En entornos rurales, las tecnologías LPWAN como LoRa o NB-IoT son preferibles. 
-                                            En cambio, en espacios cerrados con acceso a electricidad, Wi-Fi o ZigBee permiten una conectividad más robusta y rápida. 
-                                            Para aplicaciones móviles o de alta velocidad, LTE y 5G son esenciales.
-                                        </p>
-
-                                        <!--
-                                        <h2>Actividades</h2>
-                                        <p>
-                                            <ol>
-                                                <li>
-                                                    Mini juego tipo quiz (HTML o herramienta externa)
-                                                    <ul>
-                                                        <li>Ubicación sugerida: final de la sección, como parte de la actividad “Mini juego de clasificación de redes”.</li>
-                                                        <li>Ejemplo: arrastrar y soltar tecnologías al tipo correcto de red (PAN, LAN, WAN, LPWAN).</li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    Actividad de análisis contextual
-                                                    <ul>
-                                                        <li>Ubicación: justo después del cuadro de aplicación práctica.</li>
-                                                        <li>Instrucción: “Plantee un escenario de monitoreo en una zona rural, y justifique qué tipo de red usaría para sensores de humedad, temperatura y ubicación de maquinaria.”</li>
-                                                    </ul>
-                                                </li>
-                                            </ol>
-                                        </p>
-                                        -->
-
-                                        <h2>Conclusiones</h2>
-                                        <p>
-                                            La diversidad de escenarios en los que se implementan soluciones de Internet de las Cosas demanda una selección cuidadosa y 
-                                            contextual de la tecnología de red. No existe una solución única que se adapte a todos los casos; cada aplicación impone 
-                                            requisitos particulares en términos de cobertura, velocidad de transmisión y consumo energético. Por ello, el análisis del 
-                                            entorno y los objetivos del sistema es crucial al momento de elegir la conectividad adecuada.
-                                        </p>
-
-                                        <p>
-                                            Un aspecto fundamental en este proceso de selección es lograr un equilibrio entre el consumo energético, la velocidad de 
-                                            transmisión de datos y el alcance geográfico. Este balance permite desarrollar soluciones eficientes, sostenibles y capaces de 
-                                            operar durante largos periodos sin intervención constante, especialmente en contextos de difícil acceso o con limitaciones 
-                                            energéticas.
-                                        </p>
-
-                                        <p>
-                                            Además, la interoperabilidad entre diferentes redes y dispositivos se está consolidando como un factor determinante en el 
-                                            desarrollo de sistemas IoT modernos. A medida que estas tecnologías se expanden a nuevos sectores industriales y regiones 
-                                            geográficas, la capacidad de integrar múltiples estándares y plataformas se convierte en un diferenciador clave para garantizar 
-                                            la escalabilidad y el éxito a largo plazo de los sistemas implementados.
-                                        </p>
-
-                                        <h2>Referencias</h2>
-                                        <p>
-                                            <ol>
-                                                <li>A. Al-Fuqaha et al., "Internet of Things: A Survey on Enabling Technologies, Protocols and Applications," IEEE Communications Surveys & Tutorials, vol. 17, no. 4, pp. 2347–2376, 2015.</li>
-                                                <li>G. Borgia, "The Internet of Things vision: Key features, applications and open issues," Computer Communications, vol. 54, pp. 1-31, 2014.</li>
-                                                <li>A. Čólaković and M. Hadžialić, "Internet of Things (IoT): A review of enabling technologies, challenges, and open research issues," Computer Networks, vol. 144, pp. 17–39, 2018.</li>
-                                                <li>J. Lin et al., "A Survey on Internet of Things: Architecture, Enabling Technologies, Security and Privacy, and Applications," IEEE IoT Journal, vol. 4, no. 5, pp. 1125–1142, Oct. 2017.</li>
-                                                <li>H. Kashif et al., "Selection of Network Protocols for Internet of Things Applications: A Review," IEEE Int. Conf. on Semantic Computing, 2020.</li>
-                                                <li>N. Shahid and S. Aneja, "Internet of Things: Vision, Application Areas and Research Challenges," IEEE I-SMAC, pp. 583-585, 2017.</li>
-                                            </ol>
-                                        </p>
-
-                                        <!--
-                                        <h1>Importancia de la conectividad en IoT: </h1>
-                                        <p>La conectividad es un elemento esencial en el ecosistema del Internet de las Cosas (IoT), ya que permite que los dispositivos se 
-                                            comuniquen entre sí y con plataformas de análisis de datos. Esta comunicación es fundamental para la recopilación, transmisión y 
-                                            procesamiento de información en tiempo real, lo que posibilita la toma de decisiones informadas y la automatización de procesos. 
-                                            Las tecnologías de conectividad pueden variar significativamente según las necesidades y características del proyecto, desde redes 
-                                            locales de área amplia (WAN) hasta conexiones a Internet mediante protocolos específicos. Sin una conectividad adecuada, los 
-                                            dispositivos IoT no podrían funcionar de manera efectiva, limitando su utilidad y el impacto que pueden tener en diversos entornos.
-                                        </p>
-                                        <p>El ESP32 se destaca especialmente en términos de conectividad, ya que integra tanto Wi-Fi como Bluetooth Low Energy (BLE), lo que 
-                                            proporciona una gran flexibilidad para conectar una amplia variedad de dispositivos en distintos contextos. Esta dualidad de opciones 
-                                            permite a los usuarios elegir el tipo de conexión que mejor se adapte a sus necesidades específicas, ya sea que requieran un acceso a 
-                                            Internet robusto o una comunicación de corto alcance entre dispositivos. Gracias a esta capacidad, el ESP32 facilita el desarrollo de 
-                                            aplicaciones IoT que pueden interconectar múltiples sensores y actuadores, así como enviar datos a plataformas de análisis en la nube, 
-                                            maximizando así el potencial de los proyectos y fomentando una mayor innovación en el campo del IoT.
-                                        </p>
-                                        
-                                        <h1>Tipos de redes en IoT:</h1>
+                            <p>
+                                <ol>
+                                    <li>
+                                        PAN (Red de Área Personal):
                                         <ul>
-                                            <li> Redes de Área Personal (PAN)
-                                                <ul>
-                                                    <li>Bluetooth Low Energy (BLE): Esta tecnología es adecuada para conexiones de corto alcance y se caracteriza por su bajo 
-                                                        consumo de energía. Es ideal para aplicaciones donde la duración de la batería es crucial, como dispositivos portátiles y 
-                                                        sensores de salud.
-                                                    </li>
-                                                    <li>Zigbee: Zigbee es un protocolo de comunicación basado en estándares de la industria que permite la creación de redes de 
-                                                        dispositivos en un área personal. Es muy eficiente en términos de energía y se utiliza comúnmente en aplicaciones de 
-                                                        domótica y automatización del hogar.
-                                                    </li>
-                                                </ul>
+                                            <li>
+                                                Bluetooth Low Energy (BLE): Bajo consumo, ideal para wearables y sensores portátiles. BLE se posiciona como 
+                                                una tecnología crítica para la comunicación interpersonal entre dispositivos de salud o deportivos.
                                             </li>
-                                            <li> Redes de Área Local (LAN)
-                                                <ul>
-                                                    <li>Wi-Fi: Esta tecnología proporciona una alta velocidad de conexión y es ideal para dispositivos que se encuentran dentro 
-                                                        del rango de un enrutador. Permite la transmisión de grandes volúmenes de datos y es comúnmente utilizada en entornos 
-                                                        domésticos y empresariales, donde se requiere acceso a Internet.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li> Redes de Área Amplia (WAN)
-                                                <ul>
-                                                    <li>LTE y 5G: Estas tecnologías permiten conectar dispositivos a través de grandes distancias, ofreciendo una velocidad de 
-                                                        transferencia de datos significativamente mayor en comparación con sus predecesores. Son ideales para aplicaciones que 
-                                                        requieren comunicación en tiempo real y donde la movilidad es un factor importante.
-                                                    </li>
-                                                    <li>LoRa (Long Range): LoRa es una tecnología que ofrece comunicaciones de largo alcance con un bajo consumo de energía. 
-                                                        Es particularmente útil para aplicaciones en entornos rurales o industriales, donde la cobertura de red puede ser 
-                                                        limitada y se necesita transmitir datos de manera eficiente sin agotar rápidamente la batería de los dispositivos.
-                                                    </li>
-                                                </ul>
+                                            <li>
+                                                ZigBee: Permite redes en malla robustas. En entornos de domótica es valorado por su escalabilidad y tolerancia 
+                                                a fallos.
                                             </li>
                                         </ul>
-                                        -->
-									</section>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+                                    </li>
+                                    <li>
+                                        LAN (Red de Área Local):
+                                        <ul>
+                                            <li>
+                                                Wi-Fi: Alta velocidad, alta demanda energética. Recomendado en entornos con acceso a alimentación eléctrica. 
+                                                Se identifica como una tecnología clave en la capa de red del IoT tradicional.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        WAN (Red de Área Amplia):
+                                        <ul>
+                                            <li>
+                                                LTE / 5G: Ofrece alta velocidad y baja latencia, adecuado para video, telemetría móvil y logística. Estas 
+                                                tecnologías son necesarias para las aplicaciones urbanas masivas.
+                                            </li>
+                                            <li>
+                                                NB-IoT (Narrowband IoT): Red de banda angosta para sensores con bajo volumen de datos. Ideal para medidores 
+                                                inteligentes o monitoreo de activos fijos.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        LPWAN (Red de Área Amplia de Baja Potencia):
+                                        <ul>
+                                            <li>
+                                                LoRa (Long Range): Extremadamente bajo consumo y gran alcance. Es tecnología habilitadora para monitoreo de 
+                                                cultivos, forestación o redes de sensores dispersos.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
 
-                <footer>
-                    <hr>
-                    <div role="navegation" arial-label="Button navigation">
-                        <a href="/products/curso_iot/contenido/6_conectividad/" class="btn btn-neutral float-left" title="6. Protocolos y conectividad en IoT" accesskey="p" rel="prev">
-                            <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                            Anterior
-                        </a>
-                        <a href="/products/curso_iot/contenido/6_conectividad/6_2_protocolos/" class="btn btn-neutral float-right" title="6.2. Protocolos de comunicación en IoT" accesskey="n" rel="next">
-                            <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                            Siguiente
-                        </a>
+                            <table style="margin: auto;" class="table-objetive-module">
+                                <thead>
+                                    <tr>
+                                        <th class="tg-vyu2"><span style="font-weight:bold;">Tecnología</span></th>
+                                        <th class="tg-vyu2"><span style="font-weight:bold;">Cobertura</span></th>
+                                        <th class="tg-vyu2"><span style="font-weight:bold;">Velocidad</span></th>
+                                        <th class="tg-vyu2"><span style="font-weight:bold;">Consumo energético</span></th>
+                                        <th class="tg-vyu2"><span style="font-weight:bold;">Aplicaciones</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">BLE</td>
+                                        <td class="tg-cly1">Baja</td>
+                                        <td class="tg-cly1">Media</td>
+                                        <td class="tg-cly1">Muy bajo</td>
+                                        <td class="tg-cly1">Wearables, sensores personales</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">ZigBee</td>
+                                        <td class="tg-cly1">Media</td>
+                                        <td class="tg-cly1">Media</td>
+                                        <td class="tg-cly1">Bajo</td>
+                                        <td class="tg-cly1">Domótica, automatización local</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">Wi-Fi</td>
+                                        <td class="tg-cly1">Media</td>
+                                        <td class="tg-cly1">Alta</td>
+                                        <td class="tg-cly1">Alto</td>
+                                        <td class="tg-cly1">Streaming local, mashups en sitio</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">LoRa</td>
+                                        <td class="tg-cly1">Alta</td>
+                                        <td class="tg-cly1">Baja</td>
+                                        <td class="tg-cly1">Muy bajo</td>
+                                        <td class="tg-cly1">Agricultura, sensores ambientales</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">NB-IoT</td>
+                                        <td class="tg-cly1">Alta</td>
+                                        <td class="tg-cly1">Baja</td>
+                                        <td class="tg-cly1">Bajo</td>
+                                        <td class="tg-cly1">Infraestructura urbana, servicios públicos</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">LTE-5G</td>
+                                        <td class="tg-cly1">Muy alta</td>
+                                        <td class="tg-cly1">Muy alta</td>
+                                        <td class="tg-cly1">Medio/alto</td>
+                                        <td class="tg-cly1">Vehículos conectados, vigilancia en tiempo real</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <img style="display: block;margin: auto;width: 50%;" src="./img/comparacion_redes.png" alt="Comparación de redes" class="img-fluid icon-hover">
+                            <p style="text-align: center">Figura 2: Comparación de especificaciones de cada red.</p>
+
+                            <h2>Criterios metodológicos para la selección de tecnología de red</h2>
+                            <p>
+                                Seleccionar la tecnología de red adecuada para una solución IoT no es una tarea trivial. Existen múltiples factores que deben 
+                                ser analizados simultáneamente para asegurar que la conectividad sea eficiente, sostenible y funcional según los objetivos 
+                                del sistema. Una de las metodologías más útiles para este fin es el diseño de un espacio tridimensional de decisión, el cual 
+                                contempla tres ejes principales:
+                            </p>
+
+                            <p>
+                                <ul>
+                                    <li>
+                                        Duración de batería: Evalúa la autonomía energética requerida. Algunas tecnologías están diseñadas para operar durante 
+                                        años sin intervención (como LoRa o NB-IoT), mientras que otras como Wi-Fi necesitan fuentes de energía constantes.
+                                    </li>
+                                    <li>
+                                        Tasa de transmisión o duty cycle: Mide cuántos datos se transmiten y con qué frecuencia. Dispositivos que solo envían 
+                                        unos pocos bytes por día requieren tecnologías muy distintas a aquellos que transmiten imágenes o video en tiempo real.
+                                    </li>
+                                    <li>
+                                        Distancia al gateway o estación base: Determina el alcance requerido entre el nodo IoT y el punto de acceso a la red. 
+                                        Algunas soluciones se limitan a entornos de proximidad, mientras que otras deben operar a kilómetros de distancia.
+                                    </li>
+                                </ul>
+                            </p>
+
+                            <p>
+                                Visualizar estas variables en un modelo 3D permite comparar tecnologías de manera sistemática. Por ejemplo, BLE tiene una duración 
+                                de batería excelente, pero cobertura limitada. LTE puede enviar grandes volúmenes de datos, pero a un alto costo energético. 
+                                Este enfoque ayuda a los desarrolladores y diseñadores a alinear las capacidades tecnológicas con los requerimientos del caso de uso.
+                            </p>
+
+                            <p>
+                                Además, esta metodología permite anticipar escenarios futuros, como el escalamiento del sistema o la integración con nuevas 
+                                plataformas. Pensar en estos tres ejes desde el inicio del diseño contribuye a implementar soluciones más robustas, sostenibles 
+                                y adaptables.
+                            </p>
+
+                            <h2>Aplicación práctica</h2>
+                            <p>La correcta selección de la red depende del caso de uso. Por ejemplo:</p>
+
+                            <table style="margin: auto;" class="table-objetive-module">
+                                <thead>
+                                    <tr>
+                                        <th class="tg-vyu2"><span style="font-weight:bold;">Aplicación</span></th>
+                                        <th class="tg-vyu2"><span style="font-weight:bold;">Tecnología recomendada</span></th>
+                                        <th class="tg-vyu2"><span style="font-weight:bold;">Justificación</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">Agricultura remota</td>
+                                        <td class="tg-cly1">LoRa o NB-IoT</td>
+                                        <td class="tg-cly1">Bajo consumo, alta cobertura, mínimo mantenimiento</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">Hogar inteligente</td>
+                                        <td class="tg-cly1">ZigBee, Wi-Fi</td>
+                                        <td class="tg-cly1">Alta velocidad, redes en malla, buena integración</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">Seguimiento de flotas</td>
+                                        <td class="tg-cly1">LTE/5G</td>
+                                        <td class="tg-cly1">Alta disponibilidad, velocidad, movilidad</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">Wearables de salud</td>
+                                        <td class="tg-cly1">BLE</td>
+                                        <td class="tg-cly1">Comunicación segura, bajo consumo, cercanía técnica</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p>
+                                La elección de la red depende de factores como la autonomía energética, la cantidad de datos transmitidos, la ubicación geográfica 
+                                del sistema y la disponibilidad de infraestructura. En entornos rurales, las tecnologías LPWAN como LoRa o NB-IoT son preferibles. 
+                                En cambio, en espacios cerrados con acceso a electricidad, Wi-Fi o ZigBee permiten una conectividad más robusta y rápida. 
+                                Para aplicaciones móviles o de alta velocidad, LTE y 5G son esenciales.
+                            </p>
+
+                            <!--
+                            <h2>Actividades</h2>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Mini juego tipo quiz (HTML o herramienta externa)
+                                        <ul>
+                                            <li>Ubicación sugerida: final de la sección, como parte de la actividad “Mini juego de clasificación de redes”.</li>
+                                            <li>Ejemplo: arrastrar y soltar tecnologías al tipo correcto de red (PAN, LAN, WAN, LPWAN).</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Actividad de análisis contextual
+                                        <ul>
+                                            <li>Ubicación: justo después del cuadro de aplicación práctica.</li>
+                                            <li>Instrucción: “Plantee un escenario de monitoreo en una zona rural, y justifique qué tipo de red usaría para sensores de humedad, temperatura y ubicación de maquinaria.”</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
+                            -->
+
+                            <h2>Conclusiones</h2>
+                            <p>
+                                La diversidad de escenarios en los que se implementan soluciones de Internet de las Cosas demanda una selección cuidadosa y 
+                                contextual de la tecnología de red. No existe una solución única que se adapte a todos los casos; cada aplicación impone 
+                                requisitos particulares en términos de cobertura, velocidad de transmisión y consumo energético. Por ello, el análisis del 
+                                entorno y los objetivos del sistema es crucial al momento de elegir la conectividad adecuada.
+                            </p>
+
+                            <p>
+                                Un aspecto fundamental en este proceso de selección es lograr un equilibrio entre el consumo energético, la velocidad de 
+                                transmisión de datos y el alcance geográfico. Este balance permite desarrollar soluciones eficientes, sostenibles y capaces de 
+                                operar durante largos periodos sin intervención constante, especialmente en contextos de difícil acceso o con limitaciones 
+                                energéticas.
+                            </p>
+
+                            <p>
+                                Además, la interoperabilidad entre diferentes redes y dispositivos se está consolidando como un factor determinante en el 
+                                desarrollo de sistemas IoT modernos. A medida que estas tecnologías se expanden a nuevos sectores industriales y regiones 
+                                geográficas, la capacidad de integrar múltiples estándares y plataformas se convierte en un diferenciador clave para garantizar 
+                                la escalabilidad y el éxito a largo plazo de los sistemas implementados.
+                            </p>
+
+                            <h2>Referencias</h2>
+                            <p>
+                                <ol>
+                                    <li>A. Al-Fuqaha et al., "Internet of Things: A Survey on Enabling Technologies, Protocols and Applications," IEEE Communications Surveys & Tutorials, vol. 17, no. 4, pp. 2347–2376, 2015.</li>
+                                    <li>G. Borgia, "The Internet of Things vision: Key features, applications and open issues," Computer Communications, vol. 54, pp. 1-31, 2014.</li>
+                                    <li>A. Čólaković and M. Hadžialić, "Internet of Things (IoT): A review of enabling technologies, challenges, and open research issues," Computer Networks, vol. 144, pp. 17–39, 2018.</li>
+                                    <li>J. Lin et al., "A Survey on Internet of Things: Architecture, Enabling Technologies, Security and Privacy, and Applications," IEEE IoT Journal, vol. 4, no. 5, pp. 1125–1142, Oct. 2017.</li>
+                                    <li>H. Kashif et al., "Selection of Network Protocols for Internet of Things Applications: A Review," IEEE Int. Conf. on Semantic Computing, 2020.</li>
+                                    <li>N. Shahid and S. Aneja, "Internet of Things: Vision, Application Areas and Research Challenges," IEEE I-SMAC, pp. 583-585, 2017.</li>
+                                </ol>
+                            </p>
+
+                            <!--
+                            <h1>Importancia de la conectividad en IoT: </h1>
+                            <p>La conectividad es un elemento esencial en el ecosistema del Internet de las Cosas (IoT), ya que permite que los dispositivos se 
+                                comuniquen entre sí y con plataformas de análisis de datos. Esta comunicación es fundamental para la recopilación, transmisión y 
+                                procesamiento de información en tiempo real, lo que posibilita la toma de decisiones informadas y la automatización de procesos. 
+                                Las tecnologías de conectividad pueden variar significativamente según las necesidades y características del proyecto, desde redes 
+                                locales de área amplia (WAN) hasta conexiones a Internet mediante protocolos específicos. Sin una conectividad adecuada, los 
+                                dispositivos IoT no podrían funcionar de manera efectiva, limitando su utilidad y el impacto que pueden tener en diversos entornos.
+                            </p>
+                            <p>El ESP32 se destaca especialmente en términos de conectividad, ya que integra tanto Wi-Fi como Bluetooth Low Energy (BLE), lo que 
+                                proporciona una gran flexibilidad para conectar una amplia variedad de dispositivos en distintos contextos. Esta dualidad de opciones 
+                                permite a los usuarios elegir el tipo de conexión que mejor se adapte a sus necesidades específicas, ya sea que requieran un acceso a 
+                                Internet robusto o una comunicación de corto alcance entre dispositivos. Gracias a esta capacidad, el ESP32 facilita el desarrollo de 
+                                aplicaciones IoT que pueden interconectar múltiples sensores y actuadores, así como enviar datos a plataformas de análisis en la nube, 
+                                maximizando así el potencial de los proyectos y fomentando una mayor innovación en el campo del IoT.
+                            </p>
+                            
+                            <h1>Tipos de redes en IoT:</h1>
+                            <ul>
+                                <li> Redes de Área Personal (PAN)
+                                    <ul>
+                                        <li>Bluetooth Low Energy (BLE): Esta tecnología es adecuada para conexiones de corto alcance y se caracteriza por su bajo 
+                                            consumo de energía. Es ideal para aplicaciones donde la duración de la batería es crucial, como dispositivos portátiles y 
+                                            sensores de salud.
+                                        </li>
+                                        <li>Zigbee: Zigbee es un protocolo de comunicación basado en estándares de la industria que permite la creación de redes de 
+                                            dispositivos en un área personal. Es muy eficiente en términos de energía y se utiliza comúnmente en aplicaciones de 
+                                            domótica y automatización del hogar.
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li> Redes de Área Local (LAN)
+                                    <ul>
+                                        <li>Wi-Fi: Esta tecnología proporciona una alta velocidad de conexión y es ideal para dispositivos que se encuentran dentro 
+                                            del rango de un enrutador. Permite la transmisión de grandes volúmenes de datos y es comúnmente utilizada en entornos 
+                                            domésticos y empresariales, donde se requiere acceso a Internet.
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li> Redes de Área Amplia (WAN)
+                                    <ul>
+                                        <li>LTE y 5G: Estas tecnologías permiten conectar dispositivos a través de grandes distancias, ofreciendo una velocidad de 
+                                            transferencia de datos significativamente mayor en comparación con sus predecesores. Son ideales para aplicaciones que 
+                                            requieren comunicación en tiempo real y donde la movilidad es un factor importante.
+                                        </li>
+                                        <li>LoRa (Long Range): LoRa es una tecnología que ofrece comunicaciones de largo alcance con un bajo consumo de energía. 
+                                            Es particularmente útil para aplicaciones en entornos rurales o industriales, donde la cobertura de red puede ser 
+                                            limitada y se necesita transmitir datos de manera eficiente sin agotar rápidamente la batería de los dispositivos.
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            -->
+                        </div>
+
+                        <footer>
+                            <hr>
+                            <div role="navegation" arial-label="Button navigation">
+                                <a href="/products/curso_iot/contenido/6_conectividad/" class="btn btn-neutral float-left" title="6. Protocolos y conectividad en IoT" accesskey="p" rel="prev">
+                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                                    Anterior
+                                </a>
+                                <a href="/products/curso_iot/contenido/6_conectividad/6_2_protocolos/" class="btn btn-neutral float-right" title="6.2. Protocolos de comunicación en IoT" accesskey="n" rel="next">
+                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                                    Siguiente
+                                </a>
+                            </div>
+                        </footer>
                     </div>
-                </footer>
+			    
+                    <div id="aside-nav-curso-iot-container"></div>
+                </div>
 			</div>
 		</main>
 

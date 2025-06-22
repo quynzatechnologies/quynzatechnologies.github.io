@@ -23,76 +23,282 @@
         <header id="header-nav-main-container"></header>
 
         <main>
-			<div id="aside-nav-curso-iot-container"></div>
-
-            <div class="content">
-                <section>
-                    <div id="heading-breadcrumbs">
-                        <div class="container">
+			<div class="main">
+                <div class="div-content">
+                    <div id="content-curso">
+                        <div id="heading-breadcrumbs">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Ejercicio 3-4: Utilizar módulo Bluetooth de ESP32</h1>
-                                    <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-								</div>
+                                <h1>Ejercicio 3-4: Utilizar módulo Bluetooth de ESP32</h1>
+                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
                             </div>
                         </div>
-                    </div>
 
-                    <div role="navegation" arial-label="Page navigation">
-                        <ul class="wy-breadcrumbs">
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/">Inicio</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/">3. Introducción práctica a la programación con ESP32</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_3_bluetooth/">3.3. Módulo Bluetooth del ESP32</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_3_bluetooth/ejercicio_3_4.html" class="not-active">Ejercicio 3-4: Utilizar módulo Bluetooth de ESP32</a>
-                            </li>
-                        </ul>
-                        <hr>
-                    </div>
-                </section>
-            
-                <section>
-                    <div id="content">
-                        <div class="container" id="contact">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <section>
-                                        <h1>Ejercicio 3-4: Utilizar módulo Bluetooth de ESP32</h1>
-                                        <p> Descripción: Utilizar el sensor DHT11 para medir la temperatura y la humedad. Utilizar el use una fotoresistencia para medir la luz 
-                                            ambiente y controlar automáticamente la intensidad de un LED o cinta RGB según el nivel de luz. Los datos se envían a un servidor 
-                                            web alojado en el ESP32, donde se mostrarán en tiempo real en una interfaz web.
-                                        </p>
-                                        <p> Objetivos: Aprender a configurar un servidor web en el ESP32 y a diseñar una interfaz sencilla utilizando HTML.
-                                        </p>
-                                        <p> Tecnologías: Sensor DHT11, servidor web en ESP32, HTML. 
-                                        </p>
-                                    </section>
-                                </div>
-                            </div>
+                        <div role="navegation" arial-label="Page navigation">
+                            <ul class="wy-breadcrumbs">
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/">Inicio</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/3_intro_esp32/">3. Introducción práctica a la programación con ESP32</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/3_intro_esp32/3_3_bluetooth/">3.3. Módulo Bluetooth del ESP32</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/3_intro_esp32/3_3_bluetooth/ejercicio_3_4.html" class="not-active">Ejercicio 3-4: Utilizar módulo Bluetooth de ESP32</a>
+                                </li>
+                            </ul>
+                            <hr>
                         </div>
-                    </div>
-                </section>
+                    
+                        <div id="content">
+                            <h1>Ejercicio 3-4: Utilizar módulo Bluetooth de ESP32</h1>
+                            <h2>Descripción</h2>
+                            <p> Usando Micropython, con el <strong>Ejercicio 3-4: Utilizar módulo Bluetooth de ESP32</strong> se va a aprender a crear y configurar el módulo Bluetooth para
+                                permitir que otros dispositivos pueden conectarse.
+                            </p>
 
-                <footer>
-                    <hr>
-                    <div role="navegation" arial-label="Button navigation">
-                        <a href="/products/curso_iot/contenido/3_intro_esp32/3_3_bluetooth/" class="btn btn-neutral float-left" title="3.3. Módulo Bluetooth del ESP32" accesskey="p" rel="prev">
-                            <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                            Anterior
-                        </a>
-                        <a href="/products/curso_iot/contenido/3_intro_esp32/3_3_bluetooth/ejercicio_3_5.html" class="btn btn-neutral float-right" title="Ejercicio 3-5: Control de Dispositivos a través de Bluetooth con el ESP32" accesskey="n" rel="next">
-                            <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                            Siguiente
-                        </a>
+                            <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
+                            </p>
+
+                            <p style="text-align:center;">
+                                <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+                            </p>
+
+                            <h2>Código</h2>
+                            <p>Para este ejercicio se necesitará los archivos:</p>
+                            <ul>
+                                <li>
+                                    <strong><a href="https://github.com/micropython/micropython/blob/master/examples/bluetooth/ble_advertising.py" target="_blank">ble_advertising.py</a></strong>
+                                    : Este archivo contiene la clase BLEAdvertising que se utiliza para configurar la publicidad del dispositivo Bluetooth Low Energy.
+                                </li>
+                                <li>
+                                    <strong><a href="https://github.com/micropython/micropython/blob/master/examples/bluetooth/ble_uart_peripheral.py" target="_blank">ble_uart_peripheral.py</a></strong>
+                                    : Este archivo contiene la clase BLEUART que define funciones útiles para configurar un dispositivo en modo periférico e implementar una comunicación UART.
+                                </li>
+                                <li><strong>main.py</strong>: Script principal que contiene el código para configurar el módulo Bluetooth.</li>
+                            </ul>
+
+                            <h3>main.py</h3>
+                            <p>Se debe crear el archivo <strong>main.py</strong> que contiene el siguiente código:
+                            </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">bluetooth</span>
+        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">ble_uart_peripheral</span> <span style="color: #8B008B; font-weight: bold">import</span> BLEUART
+        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+
+        ble = bluetooth.BLE()
+        uart = BLEUART(ble, name=<span style="color: #CD5555">&quot;ESP32&quot;</span>)
+        led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+
+        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_rx</span>():
+        rx_recibe = uart.read().decode().strip()
+        <span style="color: #8B008B; font-weight: bold">print</span>(rx_recibe)
+        uart.write(<span style="color: #CD5555">&quot;Mensaje recibido: &quot;</span> + rx_recibe + <span style="color: #CD5555">&quot;\n&quot;</span>)
+
+        <span style="color: #8B008B; font-weight: bold">if</span> rx_recibe == <span style="color: #CD5555">&quot;0&quot;</span>:
+        led.off()
+        <span style="color: #8B008B; font-weight: bold">elif</span> rx_recibe == <span style="color: #CD5555">&quot;1&quot;</span>:
+        led.on()
+
+        uart.irq(handler=on_rx)
+
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+        <span style="color: #8B008B; font-weight: bold">try</span>:
+        time.sleep_ms(<span style="color: #B452CD">1000</span>)
+        <span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008b45; font-weight: bold">KeyboardInterrupt</span>:
+        uart.close()
+        <span style="color: #8B008B; font-weight: bold">break</span>
+        </pre>
+        </div>
+
+                            <p>
+                                Este programa tiene configurado una función interruptor que imprimirá en la consola el mensaje recibido a través del Bluetooth.
+                                Si el mensaje recibido es <em>0</em>, se apagará el LED conectado al pin 2 de la placa ESP32, y si el mensaje es <em>1</em>, se encenderá el LED. 
+                            </p>
+
+                            <h2>Explicación paso a paso</h2>
+
+                            <h3>main.py</h3>
+
+                            <p> En primer lugar importamos las librerías necesarias para este ejercicio: 
+                            </p>
+
+                            <ul>
+                                <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em> es usado para
+                                controlar los pines GPIO (General-purpose Input-Output) del ESP32</li>
+                                <li><em>bluetooth</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/bluetooth.html" target="_blank">bluetooth</a></em> es librería
+                                más básica para proveer una interface al controlador Bluetooth de la tarjeta</li>
+                                <li><em>BLEUART</em>: La clase BLEUART de la librería <em><a href="https://github.com/micropython/micropython/blob/master/examples/bluetooth/ble_uart_peripheral.py" target="_blank">ble_uart_peripheral</a></em> 
+                                es usado para la configuración de comunicación UART de un dispositivo periférico Bluetooth</li>
+                                <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html" target="_blank">time</a></em> proporciona funciones
+                                para obtener la hora y fecha actuales, medir intervalos de tiempo y retrasos. En este ejercicio se va a utilizar para hacer un temporizador</li>
+                            </ul>
+                            
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">bluetooth</span>
+        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">ble_uart_peripheral</span> <span style="color: #8B008B; font-weight: bold">import</span> BLEUART
+        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+        </pre>
+        </div>
+
+                            <p>
+                                Luego, se crea una instancia de la clase <i>BLE</i> y se inicializa la clase <i>BLEUART</i> con el nombre del dispositivo <em>ESP32</em>. Además, se configura un pin GPIO
+                                como salida para controlar un LED conectado al pin 2 de la placa ESP32.
+                            </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        ble = bluetooth.BLE()
+        uart = BLEUART(ble, name=<span style="color: #CD5555">&quot;ESP32&quot;</span>)
+        led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+        </pre>
+        </div>
+
+                            <p>
+                                A continuación, se define una función <i>on_rx</i> que se ejecutará cuando se reciba un mensaje a través del Bluetooth. Esta función decodifica el mensaje recibido,
+                                imprime el mensaje en la consola y envía una respuesta de vuelta al dispositivo que envió el mensaje. En esta función, si el mensaje recibido es <em>0</em>, se apaga el 
+                                LED, y si es <em>1</em>, se enciende el LED. 
+                            </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_rx</span>():
+        rx_recibe = uart.read().decode().strip()
+        <span style="color: #8B008B; font-weight: bold">print</span>(rx_recibe)
+        uart.write(<span style="color: #CD5555">&quot;Mensaje recibido: &quot;</span> + rx_recibe + <span style="color: #CD5555">&quot;\n&quot;</span>)
+
+        <span style="color: #8B008B; font-weight: bold">if</span> rx_recibe == <span style="color: #CD5555">&quot;0&quot;</span>:
+        led.off()
+        <span style="color: #8B008B; font-weight: bold">elif</span> rx_recibe == <span style="color: #CD5555">&quot;1&quot;</span>:
+        led.on()
+        </pre>
+        </div>
+
+                            <p>
+                                Luego, se configura la interrupción del UART para que llame a la función <i>on_rx</i> cuando se reciba un mensaje.
+                            </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        uart.irq(handler=on_rx)
+        </pre>
+        </div>
+
+                            <p>
+                                Finalmente, se inicia un bucle infinito que mantiene el programa en ejecución. Dentro de este bucle, se utiliza un temporizador para hacer una pausa de 1 segundo
+                                entre iteraciones. Si se presiona <i>Ctrl+C</i>, se cierra la conexión UART y se sale del bucle.
+                            </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+        <span style="color: #8B008B; font-weight: bold">try</span>:
+        time.sleep_ms(<span style="color: #B452CD">1000</span>)
+        <span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008b45; font-weight: bold">KeyboardInterrupt</span>:
+        uart.close()
+        <span style="color: #8B008B; font-weight: bold">break</span>
+        </pre>
+        </div>
+                            <p>
+                                Con este código, el ESP32 estará configurado para recibir mensajes a través del Bluetooth y controlar un LED en función de los mensajes recibidos.
+                            </p>
+
+                            <h2>Testeo en ESP32</h2>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/Con_ESP32_ejercicio_4.png" width ="75%" height="auto">
+                            </p>
+
+                            <p>Luego de subir los archivos <em>ble_advertising.py</em> y <em>ble_uart_peripheral.py</em> al dispositivo ESP32, en thonny se debe ver así:</p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/resultado1_ejercicio_4.png" width ="75%" height="auto">
+                            </p>
+
+                            <p>
+                                Ahora se debe ejecutar el archivo <em>main.py</em> en el dispositivo ESP32. Una vez ejecutado, la consola de Thonny se debe quedar en blanco, 
+                                indicando que el dispositivo está listo para recibir mensajes a través del Bluetooth.
+                            </p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/resultado2_ejercicio_4.png" width ="75%" height="auto">
+                            </p>
+
+                            <p>
+                                Para probar la comunicación, se puede utilizar una aplicación de Bluetooth en un teléfono móvil o una computadora. 
+                                En este caso, se utilizará la aplicación <strong>Bluefruit Connect</strong> disponible en Google Play Store:
+                            </p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/bluefruit-1.png" width ="40%" height="auto">
+                            </p>
+
+                            <p>
+                                Una vez instalada la aplicación, se debe buscar el dispositivo llamado  <em>ESP32</em> en la lista de dispositivos Bluetooth disponibles. 
+                                Al encontrarlo, se debe conectar al dispositivo. Una vez conectado, se puede enviar mensajes al ESP32 a través de la aplicación.
+                            </p>
+                            
+                            <p style="text-align:center;">
+                                <img src="./img/bluefruit-2.png" width ="40%" height="auto">
+                            </p>
+
+                            <p>
+                                Una vez conectado nos debemos dirigir al módulo de comunicación <em>UART</em> de la aplicación. Como vimos en el código, el ESP32 está configurado para 
+                                recibir mensajes a través del Bluetooth, imprimir el mensaje en la consola de Thonny, enviar un mensaje de respuesta al dispositivo con la forma 
+                                <em>Mensaje recibido: XXX</em> y controlar un LED en función de los mensajes recibidos.
+                            </p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/bluefruit-4.png" width ="40%" height="auto">
+                            </p>
+
+                            <p>
+                                En este módulo, se puede enviar mensajes al ESP32. Por ejemplo, si se envía el mensaje <em>1</em>, el LED conectado al pin 2 del ESP32 se encenderá, 
+                                y si se envía el mensaje <em>0</em>, el LED se apagará. A continuación se envía el mensaje <em>1</em>:
+                            </p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/bluefruit-5.png" width ="100%" height="auto">
+                            </p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/Testeo_ESP32_ejercicio_4.png" width ="100%" height="auto">
+                            </p>
+
+                            <p>
+                                Y ahora se envía el mensaje <em>0</em>:
+                            </p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/bluefruit-6.png" width ="100%" height="auto">
+                            </p>
+                        </div>
+
+                        <footer>
+                            <hr>
+                            <div role="navegation" arial-label="Button navigation">
+                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_3_bluetooth/" class="btn btn-neutral float-left" title="3.3. Módulo Bluetooth del ESP32" accesskey="p" rel="prev">
+                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                                    Anterior
+                                </a>
+                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_3_bluetooth/ejercicio_3_5.html" class="btn btn-neutral float-right" title="Ejercicio 3-5: Control de Dispositivos a través de Bluetooth con el ESP32" accesskey="n" rel="next">
+                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                                    Siguiente
+                                </a>
+                            </div>
+                        </footer>
                     </div>
-                </footer>
-            </div>
+			    
+                    <div id="aside-nav-curso-iot-container"></div>
+                </div>
+			</div>
         </main>
 
         <footer class="footer" id="footer-main-container"></footer>

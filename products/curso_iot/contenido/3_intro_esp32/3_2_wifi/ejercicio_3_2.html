@@ -23,223 +23,211 @@
         <header id="header-nav-main-container"></header>
 
         <main>
-			<div id="aside-nav-curso-iot-container"></div>
-
-            <div class="content">
-                <section>
-                    <div id="heading-breadcrumbs">
-                        <div class="container">
+			<div class="main">
+                <div class="div-content">
+                    <div id="content-curso">
+                        <div id="heading-breadcrumbs">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Ejercicio 3-2: Conectarse a red WiFi</h1>
-                                    <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-								</div>
+                                <h1>Ejercicio 3-2: Conectarse a red WiFi</h1>
+                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
                             </div>
                         </div>
-                    </div>
 
-                    <div role="navegation" arial-label="Page navigation">
-                        <ul class="wy-breadcrumbs">
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/">Inicio</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/">3. Introducción práctica a la programación con ESP32</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/">3.2. Conexión WiFi del ESP32</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html" class="not-active">Ejercicio 3-2: Conectarse a red WiFi</a>
-                            </li>
-                        </ul>
-                        <hr>
-                    </div>
-                </section>
-            
-                <section>
-                    <div id="content">
-                        <div class="container" id="contact">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <section>
-                                        <h1>Ejercicio 3-2: Conectarse a red WiFi</h1>
-                                        <h2>Descripción</h2>
-                                        <p> Usando Micropython, con el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong> se va a aprender a conectar al ESP32 a una red WiFi 
-                                            disponible y cuando se realice una conexión exitosa entonces se encenderá el LED conectado a la placa ESP32.
-                                        </p>
+                        <div role="navegation" arial-label="Page navigation">
+                            <ul class="wy-breadcrumbs">
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/">Inicio</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/3_intro_esp32/">3. Introducción práctica a la programación con ESP32</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/">3.2. Conexión WiFi del ESP32</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html" class="not-active">Ejercicio 3-2: Conectarse a red WiFi</a>
+                                </li>
+                            </ul>
+                            <hr>
+                        </div>
+                    
+                        <div id="content">
+                            <h1>Ejercicio 3-2: Conectarse a red WiFi</h1>
+                            <h2>Descripción</h2>
+                            <p> Usando Micropython, con el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong> se va a aprender a conectar al ESP32 a una red WiFi 
+                                disponible y cuando se realice una conexión exitosa entonces se encenderá el LED conectado a la placa ESP32.
+                            </p>
 
-                                        <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
-                                        </p>
+                            <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
+                            </p>
 
-                                        <p style="text-align:center;">
-                                            <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
-                                        </p>
+                            <p style="text-align:center;">
+                                <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+                            </p>
 
-                                        <h2>Código</h2>
-                                        <p>Para este ejercicio se necesitará el archivo:</p>
-                                        <ul>
-                                            <li><strong>main.py</strong>: Script principal que contiene el código para conexión a una red WiFi específica.</li>
-                                        </ul>
+                            <h2>Código</h2>
+                            <p>Para este ejercicio se necesitará el archivo:</p>
+                            <ul>
+                                <li><strong>main.py</strong>: Script principal que contiene el código para conexión a una red WiFi específica.</li>
+                            </ul>
 
-                                        <h3>main.py</h3>
+                            <h3>main.py</h3>
 
-                                        <p>Luego de confirmar que la red WiFi deseada para conectar ha sido correctamente detectada por el ESP32 con el 
-                                        <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_1.html">Ejercicio 3-1: Visualizar lista redes WiFi</a> se debe 
-                                        crear el archivo <strong>main.py</strong> que contiene el siguiente código:
-                                        </p>
+                            <p>Luego de confirmar que la red WiFi deseada para conectar ha sido correctamente detectada por el ESP32 con el 
+                            <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_1.html">Ejercicio 3-1: Visualizar lista redes WiFi</a> se debe 
+                            crear el archivo <strong>main.py</strong> que contiene el siguiente código:
+                            </p>
 
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">
-<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
 
-p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-    wlan = network.WLAN(network.STA_IF)
-    wlan.active(<span style="color: #658b00">False</span>)
-    wlan.active(<span style="color: #658b00">True</span>)
-    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
+        wlan = network.WLAN(network.STA_IF)
+        wlan.active(<span style="color: #658b00">False</span>)
+        wlan.active(<span style="color: #658b00">True</span>)
+        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
         p2.off()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
         wlan.connect(ssid, pwd)
         <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-            <span style="color: #8B008B; font-weight: bold">pass</span>
+        <span style="color: #8B008B; font-weight: bold">pass</span>
         p2.on()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
         config = wlan.ifconfig()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
 
-do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
-</pre>
-</div>
+        do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+        </pre>
+        </div>
 
-                                        <p>Donde "XXX" es el nombre de su red WiFi y "YYY" es la contraseña de su red.</p>
+                            <p>Donde "XXX" es el nombre de su red WiFi y "YYY" es la contraseña de su red.</p>
 
-                                        <section id="explicacion">
-                                            <h2>Explicación paso a paso</h2>
+                            <section id="explicacion">
+                                <h2>Explicación paso a paso</h2>
 
-                                            <h3>main.py</h3>
-                                            <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan" target="_blank">network</a></em> y la clase
-                                                <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em>. La clase <em>Pin</em> es usado para controlar
-                                                los pines GPIO (General-purpose Input-Output) del ESP32:
-                                            </p>
-                                            
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">
-<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-</pre>
-</div>
-    
-                                            <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
-                                                en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
-                                            </p>
-    
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">
-p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
-</pre>
-</div>
-    
-                                            <p> Se prosigue creando una función llamada <em>do_connect</em> que recibe 2 parámetros de entrada: <em>ssid</em>, que corresponde a SSID
-                                                de la red WiFi a conectarse y <em>pwd</em>, que corresponde a la contraseña de la red WiFi. Luego se configura  al ESP32 en el modo 
-                                                Estación WiFi y aseguramos que esté activada:
-                                            </p>
-    
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-    wlan = network.WLAN(network.STA_IF)
-    wlan.active(<span style="color: #658b00">False</span>)
-    wlan.active(<span style="color: #658b00">True</span>)
-</pre>
-</div>
-    
-                                            <p> Si el ESP32 no está conectado a ninguna red, entonces se apaga el LED interno del ESP32 y se procede a intentar conectar a la red WiFi
-                                                con SSID: <em>ssid</em> y Contraseña: <em>pwd</em>. Mientras no se haga la conexión de manera exitosa, el ESP32 queda en espera,
-                                                cuando se conecte entonces se enciende el LED interno y se muestra en consola la información de la conexión:
-                                            </p>
-    
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">
-    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+                                <h3>main.py</h3>
+                                <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/esp32/quickref.html#wlan" target="_blank">network</a></em> y la clase
+                                    <em><a href="https://docs.micropython.org/en/latest/library/machine.html">machine.Pin</a></em>. La clase <em>Pin</em> es usado para controlar
+                                    los pines GPIO (General-purpose Input-Output) del ESP32:
+                                </p>
+                                
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+        </pre>
+        </div>
+
+                                <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
+                                    en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
+                                </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+        </pre>
+        </div>
+
+                                <p> Se prosigue creando una función llamada <em>do_connect</em> que recibe 2 parámetros de entrada: <em>ssid</em>, que corresponde a SSID
+                                    de la red WiFi a conectarse y <em>pwd</em>, que corresponde a la contraseña de la red WiFi. Luego se configura  al ESP32 en el modo 
+                                    Estación WiFi y aseguramos que esté activada:
+                                </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
+        wlan = network.WLAN(network.STA_IF)
+        wlan.active(<span style="color: #658b00">False</span>)
+        wlan.active(<span style="color: #658b00">True</span>)
+        </pre>
+        </div>
+
+                                <p> Si el ESP32 no está conectado a ninguna red, entonces se apaga el LED interno del ESP32 y se procede a intentar conectar a la red WiFi
+                                    con SSID: <em>ssid</em> y Contraseña: <em>pwd</em>. Mientras no se haga la conexión de manera exitosa, el ESP32 queda en espera,
+                                    cuando se conecte entonces se enciende el LED interno y se muestra en consola la información de la conexión:
+                                </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
         p2.off()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
         wlan.connect(ssid, pwd)
         <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-            <span style="color: #8B008B; font-weight: bold">pass</span>
+        <span style="color: #8B008B; font-weight: bold">pass</span>
         p2.on()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
         config = wlan.ifconfig()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
-</pre>
-</div>
-    
-                                            <p> La clase <em><a href="https://docs.micropython.org/en/latest/library/network.WLAN.html" target="_blank">WLAN</a></em> tiene una función llamada 
-                                                <em>ifconfig</em> el cual retorna/configura los parámetros a nivel IP de la red conectada. Estos parámetros están organizados en 
-                                                una tupla de tamaño 4 con la siguiente información:
-                                            </p>
-    
-                                            <ol>
-                                                <li>Dirección IP de dispositivo en la red</li>
-                                                <li>Máscara de subred</li>
-                                                <li>Dirección Gateway de la red</li>
-                                                <li>Dirección del servidor DNS</li>
-                                            </ol>
-    
-                                            <p> Luego de definir la función <em>do_connect</em>, la llamamos con la información de la red WiFi disponible a conectar:
-                                            </p>
-    
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">
-do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
-</pre>
-</div>
-                                        </section>
+        </pre>
+        </div>
 
-                                        <h2>Testeo en ESP32</h2>
-                                        <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
-    
-                                        <p style="text-align:center;">
-                                            <img src="./img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
-                                        </p>
-                                        
-                                        <p>Luego ejecutamos el script <em>main.py</em> mediante el software Thonny. Después de unos segundos, en consola se va mostrar un mensaje 
-                                            como este:
-                                        </p>
-    
-                                        <p style="text-align:center;">
-                                            <img src="./img/resultado_ejercicio_2.png" width ="100%" height="auto">
-                                        </p>
-                                        
-                                        <p>Y el entrenador se podrá ver de esta manera:</p>
-    
-                                        <p style="text-align:center;">
-                                            <img src="./img/Testeo_ESP32_ejercicio_2.png" width ="100%" height="auto">
-                                        </p>
-                                    </section>
-                                </div>
-                            </div>
+                                <p> La clase <em><a href="https://docs.micropython.org/en/latest/library/network.WLAN.html" target="_blank">WLAN</a></em> tiene una función llamada 
+                                    <em>ifconfig</em> el cual retorna/configura los parámetros a nivel IP de la red conectada. Estos parámetros están organizados en 
+                                    una tupla de tamaño 4 con la siguiente información:
+                                </p>
+
+                                <ol>
+                                    <li>Dirección IP de dispositivo en la red</li>
+                                    <li>Máscara de subred</li>
+                                    <li>Dirección Gateway de la red</li>
+                                    <li>Dirección del servidor DNS</li>
+                                </ol>
+
+                                <p> Luego de definir la función <em>do_connect</em>, la llamamos con la información de la red WiFi disponible a conectar:
+                                </p>
+
+        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+        do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+        </pre>
+        </div>
+                            </section>
+
+                            <h2>Testeo en ESP32</h2>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
+                            </p>
+                            
+                            <p>Luego ejecutamos el script <em>main.py</em> mediante el software Thonny. Después de unos segundos, en consola se va mostrar un mensaje 
+                                como este:
+                            </p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/resultado_ejercicio_2.png" width ="100%" height="auto">
+                            </p>
+                            
+                            <p>Y el entrenador se podrá ver de esta manera:</p>
+
+                            <p style="text-align:center;">
+                                <img src="./img/Testeo_ESP32_ejercicio_2.png" width ="100%" height="auto">
+                            </p>
                         </div>
-                    </div>
-                </section>
 
-                <footer>
-                    <hr>
-                    <div role="navegation" arial-label="Button navigation">
-                        <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_1.html" class="btn btn-neutral float-left" title="Ejercicio 3-1: Visualizar lista redes WiFi" accesskey="p" rel="prev">
-                            <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                            Anterior
-                        </a>
-                        <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_3.html" class="btn btn-neutral float-right" title="Ejercicio 3-3: Crear red WiFi" accesskey="n" rel="next">
-                            <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                            Siguiente
-                        </a>
+                        <footer>
+                            <hr>
+                            <div role="navegation" arial-label="Button navigation">
+                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_1.html" class="btn btn-neutral float-left" title="Ejercicio 3-1: Visualizar lista redes WiFi" accesskey="p" rel="prev">
+                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                                    Anterior
+                                </a>
+                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_3.html" class="btn btn-neutral float-right" title="Ejercicio 3-3: Crear red WiFi" accesskey="n" rel="next">
+                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                                    Siguiente
+                                </a>
+                            </div>
+                        </footer>
                     </div>
-                </footer>
-            </div>
+			    
+                    <div id="aside-nav-curso-iot-container"></div>
+                </div>
+			</div>
         </main>
 
         <footer class="footer" id="footer-main-container"></footer>

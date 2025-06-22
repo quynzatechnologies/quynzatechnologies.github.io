@@ -23,86 +23,74 @@
         <header id="header-nav-main-container"></header>
 
         <main>
-			<div id="aside-nav-curso-iot-container"></div>
-	
-			<div class="content">
-				<section>
-					<div id="heading-breadcrumbs">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12">
-									<h1>Planteamiento del proyecto</h1>
-                                    <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-								</div>
-							</div>
-						</div>
-					</div>
+			<div class="main">
+                <div class="div-content">
+                    <div id="content-curso">
+                        <div id="heading-breadcrumbs">
+                            <div class="row">
+                                <h1>Planteamiento del proyecto</h1>
+                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
+                            </div>
+                        </div>
 
-                    <div role="navegation" arial-label="Page navigation">
-                        <ul class="wy-breadcrumbs">
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/">Inicio</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/8_proyecto/">8. Proyecto final integrador</a>
-                            </li>
-                            <li class="wy-li">
-                                <a href="/products/curso_iot/contenido/8_proyecto/8_1_planteamiento/" class="not-active">8.1. Planteamiento del proyecto</a>
-                            </li>
-                        </ul>
-                        <hr>
+                        <div role="navegation" arial-label="Page navigation">
+                            <ul class="wy-breadcrumbs">
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/">Inicio</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/8_proyecto/">8. Proyecto final integrador</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_iot/contenido/8_proyecto/8_1_planteamiento/" class="not-active">8.1. Planteamiento del proyecto</a>
+                                </li>
+                            </ul>
+                            <hr>
+                        </div>
+                        
+                        <div id="content">
+                            <p>[Incentivar a los usuarios mencionando que al final del curso podrán desarrollar sus propios proyectos IoT, utilizando todos los 
+                                conocimientos y habilidades adquiridos.]
+                            </p>
+                            
+                            <h1>Proyecto 1: Monitor Ambiental para Invernaderos
+                            </h1>
+                            <p>Un sistema IoT que utilice múltiples sensores para monitorear y controlar las condiciones climáticas dentro de un invernadero, como la 
+                                temperatura, humedad y niveles de luz, asegurando condiciones óptimas para el cultivo. Monitoreo por interfaz web
+                            </p>
+
+                            <h1>Proyecto 2: Sistema de Control de Actuadores Bluetooth 
+                            </h1>
+                            <p>Descripción: Implementar un sistema que utilice la conectividad Bluetooth del ESP32 para controlar diversos actuadores (LEDs, displays) desde un smartphone. Los estados de los actuadores se visualizan en un dashboard de Node-RED. 
+                            </p>
+                            <p>Objetivos: Integrar el control Bluetooth con Node-RED para visualizar y manejar actuadores desde un dispositivo móvil.
+                            </p>
+                            <p>Razón: Involucra la integración de Bluetooth con el ESP32, control de múltiples actuadores, y visualización en Node-RED, ofreciendo una experiencia completa de IoT.
+                            </p>
+                            <p>Tecnologías: Bluetooth, LEDs, displays, Node-RED, HTTP POST.
+                            </p>
+
+                            <h1>Proyecto 3: Sistema de Control de Actuadores Node-RED
+                            </h1>
+                        </div>
+
+                        <footer>
+                            <hr>
+                            <div role="navegation" arial-label="Button navigation">
+                                <a href="/products/curso_iot/contenido/8_proyecto/" class="btn btn-neutral float-left" title="8. Proyecto final integrador" accesskey="p" rel="prev">
+                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                                    Anterior
+                                </a>
+                                <a href="/products/curso_iot/contenido/8_proyecto/8_2_desarrollo/" class="btn btn-neutral float-right" title="8.2. Desarrollo y documentación técnica" accesskey="n" rel="next">
+                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                                    Siguiente
+                                </a>
+                            </div>
+                        </footer>
                     </div>
-				</section>
-			
-				<section>
-					<div id="content">
-						<div class="container" id="contact">
-							<div class="row">
-								<div class="col-md-8">
-									<section>
-                                        <p>[Incentivar a los usuarios mencionando que al final del curso podrán desarrollar sus propios proyectos IoT, utilizando todos los 
-                                            conocimientos y habilidades adquiridos.]
-                                        </p>
-                                        
-                                        <h1>Proyecto 1: Monitor Ambiental para Invernaderos
-                                        </h1>
-                                        <p>Un sistema IoT que utilice múltiples sensores para monitorear y controlar las condiciones climáticas dentro de un invernadero, como la 
-                                            temperatura, humedad y niveles de luz, asegurando condiciones óptimas para el cultivo. Monitoreo por interfaz web
-                                        </p>
-
-                                        <h1>Proyecto 2: Sistema de Control de Actuadores Bluetooth 
-                                        </h1>
-                                        <p>Descripción: Implementar un sistema que utilice la conectividad Bluetooth del ESP32 para controlar diversos actuadores (LEDs, displays) desde un smartphone. Los estados de los actuadores se visualizan en un dashboard de Node-RED. 
-                                        </p>
-                                        <p>Objetivos: Integrar el control Bluetooth con Node-RED para visualizar y manejar actuadores desde un dispositivo móvil.
-                                        </p>
-                                        <p>Razón: Involucra la integración de Bluetooth con el ESP32, control de múltiples actuadores, y visualización en Node-RED, ofreciendo una experiencia completa de IoT.
-                                        </p>
-                                        <p>Tecnologías: Bluetooth, LEDs, displays, Node-RED, HTTP POST.
-                                        </p>
-
-                                        <h1>Proyecto 3: Sistema de Control de Actuadores Node-RED
-                                        </h1>
-									</section>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
-                <footer>
-                    <hr>
-                    <div role="navegation" arial-label="Button navigation">
-                        <a href="/products/curso_iot/contenido/8_proyecto/" class="btn btn-neutral float-left" title="8. Proyecto final integrador" accesskey="p" rel="prev">
-                            <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                            Anterior
-                        </a>
-                        <a href="/products/curso_iot/contenido/8_proyecto/8_2_desarrollo/" class="btn btn-neutral float-right" title="8.2. Desarrollo y documentación técnica" accesskey="n" rel="next">
-                            <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                            Siguiente
-                        </a>
-                    </div>
-                </footer>
+			    
+                    <div id="aside-nav-curso-iot-container"></div>
+                </div>
 			</div>
 		</main>
 

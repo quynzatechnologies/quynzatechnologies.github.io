@@ -25,64 +25,62 @@
         <main>
             <div class="content">
                 <!-- Contact Information Section -->
-                <section>
-                    <div id="hero-banner" class="container" id="contact">
-                        <div class="col-md-12">
-                            <h1 class="text-center">Contáctenos</h1>
+                <div id="hero-banner" class="container" id="contact">
+                    <div class="col-md-12">
+                        <h1 class="text-center">Contáctenos</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>Nos gustaría escucharte</h2>
+                            <p>Estamos aquí para ayudarte a resolver tus dudas y explorar oportunidades de colaboración. No dudes en comunicarte con nosotros a través de cualquiera de los siguientes medios:</p>
+
+                            <!-- Contact Information -->
+                            <div class="contact-info">
+                                <ul class="list-unstyled">
+                                    <li><strong>Teléfono:</strong> <a href="tel:+57%20302-8693069">302-8693069</a></li>
+                                    <li><strong>Correo electrónico:</strong> <a href="mailto:quynzatechnologies@gmail.com">quynzatechnologies@gmail.com</a></li>
+                                    <li><strong>Dirección:</strong> Calle 116 #18-45 of. 502, Bogotá D.C., Colombia</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h2>Nos gustaría escucharte</h2>
-                                <p>Estamos aquí para ayudarte a resolver tus dudas y explorar oportunidades de colaboración. No dudes en comunicarte con nosotros a través de cualquiera de los siguientes medios:</p>
 
-                                <!-- Contact Information -->
-                                <div class="contact-info">
-                                    <ul class="list-unstyled">
-                                        <li><strong>Teléfono:</strong> <a href="tel:+57%20302-8693069">302-8693069</a></li>
-                                        <li><strong>Correo electrónico:</strong> <a href="mailto:quynzatechnologies@gmail.com">quynzatechnologies@gmail.com</a></li>
-                                        <li><strong>Dirección:</strong> Calle 116 #18-45 of. 502, Bogotá D.C., Colombia</li>
-                                    </ul>
+                        <!-- Contact Form Section -->
+                        <div class="col-md-6">
+                            <h2>Envíanos un Mensaje</h2>
+                            <p>Si prefieres escribirnos directamente, completa el siguiente formulario y nos pondremos en contacto contigo a la mayor brevedad.</p>
+
+                            <!-- Contact Form -->
+                            <form action="/submit_contact_form" method="POST" id="contact-form">
+                                <div class="form-group">
+                                    <label for="name">Nombre:</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
-                            </div>
-
-                            <!-- Contact Form Section -->
-                            <div class="col-md-6">
-                                <h2>Envíanos un Mensaje</h2>
-                                <p>Si prefieres escribirnos directamente, completa el siguiente formulario y nos pondremos en contacto contigo a la mayor brevedad.</p>
-
-                                <!-- Contact Form -->
-                                <form action="/submit_contact_form" method="POST" id="contact-form">
-                                    <div class="form-group">
-                                        <label for="name">Nombre:</label>
-                                        <input type="text" class="form-control" id="name" name="name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Correo Electrónico:</label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="message">Mensaje:</label>
-                                        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-neutral">Enviar Mensaje</button>
-                                </form>
-                            </div>
+                                <div class="form-group">
+                                    <label for="email">Correo Electrónico:</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Mensaje:</label>
+                                    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-neutral">Enviar Mensaje</button>
+                            </form>
                         </div>
                     </div>
-                </section>
+                </div>
 
                 <!-- Map Section -->
                 <section class="bg-light py-5">
                     <div class="container text-center">
                         <h2>Visítanos</h2>
                         <p>¿Prefieres visitarnos? Aquí te dejamos nuestra ubicación para que puedas llegar fácilmente.</p>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.4139805262216!2d-74.0530379234959!3d4.697918183099317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9ab72e44d8b9%3A0xb4bf817dad8f755f!2zQWMgMTE2ICMxOC00NSwgVXNhcXXDqW4sIEJvZ290w6E!5e0!3m2!1ses-419!2sco!4v1732406633433!5m2!1ses-419!2sco" width="800" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.4139805262216!2d-74.0530379234959!3d4.697918183099317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9ab72e44d8b9%3A0xb4bf817dad8f755f!2zQWMgMTE2ICMxOC00NSwgVXNhcXXDqW4sIEJvZ290w6E!5e0!3m2!1ses-419!2sco!4v1732406633433!5m2!1ses-419!2sco" 
+                        width=75% height="300" style="border:0;min-width: 275px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </section>
 
                 <!-- Social Media and Additional Contact Options -->
-                <section>
-                    <div id="cta" class="text-center">
+                <div id="cta" class="text-center">
                     <div class="container bg-contact text-center py-5">
                         <h2>Síguenos en Redes Sociales</h2>
                         <p>Conéctate con nosotros a través de nuestras redes sociales para estar al tanto de todas nuestras novedades y proyectos.</p>
@@ -92,8 +90,7 @@
                             <a href="https://www.instagram.com/quynzatechnologies/" target="_blank" class="btn btn-social btn-instagram"><i class="fab fa-instagram"></i> Instagram</a>
                         </div>
                     </div>
-                    </div>
-                </section>
+                </div>
 
             </div>
         </main>

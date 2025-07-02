@@ -879,7 +879,6 @@ ul.list-style-none {
   background-size: cover;
   position: relative;
   padding: 100px 20px;
-  height: 60vh;
   color: #fff;
   text-align: center;
   display: flex;
@@ -998,6 +997,11 @@ ul.list-style-none {
   font-size: 1.3em;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.btn-course {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 /* Caracteristicas */

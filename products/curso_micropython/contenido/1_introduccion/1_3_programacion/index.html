@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script src="/js/load_html_created.js" defer></script>
+    <script src="/js/logout_iot.js" defer></script>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
+    <script src="/js/front.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    
+    <title>1.3. Conceptos básicos de programación</title>
+</head>
+
+<body>
+    <div id="all">
+        <header id="header-comm-container"></header>
+
+        <header id="header-nav-main-container"></header>
+
+        <main>
+			<div class="main">
+                <div class="div-content">
+                    <div id="content-curso">
+                        <div id="heading-breadcrumbs">
+                            <div class="row">
+                                <h1>Conceptos básicos de programación</h1>
+                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
+                            </div>
+                        </div>
+
+                        <div role="navegation" arial-label="Page navigation">
+                            <ul class="wy-breadcrumbs">
+                                <li class="wy-li">
+                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_micropython/contenido/1_introduccion/">1. Introducción y fundamentos</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_micropython/contenido/1_introduccion/1_3_programacion/" class="not-active">1.3. Conceptos básicos de programación</a>
+                                </li>
+                            </ul>
+                            <hr>
+                        </div>
+                        
+                        <div id="content">
+                            <p>
+                                La programación de computadores es el proceso de escribir instrucciones o código para indicarle a un 
+                                computador cómo realizar una tarea específica. El conjunto de instrucciones que ejecuta una tarea se 
+                                conoce como algoritmo, que es un conjunto definido, ordenado y no ambiguo de pasos para resolver un 
+                                problema o realizar un cómputo.
+                            </p>
+
+                            <p>
+                                Antes de entender la programación, es fundamental conocer la estructura básica de un computador. Este 
+                                está compuesto por una unidad de proceso (CPU, microprocesador o microcontrolador), una memoria principal 
+                                (RAM, ROM, memoria Flash) y un conjunto de periféricos que le permiten interactuar con el entorno 
+                                (teclado, pantalla, mouse, parlantes, sensores y actuadores, entre otros). Los datos e instrucciones 
+                                se almacenan en la memoria y son transferidos por los buses hacia la unidad de proceso para su ejecución.
+                            </p>
+
+                            <p>En la programación, todas las instrucciones se organizan usando estructuras básicas:</p>
+
+                            <p>
+                                <ul>
+                                    <li>Secuencia: ejecución ordenada de instrucciones, una tras otra.</li>
+                                    <li>Selección: bifurcación condicional que ejecuta uno u otro bloque según una condición lógica.</li>
+                                    <li>Ciclo: repetición de un bloque de instrucciones mientras se cumpla una condición.</li>
+                                </ul>
+                            </p>
+
+                            <!-- IMAGEN 1 -->
+
+                            <p>
+                                El computador interpreta estas instrucciones en lenguaje de máquina, compuesto por 0s y 1s. Dado que es 
+                                inviable para un humano programar directamente en este lenguaje, se utilizan lenguajes de programación 
+                                que deben traducirse a binario. Esta traducción puede hacerse mediante:
+                            </p>
+
+                            <p>
+                                <ul>
+                                    <li>Compiladores: traducen todo el programa antes de su ejecución (ej. Java, C++).</li>
+                                    <li>Intérpretes: traducen y ejecutan instrucción por instrucción (ej. Python, JavaScript).</li>
+                                </ul>
+                            </p>
+
+                            <!-- IMAGEN 2 -->
+
+                            <p>
+                                En este curso, utilizaremos Python y su versión optimizada para microcontroladores, MicroPython, que son 
+                                lenguajes interpretados, lo que permite probar y depurar el código de forma interactiva.
+                            </p>
+                        </div>
+
+                        <footer class="btn-course">
+                            <hr>
+                            <div role="navegation" arial-label="Button navigation">
+                                <a href="/products/curso_micropython/contenido/1_introduccion/1_2_thonny/ejercicio_1_1.html" class="btn btn-neutral float-left" title="Ejercicio 1-1: Conectando y probando el ESP32" accesskey="p" rel="prev">
+                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                                    Anterior
+                                </a>
+                                <a href="/products/curso_micropython/contenido/1_introduccion/1_4_python_micropython/" class="btn btn-neutral float-right" title="Introducción a Python y MicroPython" accesskey="n" rel="next">
+                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                                    Siguiente
+                                </a>
+                            </div>
+                        </footer>
+                    </div>
+
+                    <div id="aside-nav-curso-micropython-container"></div>
+                </div>
+			</div>
+		</main>
+
+        <footer class="footer" id="footer-main-container"></footer>
+
+        <div class="copyright" id="footer-copyright-container"></div>
+    </div>
+</body>
+</html>

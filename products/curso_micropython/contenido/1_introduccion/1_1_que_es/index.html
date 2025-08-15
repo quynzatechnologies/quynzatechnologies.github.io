@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script src="/js/load_html_created.js" defer></script>
+    <script src="/js/logout_iot.js" defer></script>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
+    <script src="/js/front.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    
+    <title>1.1. ¿Qué es un microcontrolador?</title>
+</head>
+
+<body>
+    <div id="all">
+        <header id="header-comm-container"></header>
+
+        <header id="header-nav-main-container"></header>
+
+        <main>
+			<div class="main">
+                <div class="div-content">
+                    <div id="content-curso">
+                        <div id="heading-breadcrumbs">
+                            <div class="row">
+                                <h1>¿Qué es un microcontrolador?</h1>
+                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
+                            </div>
+                        </div>
+
+                        <div role="navegation" arial-label="Page navigation">
+                            <ul class="wy-breadcrumbs">
+                                <li class="wy-li">
+                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_micropython/contenido/1_introduccion/">1. Introducción y fundamentos</a>
+                                </li>
+                                <li class="wy-li">
+                                    <a href="/products/curso_micropython/contenido/1_introduccion/1_1_que_es/" class="not-active">1.1. ¿Qué es un microcontrolador?</a>
+                                </li>
+                            </ul>
+                            <hr>
+                        </div>
+                        
+                        <div id="content">
+                            <p>
+                                Un <strong>microcontrolador (MCU)</strong> es un circuito integrado programable que contiene un procesador, 
+                                memoria y periféricos de entrada/salida en un solo chip. Está diseñado para realizar tareas específicas 
+                                dentro de sistemas embebidos y es el núcleo de muchos dispositivos electrónicos modernos.
+                            </p>
+
+                            <h2>El ESP32 como microcontrolador</h2>
+
+                            <p>
+                                En este curso utilizaremos el <strong>ESP32</strong>, un MCU potente que integra 
+                                <strong>WiFi, Bluetooth y Bluetooth Low Energy (BLE)</strong>, orientado a una amplia gama de aplicaciones, 
+                                desde redes de sensores de baja potencia hasta tareas exigentes como codificación de voz o aplicaciones IoT.
+                            </p>
+
+                            <p>
+                                Nuestro entrenador se basa en la placa de desarrollo <strong>ESP32-WROOM-32 DevKit</strong>, que facilita 
+                                la conexión directa de periféricos mediante cables y permite programar fácilmente el dispositivo.
+                            </p>
+
+                            <h2>Componentes clave del ESP32-WROOM-32 DevKit</h2>
+
+                            <!-- IMAGEN 1 -->
+
+                            <p>
+                                <ul>
+                                    <li><strong>ESP32-WROOM-32:</strong> módulo principal que integra el microcontrolador y sus funciones básicas.</li>
+                                    <li><strong>EN:</strong> botón de reinicio (Reset).</li>
+                                    <li><strong>BOOT:</strong> botón para entrar en modo de descarga de firmware.</li>
+                                    <li><strong>USB-to-UART Bridge:</strong> puente para comunicación USB con tasas de hasta 3 Mbps.</li>
+                                    <li><strong>Puerto Micro USB:</strong> interfaz para alimentación y comunicación con el PC.</li>
+                                    <li><strong>LED de encendido (5V Power On):</strong> indica alimentación desde USB o fuente externa de 5V.</li>
+                                    <li><strong>Entradas/Salidas (I/O):</strong> pines reasignados desde el módulo para control de periféricos.</li>
+                                </ul>
+                            </p>
+
+                            <p>El ESP32 también cuenta con múltiples periféricos integrados, como:</p>
+
+                            <p>
+                                <ul>
+                                    <li>Hasta 34 pines GPIO configurables.</li>
+                                    <li>Conversores analógico-digital (ADC) y digital-analógico (DAC).</li>
+                                    <li>Sensores táctiles capacitivos.</li>
+                                    <li>Interfaz PWM para control de motores y brillo de LEDs.</li>
+                                    <li>Módulos de comunicación como UART, SPI, I2C, CAN y más.</li>
+
+                                </ul>
+                            </p>
+
+                            <h2>Ventajas del ESP32</h2>
+
+                            <p>El ESP32 presenta una serie de ventajas que lo hacen atractivo para aplicaciones:</p>
+
+                            <p>
+                                <ul>
+                                    <li>Conectividad integrada: Wi-Fi y Bluetooth en un solo chip.</li>
+                                    <li>Procesador potente: con capacidad para ejecutar múltiples tareas o controlar dispositivos en tiempo real.</li>
+                                    <li>Bajo consumo energético: cuenta con varios modos de ahorro de energía, incluyendo deep sleep.</li>
+                                    <li>Versatilidad de entradas y salidas: gran número de pines, compatibilidad con múltiples protocolos de comunicación.</li>
+                                    <li>Amplia documentación y comunidad: soporte disponible en múltiples lenguajes y plataformas.</li>
+                                    <li>Costo accesible: relación calidad-precio superior a muchas alternativas comerciales.</li>
+                                </ul>
+                            </p>
+                           
+                        </div>
+
+                        <footer class="btn-course">
+                            <hr>
+                            <div role="navegation" arial-label="Button navigation">
+                                <a href="/products/curso_micropython/contenido/1_introduccion/" class="btn btn-neutral float-left" title="Introducción y fundamentos" accesskey="p" rel="prev">
+                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                                    Anterior
+                                </a>
+                                <a href="/products/curso_micropython/contenido/1_introduccion/1_2_thonny/" class="btn btn-neutral float-right" title="Entorno de desarrollo: Thonny" accesskey="n" rel="next">
+                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+                                    Siguiente
+                                </a>
+                            </div>
+                        </footer>
+                    </div>
+
+                    <div id="aside-nav-curso-micropython-container"></div>
+                </div>
+			</div>
+		</main>
+
+        <footer class="footer" id="footer-main-container"></footer>
+
+        <div class="copyright" id="footer-copyright-container"></div>
+    </div>
+</body>
+</html>

@@ -49,7 +49,109 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                Los <strong>GPIO</strong> (<em>General Purpose Input/Output</em>) son pines de propósito general que el 
+                                microcontrolador puede configurar como <strong>entradas</strong> o <strong>salidas</strong> digitales, y 
+                                en algunos casos como entradas analógicas o salidas PWM.
+                            </p>
+
+                            <p>
+                                En el <strong>ESP32</strong> y en el entrenador <strong>QMT-020</strong>, cada periférico se encuentra 
+                                conectado a uno o varios GPIO específicos, por lo que es fundamental conocer su asignación para 
+                                programarlos correctamente.
+                            </p>
+
+                            <!-- IMAGEN 1 -->
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Modos de funcionamiento</strong>
+                                        <br><br>
+                                        En MicroPython, un pin se define con el módulo machine:
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+pin = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)  <span style="color: #228B22"># GPIO 2 como salida</span>
+</pre>
+</div>
+                                        <br>
+                                        Los modos más comunes son:
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Pin.OUT</strong> -> Salida digital: controla dispositivos como LEDs o relés.</li>
+                                            <li><strong>Pin.IN</strong> -> Entrada digital: lee el estado de sensores o pulsadores.</li>
+                                            <li>
+                                                <strong>Pin.OPEN_DRAIN</strong> -> Salida de drenaje abierto: útil para buses compartidos 
+                                                o comunicación con pull-ups externas.
+                                            </li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Entradas digitales</strong>
+                                        <br><br>
+                                        Un GPIO configurado como entrada puede detectar:
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Nivel alto (1)</strong> -> Generalmente tensión cercana a 3.3V en el ESP32.</li>
+                                            <li><strong>Nivel bajo (0)</strong> -> Tensión cercana a 0V.</li>
+                                        </ul>
+                                        <br>
+                                        <u>Ejemplo:</u>
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>boton = Pin(<span style="color: #B452CD">4</span>, Pin.IN)
+estado = boton.value()
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Salidas digitales</strong>
+                                        <br><br>
+                                        Permiten enviar señales lógicas para encender o apagar un componente.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+led.value(<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># Encender</span>
+led.value(<span style="color: #B452CD">0</span>)  <span style="color: #228B22"># Apagar</span>
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Pines especiales</strong>
+                                        <br><br>
+                                        En el ESP32, algunos pines tienen funciones adicionales o restricciones:
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>GPIO 34, 35, 36, 39</strong> -> Solo entradas analógicas, no salidas.</li>
+                                            <li><strong>GPIO 0, 2, 15</strong> -> Usados en arranque, requieren cuidado.</li>
+                                            <li>
+                                                <strong>GPIO con función ADC</strong> -> Permiten lectura de valores analógicos (sensores 
+                                                de luz, potenciómetros, etc.).
+                                            </li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Buenas prácticas en el uso de GPIOs</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>Verificar siempre la <strong>tabla de asignación de pines</strong> del QMT-020 antes de programar.</li>
+                                            <li>Evitar usar pines reservados para comunicación si no es necesario (UART, I2C, SPI).</li>
+                                            <li>Activar resistencias internas pull-up o pull-down cuando el sensor lo requiera:</li>
+                                        </ul>
+                                        <br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>boton = Pin(<span style="color: #B452CD">4</span>, Pin.IN, Pin.PULL_UP)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

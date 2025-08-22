@@ -49,7 +49,65 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                La pantalla <strong>LCD1602</strong> es un módulo de visualización alfanumérico capaz de mostrar 
+                                <strong>2 líneas de 16 caracteres cada una</strong>. Es ampliamente utilizada en proyectos de electrónica 
+                                e IoT por su bajo costo, bajo consumo y facilidad de uso. Su principal función es presentar información 
+                                de forma clara al usuario, como datos provenientes de sensores, mensajes de estado o menús de control.
+                            </p>
+
+                            <p>
+                                En el contexto del ESP32, el LCD1602 suele emplear un módulo adaptador <strong>I2C</strong>, lo que reduce 
+                                la cantidad de pines necesarios para su conexión a únicamente dos:
+                            </p>
+
+                            <p>
+                                <ul>
+                                    <li><strong>SDA (Serial Data)</strong> -> transmisión de datos.</li>
+                                    <li><strong>SCL (Serial Clock)</strong> -> señal de reloj para sincronizar la transmisión.</li>
+                                </ul>
+                            </p>
+
+                            <p>Gracias a la comunicación I2C, la conexión se simplifica y se liberan pines GPIO para otros periféricos.</p>
+
+                            <p>
+                                <ul>
+                                    <li><strong>GPIO21</strong> -> SDA</li>
+                                    <li><strong>GPIO22</strong> -> SCL</li>
+                                </ul>
+                            </p>
+
+                            <p><strong>Funciones básicas en MicroPython</strong></p>
+                            <p>
+                                Para manejar el LCD1602 con el ESP32, se utilizan bibliotecas específicas como lcd1602, las cuales 
+                                permiten:
+                            </p>
+
+                            <p>
+                                <ol>
+                                    <li><strong>Inicialización del módulo</strong> -> creación de un objeto que representa la pantalla.</li>
+                                    <li><strong>Mostrar texto</strong> -> con el método <em>message()</em> se envían cadenas de texto.</li>
+                                    <li>
+                                        <strong>Control de líneas</strong> -> se usan saltos de línea (<em>\n</em>) para separar contenido en dos 
+                                        filas.
+                                    </li>
+                                    <li>
+                                        <strong>Limpieza de pantalla</strong> -> con <em>clear()</em> se borra el contenido y se deja lista para 
+                                        nuevos datos.
+                                    </li>
+                                    <li><strong>Posicionamiento del cursor</strong> -> algunos controladores permiten mover el cursor a posiciones específicas.</li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Usos comunes en proyectos con ESP32</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Mostrar datos en tiempo real (temperatura, humedad, distancia, etc.).</li>
+                                    <li>Visualizar mensajes de advertencia o confirmación.</li>
+                                    <li>Crear menús de navegación básicos con botones físicos.</li>
+                                    <li>Implementar contadores, cronómetros o generadores de números aleatorios.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

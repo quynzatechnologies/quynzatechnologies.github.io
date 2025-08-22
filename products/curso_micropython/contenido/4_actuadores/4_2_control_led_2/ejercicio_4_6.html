@@ -52,7 +52,61 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Utilizar listas para almacenar referencias a múltiples pines de salida. 
+                                Implementar un bucle while con variable de control para encender LEDs en secuencia.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>Conectar un cable desde el pin GPIO15 al LED azul del entrenador.</li>
+                                    <li>Conectar el pin GPIO16 al LED verde, el GPIO21 al LED amarillo y el GPIO22 al LED rojo.</li>
+                                    <li>Abrir Thonny e identificar que el microcontrolador esté correctamente conectado.</li>
+                                    <li>Escribir el código mostrado a continuación en un nuevo archivo.</li>
+                                    <li>
+                                        Ejecutar el programa y observar cómo los LEDs se encienden uno por uno.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+ledAz=Pin(<span style="color: #B452CD">15</span>, Pin.OUT) <span style="color: #228B22"># Define el pin led as salida</span>
+ledV=Pin(<span style="color: #B452CD">16</span>, Pin.OUT)
+ledAm=Pin(<span style="color: #B452CD">21</span>, Pin.OUT) <span style="color: #228B22"># Define el pin led as salida</span>
+ledR=Pin(<span style="color: #B452CD">22</span>, Pin.OUT)
+
+lista = [ledAz, ledV,ledAm,ledR]
+
+i = <span style="color: #B452CD">0</span>               <span style="color: #228B22"># Variable de control del while</span>
+<span style="color: #8B008B; font-weight: bold">while</span> i &lt; <span style="color: #B452CD">4</span>:        <span style="color: #228B22"># Enciende el LED</span>
+  led = lista[i]    <span style="color: #228B22"># Recorre cada LED</span>
+  led.value(<span style="color: #B452CD">1</span>)
+  time.sleep(<span style="color: #B452CD">0.5</span>)
+  led.value(<span style="color: #B452CD">0</span>)      <span style="color: #228B22"># Apaga el LED</span>
+  time.sleep(<span style="color: #B452CD">0.5</span>)
+  i = i + <span style="color: #B452CD">1</span>         <span style="color: #228B22"># Incrementa la variable de control</span>
+</pre>
+</div>
+
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el orden de los LEDs en la lista para alterar la secuencia de encendido.</li>
+                                    <li>Modificar el tiempo de encendido y apagado para observar cambios en la secuencia.</li>
+                                </ul>
+                            </p>
+
+                            <p><strong>Experimentos.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Ampliar la lista para incluir otros dispositivos de salida.</li>
+                                    <li>Repetir la secuencia indefinidamente usando un bucle while True.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

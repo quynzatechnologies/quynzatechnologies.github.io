@@ -49,7 +49,113 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                En Python, una <strong>colección</strong> es una estructura que permite almacenar y organizar múltiples 
+                                valores en una sola variable. Las más utilizadas son: <strong>listas</strong>, <strong>tuplas</strong>, 
+                                <strong>diccionarios</strong> y <strong>cadenas</strong>.
+                            </p>
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Listas (<em>list</em>)</strong>
+                                        <br><br>
+                                        Son colecciones <em>ordenadas</em> y modificables que pueden contener elementos de diferentes tipos.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>colores = [<span style="color: #CD5555">&quot;rojo&quot;</span>, <span style="color: #CD5555">&quot;verde&quot;</span>, <span style="color: #CD5555">&quot;azul&quot;</span>]
+<span style="color: #658B00">print</span>(colores[<span style="color: #B452CD">0</span>])   <span style="color: #228B22"># Acceder al primer elemento</span>
+colores.append(<span style="color: #CD5555">&quot;amarillo&quot;</span>)  <span style="color: #228B22"># Agregar un elemento</span>
+</pre>
+</div>
+                                        <br>
+                                        <ul>
+                                            <li>Se accede a los elementos mediante índices (comenzando desde 0).</li>
+                                            <li>Se pueden modificar, añadir o eliminar elementos.</li>
+                                            <li>Útiles para almacenar series de valores, como lecturas de sensores.</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Tuplas (<em>tuple</em>)</strong>
+                                        <br><br>
+                                        Son colecciones <strong>ordenadas</strong> pero inmutables.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>dimensiones = (<span style="color: #B452CD">640</span>, <span style="color: #B452CD">480</span>)
+<span style="color: #658B00">print</span>(dimensiones[<span style="color: #B452CD">0</span>])
+</pre>
+</div>
+                                        <br>
+                                        <ul>
+                                            <li>No se pueden modificar después de creadas.</li>
+                                            <li>Útiles para almacenar datos que no deben cambiar, como configuraciones fijas.</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Diccionarios (<em>dict</em>)</strong>
+                                        <br><br>
+                                        Almacenan datos en forma de <strong>clave-valor</strong>.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>sensor = {<span style="color: #CD5555">&quot;tipo&quot;</span>: <span style="color: #CD5555">&quot;DHT11&quot;</span>, <span style="color: #CD5555">&quot;temperatura&quot;</span>: <span style="color: #B452CD">25</span>, <span style="color: #CD5555">&quot;humedad&quot;</span>: <span style="color: #B452CD">60</span>}
+<span style="color: #658B00">print</span>(sensor[<span style="color: #CD5555">&quot;temperatura&quot;</span>])
+</pre>
+</div>
+                                        <br>
+                                        <ul>
+                                            <li>Permiten acceso rápido a los datos mediante la clave.</li>
+                                            <li>Son útiles para representar objetos o configuraciones.</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Cadenas (<em>str</em>)</strong>
+                                        <br><br>
+                                        Son secuencias de caracteres que pueden manipularse como listas.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>mensaje = <span style="color: #CD5555">&quot;ESP32&quot;</span>
+<span style="color: #658B00">print</span>(mensaje[<span style="color: #B452CD">0</span>])  <span style="color: #228B22"># &#39;E&#39;</span>
+<span style="color: #658B00">print</span>(<span style="color: #658B00">len</span>(mensaje))  <span style="color: #228B22"># Longitud</span>
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Operadores y funciones comunes en colecciones</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li><em>in</em>: verifica si un elemento está presente.</li>
+                                            <li><em>len()</em>: devuelve el número de elementos.</li>
+                                            <li><em>append()</em>: agrega un elemento a una lista.</li>
+                                            <li><em>remove()</em>: elimina un elemento de una lista.</li>
+                                        </ul>
+                                        <br>
+                                        <u>Ejemplo de uso de operadores:</u>
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&quot;rojo&quot;</span> <span style="color: #8B008B">in</span> colores:
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;El color rojo está en la lista&quot;</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Aplicación práctica en ESP32</strong>
+                                        <br><br>
+                                        En MicroPython, las colecciones son muy útiles para:
+                                        <br><br>
+                                        <ul>
+                                            <li>Guardar mediciones de sensores en una lista antes de procesarlas.</li>
+                                            <li>Almacenar configuraciones en un diccionario para control de dispositivos.</li>
+                                            <li>Procesar cadenas recibidas desde un puerto serie o por WiFi.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
+
                         </div>
 
                         <footer class="btn-course">

@@ -49,7 +49,91 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                El entrenador QMT-020 es una placa didáctica diseñada para trabajar con el microcontrolador ESP32, 
+                                integrando en un mismo módulo múltiples periféricos y sensores ya preconectados. Esto simplifica las 
+                                prácticas, ya que evita el uso constante de cables y protoboards, reduciendo riesgos de conexión 
+                                incorrecta y daño a los componentes.
+                            </p>
+
+                            <!-- IMAGEN 1 -->
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Características generales</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>
+                                                <strong>Diseño modular:</strong> dispone de diferentes bloques de conexión para sensores 
+                                                y actuadores.
+                                            </li>
+                                            <li>
+                                                <strong>Pre-cableado interno:</strong> los periféricos están conectados directamente a 
+                                                los pines GPIO del ESP32.
+                                            </li>
+                                            <li>
+                                                <strong>Facilidad de uso:</strong> solo se requiere identificar el pin GPIO asignado a 
+                                                cada dispositivo.
+                                            </li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Importancia de identificar correctamente los pines</strong>
+                                        <br><br>
+                                        Aunque el ESP32 cuenta con <strong>30 pines físicos</strong>, en el QMT-020 solo se exponen 
+                                        <strong>26</strong> (excluyendo VIN, GND y 3.3V en el panel visible). Por este motivo, es crucial 
+                                        manejar correctamente el <strong>mapa de pines</strong> para programar de forma precisa.
+                                        <br><br>
+                                        En MicroPython, los pines se manejan mediante su <strong>número GPIO</strong>, no por el número 
+                                        físico en el conector. Por ejemplo:
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)  <span style="color: #228B22"># GPIO 2 como salida</span>
+</pre>
+</div>
+                                        <br>
+                                        Es por esto por lo que solo aparecen 26 pines del ESP32, que tiene 30, no aparecen los 
+                                        correspondientes a los pines VIN, GND y 3.3V. ¡¡Es importante tener en cuenta este detalle para 
+                                        identificar apropiadamente los GPIOs!!
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Tipos de conexiones en el QMT-020</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Entradas digitales:</strong> botones, sensores IR, sensores de ultrasonido.</li>
+                                            <li><strong>Entradas analógicas:</strong> fotorresistencia, potenciómetro (reóstato).</li>
+                                            <li><strong>Salidas digitales:</strong> LEDs, zumbador, displays de 7 segmentos.</li>
+                                            <li><strong>Salidas PWM:</strong> LED RGB, control de brillo o velocidad de motores.</li>
+                                            <li><strong>Comunicación I2C:</strong> pantalla LCD1602.</li>
+                                        </ul>
+
+                                        <!-- IMAGEN 2 -->
+                                        <br>
+                                        De esta manera, el microcontrolador recibe o envía señales dependiendo del tipo de componente. 
+                                        Los LEDs, el zumbador, la pantalla, los controla el microcontrolador enviando señales desde los 
+                                        GPIOs a los pines asociados a cada uno de esos componentes. Mientras que el microcontrolador 
+                                        recibe por sus GPIOs las señales que envían los sensores, la fotorresistencia y el reóstato.
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Utilidad en prácticas de laboratorio</strong>
+                                        <br><br>
+                                        El disponer de periféricos integrados en un solo tablero permite:
+                                        <br><br>
+                                        <ul>
+                                            <li>Hacer pruebas rápidas sin montaje adicional.</li>
+                                            <li>Cambiar de experimento de manera inmediata.</li>
+                                            <li>Focalizar el aprendizaje en la programación y control más que en la conexión física.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
+
                         </div>
 
                         <footer class="btn-course">

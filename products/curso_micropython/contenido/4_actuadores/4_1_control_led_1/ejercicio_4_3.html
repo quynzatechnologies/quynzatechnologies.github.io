@@ -52,7 +52,79 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Practicar la configuración de pines GPIO como salidas. Controlar uno o más LEDs 
+                                encendiéndolos y apagándolos secuencialmente. Reforzar el uso de instrucciones repetitivas en MicroPython.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar un cable desde el pin GPIO26 del microcontrolador al pin del LED azul del entrenador.
+
+                                        <!-- IMAGEN 1 -->
+                                        <!-- IMAGEN 2 -->
+                                        <br><br>
+                                    </li>
+                                    <li>Escribir en Thonny el primer bloque de código para encender y apagar el LED azul tres veces.</li>
+                                    <li>
+                                        Ejecutar el código y observar el parpadeo.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+<span style="color: #228B22"># Configuración del LED azul en GPIO26</span>
+led_azul = Pin(<span style="color: #B452CD">26</span>, Pin.OUT)
+
+<span style="color: #228B22"># Encendido y apagado 3 veces</span>
+<span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">3</span>):
+    led_azul.value(<span style="color: #B452CD">1</span>)   <span style="color: #228B22"># Enciende</span>
+    time.sleep(<span style="color: #B452CD">1.5</span>)
+    led_azul.value(<span style="color: #B452CD">0</span>)   <span style="color: #228B22"># Apaga</span>
+    time.sleep(<span style="color: #B452CD">1.5</span>)
+</pre>
+</div>
+                                        <br>
+                                        <strong>Actividad sugerida.</strong> Cambiar el número de repeticiones en el bucle y el tiempo de 
+                                        espera para observar el cambio de comportamiento.
+                                        <br><br>
+                                    </li>
+                                    <li>Conectar un segundo cable desde el pin GPIO22 al LED rojo del entrenador.</li>
+                                    <li>
+                                        Escribir en Thonny el segundo bloque de código para encender y apagar ambos LEDs simultáneamente.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+<span style="color: #228B22"># Configuración de LEDs</span>
+led_azul = Pin(<span style="color: #B452CD">26</span>, Pin.OUT)
+led_rojo = Pin(<span style="color: #B452CD">22</span>, Pin.OUT)
+
+<span style="color: #228B22"># Encendido y apagado 3 veces</span>
+<span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">3</span>):
+    led_azul.value(<span style="color: #B452CD">1</span>)    <span style="color: #228B22"># Enciende LED azul</span>
+    led_rojo.value(<span style="color: #B452CD">1</span>)    <span style="color: #228B22"># Enciende LED rojo</span>
+    time.sleep(<span style="color: #B452CD">1.5</span>)
+    led_azul.value(<span style="color: #B452CD">0</span>)    <span style="color: #228B22"># Apaga LED azul</span>
+    led_rojo.value(<span style="color: #B452CD">0</span>)    <span style="color: #228B22"># Apaga LED rojo</span>
+    time.sleep(<span style="color: #B452CD">1.5</span>)
+</pre>
+</div>
+                                        
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Encender los LEDs en secuencia (azul -> rojo) en lugar de simultáneamente.</li>
+                                    <li>Invertir el orden de encendido y observar los cambios.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

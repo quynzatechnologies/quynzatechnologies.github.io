@@ -52,7 +52,61 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Utilizar bucles while anidados para realizar un barrido de encendido y apagado 
+                                de varios LEDs. Reforzar el control de secuencias en salidas digitales mediante MicroPython.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>Conectar el pin GPIO15 al LED azul del entrenador. </li>
+                                    <li>Conectar el pin GPIO16 al LED verde, el GPIO21 al LED amarillo y el GPIO22 al LED rojo. </li>
+                                    <li>Abrir Thonny y asegurarse de que el ESP32 esté correctamente conectado.</li>
+                                    <li>Escribir el código mostrado a continuación en un nuevo archivo.</li>
+                                    <li>
+                                        Ejecutar el programa y observar cómo los LEDs se encienden en secuencia rápida.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+ledAz=Pin(<span style="color: #B452CD">15</span>, Pin.OUT) <span style="color: #228B22">#Define el pin led azul de salida</span>
+ledV=Pin(<span style="color: #B452CD">16</span>, Pin.OUT)  <span style="color: #228B22">#Define el pin led verde de salida</span>
+ledAm=Pin(<span style="color: #B452CD">21</span>, Pin.OUT) <span style="color: #228B22">#Define el pin led amarillo de salida</span>
+ledR=Pin(<span style="color: #B452CD">22</span>, Pin.OUT)  <span style="color: #228B22">#Define el pin led rojo de salida</span>
+
+lista = [ledAz, ledV,ledAm,ledR]
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    i = <span style="color: #B452CD">0</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> i &lt; <span style="color: #B452CD">4</span>:      
+      led = lista[i]   <span style="color: #228B22"># Enciende el LED sub i</span>
+      led.value(<span style="color: #B452CD">1</span>)
+      time.sleep(<span style="color: #B452CD">0.07</span>)
+      led.value(<span style="color: #B452CD">0</span>)     <span style="color: #228B22"># Apaga el LED sub i</span>
+      time.sleep(<span style="color: #B452CD">0.07</span>)
+      i = i + <span style="color: #B452CD">1</span>
+</pre>
+</div>
+
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el tiempo de espera para ralentizar o acelerar el barrido.</li>
+                                    <li>Alterar el orden de los LEDs en la lista para modificar la secuencia.</li>
+                                </ul>
+                            </p>
+
+                            <p><strong>Experimentos.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Hacer que el barrido sea bidireccional (ida y vuelta).</li>
+                                    <li>Probar el barrido con diferentes combinaciones de colores de LEDs.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

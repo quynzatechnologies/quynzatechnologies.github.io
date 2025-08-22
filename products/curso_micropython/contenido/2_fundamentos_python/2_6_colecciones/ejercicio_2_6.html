@@ -52,7 +52,68 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Practicar el uso de estructuras condicionales y bucles en Python. Aplicar la 
+                                validación de entradas y el manejo de intentos para un juego interactivo.
+                            </p>
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>Abrir Thonny y crear un nuevo archivo <em>.py</em>.</li>
+                                    <li>Generar un número aleatorio entre 1 y 99 usando <em>random.randint()</em>.</li>
+                                    <li>
+                                        Solicitar al usuario que ingrese un número e implementar validaciones para permitir solo 
+                                        entradas numéricas.
+                                    </li>
+                                    <li>
+                                        Comparar el número ingresado con el número secreto:
+                                        <ul>
+                                            <li>Si es correcto, mostrar un mensaje de éxito y el número de intentos realizados.</li>
+                                            <li>Si es menor, indicar que el número secreto es mayor.</li>
+                                            <li>Si es mayor, indicar que el número secreto es menor.</li>
+                                        </ul>
+                                    </li>
+                                    <li>5.	Contabilizar el número de intentos hasta que el usuario acierte.</li>
+                                </ol>
+                            </p>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">random</span>
+
+<span style="color: #228B22"># Lista de 15 posibles menús (puedes cambiar los nombres)</span>
+ayerComi = <span style="color: #CD5555">&quot;Nada&quot;</span>
+menu_opciones = [<span style="color: #CD5555">&quot;Arroz con pollo&quot;</span>,<span style="color: #CD5555">&quot;Pasta a la boloñesa&quot;</span>,<span style="color: #CD5555">&quot;Sopa de verduras&quot;</span>, 
+    <span style="color: #CD5555">&quot;Cuchuco&quot;</span>,<span style="color: #CD5555">&quot;Bandeja paisa&quot;</span>,<span style="color: #CD5555">&quot;Lentejas con chorizo&quot;</span>,<span style="color: #CD5555">&quot;Pescado al horno&quot;</span>,
+    <span style="color: #CD5555">&quot;Carne asada&quot;</span>,<span style="color: #CD5555">&quot;Sobrebarriga&quot;</span>,<span style="color: #CD5555">&quot;Frijoles con arroz&quot;</span>,<span style="color: #CD5555">&quot;Pollo a la plancha&quot;</span>,
+    <span style="color: #CD5555">&quot;Pizza margarita&quot;</span>,<span style="color: #CD5555">&quot;Hamburguesa casera&quot;</span>,<span style="color: #CD5555">&quot;Tacos mexicanos&quot;</span>,<span style="color: #CD5555">&quot;Chuleta de cerdo&quot;</span>]
+dias = [<span style="color: #CD5555">&quot;lunes&quot;</span>,<span style="color: #CD5555">&quot;martes&quot;</span>, <span style="color: #CD5555">&quot;miercoles&quot;</span>,  <span style="color: #CD5555">&quot;jueves&quot;</span>, <span style="color: #CD5555">&quot;viernes&quot;</span>]
+i = <span style="color: #B452CD">0</span>
+<span style="color: #8B008B; font-weight: bold">while</span> i &lt; <span style="color: #B452CD">5</span>:
+    menu_seleccionado = random.choice(menu_opciones)
+
+    <span style="color: #8B008B; font-weight: bold">if</span> ayerComi == menu_seleccionado:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Seleccione otro menu&quot;</span>)
+        i = i - <span style="color: #B452CD">1</span>
+    <span style="color: #8B008B; font-weight: bold">else</span>:   
+        <span style="color: #228B22"># Mostrar el resultado</span>
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;El menú para el&quot;</span>, dias[i], <span style="color: #CD5555">&quot;es:&quot;</span>)
+        <span style="color: #658B00">print</span>(menu_seleccionado)
+        ayerComi = menu_seleccionado
+    i = i + <span style="color: #B452CD">1</span>
+</pre>
+</div>
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el rango del número aleatorio (por ejemplo, entre 1 y 500).</li>
+                                    <li>Añadir un límite máximo de intentos para incrementar la dificultad.</li>
+                                    <li>Mostrar un mensaje especial si el usuario acierta en el primer intento.</li>
+                                    <li>
+                                        Modificar el juego para que sea el usuario quien piense el número y el programa intente 
+                                        adivinarlo usando búsqueda binaria.
+                                    </li>
+                                    <li>Guardar el historial de intentos en un archivo de texto.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

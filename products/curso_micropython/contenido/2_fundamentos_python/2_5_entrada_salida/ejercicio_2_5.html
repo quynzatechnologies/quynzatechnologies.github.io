@@ -52,7 +52,57 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Adivina un número secreto. Se usa la función de entrada <em>input()</em>, para 
+                                que el usuario entre un número para ver si es el número secreto. Búsqueda binaria.
+                            </p>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">random</span>
+
+<span style="color: #228B22"># Genera un número aleatorio de dos dígitos</span>
+numero_secreto = random.randint(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">99</span>)
+
+<span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Adivine el número secreto&quot;</span>)
+
+intentos = <span style="color: #B452CD">0</span>
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    entrada = <span style="color: #658B00">input</span>(<span style="color: #CD5555">&quot;Ingrese un número: &quot;</span>)
+    
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> entrada.isdigit():
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Entrada no válida. Por favor, ingrese un número.&quot;</span>)
+        <span style="color: #8B008B; font-weight: bold">continue</span> <span style="color: #228B22"># Continua dentro de la estructura if hasta entrar un número válido</span>
+
+    numero_usuario = <span style="color: #658B00">int</span>(entrada)
+    intentos = intentos + <span style="color: #B452CD">1</span>
+
+    <span style="color: #8B008B; font-weight: bold">if</span> numero_usuario == numero_secreto:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot; ¡Correcto! El número es &quot;</span>, numero_secreto, <span style="color: #CD5555">&quot;fueron&quot;</span>,intentos,<span style="color: #CD5555">&quot;intentos&quot;</span>)
+        <span style="color: #8B008B; font-weight: bold">break</span>  <span style="color: #228B22"># Rompe la estructura if y while cuando encuentra el número secreto</span>
+    <span style="color: #8B008B; font-weight: bold">elif</span> numero_usuario &lt; numero_secreto:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;El número secreto es mayor.&quot;</span>)
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;El número secreto es menor.&quot;</span>)
+</pre>
+</div>
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el rango del número aleatorio (por ejemplo, entre 1 y 500).</li>
+                                    <li>Añadir un límite máximo de intentos para incrementar la dificultad.</li>
+                                    <li>Mostrar un mensaje especial si el usuario acierta en el primer intento.</li>
+                                </ul>
+                            </p>
+
+                            <p><strong>Experimentos</strong></p>
+                            <p>
+                                <ul>
+                                    <li>
+                                        Modificar el juego para que sea el usuario quien piense el número y el programa intente 
+                                        adivinarlo usando búsqueda binaria.
+                                    </li>
+                                    <li>Guardar el historial de intentos en un archivo de texto.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

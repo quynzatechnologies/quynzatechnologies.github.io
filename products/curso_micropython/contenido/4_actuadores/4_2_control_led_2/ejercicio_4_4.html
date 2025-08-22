@@ -52,7 +52,51 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Utilizar la estructura repetitiva while para encender y apagar un LED de 
+                                manera indefinida. Comprender el concepto de bucle infinito en MicroPython.
+                            </p>
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar un cable desde el pin GPIO26 del microcontrolador al LED verde del entrenador.
+                                        <br>
+                                        <!--IMAGEN 1 -->
+                                        <!--IMAGEN 2 -->
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny e identificar que el microcontrolador esté correctamente conectado.</li>
+                                    <li>Escribir el código mostrado a continuación en un nuevo archivo.</li>
+                                    <li>
+                                        Ejecutar el programa y observar el encendido y apagado del LED.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+led=Pin(<span style="color: #B452CD">26</span>, Pin.OUT) <span style="color: #228B22"># Define el pin led as salida</span>
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+  led.value(<span style="color: #B452CD">1</span>)      <span style="color: #228B22"># Enciende el LED</span>
+  time.sleep(<span style="color: #B452CD">1.5</span>)
+  led.value(<span style="color: #B452CD">0</span>)      <span style="color: #228B22"># Apaga el LED</span>
+  time.sleep(<span style="color: #B452CD">1.5</span>)
+</pre>
+</div>
+
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el tiempo de espera para acelerar o desacelerar el parpadeo.</li>
+                                    <li>Probar con otro pin GPIO y un LED de diferente color.</li>
+                                    <li>Guardar el programa en la carpeta local del computador.</li>
+                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

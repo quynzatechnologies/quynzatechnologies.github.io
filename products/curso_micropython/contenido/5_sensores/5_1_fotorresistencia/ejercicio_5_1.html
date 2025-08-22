@@ -52,7 +52,62 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Aprender a utilizar la fotorresistencia para medir niveles de luminosidad. 
+                                Observar cómo la resistencia del sensor varía según la luz recibida.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar la fotorresistencia al pin GPIO36 del ESP32.
+                                        <br>
+                                        <!-- IMAGEN 1 -->
+                                        <!-- IMAGEN 2 -->
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo con extensión .py.</li>
+                                    <li>Configurar el pin como entrada analógica usando ADC.</li>
+                                    <li>Configurar la atenuación a 11dB para medir el rango completo del ADC.</li>
+                                    <li>
+                                        Ejecutar el código y observar en la consola los valores obtenidos.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> ADC,Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+<span style="color: #228B22"># Crea un objeto ADC que actúa sobre el pin</span>
+foto_resistencia = ADC(Pin(<span style="color: #B452CD">36</span>, Pin.IN))
+
+<span style="color: #228B22"># Configura la atenuación ADC a 11dB para un rango completo</span>
+foto_resistencia.atten(foto_resistencia.ATTN_11DB)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+
+    <span style="color: #228B22"># Lee un valor análogo bruto entre 0-4095</span>
+    valor = foto_resistencia.read()
+    <span style="color: #228B22"># A mayor iluminación, menor resistencia</span>
+    <span style="color: #658B00">print</span>(valor)
+    time.sleep(<span style="color: #B452CD">0.05</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Ver los valores de resistencia en la consola en diferentes condiciones de luz.</li>
+                                    <li>Acercar la luz de un celular a la fotorresistencia y observar la variación de los valores.</li>
+                                    <li>Tapar la fotorresistencia y verificar la lectura en consola.</li>
+                                    <li>Cambiar la frecuencia de muestreo modificando el tiempo de espera sleep().</li>
+                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

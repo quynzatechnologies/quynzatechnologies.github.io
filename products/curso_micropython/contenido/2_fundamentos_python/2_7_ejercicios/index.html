@@ -49,7 +49,94 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                Antes de programar aplicaciones más complejas, es importante realizar ejercicios simples que permitan 
+                                familiarizarse con el entorno Thonny IDE, la sintaxis de MicroPython y la interacción básica con el ESP32.
+                            </p>
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Conexión y prueba en Thonny</strong>
+                                        <br><br>
+                                        <ol>
+                                            <li>Conectar el ESP32 al PC mediante cable USB.</li>
+                                            <li>En Thonny, ir a <strong>Herramientas -> Opciones -> Intérprete</strong>.</li>
+                                            <li>Seleccionar el puerto correspondiente.</li>
+                                            <li>Elegir <strong>MicroPython (ESP32)</strong> como intérprete.</li>
+                                        </ol>
+                                        <br>
+                                        En la consola REPL de Thonny:
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Hola desde ESP32&quot;</span>)
+</pre>
+</div>
+                                        <br>
+                                        Si aparece el mensaje en pantalla, la conexión está funcionando.
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Control básico de pines GPIO</strong>
+                                        <br><br>
+                                        Ejemplo: encender y apagar un LED conectado al pin 2 del ESP32.
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    led.value(<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># Encender</span>
+    time.sleep(<span style="color: #B452CD">1</span>)
+    led.value(<span style="color: #B452CD">0</span>)  <span style="color: #228B22"># Apagar</span>
+    time.sleep(<span style="color: #B452CD">1</span>)
+</pre>
+</div>
+                                        <br>
+                                        Este código alterna el estado del LED cada segundo, mostrando el uso básico de GPIO, ciclos while 
+                                        y retardos con time.sleep().
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Lectura simple desde un sensor</strong>
+                                        <br><br>
+                                        Ejemplo: leer el estado de un pulsador.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>boton = Pin(<span style="color: #B452CD">4</span>, Pin.IN)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #8B008B; font-weight: bold">if</span> boton.value() == <span style="color: #B452CD">1</span>:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Botón presionado&quot;</span>)
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Botón suelto&quot;</span>)
+    time.sleep(<span style="color: #B452CD">0.5</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Guardar y ejecutar scripts en el ESP32</strong>
+                                        <br><br>
+                                        En Thonny:
+                                        <br><br>
+                                        <ol>
+                                            <li>Escribir el programa en Thonny.</li>
+                                            <li>Guardarlo en el dispositivo con el nombre main.py para que se ejecute automáticamente al encenderlo.</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Objetivo de estos ejercicios</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Practicar la escritura y ejecución de código en Thonny.</li>
+                                    <li>Conocer el ciclo básico de trabajo: escribir, ejecutar, depurar y guardar programas.</li>
+                                    <li>Familiarizarse con la manipulación de entradas y salidas en el ESP32.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

@@ -52,7 +52,111 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p><strong>Objetivo.</strong> Aprender a utilizar el zumbador para interpretar una melodía.</p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el pin GPIO19 del ESP32 al pin positivo del zumbador en el entrenador QMT-020.
+                                        <br>
+                                        <!-- IMAGEN 1 -->
+                                        <!-- IMAGEN 2 -->
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo con extensión .py.</li>
+                                    <li>
+                                        Escribir el código mostrado a continuación, que define las notas musicales y reproduce una melodía.
+                                    </li>
+                                    <li>
+                                        Ejecutar el programa y escuchar la melodía emitida por el zumbador.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+<span style="color: #228B22"># Crea un objeto PIN que representa el pin 19 Pin y lo deja en modo salida </span>
+buzzer = machine.Pin(<span style="color: #B452CD">19</span>, machine.Pin.OUT)
+
+<span style="color: #228B22"># Define una función tono que toma como entrada un objeto Pin</span>
+<span style="color: #228B22"># que representa el zumbador, una frecuencia in Hz, y una duración en milisegundos</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">tono</span>(pin, frequency, duration):
+    pin.freq(frequency) <span style="color: #228B22"># Set the frequency</span>
+    pin.duty(<span style="color: #B452CD">512</span>) <span style="color: #228B22"># Set the duty cycle</span>
+    time.sleep_ms(duration) <span style="color: #228B22"># Pause for the duration in milliseconds</span>
+    pin.duty(<span style="color: #B452CD">0</span>) <span style="color: #228B22"># Set the duty cycle to 0 to stop the tone</span>
+
+<span style="color: #228B22"># Define el pin GPIO pin que se conecta al zumbador</span>
+buzzer = machine.PWM(machine.Pin(<span style="color: #B452CD">19</span>))
+
+<span style="color: #228B22"># Define las frecuencias de las notas en Hz</span>
+C5 = <span style="color: #B452CD">523</span>
+D5 = <span style="color: #B452CD">587</span>
+E5 = <span style="color: #B452CD">659</span>
+F5 = <span style="color: #B452CD">698</span>
+G5 = <span style="color: #B452CD">784</span>
+A5 = <span style="color: #B452CD">880</span>
+B5 = <span style="color: #B452CD">988</span>
+
+<span style="color: #228B22"># Define las duraciones de las notas en milisegundos</span>
+quarter_note = <span style="color: #B452CD">250</span>
+half_note = <span style="color: #B452CD">300</span>
+whole_note = <span style="color: #B452CD">1000</span>
+    
+<span style="color: #228B22"># Define la melodia como una lista de tuples (nota, duración)</span>
+melody = [
+        (E5, quarter_note),
+        (E5, quarter_note),
+        (F5, quarter_note),
+        (G5, half_note),
+        (G5, quarter_note),
+        (F5, quarter_note),
+        (E5, quarter_note),
+        (D5, half_note),
+        (C5, quarter_note),
+        (C5, quarter_note),
+        (D5, quarter_note),
+        (E5, half_note),
+        (E5, quarter_note),
+        (D5, quarter_note),
+        (D5, half_note),
+        (E5, quarter_note),
+        (E5, quarter_note),
+        (F5, quarter_note),
+        (G5, half_note),
+        (G5, quarter_note),
+        (F5, quarter_note),
+        (E5, quarter_note),
+        (D5, half_note),
+        (C5, quarter_note),
+        (C5, quarter_note),
+        (D5, quarter_note),
+        (E5, half_note),
+        (D5, quarter_note),
+        (C5, quarter_note),
+        (C5, half_note)]
+    
+    <span style="color: #228B22"># Play the melody</span>
+<span style="color: #8B008B; font-weight: bold">for</span> note <span style="color: #8B008B">in</span> melody:
+    tono(buzzer, note[<span style="color: #B452CD">0</span>], note[<span style="color: #B452CD">1</span>])
+    time.sleep_ms(<span style="color: #B452CD">50</span>)
+</pre>
+</div>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Analizar la estructura de datos tupla utilizada en la melodía.</li>
+                                    <li>Aumentar los intervalos de tiempo para hacer la melodía más lenta.</li>
+                                    <li>Disminuir los intervalos para aumentar la velocidad.</li>
+                                    <li>Crear una melodía propia cambiando la secuencia de notas y duraciones.</li>
+                                    <li>Guardar el programa en la carpeta local del computador.</li>
+                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

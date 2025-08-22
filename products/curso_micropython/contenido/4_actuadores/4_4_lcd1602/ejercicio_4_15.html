@@ -52,7 +52,55 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Generar un número aleatorio con la librería random. Convertir un entero a 
+                                cadena de texto para mostrarlo en la pantalla LCD1602.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el pin GPIO22 del ESP32 al pin SCL del módulo LCD1602 y el pin GPIO21 al pin SDA.
+                                        <br>
+                                        <!-- IMAGEN 1 -->
+                                        <!-- IMAGEN 2 -->
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Abrir Thonny e importar la librería lcd1602 junto con random para la generación de números 
+                                        aleatorios.
+                                    </li>
+                                    <li>Crear una variable dado que contenga un número entero aleatorio entre 1 y 6.</li>
+                                    <li>
+                                        Convertir el número entero en cadena con str() para mostrarlo en la pantalla.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">lcd1602</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> LCD
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">random</span>               <span style="color: #228B22"># Libreria de números aleatorios</span>
+
+lcd = LCD()
+
+dado = random.randint(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">6</span>) <span style="color: #228B22"># Genera un numero aleatorio entre 1 y 6</span>
+
+dadoStr = <span style="color: #658B00">str</span>(dado)         <span style="color: #228B22"># Conversión de entero a string</span>
+lcd.message(<span style="color: #CD5555">&quot;Salio el &quot;</span>+ dadoStr)
+</pre></div>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Repetir el lanzamiento del dado cada 5 segundos y mostrar el resultado en la pantalla.</li>
+                                    <li>Mostrar el resultado del dado junto con un mensaje motivacional.</li>
+                                    <li>Modificar el rango para simular un dado de 12 caras.</li>
+                                    <li>Guardar el programa en la carpeta local del computador.</li>
+                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

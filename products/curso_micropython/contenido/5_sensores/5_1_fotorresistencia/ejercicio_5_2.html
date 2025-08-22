@@ -52,7 +52,69 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Mostrar en pantalla LCD1602 el valor leído por la fotorresistencia. Reforzar 
+                                el uso combinado de entradas analógicas y salidas en LCD.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar la fotorresistencia al pin GPIO36 del ESP32.
+                                        <br>
+                                        <!-- IMAGEN 1 -->
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Conectar la pantalla LCD1602 al bus I2C del ESP32.
+                                        <br>
+                                        <!-- IMAGEN 2 -->
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo .py.</li>
+                                    <li>Configurar el pin de la fotorresistencia como entrada analógica (ADC).</li>
+                                    <li>Configurar la atenuación ADC a 11dB para leer el rango completo de valores.</li>
+                                    <li>
+                                        Crear una instancia de LCD y mostrar el valor leído como cadena de texto.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> ADC,Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">lcd1602</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> LCD
+
+foto_resistencia = ADC(Pin(<span style="color: #B452CD">36</span>, Pin.IN))
+
+<span style="color: #228B22"># Configura la atenuación ADC a 11dB para un rango completo</span>
+foto_resistencia.atten(foto_resistencia.ATTN_11DB)
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+
+    <span style="color: #228B22"># Lee un valor análogo bruto entre 0-4095</span>
+    valor = foto_resistencia.read()
+    <span style="color: #228B22"># A mayor iluminación, menor resistencia</span>
+    <span style="color: #658B00">print</span>(valor)
+    time.sleep(<span style="color: #B452CD">0.05</span>)
+    string = <span style="color: #658B00">str</span>(valor)
+    time.sleep(<span style="color: #B452CD">0.5</span>)
+    lcd = LCD()
+<span style="color: #228B22"># Presenta el string en la pantalla</span>
+    lcd.message(string)
+</pre>
+</div>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Observar los valores en la pantalla en diferentes condiciones de luz.</li>
+                                    <li>Acercar una luz intensa y verificar el cambio en tiempo real.</li>
+                                    <li>Cubrir la fotorresistencia para ver cómo aumenta la lectura.</li>
+                                    <li>Cambiar el intervalo de actualización modificando time.sleep(0.5).</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

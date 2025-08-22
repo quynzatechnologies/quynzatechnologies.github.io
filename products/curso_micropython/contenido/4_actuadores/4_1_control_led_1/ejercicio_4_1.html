@@ -52,7 +52,88 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Aprender a ejecutar un programa en MicroPython con el IDE Thonny y correrlo en 
+                                el entrenador QMT-020. Comprender el uso básico de los módulos <strong>time</strong> y 
+                                <strong>machine</strong> para el control de hardware. Experimentar con la estructura secuencial y con un 
+                                bucle infinito (<strong>while True</strong>).
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>Conectar el ESP32 al computador mediante el cable USB-C.</li>
+                                    <li>Abrir el IDE Thonny y preparar un nuevo archivo de programa.</li>
+                                    <li>
+                                        Comprender el uso de los módulos:
+                                        <ul>
+                                            <li><em>time</em>: funciones para medir intervalos de tiempo y generar retardos.</li>
+                                            <li><em>machine</em>: acceso directo al hardware del microcontrolador, incluyendo la configuración de pines GPIO.</li>
+                                        </ul>
+                                    </li>
+                                    <li>Identificar el pin donde está conectado el LED a controlar.</li>
+                                    <li>Para el LED azul integrado en el ESP32, generalmente se usa el GPIO2.</li>
+                                    <li>
+                                        A continuación, vamos a encender y apagar una vez el LED del microcontrolador:
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Encendido y apagado único</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+<span style="color: #228B22"># Crea un objeto pin como LED de salida</span>
+led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT) 
+
+led.value(<span style="color: #B452CD">1</span>)      <span style="color: #228B22"># Enciende el LED</span>
+time.sleep(<span style="color: #B452CD">1.5</span>)   <span style="color: #228B22"># Espera 1.5 segundos</span>
+led.value(<span style="color: #B452CD">0</span>)      <span style="color: #228B22"># Apaga el LED</span>
+</pre>
+</div>
+                                        <br>
+                                        <strong>Actividad sugerida.</strong> Cambie el tiempo en la instrucción <em>time.sleep(1.5)</em> y observe 
+                                        lo que sucede.
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        Ahora, vamos a prender y a apagar el LED azul en un ciclo infinito. 
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Encendido y apagado repetitivo (bucle while</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+<span style="color: #228B22"># Crea un objeto pin como LED de salida</span>
+led=Pin(<span style="color: #B452CD">2</span>, Pin.OUT) 
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+  led.value(<span style="color: #B452CD">1</span>)      <span style="color: #228B22"># Enciende el LED</span>
+  time.sleep(<span style="color: #B452CD">0.25</span>)
+  led.value(<span style="color: #B452CD">0</span>)      <span style="color: #228B22"># Apaga el LED</span>
+  time.sleep(<span style="color: #B452CD">0.25</span>)
+</pre>
+</div>
+                                        <br>
+                                        Aquí se utiliza la estructura de control de flujo en la forma <em>while true</em>. Es decir que 
+                                        siempre se va a estar ejecutando el bloque de instrucciones que sigue al <em>while</em>. Observe 
+                                        la indentación del bloque de instrucciones del <em>while</em>.
+                                        <br><br>
+                                        <strong>Actividad sugerida.</strong> Ahora ejecute el programa varias veces cambiando los 
+                                        intervalos de espera.
+                                    </li>
+                                </ol>
+
+                            </p>
+
+                            <p><strong>Experimentos.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Observe la ejecución del programa y vea el tiempo de prendido y apagado del LED.</li>
+                                    <li>Disminuya el tiempo de parpadeo del LED.</li>
+                                    <li>Aumente el tiempo de parpadeo del LED.</li>
+                                    <li>Guarde el programa en la carpeta</li>
+                                    <li>Guarde el programa en el microcontrolador. </li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

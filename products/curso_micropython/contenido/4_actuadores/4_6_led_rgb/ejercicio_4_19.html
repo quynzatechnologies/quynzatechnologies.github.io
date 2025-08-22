@@ -52,7 +52,90 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Hacer que el LED RGB emita diferentes colores utilizando el concepto de 
+                                modulación por ancho de pulso (PWM). Configurar y variar el ciclo de trabajo (Duty Cycle) para controlar 
+                                la intensidad de cada color.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el LED RGB al ESP32 según el esquema de pines:
+                                        <br>
+                                        <ul>
+                                            <li>Rojo (R) en GPIO27</li>
+                                            <li>Verde (G) en GPIO26</li>
+                                            <li>Azul (B) en GPIO25</li>
+                                        </ul>
+                                        <br>
+                                        <!-- IMAGEN 1 -->
+                                        <!-- IMAGEN 2 -->
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo .py.</li>
+                                    <li>Importar las librerías Pin y PWM de machine, así como time.</li>
+                                    <li>Definir la frecuencia PWM de 1000 Hz para cada color.</li>
+                                    <li>Implementar la función set_color(r, g, b) para establecer el ciclo de trabajo de cada color.</li>
+                                    <li>
+                                        Ejecutar el bucle while para cambiar los colores cada segundo.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22">#LED_RGB</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, PWM
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+<span style="color: #228B22"># Define los pines GPIO para el LED RGB</span>
+RED_PIN = <span style="color: #B452CD">27</span>
+GREEN_PIN = <span style="color: #B452CD">26</span>
+BLUE_PIN = <span style="color: #B452CD">25</span>
+
+<span style="color: #228B22"># Define los canales PWM </span>
+red = PWM(Pin(RED_PIN))
+green = PWM(Pin(GREEN_PIN))
+blue = PWM(Pin(BLUE_PIN))
+
+<span style="color: #228B22"># Define la frecuencia PWM</span>
+red.freq(<span style="color: #B452CD">1000</span>)
+green.freq(<span style="color: #B452CD">1000</span>)
+blue.freq(<span style="color: #B452CD">1000</span>)
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">set_color</span>(r, g, b):
+    red.duty(r)
+    green.duty(g)
+    blue.duty(b)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #228B22"># Define los colores y espéra un momento</span>
+    set_color(<span style="color: #B452CD">1023</span>, <span style="color: #B452CD">0</span>, <span style="color: #B452CD">0</span>) <span style="color: #228B22"># Red</span>
+    time.sleep(<span style="color: #B452CD">1</span>)
+    set_color(<span style="color: #B452CD">0</span>, <span style="color: #B452CD">1023</span>, <span style="color: #B452CD">0</span>) <span style="color: #228B22"># Green</span>
+    time.sleep(<span style="color: #B452CD">1</span>)
+    set_color(<span style="color: #B452CD">0</span>, <span style="color: #B452CD">0</span>, <span style="color: #B452CD">1023</span>) <span style="color: #228B22"># Blue</span>
+    time.sleep(<span style="color: #B452CD">1</span>)
+    set_color(<span style="color: #B452CD">1023</span>, <span style="color: #B452CD">0</span>, <span style="color: #B452CD">1023</span>) <span style="color: #228B22"># purple </span>
+    time.sleep(<span style="color: #B452CD">1</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Describir lo que sucede con el LED RGB al ejecutar el programa.</li>
+                                    <li>Cambiar los intervalos de tiempo entre colores.</li>
+                                    <li>
+                                        Sustituir los valores 1023 por otros para obtener diferentes intensidades y combinaciones de 
+                                        colores.
+                                    </li>
+                                    <li>Guardar el programa en la carpeta local del computador.</li>
+                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

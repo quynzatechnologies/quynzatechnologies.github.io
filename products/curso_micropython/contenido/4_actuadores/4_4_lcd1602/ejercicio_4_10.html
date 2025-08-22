@@ -52,7 +52,67 @@
                         </div>
                         
                         <div id="content">
-                           
+                           <p>
+                                <strong>Objetivo.</strong> Aprender a utilizar la pantalla LCD1602 para mostrar mensajes de texto. Mostrar 
+                                letreros fijos en una o dos líneas de la pantalla.
+                           </p>
+
+                           <p><strong>Procedimiento.</strong></p>
+                           <p>
+                                <ol>
+                                    <li>
+                                        Conectar el pin GPIO22 del ESP32 al pin SCL del módulo LCD1602 y el pin GPIO21 al pin SDA.
+                                        <br>
+                                        <!-- IMAGEN 1 -->
+                                        <!-- IMAGEN 2 -->
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Abrir Thonny e importar la librería lcd1602, que ya incluye la configuración de pines SDA y SCL.
+                                    </li>
+                                    <li>
+                                        Escribir el código mostrado a continuación para mostrar dos mensajes fijos en la pantalla.
+                                    </li>
+                                    <li>
+                                        Ejecutar el programa y observar cómo se muestran los mensajes uno tras otro.
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22">#LCD_1602</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">lcd1602</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> LCD
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+<span style="color: #228B22"># Crea una instancia de la clase LCD y le asigna la variable lcd </span>
+lcd = LCD()
+<span style="color: #228B22"># Define el string &quot; QUYNZA\n&quot;</span>
+
+string = <span style="color: #CD5555">&quot; QUYNZA\n&quot;</span>
+<span style="color: #228B22"># Presenta el string en la pantalla</span>
+lcd.message(string)
+
+time.sleep(<span style="color: #B452CD">2</span>)
+<span style="color: #228B22"># Define el string &quot;    Tecnologia!&quot;&quot;</span>
+string = <span style="color: #CD5555">&quot;    Tecnologia!&quot;</span>
+<span style="color: #228B22"># Presenta el string en la pantalla</span>
+lcd.message(string)
+
+time.sleep(<span style="color: #B452CD">2</span>)
+<span style="color: #228B22"># Limpia la pantalla </span>
+lcd.clear()
+</pre>
+</div>
+                                    </li>
+                                </ol>
+                           </p>
+
+                           <p><strong>Actividades sugeridas.</strong></p>
+                           <p>
+                            <ul>
+                                <li>Cambiar los letreros mostrados.</li>
+                                <li>Mostrar un letrero que se vaya formando letra por letra.</li>
+                                <li>Mostrar un letrero que se desplace horizontalmente en la pantalla.</li>
+                                <li>Guardar el programa en la carpeta local del computador.</li>
+                                <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                            </ul>
+                           </p>
                         </div>
 
                         <footer class="btn-course">

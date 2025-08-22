@@ -52,7 +52,62 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Conectar y configurar una pantalla LCD1602 con el ESP32. Mostrar secuencialmente 
+                                elementos de una lista en la pantalla LCD. Utilizar la librería lcd1602 desarrollada por Quynza para 
+                                manejar la pantalla.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el pin GPIO22 del ESP32 al pin SCL del módulo LCD1602 y el pin GPIO21 al pin SDA.
+                                        <br>
+                                        <!-- IMAGEN 1 -->
+                                        <!-- IMAGEN 2 -->
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny e importar la librería lcd1602 que ya está almacenada en la memoria del ESP32.</li>
+                                    <li>
+                                        Escribir el código proporcionado, que recorre una lista de nombres y los muestra uno por uno en la 
+                                        pantalla.
+                                    </li>
+                                    <li>
+                                        Ejecutar el programa y verificar que los nombres aparezcan durante 2 segundos antes de borrarse.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">lcd1602</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> LCD
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+<span style="color: #228B22"># Crea una instancia de la clase LCD y le asigna la variable lcd </span>
+lcd = LCD()
+
+lista = [<span style="color: #CD5555">&quot;Juan&quot;</span>, <span style="color: #CD5555">&quot;Luis&quot;</span>, <span style="color: #CD5555">&quot;María&quot;</span>, <span style="color: #CD5555">&quot;Clara&quot;</span>, <span style="color: #CD5555">&quot;Pedro&quot;</span>]
+i = <span style="color: #B452CD">0</span>
+<span style="color: #8B008B; font-weight: bold">while</span> i &lt; <span style="color: #B452CD">5</span>:
+    nombre = lista[i]
+    lcd.message(nombre)
+    time.sleep(<span style="color: #B452CD">2</span>)
+    lcd.clear()
+    i = i + <span style="color: #B452CD">1</span>
+lcd.clear()   <span style="color: #228B22"># Limpia la pantalla LCD</span>
+</pre>
+</div>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar la lista de nombres por datos obtenidos de un sensor.</li>
+                                    <li>Aumentar o disminuir el tiempo de visualización de cada nombre.</li>
+                                    <li>Mostrar los nombres en una segunda línea con información adicional.</li>
+                                    <li>Guardar el programa en la carpeta local del computador.</li>
+                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

@@ -52,7 +52,63 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Practicar el uso de bucles while anidados. Generar de 
+                                forma automática las tablas de multiplicar del 1 al 10.
+                            </p>
+
+                            <p><strong>Procedimiento</strong></p>
+
+                            <p>
+                                <ol>
+                                    <li>Abrir Thonny y crear un nuevo archivo <em>.py</em>.</li>
+                                    <li>
+                                        Definir una variable <em>j</em> para representar el número de la tabla 
+                                        actual, iniciando en <em>1</em>.
+                                    </li>
+                                    <li>Usar un bucle while externo para recorrer las tablas del 1 al 10.</li>
+                                    <li>
+                                        Dentro de este bucle, definir una variable <em>i</em> para los 
+                                        multiplicadores de cada tabla, iniciando en <em>1</em>.
+                                    </li>
+                                    <li>
+                                        Usar un bucle while interno para imprimir los productos desde <em>j</em> 
+                                        x <em>1</em> hasta <em>j</em> x <em>9</em>.
+                                    </li>
+                                    <li>Separar cada tabla con un salto de línea.</li>
+                                </ol>
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Tablas de mulltiplicar del 1 al 10</span>
+j = <span style="color: #B452CD">1</span>
+<span style="color: #8B008B; font-weight: bold">while</span> j &lt; <span style="color: #B452CD">11</span>:
+    i = <span style="color: #B452CD">1</span>
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Tabla del &quot;</span>,j)
+    <span style="color: #8B008B; font-weight: bold">while</span> i &lt; <span style="color: #B452CD">10</span>:
+        <span style="color: #658B00">print</span>(j, <span style="color: #CD5555">&quot;X &quot;</span>, i, <span style="color: #CD5555">&quot; = &quot;</span>, j * i)
+        i = i + <span style="color: #B452CD">1</span>
+    <span style="color: #658B00">print</span>()
+    j = j + <span style="color: #B452CD">1</span>
+</pre>
+</div>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Modificar el límite de <em>i</em> para mostrar hasta <em>x 12</em>.</li>
+                                    <li>Adaptar el código para usar bucles <em>for</em> en lugar de <em>while</em>.</li>
+                                    <li>Agregar un separador visual entre tablas, como líneas de guiones.</li>
+                                </ul>
+                            </p>
+
+                            <p><strong>Experimentos.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Pedir al usuario el número inicial y final de tablas a mostrar.</li>
+                                    <li>Mostrar las tablas en orden inverso, del 10 al 1.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

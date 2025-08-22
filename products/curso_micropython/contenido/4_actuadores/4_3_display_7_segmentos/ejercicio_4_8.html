@@ -52,7 +52,155 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Aprender a utilizar un display de 7 segmentos de cátodo común para mostrar 
+                                números del 0 al 9. Implementar el método randint del módulo random para generar números aleatorios. 
+                                Configurar pines GPIO para seleccionar y controlar segmentos individuales del display.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el ESP32 al entrenador QMT-020 y cablear los pines de selección del display (d1-d4) y 
+                                        de los segmentos (a-g) según el esquema proporcionado.
+                                        <br>
+                                        <!-- IMAGEN 1 -->
+                                        <!-- IMAGEN 1 -->
+                                        <br>
+                                    </li>
+                                    <li>Encender únicamente el Display 1 para mostrar el número generado.</li>
+                                    <li>Escribir el código proporcionado en Thonny, utilizando <em>random.randint(0, 9)</em> para 
+                                        obtener el número aleatorio.</li>
+                                    <li>
+                                        Ejecutar el programa y observar el número en el display.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">random</span>
+
+<span style="color: #228B22"># Para la selección del display.</span>
+d1 = Pin(<span style="color: #B452CD">12</span>,Pin.OUT)
+d2 = Pin(<span style="color: #B452CD">13</span>,Pin.OUT)
+d3 = Pin(<span style="color: #B452CD">14</span>,Pin.OUT)
+d4 = Pin(<span style="color: #B452CD">15</span>,Pin.OUT)
+<span style="color: #228B22"># Se va trabajar con el disply 1</span>
+d1.on()
+d2.off()
+d3.off()
+d4.off()
+
+numero = random.randint(<span style="color: #B452CD">0</span>, <span style="color: #B452CD">9</span>)
+<span style="color: #658B00">print</span>(numero)
+
+leda = Pin(<span style="color: #B452CD">16</span>,Pin.OUT)
+ledb = Pin(<span style="color: #B452CD">17</span>,Pin.OUT)
+ledc = Pin(<span style="color: #B452CD">18</span>,Pin.OUT)
+ledd = Pin(<span style="color: #B452CD">19</span>,Pin.OUT)
+lede = Pin(<span style="color: #B452CD">21</span>,Pin.OUT)
+ledf = Pin(<span style="color: #B452CD">22</span>,Pin.OUT)
+ledg = Pin(<span style="color: #B452CD">23</span>,Pin.OUT)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">0</span>: 
+        leda.off() <span style="color: #228B22">#1</span>
+        ledb.off() <span style="color: #228B22">#1</span>
+        ledc.off() <span style="color: #228B22">#1</span>
+        ledd.off() <span style="color: #228B22">#1</span>
+        lede.off() <span style="color: #228B22">#1</span>
+        ledf.off() <span style="color: #228B22">#1</span>
+        ledg.on()  <span style="color: #228B22">#0</span>
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;zero&quot;</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">1</span>: 
+        leda.on()  <span style="color: #228B22">#0</span>
+        ledb.off() <span style="color: #228B22">#1</span>
+        ledc.off() <span style="color: #228B22">#1</span>
+        ledd.on()  <span style="color: #228B22">#0</span>
+        lede.on()  <span style="color: #228B22">#0</span>
+        ledf.on()  <span style="color: #228B22">#0</span>
+        ledg.on()  <span style="color: #228B22">#0</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">2</span>: 
+        leda.off() <span style="color: #228B22">#1</span>
+        ledb.off() <span style="color: #228B22">#1</span>
+        ledc.on()  <span style="color: #228B22">#0</span>
+        ledd.off() <span style="color: #228B22">#1</span>
+        lede.off() <span style="color: #228B22">#1</span>
+        ledf.on()  <span style="color: #228B22">#0</span>
+        ledg.off() <span style="color: #228B22">#1</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">3</span>:
+        leda.off() <span style="color: #228B22">#1</span>
+        ledb.off() <span style="color: #228B22">#1</span>
+        ledc.off() <span style="color: #228B22">#1</span>
+        ledd.off() <span style="color: #228B22">#1</span>
+        lede.on()  <span style="color: #228B22">#0</span>
+        ledf.on()  <span style="color: #228B22">#0</span>
+        ledg.off() <span style="color: #228B22">#1</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">4</span>:
+        leda.on()
+        ledb.off()
+        ledc.off()
+        ledd.on()
+        lede.on()
+        ledf.off()
+        ledg.off()
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">5</span>:
+        leda.off()
+        ledb.on()
+        ledc.off()
+        ledd.off()
+        lede.on()
+        ledf.off()
+        ledg.off()
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">6</span>:
+        leda.off()
+        ledb.on()
+        ledc.off()
+        ledd.off()
+        lede.off()
+        ledf.off()
+        ledg.off()
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">7</span>:
+        leda.off()
+        ledb.off()
+        ledc.off()
+        ledd.on()
+        lede.on()
+        ledf.on()
+        ledg.on()
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">8</span>:
+        leda.off()
+        ledb.off()
+        ledc.off()
+        ledd.off()
+        lede.off()
+        ledf.off()
+        ledg.off()
+    <span style="color: #8B008B; font-weight: bold">if</span> numero == <span style="color: #B452CD">9</span>:
+        leda.off()
+        ledb.off()
+        ledc.off()
+        ledd.off()
+        lede.on()
+        ledf.off()
+        ledg.off()
+    time.sleep(<span style="color: #B452CD">0.1</span>)
+</pre>
+</div>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Mostrar el número aleatorio en el Display 2, Display 3 y Display 4.</li>
+                                    <li>Desplazar el número aleatorio por los displays 1, 2, 3 y 4 secuencialmente.</li>
+                                    <li>Tomar 4 números aleatorios y presentarlos simultáneamente en los 4 displays.</li>
+                                    <li>Guardar el programa en la carpeta local del computador.</li>
+                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

@@ -52,7 +52,52 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Utilizar la estructura repetitiva while para encender y apagar dos LEDs al 
+                                mismo tiempo de manera indefinida. Reforzar el control simultáneo de múltiples salidas digitales en 
+                                MicroPython.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>Conectar un cable desde el pin GPIO26 del microcontrolador al LED azul del entrenador. </li>
+                                    <li>Conectar otro cable desde el pin GPIO22 al LED rojo del entrenador. </li>
+                                    <li>Abrir Thonny e identificar que el microcontrolador esté correctamente conectado</li>
+                                    <li>Escribir el código mostrado a continuación en un nuevo archivo.</li>
+                                    <li>Ejecutar el programa y observar el encendido y apagado simultáneo de los LEDs.</li>
+                                    <li>
+                                        Uso de la estructura while para prender y apagar los LEDs azul y rojo infinitamente. Observe la 
+                                        indentación.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    ledAzul=Pin(<span style="color: #B452CD">26</span>, Pin.OUT)
+    ledRojo=Pin(<span style="color: #B452CD">22</span>, Pin.OUT)
+    ledAzul.value(<span style="color: #B452CD">1</span>) <span style="color: #228B22"># Enciende el LED azul</span>
+    ledRojo.value(<span style="color: #B452CD">1</span>) <span style="color: #228B22"># Enciende el LED rojo</span>
+    time.sleep(<span style="color: #B452CD">1.5</span>)
+    ledAzul.value(<span style="color: #B452CD">0</span>) <span style="color: #228B22"># Apaga el LED azul</span>
+    ledRojo.value(<span style="color: #B452CD">0</span>) <span style="color: #228B22"># Apaga el LED rojo</span>
+    time.sleep(<span style="color: #B452CD">1.5</span>)
+</pre>
+</div>
+
+                                    </li>
+                                </ol>
+                            </p>
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el tiempo de espera para modificar la velocidad de parpadeo.</li>
+                                    <li>Encender y apagar los LEDs en secuencia en lugar de simultáneamente.</li>
+                                    <li>Guardar el programa en la carpeta local del computador.</li>
+                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

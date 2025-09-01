@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,94 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Aprender a utilizar el sensor ultrasónico HC-SR04 para medir distancias.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el sensor HC-SR04 al ESP32:
+                                        <br><br>
+                                        <ul>
+                                            <li>Trigger al pin digital (salida) GPIO16</li>
+                                            <li>Echo al pin digital (entrada) GPIO4</li>
+                                        </ul>
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_5_6_1.png" alt="Conexión 1 ejercicio 5.66." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo .py.</li>
+                                    <li>
+                                        Implementar la función <em>distancia(TRIG, ECHO)</em> que envía un pulso de <em>10 µs</em> y 
+                                        mide el tiempo de respuesta.
+                                    </li>
+                                    <li>Convertir el tiempo medido en distancia usando la velocidad del sonido (<em>340 m/s</em>).</li>
+                                    <li>
+                                        Mostrar continuamente las mediciones en consola.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+<span style="color: #228B22"># Calcula la distancia a un objeto con el sensor ultrasonico </span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">distancia</span>(TRIG,ECHO):
+    <span style="color: #228B22"># Asegura que inicialmente el trigger esta off </span>
+    TRIG.off()
+    time.sleep_us(<span style="color: #B452CD">2</span>)  <span style="color: #228B22"># Wait for 2 microseconds</span>
+
+    <span style="color: #228B22"># Envía un pulso  durante 10-microsecond al pin trigger</span>
+    TRIG.on()
+    time.sleep_us(<span style="color: #B452CD">10</span>)
+    TRIG.off()
+
+    <span style="color: #228B22"># Espera para que el pin echo vaya a high</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> ECHO.value():
+        <span style="color: #8B008B; font-weight: bold">pass</span>
+
+    <span style="color: #228B22"># Registra el tiempo hasta cuando el pin echo va a high</span>
+    time1 = time.ticks_us()
+
+    <span style="color: #228B22"># Espera hasta cuando el pin echo va a low</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> ECHO.value():
+        <span style="color: #8B008B; font-weight: bold">pass</span>
+
+    <span style="color: #228B22"># Registra el tiempo hasta cuando el pin echo va a low</span>
+    time2 = time.ticks_us()
+
+    <span style="color: #228B22"># Calcula la diferencia de tiempos entre los tiempos de los dos registros</span>
+    durante = time.ticks_diff(time2, time1)
+
+    <span style="color: #228B22"># Calcula y retorna la distance (en cm) usando la velocidad del sonido (340 m/s)</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> durante * <span style="color: #B452CD">340</span> / <span style="color: #B452CD">2</span> / <span style="color: #B452CD">10000</span>
+
+<span style="color: #228B22"># Configuración de pines</span>
+TRIG = machine.Pin(<span style="color: #B452CD">16</span>, machine.Pin.OUT)
+ECHO = machine.Pin(<span style="color: #B452CD">4</span>, machine.Pin.IN)
+
+<span style="color: #228B22"># Mide continuamente la distancia y la imprime</span>
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    dis = distancia(TRIG,ECHO)
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Distancia: &quot;</span>, dis)
+    time.sleep_ms(<span style="color: #B452CD">300</span>)  <span style="color: #228B22"># Espera 300 milisegundos antes de enviar pulsos</span>
+</pre></div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Mostrar la distancia medida en una pantalla LCD1602.</li>
+                                    <li>Activar un zumbador si la distancia es menor a un valor umbral.</li>
+                                    <li>
+                                        Cambiar el tiempo de espera <em>time.sleep_ms(300)</em> para ajustar la frecuencia de medición.
+                                    </li>
+                                    <li>Medir la distancia de diferentes objetos y registrar las variaciones.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

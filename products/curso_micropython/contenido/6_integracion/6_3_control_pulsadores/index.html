@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -49,7 +49,85 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                Los <strong>LEDs RGB</strong> (Red, Green, Blue) permiten generar una amplia gama de colores 
+                                combinando diferentes intensidades de los tres colores básicos. Estos componentes son muy comunes 
+                                en proyectos electrónicos y se controlan ajustando la señal de cada uno de sus pines.
+                            </p>
+                            <p>
+                                En el contexto del ESP32 y el entrenador QMT-020, es posible manejar un LED RGB utilizando 
+                                <strong>pulsadores</strong> para cambiar su color de manera interactiva, lo que permite comprender 
+                                conceptos básicos de <strong>entradas digitales</strong>, <strong>salidas digitales</strong> y 
+                                <strong>lógica condicional</strong>.
+                            </p>
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Funcionamiento básico</strong>
+                                        <br><br>
+                                        <ol>
+                                            <li>
+                                                Un LED RGB tiene tres diodos internos (rojo, verde y azul) encapsulados en un mismo 
+                                                cuerpo.
+                                            </li>
+                                            <li>
+                                                Existen dos tipos: <strong>ánodo común</strong> y <strong>cátodo común</strong>, que 
+                                                determinan cómo se conecta la alimentación y el control.
+                                            </li>
+                                            <li>
+                                                Encendiendo cada diodo por separado se obtiene su color puro; combinando dos o más, se 
+                                                generan colores adicionales.
+                                            </li>
+                                        </ol>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Integración con pulsadores</strong>
+                                        <br><br>
+                                        En este ejercicio, se emplean dos pulsadores para seleccionar el color:
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Pulsador 1 presionado:</strong> el LED muestra color rojo.</li>
+                                            <li><strong>Pulsador 2 presionado:</strong> el LED muestra color verde.</li>
+                                            <li><strong>Ambos pulsadores presionados:</strong> el LED muestra color azul.</li>
+                                            <li><strong>Ninguno presionado:</strong> el LED permanece apagado.</li>
+                                        </ul>
+                                        <br>
+                                        Este método introduce la <strong>lógica booleana</strong> y el concepto de combinaciones de 
+                                        entradas para controlar salidas.
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Conexiones en el QMT-020</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Pulsador 1:</strong> GPIO27.</li>
+                                            <li><strong>Pulsador 2:</strong> GPIO18.</li>
+                                            <li>
+                                                <strong>LED RGB:</strong>
+                                                <ul>
+                                                    <li>Rojo -> GPIO14.</li>
+                                                    <li>Verde -> GPIO12.</li>
+                                                    <li>Azul -> GPIO13.</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <br>
+                                        Cada pin del LED RGB debe tener su resistencia limitadora para evitar sobrecorriente.
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Aplicaciones</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>Interfaz básica para seleccionar modos o estados en un sistema.</li>
+                                            <li>Visualización de alarmas según la condición del sistema (colores predefinidos).</li>
+                                            <li>Proyectos educativos para explicar lógica digital y codificación binaria.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

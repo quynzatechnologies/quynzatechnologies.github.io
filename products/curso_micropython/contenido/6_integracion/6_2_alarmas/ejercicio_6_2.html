@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,105 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Detectar un objeto a menos de 5 cm usando un sensor ultrasónico HC-SR04. 
+                                Activar una alarma sonora mediante un zumbador cuando se cumpla la condición de proximidad.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el sensor HC-SR04 al ESP32:
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_2_1.png" alt="Conexión 1 ejercicio 6.2." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Conectar el zumbador al pin GPIO19 del ESP32.
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_2_2.png" alt="Conexión 2 ejercicio 6.2." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Configurar el HC-SR04 para medir distancias mediante la función <em>distancia()</em>.
+                                    </li>
+                                    <li>
+                                        Implementar la lógica para que, si la distancia es menor a 5 cm, el zumbador emita pulsos 
+                                        intermitentes como alarma.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+<span style="color: #228B22"># Define los pines trigger y echo para sensar la distancia</span>
+TRIG = machine.Pin(<span style="color: #B452CD">16</span>, machine.Pin.OUT)
+ECHO = machine.Pin(<span style="color: #B452CD">4</span>, machine.Pin.IN)
+
+buzzer = machine.Pin(<span style="color: #B452CD">19</span>, machine.Pin.OUT)
+
+<span style="color: #228B22"># Calcula la distancia usando el sensor ultrasaonico</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">distancia</span>():
+    <span style="color: #228B22"># Asegura que inicialmente el trigger este off</span>
+    TRIG.off()
+    time.sleep_us(<span style="color: #B452CD">2</span>)  <span style="color: #228B22"># Espera durane 2 microsegundos</span>
+    <span style="color: #228B22"># Envia un pulso de 10-microsegundos al pin trigger</span>
+    TRIG.on()
+    time.sleep_us(<span style="color: #B452CD">10</span>)
+    TRIG.off()
+    <span style="color: #228B22"># Espera un momento para que el pin echo pase a high</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> ECHO.value():
+        <span style="color: #8B008B; font-weight: bold">pass</span>
+    <span style="color: #228B22"># Registra el tiempo cuando el pin echo va a high</span>
+    time1 = time.ticks_us()
+    <span style="color: #228B22"># Espera a que el pin echo vaya a low</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> ECHO.value():
+        <span style="color: #8B008B; font-weight: bold">pass</span>
+    <span style="color: #228B22"># Registra el tiempo cuando el pin echo va a low</span>
+    time2 = time.ticks_us()
+    <span style="color: #228B22"># Calcula la diferencia de tiempo entre el registro de los dos tiempos</span>
+    during = time.ticks_diff(time2, time1)
+    <span style="color: #228B22"># Calculate and return the distance (in cm) using the speed of sound (340 m/s)</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> during * <span style="color: #B452CD">340</span> / <span style="color: #B452CD">2</span> / <span style="color: #B452CD">10000</span>
+
+<span style="color: #228B22"># Mide continuamente la distancia y la imprime</span>
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    dis = distancia()
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Distancia: &quot;</span>, dis)
+    time.sleep_ms(<span style="color: #B452CD">300</span>)  <span style="color: #228B22"># Espera 300 milisegundos antes de enviar pulsos</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> dis &lt; <span style="color: #B452CD">5.0</span>:
+    
+    <span style="color: #228B22"># Itera sobre los valores 0 to 3 usando un ciclo for</span>
+        <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">4</span>):
+        <span style="color: #228B22"># Enciende el zumbador colocando su valor en 1. </span>
+            buzzer.value(<span style="color: #B452CD">1</span>)
+        <span style="color: #228B22"># Pausa durante  0.2 segundos. </span>
+            time.sleep(<span style="color: #B452CD">0.1</span>)
+        <span style="color: #228B22"># Apaga el zumbador</span>
+            buzzer.value(<span style="color: #B452CD">0</span>)
+        <span style="color: #228B22"># Pausa durante  0.2 segundos.</span>
+            time.sleep(<span style="color: #B452CD">0.1</span>)
+    <span style="color: #228B22"># Pausa durante 1 segundos, antes de reiniciar el ciclo while</span>
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot; !!! ALARMA OBJETO MUY CERCANO!!!&quot;</span>)
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        <span style="color: #8B008B; font-weight: bold">continue</span>
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el umbral de 5 cm por otro valor para ajustar la sensibilidad.</li>
+                                    <li>Hacer que el zumbador emita un sonido continuo en lugar de pulsos.</li>
+                                    <li>Mostrar el estado de la alarma en una pantalla LCD1602.</li>
+                                    <li>Probar la detección con diferentes objetos y distancias para evaluar la precisión.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

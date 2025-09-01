@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -49,7 +49,88 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                El <strong>potenciómetro</strong> es un componente electrónico que actúa como 
+                                <strong>resistencia variable</strong>. Su resistencia cambia al girar su eje, lo que modifica el 
+                                voltaje en la salida intermedia (terminal central). Esta característica lo convierte en un dispositivo 
+                                útil para ajustar parámetros como intensidad de luz, velocidad de un motor o nivel de volumen.
+                            </p>
+
+                            <p>
+                                En el ESP32, el potenciómetro se conecta a un <strong>pin de entrada analógica</strong> y su valor se 
+                                lee a través del conversor analógico-digital (<strong>ADC</strong>), que entrega valores entre 
+                                <strong>0 y 4095</strong> en función del voltaje medido.
+                            </p>
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Conexión al ESP32</strong>
+                                        <br><br>
+                                        En el entrenador QMT-020, el potenciómetro se suele conectar de la siguiente forma:
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Extremo 1</strong> -> 3.3 V</li>
+                                            <li><strong>Extremo 2</strong> -> GND</li>
+                                            <li><strong>Terminal central (cursor)</strong> -> GPIO39 (entrada analógica)</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Configuración en MicroPython</strong>
+                                        <br><br>
+                                        Para leer un potenciómetro:
+                                        <br><br>
+                                        <ol>
+                                            <li>Configurar el pin como entrada analógica (ADC).</li>
+                                            <li>
+                                                Ajustar la atenuación (atten) a <strong>11 dB</strong> para aprovechar el rango 
+                                                completo de voltaje.
+                                            </li>
+                                            <li>Leer el valor periódicamente y usarlo en la aplicación.</li>
+                                        </ol>
+                                        <br>
+                                        <u>Ejemplo básico:</u>
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> ADC, Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+pot = ADC(Pin(<span style="color: #B452CD">39</span>))
+pot.atten(ADC.ATTN_11DB)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    valor = pot.read()
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">f&quot;Valor: {</span>valor<span style="color: #CD5555">}&quot;</span>)
+    time.sleep(<span style="color: #B452CD">0.5</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Aplicaciones comunes</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>Ajustar brillo de LEDs mediante PWM.</li>
+                                            <li>Control de velocidad en motores.</li>
+                                            <li>Interfaces de usuario para seleccionar parámetros.</li>
+                                            <li>Control manual en simuladores o sistemas de prueba.</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Integración en proyectos</strong>
+                                        <br><br>
+                                        El valor obtenido puede:
+                                        <br><br>
+                                        <ul>
+                                            <li>Mostrarse en consola.</li>
+                                            <li>Representarse en una <strong>pantalla LCD1602</strong>.</li>
+                                            <li>Usarse para condicionar el funcionamiento de otros dispositivos.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

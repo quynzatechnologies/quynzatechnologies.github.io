@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,107 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Usar combinaciones de presión de dos pulsadores para controlar el color de 
+                                un LED RGB.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar dos pulsadores a los pines GPIO27 y GPIO18.
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_4_1.png" alt="Conexión 2 ejercicio 6.4." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Conectar el LED RGB a los pines GPIO14 (rojo), GPIO12 (verde) y GPIO13 (azul) mediante 
+                                        resistencias limitadoras.
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_4_2.png" alt="Conexión 1 ejercicio 6.4." class="img-fluid icon-hover">
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_6_4_1.png" alt="Foto ejercicio 6.4." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Programar la lógica para que:
+                                        <br><br>
+                                        <ul>
+                                            <li>Solo pulsador 1 encendido → LED rojo.</li>
+                                            <li>Solo pulsador 2 encendido → LED verde.</li>
+                                            <li>Ambos pulsadores encendidos → LED azul.</li>
+                                            <li>Ninguno encendido → LED apagado.</li>
+                                        </ul>
+                                        <br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+Pulsador1 = <span style="color: #B452CD">27</span>
+Pulsador3 = <span style="color: #B452CD">18</span>
+RGB_R = <span style="color: #B452CD">14</span>
+RGB_G = <span style="color: #B452CD">12</span>
+RGB_B = <span style="color: #B452CD">13</span>
+
+Pulsa1 = machine.Pin(Pulsador1, machine.Pin.IN) <span style="color: #228B22"># Button pin</span>
+Pulsa3 = machine.Pin(Pulsador3, machine.Pin.IN) <span style="color: #228B22"># Button pin</span>
+led_R = machine.Pin(RGB_R, machine.Pin.OUT) <span style="color: #228B22"># LED pin</span>
+led_G = machine.Pin(RGB_G, machine.Pin.OUT) <span style="color: #228B22"># LED pin</span>
+led_B = machine.Pin(RGB_B, machine.Pin.OUT) <span style="color: #228B22"># LED pin</span>
+
+<span style="color: #228B22"># Entra en un ciclo de 10 segs</span>
+time1 = time.ticks_us()
+during = <span style="color: #B452CD">0</span>
+<span style="color: #8B008B; font-weight: bold">while</span> during &lt;= <span style="color: #B452CD">10000000</span>:
+    time2 = time.ticks_us()
+    during = time.ticks_diff(time2, time1)
+        
+    <span style="color: #228B22"># Si se presiona pulsador 1  y no se presiona pulsador 2 se ilumina  el LED en rojo</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> Pulsa1.value() <span style="color: #8B008B">and</span> <span style="color: #8B008B">not</span> Pulsa3.value():
+        <span style="color: #228B22"># Turn on the LED by setting its value to 1</span>
+        led_R.value(<span style="color: #B452CD">1</span>)
+        led_G.value(<span style="color: #B452CD">0</span>)
+        led_B.value(<span style="color: #B452CD">0</span>)
+        time.sleep(<span style="color: #B452CD">2</span>)
+    <span style="color: #228B22"># Si no se presiona pulsador 1 y se presiona el pulsador 2 se ilumina  el LED en verde  </span>
+    <span style="color: #8B008B; font-weight: bold">elif</span> <span style="color: #8B008B">not</span> Pulsa1.value() <span style="color: #8B008B">and</span> Pulsa3.value():
+        led_R.value(<span style="color: #B452CD">0</span>)
+        led_G.value(<span style="color: #B452CD">1</span>)
+        led_B.value(<span style="color: #B452CD">0</span>)
+        time.sleep(<span style="color: #B452CD">2</span>)
+    <span style="color: #8B008B; font-weight: bold">elif</span> Pulsa1.value() <span style="color: #8B008B">and</span> Pulsa3.value():
+    <span style="color: #228B22"># Si se presiona el pulsador 1 y se presiona el pulsador 2  a la vez se ilumina  el LED en azul    </span>
+        led_R.value(<span style="color: #B452CD">0</span>)
+        led_G.value(<span style="color: #B452CD">0</span>)
+        led_B.value(<span style="color: #B452CD">1</span>)
+        time.sleep(<span style="color: #B452CD">2</span>)
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        <span style="color: #228B22"># El LED deja de iluminar</span>
+        led_R.value(<span style="color: #B452CD">0</span>)
+        led_G.value(<span style="color: #B452CD">0</span>)
+        led_B.value(<span style="color: #B452CD">0</span>)
+        time.sleep(<span style="color: #B452CD">0.5</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar la combinación de pines y pulsadores usados.</li>
+                                    <li>
+                                        Modificar el código para que se utilicen tres pulsadores y asignar colores diferentes a cada 
+                                        combinación posible.
+                                    </li>
+                                    <li>Cambiar los tiempos de encendido y apagado.</li>
+                                    <li>Probar el código con pulsadores 2 y 4 en lugar de 1 y 3.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

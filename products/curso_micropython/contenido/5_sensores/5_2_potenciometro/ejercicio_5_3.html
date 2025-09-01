@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,66 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Aprender a utilizar un potenciómetro como entrada analógica en el ESP32. 
+                                Comprender cómo varía la resistencia y el valor leído en función de la posición del eje del potenciómetro.
+                            </p>
+                            
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el potenciómetro al pin GPIO39 del ESP32, asegurando la alimentación en 3.3V y la 
+                                        tierra en GND.
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexiones_5_3_1.png" alt="Conexión 1 ejercicio 5.3." class="img-fluid icon-hover">
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_5_3_1.png" alt="Fotos conexión ejercicio 5.3." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo con extensión .py.</li>
+                                    <li>Configurar el pin como entrada analógica usando la clase ADC.</li>
+                                    <li>Ajustar la atenuación del ADC a 11dB para leer todo el rango de 0 a 4095.</li>
+                                    <li>
+                                        Ejecutar el código y observar los valores en la consola.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> ADC, Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+pot = ADC(Pin(<span style="color: #B452CD">39</span>, Pin.IN)) <span style="color: #228B22"># Crea un objeto ADC que actúa sobre el pin</span>
+
+<span style="color: #228B22"># Configura la atenuación ADC a 11dB para un rango completo</span>
+pot.atten(pot.ATTN_11DB)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #228B22"># Lee un valor análogo bruto entre 0-4095</span>
+    valor = pot.read()
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">f&quot;valor: {</span>valor<span style="color: #CD5555">}&quot;</span>)
+    <span style="color: #228B22"># Espera 0.5 segundos antes de hacer la nueva lectura</span>
+    time.sleep(<span style="color: #B452CD">0.5</span>)
+</pre>
+</div>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Girar el potenciómetro y observar la variación de valores en consola.</li>
+                                    <li>Modificar el código para mostrar los valores en una pantalla LCD1602.</li>
+                                    <li>Cambiar el tiempo de muestreo para tener una lectura más rápida o más lenta.</li>
+                                </ul>
+                            </p>
+
+                            <p><strong>Experimentos.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Usar el valor del potenciómetro para controlar la intensidad de un LED con PWM.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

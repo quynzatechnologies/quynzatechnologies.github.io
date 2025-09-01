@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,122 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Aprender a recibir y decodificar señales de un control remoto IR usando el 
+                                protocolo NEC. Interpretar y mostrar en consola la tecla pulsada en el control.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el receptor IR al pin GPIO15 del ESP32.
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_5_11_1.png" alt="Conexión ejercicio 5.11." class="img-fluid icon-hover">
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_5_11_1.png" alt="Foto ejercicio 5.11." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo .py.</li>
+                                    <li>Importar las librerías necesarias: Pin, NEC_8 y print_error.</li>
+                                    <li>Implementar la función <em>decodeKeyValue()</em> para traducir el código recibido al nombre de la tecla.</li>
+                                    <li>Definir la función <em>callback()</em> para capturar y mostrar en consola la tecla presionada.</li>
+                                    <li>Instanciar el receptor NEC_8 y activar la función de manejo de errores.</li>
+                                    <li>
+                                        Ejecutar el bucle principal para mantener el script activo hasta interrupción manual.
+                                        <br><br>
+<!-- HTML generated using hilite.me --><div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, freq
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">ir_rx.print_error</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> print_error
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">ir_rx.nec</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> NEC_8
+
+<span style="color: #228B22"># GPIO15 receptor IR</span>
+pin_ir = Pin(<span style="color: #B452CD">15</span>, Pin.IN)
+
+<span style="color: #228B22"># Decodifica los datos recibidos y devuelve el nombre de la tecla correspondiente</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">decodeKeyValue</span>(data):
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x16</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;0&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x0C</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;1&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x18</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;2&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x5E</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;3&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x08</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;4&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x1C</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;5&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x5A</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;6&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x42</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;7&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x52</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;8&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x4A</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;9&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x09</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;+&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x15</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;-&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x7</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;EQ&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x0D</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;U/SD&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x19</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;CYCLE&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x44</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;PLAY/PAUSE&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x43</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;FORWARD&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x40</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;BACKWARD&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x45</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;POWER&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x47</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;MUTE&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x46</span>:
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;MODE&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;ERROR&quot;</span>
+
+<span style="color: #228B22"># El usuario oprime una tecla </span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">callback</span>(data, addr, ctrl):
+    <span style="color: #8B008B; font-weight: bold">if</span> data &lt; <span style="color: #B452CD">0</span>:  <span style="color: #228B22"># El protocolo NEC envía un código.</span>
+        <span style="color: #8B008B; font-weight: bold">pass</span>
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        <span style="color: #658B00">print</span>(decodeKeyValue(data))
+        <span style="color: #228B22"># Decodifica e imprime el código</span>
+
+ir = NEC_8(pin_ir, callback) <span style="color: #228B22"># Instancia el receptor NEC_8 </span>
+
+<span style="color: #228B22"># Muestra información de depuración, en caso de error</span>
+ir.error_function(print_error)
+
+<span style="color: #228B22"># Mantiene corriendo el script hasta que se interrupe al orpimir el control </span>
+<span style="color: #8B008B; font-weight: bold">try</span>:
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+        <span style="color: #8B008B; font-weight: bold">pass</span>
+<span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008B45; font-weight: bold">KeyboardInterrupt</span>:
+    ir.close()  <span style="color: #228B22"># Cierra el receptor</span>
+</pre></div>
+                                        <br>                                        
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Oprimir varias teclas para observar los resultados en consola.</li>
+                                    <li>Usar las teclas FORWARD y BACKWARD para mostrar mensajes personalizados en la pantalla LCD.</li>
+                                    <li>
+                                        Programar operaciones matemáticas simples (suma, multiplicación) usando las teclas numéricas y 
+                                        mostrar el resultado en pantalla.
+                                    </li>
+                                    <li>Integrar el control remoto IR para manejar LEDs o actuadores del kit.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,69 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Detectar la presencia de un objeto cercano con un sensor IR digital. 
+                                Activar una alarma visual encendiendo LEDs rojos cuando se detecta un obstáculo.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el sensor IR al GPIO17 del ESP32.
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_1_1.png" alt="Conexión 1 ejercicio 6.1." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Conectar dos LEDs rojos a los pines GPIO26 y GPIO27 a través de resistencias limitadoras.
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_1_2.png" alt="Conexión 2 ejercicio 6.1." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>Configurar el sensor como entrada digital con Pin.PULL_UP.</li>
+                                    <li>
+                                        Programar la lógica para encender los LEDs durante 4 segundos cuando se detecte un objeto y luego apagarlos.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+ir_evitar = machine.Pin(<span style="color: #B452CD">17</span>, machine.Pin.IN, machine.Pin.PULL_UP) 
+<span style="color: #228B22"># GPIO17</span>
+led1=Pin(<span style="color: #B452CD">26</span>, Pin.OUT) <span style="color: #228B22"># Define la señal del pin led como de salida</span>
+led2=Pin(<span style="color: #B452CD">27</span>, Pin.OUT) <span style="color: #228B22"># Define la señal del pin led como de salida</span>
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+
+    <span style="color: #228B22"># Muestra valores lógicos para reconocer la presencia de un objeto</span>
+    <span style="color: #658B00">print</span>(ir_evitar.value())
+    <span style="color: #228B22"># Si lo detecta enciende los LEDs rojos</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> ir_evitar.value() == <span style="color: #B452CD">1</span>:
+        led1.value(<span style="color: #B452CD">1</span>)
+        led2.value(<span style="color: #B452CD">1</span>)
+        time.sleep(<span style="color: #B452CD">4</span>)
+    led1.value(<span style="color: #B452CD">0</span>)
+    led2.value(<span style="color: #B452CD">0</span>)
+    time.sleep(<span style="color: #B452CD">4</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el tiempo de encendido y apagado de los LEDs.</li>
+                                    <li>Usar LEDs de diferentes colores para identificar tipos de alerta.</li>
+                                    <li>Mostrar un mensaje de alerta en una pantalla LCD1602 cuando se active la alarma.</li>
+                                    <li>Integrar un zumbador para añadir una alerta sonora junto a la visual.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

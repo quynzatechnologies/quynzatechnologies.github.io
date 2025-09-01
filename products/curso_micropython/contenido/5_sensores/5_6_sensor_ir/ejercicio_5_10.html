@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,55 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Aprender a utilizar el módulo de sensor IR para evitar obstáculos. Detectar 
+                                la presencia o ausencia de un objeto mediante señal digital.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el módulo IR digital al pin GPIO17 del ESP32.
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_5_10_1.png" alt="Conexión 1 ejercicio 5.10." class="img-fluid icon-hover">
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_5_10_1.png" alt="Fotos conexión ejercicio 5.10." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo .py.</li>
+                                    <li>Configurar el pin como entrada con resistencia interna de pull-up (Pin.PULL_UP).</li>
+                                    <li>
+                                        Ejecutar un bucle que lea el valor lógico del sensor y lo muestre en consola.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+ir_evitar = machine.Pin(<span style="color: #B452CD">17</span>, machine.Pin.IN, machine.Pin.PULL_UP) 
+<span style="color: #228B22"># GPIO17 </span>
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #228B22"># Muestra  valores lógicos para evitar la presencia de un objeto, para evitarlo</span>
+    <span style="color: #658B00">print</span>(ir_evitar.value())
+    time.sleep(<span style="color: #B452CD">1</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Acercar un objeto al sensor y medir la distancia a la cual se activa.</li>
+                                    <li>Ajustar la sensibilidad del sensor para que detecte a diferentes distancias.</li>
+                                    <li>Modificar el código para mostrar en la pantalla LCD si hay un obstáculo presente o no.</li>
+                                    <li>Integrar el sensor IR con un LED que se encienda cuando se detecte un objeto.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

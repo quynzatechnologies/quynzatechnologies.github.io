@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -49,7 +49,107 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                En este tema se integran <strong>múltiples sensores y actuadores</strong> para desarrollar sistemas 
+                                que respondan a condiciones específicas del entorno. A diferencia de los temas anteriores, donde se 
+                                trabaja con componentes de forma aislada, aquí se busca <strong>combinar entradas y salidas</strong> 
+                                para simular aplicaciones reales en áreas como seguridad, control ambiental y automatización.
+                            </p>
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Principios de integración</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Lectura simultánea</strong> de varios sensores para evaluar diferentes condiciones.</li>
+                                            <li>
+                                                <strong>Toma de decisiones</strong> mediante estructuras condicionales, en función de 
+                                                los datos recibidos.
+                                            </li>
+                                            <li>
+                                                <strong>Accionamiento de múltiples salidas</strong> (LEDs, zumbadores, pantallas LCD, 
+                                                relés, etc.) en respuesta a las condiciones detectadas.
+                                            </li>
+                                            <li>
+                                                <strong>Interacción con el usuario</strong> a través de botones o displays para 
+                                                cambiar parámetros del sistema.
+                                            </li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Tipos de escenarios trabajados</strong>
+                                        <br><br>
+                                        <ol>
+                                            <li>
+                                                <strong>Seguridad:</strong> Detectar intrusiones con sensores infrarrojos y generar 
+                                                alertas visuales o sonoras.
+                                            </li>
+                                            <li>
+                                                <strong>Monitoreo:</strong> Medir variables ambientales (temperatura, humedad, luz, 
+                                                distancia) y presentarlas al usuario.
+                                            </li>
+                                            <li>
+                                                <strong>Control automático:</strong> Regular iluminación, activar ventiladores o 
+                                                alarmas en función de umbrales definidos.
+                                            </li>
+                                        </ol>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Componenetes utilizados</strong>
+                                        <br><br>
+                                        <ol>
+                                            <li>
+                                                <strong>Sensores:</strong> HC-SR04 (distancia), fotorresistencia (luz), IR 
+                                                (infrarrojo), DHT11 (temperatura y humedad).
+                                            </li>
+                                            <li><strong>Actuadores:</strong> LEDs, zumbadores, LCD1602.</li>
+                                            <li><strong>Entradas de usuario:</strong> Botones para configuración de umbrales y modos.</li>
+                                            <li><strong>ESP32:</strong> Procesa la información y ejecuta las acciones programadas.</li>
+                                        </ol>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Ejemplos prácticos</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>
+                                                <strong>Alerta visual según distancia:</strong> Encender LEDs de diferentes colores 
+                                                según la proximidad de un objeto.
+                                            </li>
+                                            <li>
+                                                <strong>Control de iluminación inteligente:</strong> Ajustar automáticamente un LED 
+                                                RGB en función de la luz ambiente.
+                                            </li>
+                                            <li>
+                                                <strong>Sistema de alarma de intrusión:</strong> Detectar movimiento con sensor IR y 
+                                                mostrar mensaje en LCD.
+                                            </li>
+                                            <li>
+                                                <strong>Monitoreo ambiental:</strong> Mostrar temperatura y humedad en LCD en tiempo 
+                                                real.
+                                            </li>
+                                            <li>
+                                                <strong>Termostato inteligente:</strong> Activar LED o alarma si la temperatura excede 
+                                                un umbral, con ajuste mediante botones.
+                                            </li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Aplicaciones reales</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>Automatización de hogares y oficinas.</li>
+                                            <li>Sistemas de seguridad para acceso restringido.</li>
+                                            <li>Control ambiental en invernaderos o laboratorios.</li>
+                                            <li>Señalización de proximidad en maquinaria industrial.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -49,7 +49,110 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                El <strong>DHT11</strong> es un sensor digital que mide <strong>temperatura</strong> y <strong>humedad 
+                                relativa</strong> de forma sencilla y fiable. Está diseñado con un conversor analógico-digital 
+                                interno de <strong>16 bits</strong>, y utiliza un protocolo digital propio para enviar la información 
+                                al microcontrolador.
+                            </p>
+
+                            <img style="display: block;margin: auto;width: 35%;" src="./img/foto_dht11.jpg" alt="Foto DHT-11" class="img-fluid icon-hover">
+                       
+                            <p>Este sensor integra:</p>
+                            <p>
+                                <ul>
+                                    <li>
+                                        Un <strong>sensor resistivo de humedad</strong> capaz de medir entre <strong>20% y 95%</strong> 
+                                        de humedad relativa.
+                                    </li>
+                                    <li>
+                                        Un <strong>termistor NTC</strong> para medir temperaturas entre <strong>0°C y 50°C</strong>.
+                                    </li>
+                                </ul>
+                            </p>
+
+                            <p>Su salida es <strong>digital calibrada</strong>, lo que garantiza buena precisión y estabilidad en el tiempo.</p>
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Principio de funcionamiento</strong>
+                                        <br><br>
+                                        El DHT11 realiza internamente la conversión de las señales analógicas de temperatura y humedad 
+                                        en datos digitales. Cuando el ESP32 solicita una lectura, el sensor envía dos valores: 
+                                        <strong>temperatura en °C</strong> y <strong>humedad relativa en %</strong>.
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Conexión al ESP32</strong>
+                                        <br><br>
+                                        En el entrenador QMT-020, el DHT11 se conecta normalmente de la siguiente forma:
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>DATA:</strong> GPIO5 (entrada digital)</li>
+                                            <li><strong>VCC:</strong> 3.3V</li>
+                                            <li><strong>GND:</strong> Tierra</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Lectura en MicroPython</strong>
+                                        <br><br>
+                                        Para usarlo en MicroPython:
+                                        <br><br>
+                                        <ol>
+                                            <li>Importar la librería dht.</li>
+                                            <li>Configurar el pin correspondiente como entrada digital.</li>
+                                            <li>
+                                                Inicializar el sensor y llamar a su método <em>.measure()</em> para actualizar los 
+                                                datos.
+                                            </li>
+                                            <li>
+                                                Obtener la temperatura con <em>.temperature()</em> y la humedad con 
+                                                <em>.humidity()</em>.
+                                            </li>
+                                        </ol>
+                                        <br>
+                                        <u>Ejemplo básico:</u>
+                                        <br><br>
+<!-- HTML generated using hilite.me --><div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">dht</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+sensor = dht.DHT11(machine.Pin(<span style="color: #B452CD">5</span>))
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    sensor.measure()
+    temp = sensor.temperature()
+    hume = sensor.humidity()
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Temperatura:&quot;</span>, temp, <span style="color: #CD5555">&quot;°C&quot;</span>)
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Humedad:&quot;</span>, hume, <span style="color: #CD5555">&quot;%&quot;</span>)
+    time.sleep(<span style="color: #B452CD">1</span>)
+</pre></div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Aplicaciones comunes</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>Estaciones meteorológicas caseras.</li>
+                                            <li>Sistemas de monitoreo ambiental.</li>
+                                            <li>Control de ventilación y climatización.</li>
+                                            <li>Automatización de invernaderos.</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Buenas prácticas</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>Evitar colocar el sensor cerca de fuentes de calor directo o humedad extrema.</li>
+                                            <li>Esperar al menos 1 segundo entre lecturas para mejorar la precisión.</li>
+                                            <li>Ubicarlo en un lugar con buena circulación de aire.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

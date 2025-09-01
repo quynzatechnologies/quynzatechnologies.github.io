@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,106 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Realizar mediciones de distancia con un sensor ultrasónico HC-SR04 mediante 
+                                una función parametrizable. Controlar el número de lecturas y los pines utilizados a través de 
+                                parámetros de entrada.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el sensor HC-SR04 al ESP32:
+                                        <ul>
+                                            <li>Trigger al pin digital (salida) GPIO16</li>
+                                            <li>Echo al pin digital (entrada) GPIO4</li>
+                                        </ul>
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_5_6_1.png" alt="Conexión 1 ejercicio 5.66." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo .py.</li>
+                                    <li>
+                                        Definir la función <em>distancia(TRIG, ECHO)</em> para calcular la distancia usando la 
+                                        velocidad del sonido.
+                                    </li>
+                                    <li>
+                                        Crear la función <em>rutine_HCSR04(trig_pin, echo_pin)</em> que inicializa pines y controla la 
+                                        cantidad de mediciones.
+                                    </li>
+                                    <li>
+                                        Llamar a la función con los pines especificados para iniciar el conteo de lecturas.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+<span style="color: #228B22"># Calcula la distancia a un objeto con el sensor ultrasonico </span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">distancia</span>(TRIG,ECHO):
+    <span style="color: #228B22"># Asegura que inicialmente el trigger esta off </span>
+    TRIG.off()
+    time.sleep_us(<span style="color: #B452CD">2</span>)  <span style="color: #228B22"># Wait for 2 microseconds</span>
+
+    <span style="color: #228B22"># Envía un pulso  durante 10-microsecond al pin trigger</span>
+    TRIG.on()
+    time.sleep_us(<span style="color: #B452CD">10</span>)
+    TRIG.off()
+
+    <span style="color: #228B22"># Espera para que el pin echo vaya a high</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> ECHO.value():
+        <span style="color: #8B008B; font-weight: bold">pass</span>
+
+    <span style="color: #228B22"># Registra el tiempo hasta cuando el pin echo va a high</span>
+    time1 = time.ticks_us()
+
+    <span style="color: #228B22"># Espera hasta cuando el pin echo va a low</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> ECHO.value():
+        <span style="color: #8B008B; font-weight: bold">pass</span>
+
+    <span style="color: #228B22"># Registra el tiempo hasta cuando el pin echo va a low</span>
+    time2 = time.ticks_us()
+
+    <span style="color: #228B22"># Calcula la diferencia de tiempos entre los tiempos de los dos registros</span>
+    durante = time.ticks_diff(time2, time1)
+
+    <span style="color: #228B22"># Calcula y retorna la distance (en cm) usando la velocidad del sonido (340 m/s)</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> durante * <span style="color: #B452CD">340</span> / <span style="color: #B452CD">2</span> / <span style="color: #B452CD">10000</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">rutine_HCSR04</span>(trig_pin,echo_pin):
+    <span style="color: #228B22"># Define los pines trigger y echo para el sensor de distancia</span>
+    TRIG_ = machine.Pin(trig_pin, machine.Pin.OUT)
+    ECHO_ = machine.Pin(echo_pin, machine.Pin.IN)
+    
+    time1 = time.ticks_us()
+    i = <span style="color: #B452CD">0</span>
+    <span style="color: #8B008B; font-weight: bold">while</span>  i &lt;= <span style="color: #B452CD">30</span>:
+        time2 = time.ticks_us()
+        dis = distancia(TRIG_,ECHO_)
+        i = i + <span style="color: #B452CD">1</span>
+        <span style="color: #658B00">print</span>(i,<span style="color: #CD5555">&#39; Distancia: %.2f&#39;</span> % dis)
+        time.sleep_ms(<span style="color: #B452CD">300</span>)
+        <span style="color: #228B22"># Espera 300 milisegundos antes de volver a leer</span>
+
+<span style="color: #228B22"># Pines utilizados: GPIO16 para el trigger y GPIO4 para el ECHO</span>
+rutine_HCSR04(<span style="color: #B452CD">16</span>,<span style="color: #B452CD">4</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el número máximo de lecturas modificando el valor de <em>i <= 30</em>.</li>
+                                    <li>Mostrar las distancias en una pantalla LCD1602 en lugar de la consola.</li>
+                                    <li>Usar diferentes pines para trigger y echo ajustando la llamada a <em>rutine_HCSR04</em>.</li>
+                                    <li>Acercar y alejar un objeto del sensor y analizar las variaciones en la distancia medida.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

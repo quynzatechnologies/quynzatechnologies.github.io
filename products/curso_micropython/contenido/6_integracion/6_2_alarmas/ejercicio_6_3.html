@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,128 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Medir continuamente la distancia usando el sensor ultrasónico HC-SR04. 
+                                Mostrar la distancia en una pantalla LCD1602. Activar un zumbador a una frecuencia determinada si la 
+                                distancia es menor a 5 cm, repitiendo cada 5 segundos hasta que el objeto se aleje.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el sensor HC-SR04 al ESP32:
+                                        <br><br>
+                                        <ul>
+                                            <li>Trigger a GPIO16</li>
+                                            <li>Echo a GPIO4</li>
+                                        </ul>
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_2_1.png" alt="Conexión 1 ejercicio 6.3." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Conectar el módulo LCD1602 (I2C) al ESP32:
+                                        <br><br>
+                                        <ul>
+                                            <li>SCL a GPIO22</li>
+                                            <li>SDA a GPIO21</li>
+                                        </ul>
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_3_2.png" alt="Conexión 2 ejercicio 6.3." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>
+                                        Conectar el zumbador al pin GPIO23.
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_2_2.png" alt="Conexión 3 ejercicio 6.3." class="img-fluid icon-hover">
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_6_3_1.png" alt="Foto ejercicio 6.3." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>Configurar la pantalla LCD usando la librería lcd1602.</li>
+                                    <li>Implementar las funciones para medición de distancia y activación del zumbador.</li>
+                                    <li>
+                                        Ejecutar un bucle que actualice la pantalla y active la alarma según la distancia.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, I2C, PWM
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> sleep, ticks_us, ticks_diff
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">lcd1602</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> LCD
+
+
+<span style="color: #228B22"># Crea una instancia de la clase LCD y le asigna la variable lcd </span>
+lcd = LCD()
+<span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Alarma más completa&quot;</span>)
+<span style="color: #228B22"># Configuración del I2C para la pantalla LCD</span>
+
+I2C_SCL = <span style="color: #B452CD">22</span>
+I2C_SDA = <span style="color: #B452CD">21</span>
+
+<span style="color: #228B22"># Configuración del sensor ultrasónico</span>
+TRIG_PIN = <span style="color: #B452CD">16</span>
+ECHO_PIN = <span style="color: #B452CD">4</span>
+trig = Pin(TRIG_PIN, Pin.OUT)
+echo = Pin(ECHO_PIN, Pin.IN)
+
+<span style="color: #228B22"># Configuración del zumbador</span>
+ZUMBADOR_PIN = <span style="color: #B452CD">23</span>
+zumbador = PWM(Pin(ZUMBADOR_PIN))
+
+<span style="color: #228B22"># Función para medir la distancia</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">medir_distancia</span>():
+    trig.off()
+    sleep(<span style="color: #B452CD">0.002</span>)
+    trig.on()
+    sleep(<span style="color: #B452CD">0.00001</span>)
+    trig.off()
+
+    <span style="color: #8B008B; font-weight: bold">while</span> echo.value() == <span style="color: #B452CD">0</span>:
+        inicio = ticks_us()
+    <span style="color: #8B008B; font-weight: bold">while</span> echo.value() == <span style="color: #B452CD">1</span>:
+        fin = ticks_us()
+
+    duracion = ticks_diff(fin, inicio)
+    distancia = (duracion * <span style="color: #B452CD">0.0343</span>) / <span style="color: #B452CD">2</span>  <span style="color: #228B22"># Convertir a cm</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> distancia
+
+<span style="color: #228B22"># Función para activar el buzzer</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">activar_zumbador</span>():
+    zumbador.freq(<span style="color: #B452CD">2000</span>)  <span style="color: #228B22"># Frecuencia en Hz</span>
+    zumbador.duty(<span style="color: #B452CD">512</span>)   <span style="color: #228B22"># Intensidad del sonido</span>
+    sleep(<span style="color: #B452CD">0.5</span>)
+    zumbador.duty(<span style="color: #B452CD">0</span>)     <span style="color: #228B22"># Apagar buzzer</span>
+
+<span style="color: #228B22"># Bucle principal</span>
+lcd.message(<span style="color: #CD5555">&quot;Distancia: --- cm&quot;</span>)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    distancia = medir_distancia()
+    lcd.clear()
+    lcd.message(<span style="color: #CD5555">&quot;Distancia: {:.1f}cm&quot;</span>.format(distancia))
+
+    <span style="color: #8B008B; font-weight: bold">if</span> distancia &lt; <span style="color: #B452CD">5</span>:
+        activar_zumbador()
+        sleep(<span style="color: #B452CD">5</span>)  <span style="color: #228B22"># Esperar 5 segundos antes de volver a verificar</span>
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        sleep(<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># Verificar cada segundo si la distancia es segura</span>
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Cambiar el umbral de distancia de 5 cm a otro valor.</li>
+                                    <li>Mostrar un mensaje de advertencia adicional en la pantalla LCD cuando se active la alarma.</li>
+                                    <li>Ajustar la frecuencia y duración del zumbador para generar diferentes tonos de alerta.</li>
+                                    <li>Probar con diferentes materiales y formas de objetos para observar variaciones en la detección.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

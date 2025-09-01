@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -49,7 +49,121 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                Los <strong>controles remotos infrarrojos (IR)</strong> son dispositivos de transmisión de datos a 
+                                corta distancia que utilizan luz infrarroja modulada para enviar comandos a un receptor. El receptor 
+                                IR decodifica las señales luminosas y las convierte en información digital que el microcontrolador 
+                                puede interpretar.
+                            </p>
+
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Principio de funcionamiento</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>
+                                                La comunicación IR requiere <strong>línea de vista directa</strong> entre el control y 
+                                                el receptor.
+                                            </li>
+                                            <li>
+                                                No atraviesa paredes ni objetos opacos, a diferencia de tecnologías como WiFi o 
+                                                Bluetooth.
+                                            </li>
+                                            <li>
+                                                La transmisión se realiza mediante <strong>modulación</strong> de un haz de luz IR en 
+                                                una frecuencia portadora (típicamente 38 kHz).
+                                            </li>
+                                            <li>
+                                                Cada botón del control envía un <strong>código único</strong> que representa la función 
+                                                asociada.
+                                            </li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Protocolo NEC</strong>
+                                        <br><br>
+                                        Uno de los protocolos más usados en controles IR es el NEC, que define cómo se codifican y 
+                                        transmiten los datos.
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Bits de dirección:</strong> identifican el dispositivo.</li>
+                                            <li><strong>Bits de comando:</strong> indican la acción solicitada.</li>
+                                            <li><strong>Bits de control:</strong> para repetición o validación de datos.</li>
+                                        </ul>
+                                        <br>
+                                        En este curso se usará la librería <em>ir_rx.nec.NEC_8</em> de MicroPython, que implementa la 
+                                        recepción y decodificación del protocolo NEC.
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Conexión al ESP32</strong>
+                                        <br><br>
+                                        En el entrenador QMT-020:
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>VCC:</strong> 3.3V o 5V (según módulo).</li>
+                                            <li><strong>GND:</strong> Tierra.</li>
+                                            <li><strong>OUT:</strong> señal digital conectada, por ejemplo, al GPIO15.</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Lectura en MicroPython</strong>
+                                        <br><br>
+                                        El flujo básico es:
+                                        <br><br>
+                                        <ol>
+                                            <li>Conectar el receptor IR al pin correspondiente.</li>
+                                            <li>Usar la librería NEC_8 para decodificar los códigos recibidos.</li>
+                                            <li>
+                                                Implementar una función <em>decodeKeyValue()</em> que convierta cada código en el 
+                                                nombre de la tecla.
+                                            </li>
+                                            <li>
+                                                Definir un <em>callback()</em> para manejar la tecla presionada y ejecutar la acción 
+                                                correspondiente.
+                                            </li>
+                                        </ol>
+                                        <br>
+                                        <u>Ejemplo simplificado:</u>
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">ir_rx.nec</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> NEC_8
+<span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">ir_rx.print_error</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> print_error
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">decodeKeyValue</span>(data):
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x16</span>: <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;0&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> data == <span style="color: #B452CD">0x0C</span>: <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;1&quot;</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;ERROR&quot;</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">callback</span>(data, addr, ctrl):
+    <span style="color: #8B008B; font-weight: bold">if</span> data &gt;= <span style="color: #B452CD">0</span>:
+        <span style="color: #658B00">print</span>(decodeKeyValue(data))
+
+ir = NEC_8(Pin(<span style="color: #B452CD">15</span>, Pin.IN), callback)
+ir.error_function(print_error)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #8B008B; font-weight: bold">pass</span>
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Aplicaciones</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>Control remoto de LEDs y actuadores.</li>
+                                            <li>Menús interactivos en pantallas LCD.</li>
+                                            <li>Control de robots o sistemas de domótica.</li>
+                                            <li>Ejecución de operaciones programadas (por ejemplo, calculadora).</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -52,7 +52,65 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                <strong>Objetivo.</strong> Aprender a utilizar el sensor de temperatura y humedad DHT11. Obtener 
+                                mediciones continuas de temperatura y humedad relativa.
+                            </p>
+
+                            <p><strong>Procedimiento.</strong></p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar el sensor DHT11 al ESP32.
+                                        <ul>
+                                            <li>DATA al pin digital (entrada) GPIO5</li>
+                                        </ul>
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_5_9_1.png" alt="Conexión 1 ejercicio 5.9." class="img-fluid icon-hover">
+                                        <br>
+                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_5_9_1.png" alt="Fotos conexión ejercicio 5.9." class="img-fluid icon-hover">
+                                        <br>
+                                    </li>
+                                    <li>Abrir Thonny y crear un nuevo archivo .py.</li>
+                                    <li>Importar la librería dht para inicializar el sensor.</li>
+                                    <li>Configurar el pin de datos como entrada digital.</li>
+                                    <li>
+                                        Implementar un bucle infinito que lea temperatura y humedad y los muestre en consola.
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">dht</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+<span style="color: #228B22"># Inicia el sensor DHT11</span>
+
+sensor = dht.DHT11(machine.Pin(<span style="color: #B452CD">5</span>))
+
+<span style="color: #228B22"># Ciclo para medir continuamente la temperatura y la humedad</span>
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    result = sensor.measure()
+    temp = sensor.temperature()
+    hume = sensor.humidity()
+
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Temperature: &quot;</span>, temp)
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Humidity: &quot;</span>, hume)
+    time.sleep(<span style="color: #B452CD">1</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><strong>Actividades sugeridas.</strong></p>
+                            <p>
+                                <ul>
+                                    <li>Tocar el sensor con un dedo y observar los cambios en humedad y temperatura.</li>
+                                    <li>Modificar el código para mostrar las mediciones en una pantalla LCD1602.</li>
+                                    <li>Cambiar el intervalo de medición ajustando time.sleep(1).</li>
+                                    <li>Colocar el sensor en diferentes ambientes (interior, exterior) y comparar resultados.</li>
+                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+                                </ul>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

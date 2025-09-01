@@ -3,7 +3,7 @@
 
 <head>
     <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
+    <script src="/js/logout_micropython.js" defer></script>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -49,7 +49,110 @@
                         </div>
                         
                         <div id="content">
-                           
+                            <p>
+                                El <strong>sensor infrarrojo (IR)</strong> para detección de obstáculos es un dispositivo electrónico que utiliza la reflexión de luz infrarroja para determinar la presencia de objetos cercanos. Está compuesto por:
+                            </p>
+
+                            <p>
+                                <ul>
+                                    <li><strong>LED emisor IR:</strong> genera un haz de luz infrarroja.</li>
+                                    <li><strong>LED receptor IR (fotodiodo o fototransistor):</strong> detecta la luz reflejada por un objeto.</li>
+                                </ul>
+                            </p>
+
+                            <p>
+                                Cuando un objeto se encuentra dentro del rango de detección, la luz infrarroja emitida rebota en su superficie y es captada por el receptor, generando una señal digital que indica su presencia.
+                            </p>
+                            <img style="display: block;margin: auto;width: 50%;" src="./img/foto_ir.png" alt="Foto sensor IR" class="img-fluid icon-hover">
+                            <p>
+                                <ol>
+                                    <li>
+                                        <strong>Características principales</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>Rango ajustable:</strong> típicamente entre 2 cm y 20 cm.</li>
+                                            <li>
+                                                <strong>Salida digital:</strong> valor lógico 0 o 1 según la presencia o ausencia de un 
+                                                objeto.
+                                            </li>
+                                            <li>
+                                                <strong>Alta inmunidad a interferencias de luz ambiental</strong> gracias a la modulación de 
+                                                la señal infrarroja.
+                                            </li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Principio de funcionamiento</strong>
+                                        <br><br>
+                                        La radiación infrarroja es similar a la luz visible, pero con una longitud de onda mayor (generalmente 
+                                        entre 700 nm y 1 mm), lo que la hace invisible al ojo humano.
+                                        
+                                        <br><br>
+                                        <img style="display: block;margin: auto;width: 100%;" src="./img/espectro_radiofrecuencia.png" alt="Espectro radiofrecuencia" class="img-fluid icon-hover">
+                                        <br>
+                                        En el caso de estos sensores, el emisor IR proyecta un haz que, al reflejarse en un objeto, es 
+                                        captado por el receptor. La electrónica interna del módulo procesa esta señal y entrega un 
+                                        valor lógico que puede ser leído por un microcontrolador como el ESP32.
+                                        <br><br>
+                                    </li>
+                                    <li>
+                                        <strong>Conexión al ESP32</strong>
+                                        <br><br>
+                                        En el entrenador QMT-020, el módulo IR digital puede conectarse, por ejemplo, al 
+                                        <strong>GPIO17</strong> del ESP32:
+                                        <br><br>
+                                        <ul>
+                                            <li><strong>VCC:</strong> 3.3V o 5V (según especificaciones del módulo).</li>
+                                            <li><strong>GND:</strong> Tierra.</li>
+                                            <li><strong>OUT:</strong> señal digital conectada al pin de lectura.</li>
+                                        </ul>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Lectura en MicroPython</strong>
+                                        <br><br>
+                                        El uso básico del sensor consiste en:
+                                        <br><br>
+                                        <ul>
+                                            <li>
+                                                Configurar el pin como <strong>entrada digital</strong> con resistencia interna de 
+                                                pull-up (Pin.PULL_UP).
+                                            </li>
+                                            <li>Leer el valor lógico de salida en un bucle continuo.</li>
+                                            <li>Tomar decisiones según la detección o no de obstáculos.</li>
+                                        </ul>
+                                        <br>
+                                        <u>Ejemplo básico:</u>
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
+
+ir_sensor = machine.Pin(<span style="color: #B452CD">17</span>, machine.Pin.IN, machine.Pin.PULL_UP)
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #8B008B; font-weight: bold">if</span> ir_sensor.value() == <span style="color: #B452CD">0</span>:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Obstáculo detectado&quot;</span>)
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Libre&quot;</span>)
+    time.sleep(<span style="color: #B452CD">0.5</span>)
+</pre>
+</div>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <strong>Aplicaciones</strong>
+                                        <br><br>
+                                        <ul>
+                                            <li>Robótica móvil para evitar colisiones.</li>
+                                            <li>Sistemas de conteo de objetos.</li>
+                                            <li>Alarmas de proximidad en zonas restringidas.</li>
+                                            <li>Activadores automáticos para dispositivos.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

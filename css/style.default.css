@@ -1983,6 +1983,7 @@ main {
   margin: 0 auto;
 }
 
+/*
 @media (min-width: 1395px) {
   #aside-nav-curso-iot-container {
     position: relative;
@@ -2015,6 +2016,7 @@ main {
     display: none;
   }
 }
+*/
 
 a {
   color: var(--primary-accent);
@@ -2284,4 +2286,167 @@ address {
 .yamm .dropdown.yamm-fw .dropdown-menu {
   left: 15px;
   right: 15px;
+}
+
+/* Layout: sidebar + contenido */
+.div-content{
+  display:flex;
+  align-items:flex-start;
+  gap:20px;
+  max-width:1550px;
+  margin:0 auto;
+}
+
+/* Sidebar */
+#aside-nav-curso-micropython-container{
+  flex:0 0 450px;
+  background:#f2f2f2;
+  border-radius:6px;
+  padding:10px;
+  transition:all .3s ease;
+}
+
+/* Colapso total */
+#aside-nav-curso-micropython-container.is-collapsed{
+  flex:0 0 0 !important;
+  width:0 !important;
+  padding:0 !important;
+  overflow:hidden;
+}
+
+/* --- MENÚ --- */
+
+/* Todos los li como bloque por defecto */
+#aside-nav-curso-micropython-container li{
+  display:block;
+  position:relative;
+}
+
+/* Solo los li con submenú usan flex (texto + flecha a la derecha) */
+#aside-nav-curso-micropython-container li.has-submenu{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* Texto recortado si es largo */
+#aside-nav-curso-micropython-container li.has-submenu > a{
+  flex:1 1 auto;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* Flecha fija a la derecha (sin float) */
+#aside-nav-curso-micropython-container .submenu-toggle{
+  flex:0 0 auto;
+  margin-left:8px;
+  cursor:pointer;
+  font-size:14px;
+  line-height:1;
+  user-select:none;
+  /* asegurar que anule floats anteriores si existían */
+  float:none !important;
+}
+#aside-nav-curso-micropython-container .submenu-toggle.open{ transform: rotate(90deg); }
+
+/* Submenús en bloque vertical */
+#aside-nav-curso-micropython-container li > ul{
+  display:none;
+  padding-left:15px;
+}
+#aside-nav-curso-micropython-container li.open > ul{ display:block; }
+
+/* Resalte opcional del ítem abierto */
+#aside-nav-curso-micropython-container li.open > a{ font-weight:700; }
+
+/* Cada fila de título (link + flecha) */
+#aside-nav-curso-micropython-container .menu-item-header{
+  position: relative;
+  display: block;                  /* no flex en el <li>, solo aquí */
+  border-radius: 4px;
+}
+
+/* Hover y cuando el li está abierto */
+#aside-nav-curso-micropython-container li.open > .menu-item-header,
+#aside-nav-curso-micropython-container .menu-item-header:hover{
+  background: rgba(255,255,255,0.18);
+}
+
+/* Texto: recorte con "..." si no cabe */
+#aside-nav-curso-micropython-container .menu-item-header > a{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--black);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Flecha pegada al borde derecho, centrada verticalmente */
+#aside-nav-curso-micropython-container .menu-item-header > .submenu-toggle{
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0);
+  transition: transform .15s ease;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  line-height: 1;
+}
+#aside-nav-curso-micropython-container li.open > .menu-item-header > .submenu-toggle{
+  transform: translateY(-50%) rotate(90deg);
+}
+
+/* Submenús en bloque vertical, sin “caja” propia */
+#aside-nav-curso-micropython-container li > ul{
+  display: none;                /* se abre por JS añadiendo .open al li */
+  padding-left: 16px;
+  margin: 6px 0 0 0;
+  background: #cbcbcb;
+  border: 0;
+}
+#aside-nav-curso-micropython-container li.open > ul{ display: block; }
+
+/* Evita fondos heredados que crean bandas raras */
+#aside-nav-curso-micropython-container li,
+#aside-nav-curso-micropython-container ul{
+  background: transparent;
+  border: 0;
+}
+
+/* Contenido principal */
+#content-curso{
+  flex:1;
+  max-width:1000px;
+  background:#fff;
+  padding:20px;
+  border-radius:6px;
+}
+
+/* Botón (sticky, no fixed) */
+#toggle-sidebar{
+  position:sticky;
+  top:20px;
+  align-self:flex-start;
+  background:#626262;
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  margin:10px;
+  border-radius:4px;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:200;
+}
+#toggle-sidebar:hover{ background:#4e4e4e; }
+
+/* Responsive */
+@media (max-width: 992px){
+  .div-content{ flex-direction:column; }
+  #aside-nav-curso-micropython-container{ width:100%; flex:none; }
+  #content-curso{ width:100%; max-width:none; }
 }

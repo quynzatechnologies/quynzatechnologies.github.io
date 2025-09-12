@@ -12,7 +12,8 @@ function loadNavigation() {
     .then(response => response.text())  // Convertir la respuesta a texto
     .then(data => {
       // Insertar el contenido de nav.html en el contenedor con el id 'sidebar-container'
-      document.getElementById('aside-nav-curso-micropython-container').innerHTML = data;
+      // document.getElementById('aside-nav-curso-micropython-container').innerHTML = data;
+      document.getElementById('aside-nav-curso-micropython-container').insertAdjacentHTML('beforeend', data);
     })
     .catch(error => console.error('Error al cargar el panel de navegación:', error));
 
@@ -20,7 +21,8 @@ function loadNavigation() {
     .then(response => response.text())  // Convertir la respuesta a texto
     .then(data => {
       // Insertar el contenido de nav.html en el contenedor con el id 'sidebar-container'
-      document.getElementById('aside-nav-curso-iot-container').innerHTML = data;
+      // document.getElementById('aside-nav-curso-iot-container').innerHTML = data;
+      document.getElementById('aside-nav-curso-iot-container').insertAdjacentHTML('beforeend', data);
     })
     .catch(error => console.error('Error al cargar el panel de navegación:', error));
   

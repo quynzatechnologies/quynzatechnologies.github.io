@@ -10,8 +10,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/front.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/sidebar_nav.js"></script>
 
     <title>Ejercicio 6-3: Alarma sonora y visual en LCD para objetos cercanos con HC-SR04</title>
 </head>
@@ -25,6 +24,9 @@
         <main>
 			<div class="main">
                 <div class="div-content">
+                    <button id="toggle-sidebar">☰ Menú</button>
+                    <div id="aside-nav-curso-micropython-container"></div>
+
                     <div id="content-curso">
                         <div id="heading-breadcrumbs">
                             <div class="row">
@@ -190,8 +192,7 @@ lcd.message(<span style="color: #CD5555">&quot;Distancia: --- cm&quot;</span>)
                             </div>
                         </footer>
                     </div>
-
-                    <div id="aside-nav-curso-micropython-container"></div>
+                    </div>
                 </div>
 			</div>
 		</main>

@@ -71,186 +71,167 @@
 
                             <p>Para este ejercicio se necesitará el archivo:</p>
                             <ol>
-                                <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32. Contiene el código para conexión a una red WiFi 
-                                    específica</li>
-                                <li>main.py: Script principal de Python. Contiene el código para crear el servidor web para controlar el color del LED RGB.</li>
-                                <li>html_dht11.html: Texto HTML para interfaz gráfica del ejercicio.</li>
+                                <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica crear el servidor web para controlar el color del LED RGB.</li>
+                                <li>html_dht11.html: Texto HTML para interfaz gráfica del ejercicio. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
                             </ol>
-
-                            <h3>boot.py:</h3>
-
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
-
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-        wlan = network.WLAN(network.STA_IF)
-        wlan.active(<span style="color: #658b00">True</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        p2.off()
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;connecting to network...&#39;</span>)
-        wlan.connect(ssid, pwd)
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        <span style="color: #8B008B; font-weight: bold">pass</span>
-        p2.on()
-
-        do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
-        </pre>
-        </div>
                         
                             <h3>main.py:</h3>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin, PWM
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">uselect</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">select</span>
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, PWM
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">uselect</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">as</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">select</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
 
-        r = <span style="color: #B452CD">0</span>
-        g = <span style="color: #B452CD">0</span>
-        b = <span style="color: #B452CD">0</span>
-        <span style="color: #228B22"># Configuración de pines PWM para el LED RGB</span>
-        red = PWM(Pin(<span style="color: #B452CD">14</span>), freq=<span style="color: #B452CD">5000</span>)
-        green = PWM(Pin(<span style="color: #B452CD">12</span>), freq=<span style="color: #B452CD">5000</span>)
-        blue = PWM(Pin(<span style="color: #B452CD">13</span>), freq=<span style="color: #B452CD">5000</span>)
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 
-        <span style="color: #228B22"># Función para ajustar el brillo de cada canal RGB</span>
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">set_color</span>(r, g, b):
-        red.duty_u16(<span style="color: #658b00">int</span>(r * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
-        green.duty_u16(<span style="color: #658b00">int</span>(g * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
-        blue.duty_u16(<span style="color: #658b00">int</span>(b * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">False</span>)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
+        config = wlan.ifconfig()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
-        f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_rgb_control.html&#39;</span>)
-        text = f.read()
-        f.close()
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
 
-        html = <span style="color: #658b00">str</span>(text)
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%r&quot;</span>, <span style="color: #658b00">str</span>(r))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%g&quot;</span>, <span style="color: #658b00">str</span>(g))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%b&quot;</span>, <span style="color: #658b00">str</span>(b))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%color&quot;</span>, <span style="color: #CD5555">&#39;rgb(&#39;</span>+<span style="color: #658b00">str</span>(r)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(g)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(b)+<span style="color: #CD5555">&#39;)&#39;</span>)
-        <span style="color: #8B008B; font-weight: bold">return</span> html
+r = <span style="color: #B452CD">0</span>
+g = <span style="color: #B452CD">0</span>
+b = <span style="color: #B452CD">0</span>
+<span style="color: #228B22"># Configuración de pines PWM para el LED RGB</span>
+red = PWM(Pin(<span style="color: #B452CD">14</span>), freq=<span style="color: #B452CD">5000</span>)
+green = PWM(Pin(<span style="color: #B452CD">12</span>), freq=<span style="color: #B452CD">5000</span>)
+blue = PWM(Pin(<span style="color: #B452CD">13</span>), freq=<span style="color: #B452CD">5000</span>)
 
-        <span style="color: #228B22"># Create a Socket</span>
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        <span style="color: #228B22"># </span>
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
-        <span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
-        s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
-        <span style="color: #228B22"># Accept maximum 5 connections</span>
-        s.listen(<span style="color: #B452CD">5</span>)
-        <span style="color: #228B22"># Tiempo mínimo entre mensajes (en segundos)</span>
-        last_request_time = time.ticks_ms()
+<span style="color: #228B22"># Función para ajustar el brillo de cada canal RGB</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">set_color</span>(r, g, b):
+    red.duty_u16(<span style="color: #658B00">int</span>(r * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+    green.duty_u16(<span style="color: #658B00">int</span>(g * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+    blue.duty_u16(<span style="color: #658B00">int</span>(b * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
 
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
-        r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> r:
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">web_page</span>():
+    f = <span style="color: #658B00">open</span>(<span style="color: #CD5555">&#39;html_rgb_control.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658B00">str</span>(text)
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%r&quot;</span>, <span style="color: #658B00">str</span>(r))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%g&quot;</span>, <span style="color: #658B00">str</span>(g))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%b&quot;</span>, <span style="color: #658B00">str</span>(b))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%color&quot;</span>, <span style="color: #CD5555">&#39;rgb(&#39;</span>+<span style="color: #658B00">str</span>(r)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658B00">str</span>(g)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658B00">str</span>(b)+<span style="color: #CD5555">&#39;)&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+<span style="color: #228B22"># Tiempo mínimo entre mensajes (en segundos)</span>
+last_request_time = time.ticks_ms()
+
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
+    r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r:
         <span style="color: #8B008B; font-weight: bold">for</span> readable <span style="color: #8B008B">in</span> r:
-        <span style="color: #228B22"># When a client connects, the connection is accepted</span>
-        conn, addr = s.accept()
+            <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+            conn, addr = s.accept()
+            
+            <span style="color: #228B22"># Get the received request of the client</span>
+            request = conn.recv(<span style="color: #B452CD">1024</span>)
+            request = request.decode()
+            
+            <span style="color: #228B22"># Extraer datos del formulario si es POST</span>
+            <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
+                <span style="color: #228B22"># Obtener tiempo actual</span>
+                current_time = time.ticks_ms()
+                <span style="color: #228B22"># Ignorar solicitudes si no ha pasado el intervalo mínimo</span>
+                <span style="color: #8B008B; font-weight: bold">if</span> time.ticks_diff(current_time, last_request_time) &lt; <span style="color: #B452CD">200</span>:
+                    conn.close()
+                    <span style="color: #8B008B; font-weight: bold">continue</span>
+                <span style="color: #8B008B; font-weight: bold">else</span>:
+                    <span style="color: #228B22"># Actualizar el tiempo de la última solicitud procesada</span>
+                    last_request_time = current_time
+                    body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
+                    params = {param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">0</span>]: <span style="color: #658B00">int</span>(param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">1</span>]) <span style="color: #8B008B; font-weight: bold">for</span> param <span style="color: #8B008B">in</span> body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>)}
+                    r = params.get(<span style="color: #CD5555">&#39;red&#39;</span>, <span style="color: #B452CD">0</span>)
+                    g = params.get(<span style="color: #CD5555">&#39;green&#39;</span>, <span style="color: #B452CD">0</span>)
+                    b = params.get(<span style="color: #CD5555">&#39;blue&#39;</span>, <span style="color: #B452CD">0</span>)
+                    set_color(r, g, b)
+            
+            <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+            response = web_page()
+            <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+            conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+            conn.sendall(response)
+            
+            <span style="color: #228B22"># Close Socket</span>
+            conn.close()
+</pre></div>
 
-        <span style="color: #228B22"># Get the received request of the client</span>
-        request = conn.recv(<span style="color: #B452CD">1024</span>)
-        request = request.decode()
-
-        <span style="color: #228B22"># Extraer datos del formulario si es POST</span>
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
-        <span style="color: #228B22"># Obtener tiempo actual</span>
-        current_time = time.ticks_ms()
-        <span style="color: #228B22"># Ignorar solicitudes si no ha pasado el intervalo mínimo</span>
-        <span style="color: #8B008B; font-weight: bold">if</span> time.ticks_diff(current_time, last_request_time) &lt; <span style="color: #B452CD">200</span>:
-        conn.close()
-        <span style="color: #8B008B; font-weight: bold">continue</span>
-        <span style="color: #8B008B; font-weight: bold">else</span>:
-        <span style="color: #228B22"># Actualizar el tiempo de la última solicitud procesada</span>
-        last_request_time = current_time
-        body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
-        params = {param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">0</span>]: <span style="color: #658b00">int</span>(param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">1</span>]) <span style="color: #8B008B; font-weight: bold">for</span> param <span style="color: #8B008B">in</span> body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>)}
-        r = params.get(<span style="color: #CD5555">&#39;red&#39;</span>, <span style="color: #B452CD">0</span>)
-        g = params.get(<span style="color: #CD5555">&#39;green&#39;</span>, <span style="color: #B452CD">0</span>)
-        b = params.get(<span style="color: #CD5555">&#39;blue&#39;</span>, <span style="color: #B452CD">0</span>)
-        set_color(r, g, b)
-
-        <span style="color: #228B22"># Generate the HTML text of Web Site</span>
-        response = web_page()
-        <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
-        conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
-        conn.sendall(response)
-
-        <span style="color: #228B22"># Close Socket</span>
-        conn.close()
-        </pre>
-        </div>
 
                             <h3>html_rgb_control.html:</h3>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #1e889b">&lt;!DOCTYPE html&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;head&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;title&gt;</span>LED RGB Control<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;viewport&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;style&gt;</span>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #1e889b">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;head&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;title&gt;</span>LED RGB Control<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;viewport&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;style&gt;</span>
         <span style="color: #8B008B; font-weight: bold">body</span> { <span style="color: #8B008B; font-weight: bold">font-family</span>: Arial;}
         <span style="color: #8B008B; font-weight: bold">h1</span> { <span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #B452CD">#333</span>; }
         <span style="color: #008b45; font-weight: bold">.format</span> {<span style="color: #8B008B; font-weight: bold">width</span>: <span style="color: #B452CD">50</span>%;}
         <span style="color: #008b45; font-weight: bold">.slider</span> {<span style="color: #8B008B; font-weight: bold">width</span>: <span style="color: #B452CD">100</span>%;}
         <span style="color: #008b45">#square</span> {<span style="color: #8B008B; font-weight: bold">height</span>: <span style="color: #B452CD">50px</span>; <span style="color: #8B008B; font-weight: bold">width</span>: <span style="color: #B452CD">50</span>%; <span style="color: #8B008B; font-weight: bold">background-color</span>: %<span style="color: #8B008B; font-weight: bold">color</span>; <span style="color: #8B008B; font-weight: bold">float</span>: <span style="color: #8B008B; font-weight: bold">center</span>;<span style="color: #8B008B; font-weight: bold">margin-bottom</span>: <span style="color: #B452CD">15px</span>;<span style="color: #8B008B; font-weight: bold">border</span>: <span style="color: #B452CD">1px</span> <span style="color: #8B008B; font-weight: bold">solid</span> <span style="color: #658b00">black</span>;}
-        <span style="color: #8B008B; font-weight: bold">&lt;/style&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/head&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>Control de LED RGB<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;div</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;square&quot;</span> <span style="color: #8B008B; font-weight: bold">&gt;&lt;/div&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;form</span> <span style="color: #658b00">class =</span><span style="color: #a61717; background-color: #e3d2d2"> </span><span style="color: #CD5555">&quot;format&quot;</span> <span style="color: #658b00">action=</span><span style="color: #CD5555">&quot;/&quot;</span> <span style="color: #658b00">method=</span><span style="color: #CD5555">&quot;post&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;/style&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/head&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>Control de LED RGB<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;div</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;square&quot;</span> <span style="color: #8B008B; font-weight: bold">&gt;&lt;/div&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;form</span> <span style="color: #658b00">class =</span><span style="color: #a61717; background-color: #e3d2d2"> </span><span style="color: #CD5555">&quot;format&quot;</span> <span style="color: #658b00">action=</span><span style="color: #CD5555">&quot;/&quot;</span> <span style="color: #658b00">method=</span><span style="color: #CD5555">&quot;post&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;red&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Rojo:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;input</span> <span style="color: #658b00">type=</span><span style="color: #CD5555">&quot;range&quot;</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;red&quot;</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;red&quot;</span> <span style="color: #658b00">min=</span><span style="color: #CD5555">&quot;0&quot;</span> <span style="color: #658b00">max=</span><span style="color: #CD5555">&quot;255&quot;</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;%r&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;slider&quot;</span> <span style="color: #658b00">oninput=</span><span style="color: #CD5555">&quot;changeColor()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;br&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;green&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Verde:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;input</span> <span style="color: #658b00">type=</span><span style="color: #CD5555">&quot;range&quot;</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;green&quot;</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;green&quot;</span> <span style="color: #658b00">min=</span><span style="color: #CD5555">&quot;0&quot;</span> <span style="color: #658b00">max=</span><span style="color: #CD5555">&quot;255&quot;</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;%g&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;slider&quot;</span> <span style="color: #658b00">oninput=</span><span style="color: #CD5555">&quot;changeColor()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;br&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;blue&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Azul:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;input</span> <span style="color: #658b00">type=</span><span style="color: #CD5555">&quot;range&quot;</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;blue&quot;</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;blue&quot;</span> <span style="color: #658b00">min=</span><span style="color: #CD5555">&quot;0&quot;</span> <span style="color: #658b00">max=</span><span style="color: #CD5555">&quot;255&quot;</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;%b&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;slider&quot;</span> <span style="color: #658b00">oninput=</span><span style="color: #CD5555">&quot;changeColor()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;br&gt;&lt;br&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/form&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;/form&gt;</span>
 
-        <span style="color: #8B008B; font-weight: bold">&lt;script&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;script&gt;</span>
         <span style="color: #8B008B; font-weight: bold">function</span> changeColor() {
-        <span style="color: #8B008B; font-weight: bold">let</span> slider = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;square&quot;</span>);
-        <span style="color: #8B008B; font-weight: bold">let</span> r = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;red&quot;</span>).value;
-        <span style="color: #8B008B; font-weight: bold">let</span> g = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;green&quot;</span>).value;
-        <span style="color: #8B008B; font-weight: bold">let</span> b = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;blue&quot;</span>).value;
-        <span style="color: #8B008B; font-weight: bold">let</span> color = <span style="color: #CD5555">&#39;rgb(&#39;</span> + r + <span style="color: #CD5555">&#39;,&#39;</span> + g +<span style="color: #CD5555">&#39;,&#39;</span> + b + <span style="color: #CD5555">&#39;)&#39;</span>;
-        slider.style.backgroundColor = color;
+            <span style="color: #8B008B; font-weight: bold">let</span> slider = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;square&quot;</span>);
+            <span style="color: #8B008B; font-weight: bold">let</span> r = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;red&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> g = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;green&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> b = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;blue&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> color = <span style="color: #CD5555">&#39;rgb(&#39;</span> + r + <span style="color: #CD5555">&#39;,&#39;</span> + g +<span style="color: #CD5555">&#39;,&#39;</span> + b + <span style="color: #CD5555">&#39;)&#39;</span>;
+            slider.style.backgroundColor = color;
 
-        <span style="color: #228B22">// Enviar valores al servidor</span>
-        <span style="color: #8B008B; font-weight: bold">let</span> xhr = <span style="color: #8B008B; font-weight: bold">new</span> XMLHttpRequest();
-        xhr.open(<span style="color: #CD5555">&quot;POST&quot;</span>, <span style="color: #CD5555">&quot;/&quot;</span>, <span style="color: #8B008B; font-weight: bold">true</span>);
-        xhr.setRequestHeader(<span style="color: #CD5555">&quot;Content-Type&quot;</span>, <span style="color: #CD5555">&quot;application/x-www-form-urlencoded&quot;</span>);
-        xhr.send(<span style="color: #CD5555">&quot;red=&quot;</span> + r + <span style="color: #CD5555">&quot;&amp;green=&quot;</span> + g + <span style="color: #CD5555">&quot;&amp;blue=&quot;</span> + b);
+            <span style="color: #228B22">// Enviar valores al servidor</span>
+            <span style="color: #8B008B; font-weight: bold">let</span> xhr = <span style="color: #8B008B; font-weight: bold">new</span> XMLHttpRequest();
+            xhr.open(<span style="color: #CD5555">&quot;POST&quot;</span>, <span style="color: #CD5555">&quot;/&quot;</span>, <span style="color: #8B008B; font-weight: bold">true</span>);
+            xhr.setRequestHeader(<span style="color: #CD5555">&quot;Content-Type&quot;</span>, <span style="color: #CD5555">&quot;application/x-www-form-urlencoded&quot;</span>);
+            xhr.send(<span style="color: #CD5555">&quot;red=&quot;</span> + r + <span style="color: #CD5555">&quot;&amp;green=&quot;</span> + g + <span style="color: #CD5555">&quot;&amp;blue=&quot;</span> + b);
         }
-        <span style="color: #8B008B; font-weight: bold">&lt;/script&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
-        </pre>
-        </div>    
+    <span style="color: #8B008B; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
+</pre>
+</div>     
 
                             <h2>Explicación paso a paso</h2>
-
-                            <h3>boot.py:</h3>
-
-                            <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
-                                en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
-                            </p>
-
-                            <ul>
-                                <li>XXX: Nombre de su red WiFi</li>
-                                <li>YYY: Contraseña de su red WiFi</li>
-                            </ul>
                             
                             <h3>main.py:</h3>
 
@@ -278,45 +259,78 @@
                                 y solo aceptar solicitudes <em>POST</em> con un tiempo mínimo entre solicitudes.</li>
                             </ul>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin, PWM
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">uselect</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">select</span>
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin, PWM
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">uselect</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">select</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+</div>
 
-                            <p> Luego se crea 3 objetos llamados <em>red</em>, <em>green</em> y <em>blue</em> con clase <em>PWM</em>, el cual se va a vincular con los 
+                            <p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">False</span>)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
+        config = wlan.ifconfig()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
+                            
+                            <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
+                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
+                                en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+                            </p>
+
+                            <ul>
+                                <li>XXX: Nombre de su red WiFi</li>
+                                <li>YYY: Contraseña de su red WiFi</li>
+                            </ul>
+
+                            <p> Después, se crea 3 objetos llamados <em>red</em>, <em>green</em> y <em>blue</em> con clase <em>PWM</em>, el cual se va a vincular con los 
                                 <em>GPIO14</em>, <em>GPIO12</em> y <em>GPIO13</em>, respectivamente, del ESP32 con una configuración en modo salida (<em>Pin.OUT</em>).
                                 También se crean las variables globales <em>r</em>, <em>g</em> y <em>b</em>:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        r = <span style="color: #B452CD">0</span>
-        g = <span style="color: #B452CD">0</span>
-        b = <span style="color: #B452CD">0</span>
-        <span style="color: #228B22"># Configuración de pines PWM para el LED RGB</span>
-        red = PWM(Pin(<span style="color: #B452CD">14</span>), freq=<span style="color: #B452CD">5000</span>)
-        green = PWM(Pin(<span style="color: #B452CD">12</span>), freq=<span style="color: #B452CD">5000</span>)
-        blue = PWM(Pin(<span style="color: #B452CD">13</span>), freq=<span style="color: #B452CD">5000</span>)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+r = <span style="color: #B452CD">0</span>
+g = <span style="color: #B452CD">0</span>
+b = <span style="color: #B452CD">0</span>
+<span style="color: #228B22"># Configuración de pines PWM para el LED RGB</span>
+red = PWM(Pin(<span style="color: #B452CD">14</span>), freq=<span style="color: #B452CD">5000</span>)
+green = PWM(Pin(<span style="color: #B452CD">12</span>), freq=<span style="color: #B452CD">5000</span>)
+blue = PWM(Pin(<span style="color: #B452CD">13</span>), freq=<span style="color: #B452CD">5000</span>)
+</pre>
+</div>
 
                             <p> Se crea una función llamada <em>set_color</em>. En este se lee los valores <em>r</em>, <em>g</em> y <em>b</em>, que guardan los valores
                                 obtenidos por los slider de la interfaz web. Y se asignan a los 3 pines PWM del ESP32 mediante la función <em>PWM.duty_u16</em>
                                 en una escala de 16 bits (0 - 65535):
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Función para ajustar el brillo de cada canal RGB</span>
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">set_color</span>(r, g, b):
-        red.duty_u16(<span style="color: #658b00">int</span>(r * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
-        green.duty_u16(<span style="color: #658b00">int</span>(g * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
-        blue.duty_u16(<span style="color: #658b00">int</span>(b * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #228B22"># Función para ajustar el brillo de cada canal RGB</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">set_color</span>(r, g, b):
+    red.duty_u16(<span style="color: #658b00">int</span>(r * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+    green.duty_u16(<span style="color: #658b00">int</span>(g * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+    blue.duty_u16(<span style="color: #658b00">int</span>(b * <span style="color: #B452CD">65535</span> / <span style="color: #B452CD">255</span>))
+</pre>
+</div>
 
                             <p> Se crea una función llamada <em>web_page</em>. Se procede a leer el archivo <em>html_rgb_control.html</em> que contiene la página web 
                                 a mostrar en el servidor web, se convierte en un variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para 
@@ -324,21 +338,21 @@
                                 <em>%b</em> por la variable <em>b</em>. Por último se retorna la página web modificada:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
-        f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_rgb_control.html&#39;</span>)
-        text = f.read()
-        f.close()
-
-        html = <span style="color: #658b00">str</span>(text)
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%r&quot;</span>, <span style="color: #658b00">str</span>(r))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%g&quot;</span>, <span style="color: #658b00">str</span>(g))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%b&quot;</span>, <span style="color: #658b00">str</span>(b))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%color&quot;</span>, <span style="color: #CD5555">&#39;rgb(&#39;</span>+<span style="color: #658b00">str</span>(r)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(g)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(b)+<span style="color: #CD5555">&#39;)&#39;</span>)
-        <span style="color: #8B008B; font-weight: bold">return</span> html
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
+    f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_rgb_control.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658b00">str</span>(text)
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%r&quot;</span>, <span style="color: #658b00">str</span>(r))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%g&quot;</span>, <span style="color: #658b00">str</span>(g))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%b&quot;</span>, <span style="color: #658b00">str</span>(b))
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%color&quot;</span>, <span style="color: #CD5555">&#39;rgb(&#39;</span>+<span style="color: #658b00">str</span>(r)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(g)+<span style="color: #CD5555">&#39;,&#39;</span>+<span style="color: #658b00">str</span>(b)+<span style="color: #CD5555">&#39;)&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+</pre>
+</div>
 
                             <p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
                                 <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
@@ -347,41 +361,41 @@
                                 el número de ms actual de ESP32 mediante la función <em>time.ticks_ms()</em>:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Create a Socket</span>
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        <span style="color: #228B22"># </span>
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
-        <span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
-        s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
-        <span style="color: #228B22"># Accept maximum 5 connections</span>
-        s.listen(<span style="color: #B452CD">5</span>)
-        <span style="color: #228B22"># Tiempo mínimo entre mensajes (en segundos)</span>
-        last_request_time = time.ticks_ms()
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+<span style="color: #228B22"># Tiempo mínimo entre mensajes (en segundos)</span>
+last_request_time = time.ticks_ms()
+</pre>
+</div>
 
                             <p> Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
                                 entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente. Luego se recibe los datos del socket 
                                 enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se decodifica:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
-        r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> r:
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
+    r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r:
         <span style="color: #8B008B; font-weight: bold">for</span> readable <span style="color: #8B008B">in</span> r:
-        <span style="color: #228B22"># When a client connects, the connection is accepted</span>
-        conn, addr = s.accept()
-
-        <span style="color: #228B22"># Get the received request of the client</span>
-        request = conn.recv(<span style="color: #B452CD">1024</span>)
-        request = request.decode()
-        </pre>
-        </div>
+            <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+            conn, addr = s.accept()
+            
+            <span style="color: #228B22"># Get the received request of the client</span>
+            request = conn.recv(<span style="color: #B452CD">1024</span>)
+            request = request.decode()
+</pre>
+</div>
 
                             <p> Si se recibe una solicitud de tipo <em>POST</em> entonces se verifica si ha pasado más de 200ms desde la última solicitud procesada.
                                 En caso negativo entonces se cierra la conexión y se pasa a un nuevo ciclo. En caso afirmativo entonces se guarda el tiempo, y se Extraer
@@ -389,63 +403,63 @@
                                 <em>set_color</em> para cambiar los valores de los PWM de los pines correspondientes del ESP32: 
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Extraer datos del formulario si es POST</span>
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
-        <span style="color: #228B22"># Obtener tiempo actual</span>
-        current_time = time.ticks_ms()
-        <span style="color: #228B22"># Ignorar solicitudes si no ha pasado el intervalo mínimo</span>
-        <span style="color: #8B008B; font-weight: bold">if</span> time.ticks_diff(current_time, last_request_time) &lt; <span style="color: #B452CD">200</span>:
-        conn.close()
-        <span style="color: #8B008B; font-weight: bold">continue</span>
-        <span style="color: #8B008B; font-weight: bold">else</span>:
-        <span style="color: #228B22"># Actualizar el tiempo de la última solicitud procesada</span>
-        last_request_time = current_time
-        body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
-        params = {param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">0</span>]: <span style="color: #658b00">int</span>(param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">1</span>]) <span style="color: #8B008B; font-weight: bold">for</span> param <span style="color: #8B008B">in</span> body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>)}
-        r = params.get(<span style="color: #CD5555">&#39;red&#39;</span>, <span style="color: #B452CD">0</span>)
-        g = params.get(<span style="color: #CD5555">&#39;green&#39;</span>, <span style="color: #B452CD">0</span>)
-        b = params.get(<span style="color: #CD5555">&#39;blue&#39;</span>, <span style="color: #B452CD">0</span>)
-        set_color(r, g, b)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+            <span style="color: #228B22"># Extraer datos del formulario si es POST</span>
+            <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
+                <span style="color: #228B22"># Obtener tiempo actual</span>
+                current_time = time.ticks_ms()
+                <span style="color: #228B22"># Ignorar solicitudes si no ha pasado el intervalo mínimo</span>
+                <span style="color: #8B008B; font-weight: bold">if</span> time.ticks_diff(current_time, last_request_time) &lt; <span style="color: #B452CD">200</span>:
+                    conn.close()
+                    <span style="color: #8B008B; font-weight: bold">continue</span>
+                <span style="color: #8B008B; font-weight: bold">else</span>:
+                    <span style="color: #228B22"># Actualizar el tiempo de la última solicitud procesada</span>
+                    last_request_time = current_time
+                    body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
+                    params = {param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">0</span>]: <span style="color: #658b00">int</span>(param.split(<span style="color: #CD5555">&#39;=&#39;</span>)[<span style="color: #B452CD">1</span>]) <span style="color: #8B008B; font-weight: bold">for</span> param <span style="color: #8B008B">in</span> body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>)}
+                    r = params.get(<span style="color: #CD5555">&#39;red&#39;</span>, <span style="color: #B452CD">0</span>)
+                    g = params.get(<span style="color: #CD5555">&#39;green&#39;</span>, <span style="color: #B452CD">0</span>)
+                    b = params.get(<span style="color: #CD5555">&#39;blue&#39;</span>, <span style="color: #B452CD">0</span>)
+                    set_color(r, g, b)
+</pre>
+</div>
 
                             <p> Después de procesar la solicitud se llama a la función <em>web_page</em>, se llama y este automáticamente va a generar el html de la 
                                 página web con los valores actuales de temperatura y humedad. Después se envía los datos requeridos por el navegador del cliente para 
                                 mostrar la página web (Encabezado + Contenido) y se cierra el socket creado para el cliente:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Generate the HTML text of Web Site</span>
-        response = web_page()
-        <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
-        conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
-        conn.sendall(response)
-
-        <span style="color: #228B22"># Close Socket</span>
-        conn.close()
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+            <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+            response = web_page()
+            <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+            conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+            conn.sendall(response)
+            
+            <span style="color: #228B22"># Close Socket</span>
+            conn.close()
+</pre>
+</div>
 
                             
                             <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/Con_ESP32_ejercicio_8.png" width ="100%" height="auto">
                             </p>
 
-                            <p>Luego de subir los archivos <em>boot.py</em> y <em>html_rgb_control.html</em> al dispositivo ESP32, en consola se va a mostrar:</p>
+                            <p><b>Luego procedemos a subir el <em>html_rgb_control.html</em> al dispositivo ESP32.</b></p>
+
+                            <p>Después, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/resultado1_ejercicio_8.png" width ="100%" height="auto">
                             </p>
-
-                            <p>Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p>
-
-                            <p>Luego ejecutamos el script <em>main.py</em> mediante el software Thonny. Y con un computador o dispositivo móvil que esté conectado
+                            
+                            <p> Y con un computador o dispositivo móvil que esté conectado
                                 en la misma red WiFi que el ESP32, por medio de un navegador se debe conectar a la dirección web anotada en pasos anteriores:
                             </p>
 

@@ -22,10 +22,6 @@
         <header id="header-nav-main-container"></header>
 
         <main>
-			<!--
-            <div id="aside-nav-curso-iot-container"></div>
-            -->
-            
             <div class="content">
                 <section>
                     <div id="heading-breadcrumbs">
@@ -47,7 +43,7 @@
                                     <h2>Inicio Sesión</h2>
                                     <form id="login-form-iot">
                                         <div class="textbox">
-                                            <input  placeholder="Usuario" type="text" id="usuario" name="usuario" required>
+                                            <input placeholder="Usuario" type="text" id="usuario" name="usuario" required>
                                         </div>
                                         <div class="textbox">
                                             <input placeholder="Contraseña" type="password" id="contraseña" name="contraseña" required>
@@ -56,10 +52,29 @@
                                     </form>
                                     
                                     <div class="signup-link">
-                                        <p>No tienes una cuenta? <a href="#">Registrate aquí</a></p>
+                                        <p>No tienes una cuenta? 
+                                        <a href="#" id="toggle-register">Regístrate aquí</a>
+                                        </p>
+                                    </div>
+
+                                    <!-- Formulario oculto de registro -->
+                                    <div id="register-form-container" style="display: none; margin-top:20px;">
+                                        <h2>Registro de Usuario</h2>
+                                        <form id="register-form">
+                                            <div class="textbox">
+                                                <input placeholder="Código de activación" type="text" id="code" name="code" required>
+                                            </div>
+                                            <div class="textbox">
+                                                <input placeholder="Usuario" type="text" id="new-usuario" name="new-usuario" required>
+                                            </div>
+                                            <div class="textbox">
+                                                <input placeholder="Contraseña" type="password" id="new-contraseña" name="new-contraseña" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-neutral">Registrar</button>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="col-md-3"></div>
+
                             </div>
                         </div>
                     </div>

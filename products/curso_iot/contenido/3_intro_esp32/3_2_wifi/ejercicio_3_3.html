@@ -77,30 +77,30 @@
                             <p>Se debe crear el archivo <strong>main.py</strong> que contiene el siguiente código:
                             </p>
                             
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
 
-        p2 = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+p2 = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
 
-        ap = network.WLAN(network.AP_IF) <span style="color: #228B22"># create access-point interface</span>
-        ap.active(<span style="color: #658b00">True</span>)         <span style="color: #228B22"># Desactivate the interface</span>
-        ap.config(essid=<span style="color: #CD5555">&#39;XXX&#39;</span>, channel = <span style="color: #B452CD">11</span>, authmode = <span style="color: #B452CD">3</span>, password = <span style="color: #CD5555">&#39;YYY&#39;</span>)
-        ap.config(max_clients=<span style="color: #B452CD">10</span>) <span style="color: #228B22"># set how many clients can connect to the network</span>
+ap = network.WLAN(network.AP_IF) <span style="color: #228B22"># create access-point interface</span>
+ap.active(<span style="color: #658b00">True</span>)         <span style="color: #228B22"># Desactivate the interface</span>
+ap.config(essid=<span style="color: #CD5555">&#39;XXX&#39;</span>, channel = <span style="color: #B452CD">11</span>, authmode = <span style="color: #B452CD">3</span>, password = <span style="color: #CD5555">&#39;YYY&#39;</span>)
+ap.config(max_clients=<span style="color: #B452CD">10</span>) <span style="color: #228B22"># set how many clients can connect to the network</span>
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">printClients</span>():
-        clients = ap.status(<span style="color: #CD5555">&#39;stations&#39;</span>)
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">printClients</span>():
+    clients = ap.status(<span style="color: #CD5555">&#39;stations&#39;</span>)
 
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">len</span>(clients) &gt; <span style="color: #B452CD">0</span>:
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">len</span>(clients) &gt; <span style="color: #B452CD">0</span>:
         p2.on()
-        <span style="color: #8B008B; font-weight: bold">else</span>:
+    <span style="color: #8B008B; font-weight: bold">else</span>:
         p2.off()
 
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        printClients()
-        </pre>
-        </div>
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    printClients()
+</pre>
+</div>
 
                             <p>Este programa estará continuamente monitoreando la conexión a la red WiFi del ESP32, y cuando al menos un dispositivo esté conectado 
                                 exitosamente se va a encender el LED conectado a la placa ESP32. Donde "XXX" es el nombre de su red WiFi y "YYY" es la contraseña 
@@ -115,42 +115,42 @@
                                 los pines GPIO (General-purpose Input-Output) del ESP32:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+</pre>
+</div>
 
                             <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
                                 en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+</pre>
+</div>
 
                             <p> Después se va a configurar al ESP32 en el modo Punto acceso (Access Point) WiFi, para luego mantenerla activa:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        ap = network.WLAN(network.AP_IF) <span style="color: #228B22"># create access-point interface</span>
-        ap.active(<span style="color: #658b00">True</span>)         <span style="color: #228B22"># Desactivate the interface</span>
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+ap = network.WLAN(network.AP_IF) <span style="color: #228B22"># create access-point interface</span>
+ap.active(<span style="color: #658b00">True</span>)         <span style="color: #228B22"># Desactivate the interface</span>
+</pre>
+</div>
 
                             <p> Se prosigue a configurar del punto acceso:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        ap.config(essid=<span style="color: #CD5555">&#39;XXX&#39;</span>, channel = <span style="color: #B452CD">11</span>, authmode = <span style="color: #B452CD">3</span>, password = <span style="color: #CD5555">&#39;YYY&#39;</span>)
-        ap.config(max_clients=<span style="color: #B452CD">10</span>) <span style="color: #228B22"># set how many clients can connect to the network</span>
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+ap.config(essid=<span style="color: #CD5555">&#39;XXX&#39;</span>, channel = <span style="color: #B452CD">11</span>, authmode = <span style="color: #B452CD">3</span>, password = <span style="color: #CD5555">&#39;YYY&#39;</span>)
+ap.config(max_clients=<span style="color: #B452CD">10</span>) <span style="color: #228B22"># set how many clients can connect to the network</span>
+</pre>
+</div>
 
                             <ul>
                                 <li><em>essid</em>: Identificador de la red WiFi</li>
@@ -172,30 +172,30 @@
                                 conectados a la red WiFi. Si el número de clientes es mayor a 0 se enciende el LED integrado en el ESP32, en caso contrario se apaga:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">printClients</span>():
-        clients = ap.status(<span style="color: #CD5555">&#39;stations&#39;</span>)
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">printClients</span>():
+    clients = ap.status(<span style="color: #CD5555">&#39;stations&#39;</span>)
 
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">len</span>(clients) &gt; <span style="color: #B452CD">0</span>:
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">len</span>(clients) &gt; <span style="color: #B452CD">0</span>:
         p2.on()
-        <span style="color: #8B008B; font-weight: bold">else</span>:
+    <span style="color: #8B008B; font-weight: bold">else</span>:
         p2.off()
-        </pre>
-        </div>
+</pre>
+</div>
 
                             <p>  Luego de definir la función <em>printClients</em>, la llamamos en loop para que monitoriee el punto de acceso activamente:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        printClients()
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    printClients()
+</pre>
+</div>
 
                             <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">

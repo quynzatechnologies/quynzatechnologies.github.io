@@ -80,31 +80,31 @@
                             crear el archivo <strong>main.py</strong> que contiene el siguiente código:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
 
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-        wlan = network.WLAN(network.STA_IF)
-        wlan.active(<span style="color: #658b00">False</span>)
-        wlan.active(<span style="color: #658b00">True</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #658b00">False</span>)
+    wlan.active(<span style="color: #658b00">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
         p2.off()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
         wlan.connect(ssid, pwd)
         <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        <span style="color: #8B008B; font-weight: bold">pass</span>
+            <span style="color: #8B008B; font-weight: bold">pass</span>
         p2.on()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
         config = wlan.ifconfig()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
 
-        do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
-        </pre>
-        </div>
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
 
                             <p>Donde "XXX" es el nombre de su red WiFi y "YYY" es la contraseña de su red.</p>
 
@@ -117,56 +117,56 @@
                                     los pines GPIO (General-purpose Input-Output) del ESP32:
                                 </p>
                                 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+</pre>
+</div>
 
                                 <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
                                     en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
                                 </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+</pre>
+</div>
 
                                 <p> Se prosigue creando una función llamada <em>do_connect</em> que recibe 2 parámetros de entrada: <em>ssid</em>, que corresponde a SSID
                                     de la red WiFi a conectarse y <em>pwd</em>, que corresponde a la contraseña de la red WiFi. Luego se configura  al ESP32 en el modo 
                                     Estación WiFi y aseguramos que esté activada:
                                 </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-        wlan = network.WLAN(network.STA_IF)
-        wlan.active(<span style="color: #658b00">False</span>)
-        wlan.active(<span style="color: #658b00">True</span>)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #658b00">False</span>)
+    wlan.active(<span style="color: #658b00">True</span>)
+</pre>
+</div>
 
                                 <p> Si el ESP32 no está conectado a ninguna red, entonces se apaga el LED interno del ESP32 y se procede a intentar conectar a la red WiFi
                                     con SSID: <em>ssid</em> y Contraseña: <em>pwd</em>. Mientras no se haga la conexión de manera exitosa, el ESP32 queda en espera,
                                     cuando se conecte entonces se enciende el LED interno y se muestra en consola la información de la conexión:
                                 </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
         p2.off()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
         wlan.connect(ssid, pwd)
         <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        <span style="color: #8B008B; font-weight: bold">pass</span>
+            <span style="color: #8B008B; font-weight: bold">pass</span>
         p2.on()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
         config = wlan.ifconfig()
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
-        </pre>
-        </div>
+</pre>
+</div>
 
                                 <p> La clase <em><a href="https://docs.micropython.org/en/latest/library/network.WLAN.html" target="_blank">WLAN</a></em> tiene una función llamada 
                                     <em>ifconfig</em> el cual retorna/configura los parámetros a nivel IP de la red conectada. Estos parámetros están organizados en 
@@ -183,15 +183,15 @@
                                 <p> Luego de definir la función <em>do_connect</em>, la llamamos con la información de la red WiFi disponible a conectar:
                                 </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
                             </section>
 
                             <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">

@@ -77,24 +77,24 @@
 
                             <p>Se debe crear el archivo <strong>main.py</strong> que contiene el siguiente código:</p>
                             
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
 
-        wlan = network.WLAN(network.STA_IF) <span style="color: #228B22"># create station interface</span>
-        wlan.active(<span style="color: #658b00">True</span>)                   <span style="color: #228B22"># activate the interface</span>
-        listWifi = wlan.scan()              <span style="color: #228B22"># scan for access points</span>
+wlan = network.WLAN(network.STA_IF) <span style="color: #228B22"># create station interface</span>
+wlan.active(<span style="color: #658b00">True</span>)                   <span style="color: #228B22"># activate the interface</span>
+listWifi = wlan.scan()              <span style="color: #228B22"># scan for access points</span>
 
-        <span style="color: #8B008B; font-weight: bold">for</span> item <span style="color: #8B008B">in</span> listWifi:
-        ssid = item[<span style="color: #B452CD">0</span>].decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>)
-        channel = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">2</span>])
-        rssi = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">3</span>])
-        security = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">4</span>])
-        hidden =  <span style="color: #658b00">str</span>(<span style="color: #658b00">bool</span>(item[<span style="color: #B452CD">5</span>]))
-
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;SSID: &quot;</span>+ ssid + <span style="color: #CD5555">&quot;, Canal: &quot;</span>+ channel + <span style="color: #CD5555">&quot;, RSSI: &quot;</span>+ rssi + <span style="color: #CD5555">&quot;, Seguridad: &quot;</span>+ security + <span style="color: #CD5555">&quot;, Oculto: &quot;</span>+ hidden)
-        </pre>
-        </div>    
+<span style="color: #8B008B; font-weight: bold">for</span> item <span style="color: #8B008B">in</span> listWifi:
+    ssid = item[<span style="color: #B452CD">0</span>].decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>)
+    channel = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">2</span>])
+    rssi = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">3</span>])
+    security = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">4</span>])
+    hidden =  <span style="color: #658b00">str</span>(<span style="color: #658b00">bool</span>(item[<span style="color: #B452CD">5</span>]))
+    
+    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;SSID: &quot;</span>+ ssid + <span style="color: #CD5555">&quot;, Canal: &quot;</span>+ channel + <span style="color: #CD5555">&quot;, RSSI: &quot;</span>+ rssi + <span style="color: #CD5555">&quot;, Securidad: &quot;</span>+ security + <span style="color: #CD5555">&quot;, Oculto: &quot;</span>+ hidden)
+</pre>
+</div>   
                             <h2>Explicación paso a paso</h2>
 
                             <h3>main.py</h3>
@@ -102,35 +102,35 @@
                                 Esta librería permite al ESP32 conectarse a una red WiFi:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        </pre>
-        </div>    
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
+</pre>
+</div>    
                             <p>Después se va a configurar al ESP32 en el modo Estación WiFi:</p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        wlan = network.WLAN(network.STA_IF) <span style="color: #228B22"># create station interface</span>
-        </pre>
-        </div>   
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+wlan = network.WLAN(network.STA_IF) <span style="color: #228B22"># create station interface</span>
+</pre>
+</div>     
 
                             <p>Luego se procede a activar la estación:</p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        wlan.active(<span style="color: #658b00">True</span>)                   <span style="color: #228B22"># activate the interface</span>
-        </pre>
-        </div>  
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+wlan.active(<span style="color: #658b00">True</span>)                   <span style="color: #228B22"># activate the interface</span>
+</pre>
+</div> 
 
                             <p>Finalmente, se llama al método <em>scan</em> de la clase <em><a href="https://docs.micropython.org/en/latest/library/network.WLAN.html" target="_blank">WLAN</a></em>
                                 para generar la lista de redes WiFi que el módulo WLAN del ESP32 detecta:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        listWifi = wlan.scan()              <span style="color: #228B22"># scan for access points</span>
-        </div>    
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+listWifi = wlan.scan()              <span style="color: #228B22"># scan for access points</span>
+</div> 
 
                             <p>Para cada red WiFi guardada dentro de la lista, se construye una dupla conformada por los siguientes especificaciones:</p>
                             <ol>
@@ -154,21 +154,21 @@
                                 especificaciones: 
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">for</span> item <span style="color: #8B008B">in</span> listWifi:
-        ssid = item[<span style="color: #B452CD">0</span>].decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>)
-        channel = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">2</span>])
-        rssi = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">3</span>])
-        security = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">4</span>])
-        hidden =  <span style="color: #658b00">str</span>(<span style="color: #658b00">bool</span>(item[<span style="color: #B452CD">5</span>]))
-
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;SSID: &quot;</span>+ ssid + <span style="color: #CD5555">&quot;, Canal: &quot;</span>+ channel + <span style="color: #CD5555">&quot;, RSSI: &quot;</span>+ rssi + <span style="color: #CD5555">&quot;, Seguridad: &quot;</span>+ security + <span style="color: #CD5555">&quot;, Oculto: &quot;</span>+ hidden)
-        </pre>
-        </div>    
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">for</span> item <span style="color: #8B008B">in</span> listWifi:
+    ssid = item[<span style="color: #B452CD">0</span>].decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>)
+    channel = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">2</span>])
+    rssi = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">3</span>])
+    security = <span style="color: #658b00">str</span>(item[<span style="color: #B452CD">4</span>])
+    hidden =  <span style="color: #658b00">str</span>(<span style="color: #658b00">bool</span>(item[<span style="color: #B452CD">5</span>]))
+    
+    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;SSID: &quot;</span>+ ssid + <span style="color: #CD5555">&quot;, Canal: &quot;</span>+ channel + <span style="color: #CD5555">&quot;, RSSI: &quot;</span>+ rssi + <span style="color: #CD5555">&quot;, Securidad: &quot;</span>+ security + <span style="color: #CD5555">&quot;, Oculto: &quot;</span>+ hidden)
+</pre>
+</div>   
 
                             <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">

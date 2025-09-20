@@ -71,129 +71,172 @@
                             <h2>Código</h2>
                             <p>Para este ejercicio se necesitará el archivo:</p>
                             <ol>
-                                <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32. Contiene el código para conexión a una red WiFi 
-                                    específica</li>
-                                <li>main.py: Script principal de Python. Contiene el código para crear el servidor web y comunicarse con los clientes que se conecten.</li>
-                                <li>html_led.html: Texto HTML para interfaz gráfica del ejercicio.</li>
+                                <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica, crear el servidor web y comunicarse con los clientes que se conecten.</li>
+                                <li>html_led.html: Texto HTML para interfaz gráfica del ejercicio. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
                             </ol>
 
-                            <h3>boot.py:</h3>
-
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
-
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-        wlan = network.WLAN(network.STA_IF)
-        wlan.active(<span style="color: #658b00">True</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        p2.off()
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;connecting to network...&#39;</span>)
-        wlan.connect(ssid, pwd)
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        <span style="color: #8B008B; font-weight: bold">pass</span>
-        p2.on()
-
-        do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
-        </pre>
-        </div>
 
                             <h3>main.py:</h3>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">network</span>
 
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
-        <span style="color: #8B008B; font-weight: bold">if</span> p2.value() == <span style="color: #B452CD">1</span>:
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">False</span>)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
+        config = wlan.ifconfig()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">web_page</span>():
+    <span style="color: #8B008B; font-weight: bold">if</span> p2.value() == <span style="color: #B452CD">1</span>:
         gpio_state=<span style="color: #CD5555">&quot;ON&quot;</span>
-        <span style="color: #8B008B; font-weight: bold">else</span>:
+    <span style="color: #8B008B; font-weight: bold">else</span>:
         gpio_state=<span style="color: #CD5555">&quot;OFF&quot;</span>
+    
+    f = <span style="color: #658B00">open</span>(<span style="color: #CD5555">&#39;html_led.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658B00">str</span>(text)
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%s&quot;</span>, gpio_state)
+    <span style="color: #8B008B; font-weight: bold">return</span> html
 
-        f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_led.html&#39;</span>)
-        text = f.read()
-        f.close()
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
 
-        html = <span style="color: #658b00">str</span>(text)
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%led&quot;</span>, gpio_state)
-        <span style="color: #8B008B; font-weight: bold">return</span> html
-
-        <span style="color: #228B22"># Create a Socket</span>
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        <span style="color: #228B22"># </span>
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
-        <span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
-        s.bind((<span style="color: #CD5555">&#39;&#39;</span>,<span style="color: #B452CD">80</span>))
-        <span style="color: #228B22"># Accept maximum 5 connections</span>
-        s.listen(<span style="color: #B452CD">5</span>)
-
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        <span style="color: #228B22"># When a client connects, the connection is accepted</span>
-        conn, addr = s.accept()
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Got a connection from %s&#39;</span> % <span style="color: #658b00">str</span>(addr))
-
-        <span style="color: #228B22"># Get the received request of the client</span>
-        request = conn.recv(<span style="color: #B452CD">1024</span>)
-        request = <span style="color: #658b00">str</span>(request)
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Content = %s&#39;</span> % request)
-
-        <span style="color: #228B22"># Find commands of client to turn ON/OFF the led</span>
-        led_on = request.find(<span style="color: #CD5555">&#39;/?led=on&#39;</span>)
-        led_off = request.find(<span style="color: #CD5555">&#39;/?led=off&#39;</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> led_on == <span style="color: #B452CD">6</span>:
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;LED ON&#39;</span>)
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+    conn, addr = s.accept()
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Got a connection from %s&#39;</span> % <span style="color: #658B00">str</span>(addr))
+    
+    <span style="color: #228B22"># Get the received request of the client</span>
+    request = conn.recv(<span style="color: #B452CD">1024</span>)
+    request = <span style="color: #658B00">str</span>(request)
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Content = %s&#39;</span> % request)
+    
+    <span style="color: #228B22"># Find commands of client to turn ON/OFF the led</span>
+    led_on = request.find(<span style="color: #CD5555">&#39;/?led=on&#39;</span>)
+    led_off = request.find(<span style="color: #CD5555">&#39;/?led=off&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> led_on == <span style="color: #B452CD">6</span>:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;LED ON&#39;</span>)
         p2.value(<span style="color: #B452CD">1</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> led_off == <span style="color: #B452CD">6</span>:
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;LED OFF&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> led_off == <span style="color: #B452CD">6</span>:
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;LED OFF&#39;</span>)
         p2.value(<span style="color: #B452CD">0</span>)
+        
+    <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+    response = web_page()
+    
+    <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+    conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+    conn.sendall(response)
+    
+    <span style="color: #228B22"># Close Socket</span>
+    conn.close()
+</pre>
+</div>
+ 
 
-        <span style="color: #228B22"># Generate the HTML text of Web Site</span>
-        response = web_page()
-
-        <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
-        conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
-        conn.sendall(response)
-
-        <span style="color: #228B22"># Close Socket</span>
-        conn.close()
-        </pre>
-        </div>    
-                            
                             <h3>html_led.html:</h3>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #1e889b">&lt;!DOCTYPE HTML&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;head&gt;</span> 
-        <span style="color: #8B008B; font-weight: bold">&lt;title&gt;</span>ESP Web Server<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;</span> 
-        <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;viewport&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;link</span> <span style="color: #658b00">rel=</span><span style="color: #CD5555">&quot;icon&quot;</span> <span style="color: #658b00">href=</span><span style="color: #CD5555">&quot;data:,&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> 
-        <span style="color: #8B008B; font-weight: bold">&lt;style&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">html</span>{<span style="color: #8B008B; font-weight: bold">font-family</span>: Helvetica; <span style="color: #8B008B; font-weight: bold">display</span>:<span style="color: #8B008B; font-weight: bold">inline</span>-<span style="color: #8B008B; font-weight: bold">block</span>; <span style="color: #8B008B; font-weight: bold">margin</span>: <span style="color: #B452CD">0px</span> <span style="color: #8B008B; font-weight: bold">auto</span>; <span style="color: #8B008B; font-weight: bold">text-align</span>: <span style="color: #8B008B; font-weight: bold">center</span>;}
-        <span style="color: #8B008B; font-weight: bold">h1</span>{<span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #B452CD">#0F3376</span>; <span style="color: #8B008B; font-weight: bold">padding</span>: <span style="color: #B452CD">2</span>vh;}<span style="color: #8B008B; font-weight: bold">p</span>{<span style="color: #8B008B; font-weight: bold">font-size</span>: <span style="color: #B452CD">1</span>.<span style="color: #B452CD">5</span>rem;}
-        <span style="color: #008b45; font-weight: bold">.button</span>{<span style="color: #8B008B; font-weight: bold">display</span>: <span style="color: #8B008B; font-weight: bold">inline</span>-<span style="color: #8B008B; font-weight: bold">block</span>; <span style="color: #8B008B; font-weight: bold">background-color</span>: <span style="color: #B452CD">#e7bd3b</span>; <span style="color: #8B008B; font-weight: bold">border</span>: <span style="color: #8B008B; font-weight: bold">none</span>; <span style="color: #8B008B; font-weight: bold">border</span>-radius: <span style="color: #B452CD">4px</span>; <span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #658b00">white</span>; <span style="color: #8B008B; font-weight: bold">padding</span>: <span style="color: #B452CD">16px</span> <span style="color: #B452CD">40px</span>; <span style="color: #8B008B; font-weight: bold">text-decoration</span>: <span style="color: #8B008B; font-weight: bold">none</span>; <span style="color: #8B008B; font-weight: bold">font-size</span>: <span style="color: #B452CD">30px</span>; <span style="color: #8B008B; font-weight: bold">margin</span>: <span style="color: #B452CD">2px</span>; <span style="color: #8B008B; font-weight: bold">cursor</span>: <span style="color: #8B008B; font-weight: bold">pointer</span>;}
-        <span style="color: #008b45; font-weight: bold">.button2</span>{<span style="color: #8B008B; font-weight: bold">background-color</span>: <span style="color: #B452CD">#4286f4</span>;}
-        <span style="color: #8B008B; font-weight: bold">&lt;/style&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/head&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span> 
-        <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>ESP Web Server<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span> 
-        <span style="color: #8B008B; font-weight: bold">&lt;p&gt;</span>GPIO state: <span style="color: #8B008B; font-weight: bold">&lt;strong&gt;</span> %led <span style="color: #8B008B; font-weight: bold">&lt;/strong&gt;&lt;/p&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;p&gt;&lt;a</span> <span style="color: #658b00">href=</span><span style="color: #CD5555">&quot;/?led=on&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;button</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;button&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>ON<span style="color: #8B008B; font-weight: bold">&lt;/button&gt;&lt;/a&gt;&lt;/p&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;p&gt;&lt;a</span> <span style="color: #658b00">href=</span><span style="color: #CD5555">&quot;/?led=off&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;button</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;button button2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>OFF<span style="color: #8B008B; font-weight: bold">&lt;/button&gt;&lt;/a&gt;&lt;/p&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
-        </pre></div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #1e889b">&lt;!DOCTYPE HTML&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;head&gt;</span> 
+    <span style="color: #8B008B; font-weight: bold">&lt;title&gt;</span>ESP Web Server<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;</span> 
+    <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;viewport&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;link</span> <span style="color: #658b00">rel=</span><span style="color: #CD5555">&quot;icon&quot;</span> <span style="color: #658b00">href=</span><span style="color: #CD5555">&quot;data:,&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> 
+    <span style="color: #8B008B; font-weight: bold">&lt;style&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">html</span>{<span style="color: #8B008B; font-weight: bold">font-family</span>: Helvetica; <span style="color: #8B008B; font-weight: bold">display</span>:<span style="color: #8B008B; font-weight: bold">inline</span>-<span style="color: #8B008B; font-weight: bold">block</span>; <span style="color: #8B008B; font-weight: bold">margin</span>: <span style="color: #B452CD">0px</span> <span style="color: #8B008B; font-weight: bold">auto</span>; <span style="color: #8B008B; font-weight: bold">text-align</span>: <span style="color: #8B008B; font-weight: bold">center</span>;}
+    <span style="color: #8B008B; font-weight: bold">h1</span>{<span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #B452CD">#0F3376</span>; <span style="color: #8B008B; font-weight: bold">padding</span>: <span style="color: #B452CD">2</span>vh;}<span style="color: #8B008B; font-weight: bold">p</span>{<span style="color: #8B008B; font-weight: bold">font-size</span>: <span style="color: #B452CD">1</span>.<span style="color: #B452CD">5</span>rem;}
+    <span style="color: #008b45; font-weight: bold">.button</span>{<span style="color: #8B008B; font-weight: bold">display</span>: <span style="color: #8B008B; font-weight: bold">inline</span>-<span style="color: #8B008B; font-weight: bold">block</span>; <span style="color: #8B008B; font-weight: bold">background-color</span>: <span style="color: #B452CD">#e7bd3b</span>; <span style="color: #8B008B; font-weight: bold">border</span>: <span style="color: #8B008B; font-weight: bold">none</span>; <span style="color: #8B008B; font-weight: bold">border</span>-radius: <span style="color: #B452CD">4px</span>; <span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #658b00">white</span>; <span style="color: #8B008B; font-weight: bold">padding</span>: <span style="color: #B452CD">16px</span> <span style="color: #B452CD">40px</span>; <span style="color: #8B008B; font-weight: bold">text-decoration</span>: <span style="color: #8B008B; font-weight: bold">none</span>; <span style="color: #8B008B; font-weight: bold">font-size</span>: <span style="color: #B452CD">30px</span>; <span style="color: #8B008B; font-weight: bold">margin</span>: <span style="color: #B452CD">2px</span>; <span style="color: #8B008B; font-weight: bold">cursor</span>: <span style="color: #8B008B; font-weight: bold">pointer</span>;}
+    <span style="color: #008b45; font-weight: bold">.button2</span>{<span style="color: #8B008B; font-weight: bold">background-color</span>: <span style="color: #B452CD">#4286f4</span>;}
+    <span style="color: #8B008B; font-weight: bold">&lt;/style&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/head&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span> 
+    <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>ESP Web Server<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span> 
+    <span style="color: #8B008B; font-weight: bold">&lt;p&gt;</span>GPIO state: <span style="color: #8B008B; font-weight: bold">&lt;strong&gt;</span> %led <span style="color: #8B008B; font-weight: bold">&lt;/strong&gt;&lt;/p&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;p&gt;&lt;a</span> <span style="color: #658b00">href=</span><span style="color: #CD5555">&quot;/?led=on&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;button</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;button&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>ON<span style="color: #8B008B; font-weight: bold">&lt;/button&gt;&lt;/a&gt;&lt;/p&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;p&gt;&lt;a</span> <span style="color: #658b00">href=</span><span style="color: #CD5555">&quot;/?led=off&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;button</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;button button2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>OFF<span style="color: #8B008B; font-weight: bold">&lt;/button&gt;&lt;/a&gt;&lt;/p&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
+</pre></div>
 
                             <h2>Explicación paso a paso</h2>
 
                             <h3>boot.py</h3>
+
+                            <h3>main.py</h3>
+
+                            <p>Con la teoría explicada en la sección anterior, se procede a explicar el código desarrollado:</p>
+
+                            <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">socket</a></em>, <em>Network</em> y la clase
+                                <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em>. La clase <em>Pin</em> es usada para controlar
+                                los pines GPIO (General-purpose Input-Output) del ESP32:
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">network</span>
+</pre>
+</div>
+
+                            <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
+                                en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+</pre>
+</div>
+
+                            <p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">False</span>)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
+        config = wlan.ifconfig()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
+
                             <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
                                 <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
                                 en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
@@ -204,56 +247,30 @@
                                 <li>YYY: Contraseña de su red WiFi</li>
                             </ul>
 
-                            <h3>main.py</h3>
-
-                            <p>Con la teoría explicada en la sección anterior, se procede a explicar el código desarrollado:</p>
-
-                            <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">socket</a></em> y la clase
-                                <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em>. La clase <em>Pin</em> es usada para controlar
-                                los pines GPIO (General-purpose Input-Output) del ESP32:
-                            </p>
-
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
-        </pre>
-        </div>
-
-                            <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
-                                en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
-                            </p>
-
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
-        </pre>
-        </div>
-
-                            <p> Se crea una función llamada <em>web_page</em>. En este se llama la función <em>p2.value()</em> para determinar el estado LED <em>p2</em>:
+                            <p> Despues, se crea una función llamada <em>web_page</em>. En este se llama la función <em>p2.value()</em> para determinar el estado LED <em>p2</em>:
                                 si está encendido entonces se define la variable <em>gpio_state</em> como "<em>ON</em>", en caso contrario como  como "<em>OFF</em>".
                                 Luego se procede a leer el archivo <em>html_led.html</em> que contiene la página web a mostrar en el servidor web, se convierte en un
                                 variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para reemplazar el string <em>%led</em> por el valor de 
                                 la variable <em>gpio_state</em>. Por último se retorna la página web modificada:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
-        <span style="color: #8B008B; font-weight: bold">if</span> p2.value() == <span style="color: #B452CD">1</span>:
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>():
+    <span style="color: #8B008B; font-weight: bold">if</span> p2.value() == <span style="color: #B452CD">1</span>:
         gpio_state=<span style="color: #CD5555">&quot;ON&quot;</span>
-        <span style="color: #8B008B; font-weight: bold">else</span>:
+    <span style="color: #8B008B; font-weight: bold">else</span>:
         gpio_state=<span style="color: #CD5555">&quot;OFF&quot;</span>
-
-        f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_led.html&#39;</span>)
-        text = f.read()
-        f.close()
-
-        html = <span style="color: #658b00">str</span>(text)
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%led&quot;</span>, gpio_state)
-        <span style="color: #8B008B; font-weight: bold">return</span> html
-        </pre>
-        </div>
+    
+    f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_led.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658b00">str</span>(text)
+    html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%led&quot;</span>, gpio_state)
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+</pre>
+</div>
 
                             <p>Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
                                 <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
@@ -261,42 +278,42 @@
                                 el socket para recibir máximo 5 conexiones de manera simultánea:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Create a Socket</span>
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        <span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
-        s.bind((<span style="color: #CD5555">&#39;&#39;</span>,<span style="color: #B452CD">80</span>))
-        <span style="color: #228B22"># Accept maximum 5 connections</span>
-        s.listen(<span style="color: #B452CD">5</span>)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>,<span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+</pre>
+</div>
 
                             <p>Se procede a habilitar al socket a aceptar las conexiones entrantes de clientes que accedan a la dirección web especificada anteriormente y
                                 se imprime en consola la dirección del cliente:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        <span style="color: #228B22"># When a client connects, the connection is accepted</span>
-        conn, addr = s.accept()
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Got a connection from %s&#39;</span> % <span style="color: #658b00">str</span>(addr))
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+    conn, addr = s.accept()
+    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Got a connection from %s&#39;</span> % <span style="color: #658b00">str</span>(addr))
+</pre>
+</div>
 
                             <p>Luego se recibe los datos del socket enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se 
                                 imprime en consola:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Get the received request of the client</span>
-        request = conn.recv(<span style="color: #B452CD">1024</span>)
-        request = <span style="color: #658b00">str</span>(request)
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Content = %s&#39;</span> % request)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    <span style="color: #228B22"># Get the received request of the client</span>
+    request = conn.recv(<span style="color: #B452CD">1024</span>)
+    request = <span style="color: #658b00">str</span>(request)
+    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;Content = %s&#39;</span> % request)
+</pre>
+</div>
 
                             <p>La página web tiene dos botones:
                             </p>
@@ -313,68 +330,68 @@
                                 de esta búsqueda sea igual a 6 (si se encontró) entonces se cambia el estado del LED mediante la función <em>p2.value(i)</em>:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Find commands of client to turn ON/OFF the led</span>
-        led_on = request.find(<span style="color: #CD5555">&#39;/?led=on&#39;</span>)
-        led_off = request.find(<span style="color: #CD5555">&#39;/?led=off&#39;</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> led_on == <span style="color: #B452CD">6</span>:
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    <span style="color: #228B22"># Find commands of client to turn ON/OFF the led</span>
+    led_on = request.find(<span style="color: #CD5555">&#39;/?led=on&#39;</span>)
+    led_off = request.find(<span style="color: #CD5555">&#39;/?led=off&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> led_on == <span style="color: #B452CD">6</span>:
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;LED ON&#39;</span>)
         p2.value(<span style="color: #B452CD">1</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> led_off == <span style="color: #B452CD">6</span>:
+    <span style="color: #8B008B; font-weight: bold">if</span> led_off == <span style="color: #B452CD">6</span>:
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;LED OFF&#39;</span>)
         p2.value(<span style="color: #B452CD">0</span>)
-        </pre>
-        </div>
+</pre>
+</div>
 
                             <p> Luego de definir la función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con el valor actual
                                 del led:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Generate the HTML text of Web Site</span>
-        response = web_page()
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+    response = web_page()
+</pre>
+</div>
 
                             <p> Después se envía los datos requeridos por el navegador del cliente para mostrar la página web (Encabezado + Contenido):
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
-        conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
-        conn.sendall(response)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+    conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+    conn.sendall(response)
+</pre>
+</div>
 
                             <p>Por último, se cierra el socket creado para el cliente:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #228B22"># Close Socket</span>
-        conn.close()
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    <span style="color: #228B22"># Close Socket</span>
+    conn.close()
+</pre>
+</div>
 
                             <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
                             <p style="text-align:center;">
                                 <img src="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
                             </p>
 
-                            <p>Luego de subir los archivos <em>boot.py</em> y <em>html_led.html</em> al dispositivo ESP32, en consola se va a mostrar:</p>
+                            <p> <b>Luego procedemos a subir el archivo <em>html_led.html</em> al dispositivo ESP32.</b></p>
+
+                            <p> Despues, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos:</p> 
 
                             <p style="text-align:center;">
                                 <img src="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/img/resultado1_ejercicio_4.png" width ="100%" height="auto">
                             </p>
-
-                            <p>Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p>
-
-                            <p>Luego ejecutamos el script <em>main.py</em> mediante el software Thonny. Y con un computador o dispositivo móvil que esté conectado
+                            
+                            <p> Y con un computador o dispositivo móvil que esté conectado
                                 en la misma red WiFi que el ESP32, por medio de un navegador se debe conectar a la dirección web anotada en pasos anteriores:
                             </p>
 

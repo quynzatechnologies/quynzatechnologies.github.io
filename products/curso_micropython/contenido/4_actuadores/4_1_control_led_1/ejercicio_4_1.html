@@ -56,9 +56,9 @@
                         <div id="content">
                             <p>
                                 <strong>Objetivo.</strong> Aprender a ejecutar un programa en MicroPython con el IDE Thonny y correrlo en 
-                                el entrenador QMT-020. Comprender el uso básico de los módulos <strong>time</strong> y 
+                                el entrenador QMT-020. Comprender el uso básico de las librerías <strong>time</strong> y 
                                 <strong>machine</strong> para el control de hardware. Experimentar con la estructura secuencial y con un 
-                                bucle infinito (<strong>while True</strong>).
+                                ciclo infinito (<strong>while True</strong>).
                             </p>
 
                             <p><strong>Procedimiento.</strong></p>
@@ -67,7 +67,7 @@
                                     <li>Conectar el ESP32 al computador mediante el cable USB-C.</li>
                                     <li>Abrir el IDE Thonny y preparar un nuevo archivo de programa.</li>
                                     <li>
-                                        Comprender el uso de los módulos:
+                                        Comprender el uso de las librerías:
                                         <ul>
                                             <li><em>time</em>: funciones para medir intervalos de tiempo y generar retardos.</li>
                                             <li><em>machine</em>: acceso directo al hardware del microcontrolador, incluyendo la configuración de pines GPIO.</li>
@@ -100,7 +100,7 @@ led.value(<span style="color: #B452CD">0</span>)      <span style="color: #228B2
                                         Ahora, vamos a prender y a apagar el LED azul en un ciclo infinito. 
                                         <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Encendido y apagado repetitivo (bucle while</span>
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Encendido y apagado repetitivo (ciclo while</span>
 <span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
 <span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
 

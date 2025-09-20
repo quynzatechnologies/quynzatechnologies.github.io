@@ -71,7 +71,7 @@
                                     <li>
                                         <strong>Modos de funcionamiento</strong>
                                         <br><br>
-                                        En MicroPython, un pin se define con el módulo machine:
+                                        En MicroPython, un pin se define con la librería <em>machine</em>:
                                         <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
@@ -86,7 +86,7 @@ pin = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)  <span style="color: #
                                             <li><strong>Pin.IN</strong> -> Entrada digital: lee el estado de sensores o pulsadores.</li>
                                             <li>
                                                 <strong>Pin.OPEN_DRAIN</strong> -> Salida de drenaje abierto: útil para buses compartidos 
-                                                o comunicación con pull-ups externas.
+                                                o comunicación con pull-ups externas (no muy usado).
                                             </li>
                                         </ul>
                                         <br>
@@ -130,6 +130,9 @@ led.value(<span style="color: #B452CD">0</span>)  <span style="color: #228B22">#
                                         <br><br>
                                         <ul>
                                             <li><strong>GPIO 34, 35, 36, 39</strong> -> Solo entradas analógicas, no salidas.</li>
+                                            <li><strong>GPIO 36</strong> -> Tiene integrado un sensor de voltaje para los ADC del chip 
+                                                (Sensor VP - “Voltaje positivo”). No es un sensor en sí mismo, sino es una parte de la 
+                                                entrada analógica del microcontrolador</li>
                                             <li><strong>GPIO 0, 2, 15</strong> -> Usados en arranque, requieren cuidado.</li>
                                             <li>
                                                 <strong>GPIO con función ADC</strong> -> Permiten lectura de valores analógicos (sensores 

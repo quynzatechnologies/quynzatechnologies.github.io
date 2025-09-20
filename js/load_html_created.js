@@ -57,6 +57,12 @@ function loadNavigation() {
       document.getElementById('header-comm-container').innerHTML = data;
     })
     .catch(error => console.error('Error al cargar el panel de navegación:', error));
+  
+  // Añadir funcionalidad de jQuery para alternar la visibilidad del formulario de registro
+  $("#toggle-register").click(function(e){
+      e.preventDefault();
+      $("#register-form-container").slideToggle();
+  });
 }
   
 // Llamamos a la función cuando la página haya cargado completamente

@@ -1,47 +1,89 @@
-async function cargarUsers() {
-    try {
-        const response = await fetch("/js/login/users.json");
-        const data = await response.json();
-        return data.users; // Retorna el objeto con los usuarios
-    } catch (error) {
-        console.error("Error al cargar usuarios:", error);
-        return null;
-    }
-}
 
-function md5(text) {
-    return CryptoJS.MD5(text).toString();
-}
+$(document).ready(function(){
+    // Verificar si ya está logueado
+    window.addEventListener('DOMContentLoaded', function() {
+        const logueado = sessionStorage.getItem("logueado-iot");
+        if (logueado === "true") {
+            // Si ya está logueado, redirigir directo al curso
+            window.location.href = "/products/curso_iot/contenido/";
+        }
+    });
 
-// Verificar si el usuario ha iniciado sesión cuando el contenido se haya cargado completamente
-window.addEventListener('DOMContentLoaded', function() {
-    const logueado = sessionStorage.getItem("logueado-iot");
-    if (logueado === "true") {
-        window.location.href = "/products/curso_iot/contenido/";  // Redirigir a la página de login
-    }
-});
+    // --- LOGIN ---
+    $("#login-form-iot").on("submit", async function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
-document.getElementById("login-form-iot").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const userIngresado = document.getElementById("usuario").value;
-    const pwdIngresada = document.getElementById("contraseña").value;
+        const username = $("#usuario").val();
+        const password = $("#contraseña").val();
 
-    const usuarios = await cargarUsers();
-    if (!usuarios) {
-        alert("No se pudieron verificar los usuarios. Inténtalo más tarde.");
-        return;
-    }
+        try {
+            const res = await fetch("https://backend-quynza-pages.vercel.app/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
 
-    // Generar el hash MD5 de la contraseña ingresada
-    const userHash = md5(userIngresado);
-    const pwdHash = md5(pwdIngresada);
+            const text = await res.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch {
+                data = { error: text };
+            }
 
-    // Validar el usuario
-    if (usuarios[userHash] === pwdHash) {
-        sessionStorage.setItem("logueado-iot", "true");
-        alert("Inicio de sesión exitoso");
-        window.location.href = "/products/curso_iot/contenido/";
-    } else {
-        alert("Usuario o contraseña incorrectos");
-    }
+            if (res.ok) {
+                // Guardar estado de login en sessionStorage
+                sessionStorage.setItem("logueado-iot", "true");
+                alert("✅ Inicio de sesión exitoso");
+
+                // Redirigir al curso
+                window.location.href = "/products/curso_iot/contenido/";
+            } else {
+                alert("❌ " + (data.error || "Error en inicio de sesión"));
+            }
+        } catch(err) {
+            console.error("Error en fetch:", err);
+            alert("Error de red al iniciar sesión");
+        }
+
+        return false;
+    });
+
+    // --- REGISTRO ---
+    $("#register-form").on("submit", async function(e){
+        e.preventDefault(); 
+        e.stopImmediatePropagation();
+        
+        const code = $("#code").val();
+        const username = $("#new-usuario").val();
+        const password = $("#new-contraseña").val();
+
+        try {
+            const res = await fetch("https://backend-quynza-pages.vercel.app/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code, username, password })
+            });
+
+            const text = await res.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch {
+                data = { error: text };
+            }
+
+            if (res.ok) {
+                alert("✅ " + (data.message || "Usuario registrado con éxito"));
+            } else {
+                alert("❌ " + (data.error || "Error al registrar usuario"));
+            }
+        } catch(err) {
+            console.error("Error en fetch:", err);
+            alert("Error de red al registrar usuario");
+        }
+
+        return false;
+    });
 });

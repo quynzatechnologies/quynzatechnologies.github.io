@@ -72,421 +72,400 @@
 
                             <p>Para este ejercicio se necesitará el archivo:</p>
                             <ol>
-                                <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32. Contiene el código para conexión a una red WiFi 
-                                    específica</li>
-                                <li>main.py: Script principal de Python. Contiene el código para crear el servidor web para controlar el display 7 segmentos.</li>
-                                <li>html_7_segment.html: Texto HTML para interfaz gráfica del ejercicio.</li>
+                                <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica, crear el servidor web para controlar el display 7 segmentos.</li>
+                                <li>html_7_segment.html: Texto HTML para interfaz gráfica del ejercicio. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
                             </ol>
-
-                            <h3>boot.py:</h3>
-
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
-
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-        wlan = network.WLAN(network.STA_IF)
-        wlan.active(<span style="color: #658b00">True</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        p2.off()
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;connecting to network...&#39;</span>)
-        wlan.connect(ssid, pwd)
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        <span style="color: #8B008B; font-weight: bold">pass</span>
-        p2.on()
-
-        do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
-        </pre>
-        </div>
 
                             <h3>main.py:</h3>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin, Timer
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">uselect</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">select</span>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, Timer
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">uselect</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">as</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">select</span>
 
-        <span style="color: #228B22"># Configuración de pines para los segmentos (a-g, punto decimal)</span>
-        segments = [Pin(i, Pin.OUT) <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> [<span style="color: #B452CD">15</span>,<span style="color: #B452CD">16</span>,<span style="color: #B452CD">17</span>,<span style="color: #B452CD">18</span>,<span style="color: #B452CD">19</span>,<span style="color: #B452CD">21</span>,<span style="color: #B452CD">22</span>]]
-        <span style="color: #228B22"># Configuración de pines para los dígitos (catodos/anodos)</span>
-        digits = [Pin(i, Pin.OUT) <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> [<span style="color: #B452CD">13</span>,<span style="color: #B452CD">12</span>,<span style="color: #B452CD">14</span>,<span style="color: #B452CD">27</span>]]
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 
-        j = <span style="color: #B452CD">0</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">False</span>)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
+        config = wlan.ifconfig()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
 
-        <span style="color: #228B22"># Tabla de segmentos para números y letras</span>
-        segment_map = {
-        <span style="color: #CD5555">&#39; &#39;</span>: <span style="color: #B452CD">0</span>,
-        <span style="color: #CD5555">&#39;0&#39;</span>: <span style="color: #B452CD">63</span>,
-        <span style="color: #CD5555">&#39;1&#39;</span>: <span style="color: #B452CD">6</span>,
-        <span style="color: #CD5555">&#39;2&#39;</span>: <span style="color: #B452CD">91</span>,
-        <span style="color: #CD5555">&#39;3&#39;</span>: <span style="color: #B452CD">79</span>,
-        <span style="color: #CD5555">&#39;4&#39;</span>: <span style="color: #B452CD">102</span>,
-        <span style="color: #CD5555">&#39;5&#39;</span>: <span style="color: #B452CD">109</span>,
-        <span style="color: #CD5555">&#39;6&#39;</span>: <span style="color: #B452CD">125</span>,
-        <span style="color: #CD5555">&#39;7&#39;</span>: <span style="color: #B452CD">7</span>,
-        <span style="color: #CD5555">&#39;8&#39;</span>: <span style="color: #B452CD">127</span>,
-        <span style="color: #CD5555">&#39;9&#39;</span>: <span style="color: #B452CD">103</span>,
-        <span style="color: #CD5555">&#39;A&#39;</span>: <span style="color: #B452CD">119</span>,
-        <span style="color: #CD5555">&#39;B&#39;</span>: <span style="color: #B452CD">124</span>,
-        <span style="color: #CD5555">&#39;C&#39;</span>: <span style="color: #B452CD">57</span>,
-        <span style="color: #CD5555">&#39;D&#39;</span>: <span style="color: #B452CD">94</span>,
-        <span style="color: #CD5555">&#39;E&#39;</span>: <span style="color: #B452CD">121</span>,
-        <span style="color: #CD5555">&#39;F&#39;</span>: <span style="color: #B452CD">113</span>,
-        <span style="color: #CD5555">&#39;G&#39;</span>: <span style="color: #B452CD">111</span>,
-        <span style="color: #CD5555">&#39;H&#39;</span>: <span style="color: #B452CD">118</span>,
-        <span style="color: #CD5555">&#39;I&#39;</span>: <span style="color: #B452CD">25</span>,
-        <span style="color: #CD5555">&#39;J&#39;</span>: <span style="color: #B452CD">30</span>,
-        <span style="color: #CD5555">&#39;K&#39;</span>: <span style="color: #B452CD">122</span>,
-        <span style="color: #CD5555">&#39;L&#39;</span>: <span style="color: #B452CD">56</span>,
-        <span style="color: #CD5555">&#39;M&#39;</span>: <span style="color: #B452CD">55</span>,
-        <span style="color: #CD5555">&#39;N&#39;</span>: <span style="color: #B452CD">84</span>,
-        <span style="color: #CD5555">&#39;O&#39;</span>: <span style="color: #B452CD">63</span>,
-        <span style="color: #CD5555">&#39;P&#39;</span>: <span style="color: #B452CD">115</span>,
-        <span style="color: #CD5555">&#39;Q&#39;</span>: <span style="color: #B452CD">103</span>,
-        <span style="color: #CD5555">&#39;R&#39;</span>: <span style="color: #B452CD">80</span>,
-        <span style="color: #CD5555">&#39;S&#39;</span>: <span style="color: #B452CD">109</span>,
-        <span style="color: #CD5555">&#39;T&#39;</span>: <span style="color: #B452CD">120</span>,
-        <span style="color: #CD5555">&#39;U&#39;</span>: <span style="color: #B452CD">28</span>,
-        <span style="color: #CD5555">&#39;V&#39;</span>: <span style="color: #B452CD">62</span>,
-        <span style="color: #CD5555">&#39;W&#39;</span>: <span style="color: #B452CD">29</span>,
-        <span style="color: #CD5555">&#39;X&#39;</span>: <span style="color: #B452CD">112</span>,
-        <span style="color: #CD5555">&#39;Y&#39;</span>: <span style="color: #B452CD">110</span>,
-        <span style="color: #CD5555">&#39;Z&#39;</span>: <span style="color: #B452CD">73</span>,
-        }
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
 
-        params = {
-        <span style="color: #CD5555">&#39;d1&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
-        <span style="color: #CD5555">&#39;d2&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
-        <span style="color: #CD5555">&#39;d3&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
-        <span style="color: #CD5555">&#39;d4&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>
-        }
+<span style="color: #228B22"># Configuración de pines para los segmentos (a-g, punto decimal)</span>
+segments = [Pin(i, Pin.OUT) <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> [<span style="color: #B452CD">15</span>,<span style="color: #B452CD">16</span>,<span style="color: #B452CD">17</span>,<span style="color: #B452CD">18</span>,<span style="color: #B452CD">19</span>,<span style="color: #B452CD">21</span>,<span style="color: #B452CD">22</span>]]
+<span style="color: #228B22"># Configuración de pines para los dígitos (catodos/anodos)</span>
+digits = [Pin(i, Pin.OUT) <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> [<span style="color: #B452CD">13</span>,<span style="color: #B452CD">12</span>,<span style="color: #B452CD">14</span>,<span style="color: #B452CD">27</span>]]
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">decode_segments</span>(value):
-        <span style="color: #228B22"># Generar un array de tamaño 7 representando cada segmento</span>
-        <span style="color: #8B008B; font-weight: bold">return</span> [(value &gt;&gt; i) &amp; <span style="color: #B452CD">1</span> <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">0</span>, <span style="color: #B452CD">7</span>, <span style="color: #B452CD">1</span>)]
+j = <span style="color: #B452CD">0</span>
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">display_digit</span>(digit, value):
-        <span style="color: #228B22"># Desactivar todos los dígitos</span>
-        <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658b00">enumerate</span>(digits):
+<span style="color: #228B22"># Tabla de segmentos para números y letras</span>
+segment_map = {
+    <span style="color: #CD5555">&#39; &#39;</span>: <span style="color: #B452CD">0</span>,
+    <span style="color: #CD5555">&#39;0&#39;</span>: <span style="color: #B452CD">63</span>,
+    <span style="color: #CD5555">&#39;1&#39;</span>: <span style="color: #B452CD">6</span>,
+    <span style="color: #CD5555">&#39;2&#39;</span>: <span style="color: #B452CD">91</span>,
+    <span style="color: #CD5555">&#39;3&#39;</span>: <span style="color: #B452CD">79</span>,
+    <span style="color: #CD5555">&#39;4&#39;</span>: <span style="color: #B452CD">102</span>,
+    <span style="color: #CD5555">&#39;5&#39;</span>: <span style="color: #B452CD">109</span>,
+    <span style="color: #CD5555">&#39;6&#39;</span>: <span style="color: #B452CD">125</span>,
+    <span style="color: #CD5555">&#39;7&#39;</span>: <span style="color: #B452CD">7</span>,
+    <span style="color: #CD5555">&#39;8&#39;</span>: <span style="color: #B452CD">127</span>,
+    <span style="color: #CD5555">&#39;9&#39;</span>: <span style="color: #B452CD">103</span>,
+    <span style="color: #CD5555">&#39;A&#39;</span>: <span style="color: #B452CD">119</span>,
+    <span style="color: #CD5555">&#39;B&#39;</span>: <span style="color: #B452CD">124</span>,
+    <span style="color: #CD5555">&#39;C&#39;</span>: <span style="color: #B452CD">57</span>,
+    <span style="color: #CD5555">&#39;D&#39;</span>: <span style="color: #B452CD">94</span>,
+    <span style="color: #CD5555">&#39;E&#39;</span>: <span style="color: #B452CD">121</span>,
+    <span style="color: #CD5555">&#39;F&#39;</span>: <span style="color: #B452CD">113</span>,
+    <span style="color: #CD5555">&#39;G&#39;</span>: <span style="color: #B452CD">111</span>,
+    <span style="color: #CD5555">&#39;H&#39;</span>: <span style="color: #B452CD">118</span>,
+    <span style="color: #CD5555">&#39;I&#39;</span>: <span style="color: #B452CD">25</span>,
+    <span style="color: #CD5555">&#39;J&#39;</span>: <span style="color: #B452CD">30</span>,
+    <span style="color: #CD5555">&#39;K&#39;</span>: <span style="color: #B452CD">122</span>,
+    <span style="color: #CD5555">&#39;L&#39;</span>: <span style="color: #B452CD">56</span>,
+    <span style="color: #CD5555">&#39;M&#39;</span>: <span style="color: #B452CD">55</span>,
+    <span style="color: #CD5555">&#39;N&#39;</span>: <span style="color: #B452CD">84</span>,
+    <span style="color: #CD5555">&#39;O&#39;</span>: <span style="color: #B452CD">63</span>,
+    <span style="color: #CD5555">&#39;P&#39;</span>: <span style="color: #B452CD">115</span>,
+    <span style="color: #CD5555">&#39;Q&#39;</span>: <span style="color: #B452CD">103</span>,
+    <span style="color: #CD5555">&#39;R&#39;</span>: <span style="color: #B452CD">80</span>,
+    <span style="color: #CD5555">&#39;S&#39;</span>: <span style="color: #B452CD">109</span>,
+    <span style="color: #CD5555">&#39;T&#39;</span>: <span style="color: #B452CD">120</span>,
+    <span style="color: #CD5555">&#39;U&#39;</span>: <span style="color: #B452CD">28</span>,
+    <span style="color: #CD5555">&#39;V&#39;</span>: <span style="color: #B452CD">62</span>,
+    <span style="color: #CD5555">&#39;W&#39;</span>: <span style="color: #B452CD">29</span>,
+    <span style="color: #CD5555">&#39;X&#39;</span>: <span style="color: #B452CD">112</span>,
+    <span style="color: #CD5555">&#39;Y&#39;</span>: <span style="color: #B452CD">110</span>,
+    <span style="color: #CD5555">&#39;Z&#39;</span>: <span style="color: #B452CD">73</span>,
+}
+
+params = {
+    <span style="color: #CD5555">&#39;d1&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
+    <span style="color: #CD5555">&#39;d2&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
+    <span style="color: #CD5555">&#39;d3&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
+    <span style="color: #CD5555">&#39;d4&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>
+}
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">decode_segments</span>(value):
+    <span style="color: #228B22"># Generar un array de tamaño 7 representando cada segmento</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> [(value &gt;&gt; i) &amp; <span style="color: #B452CD">1</span> <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">0</span>, <span style="color: #B452CD">7</span>, <span style="color: #B452CD">1</span>)]
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">display_digit</span>(digit, value):
+    <span style="color: #228B22"># Desactivar todos los dígitos</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658B00">enumerate</span>(digits):
         pin.init(pin.IN)
         pin.value(<span style="color: #B452CD">0</span>)
-
-        <span style="color: #228B22"># Desactivar todos los segmentos</span>
-        <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658b00">enumerate</span>(segments):
+    
+    <span style="color: #228B22"># Desactivar todos los segmentos</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658B00">enumerate</span>(segments):
         pin.init(pin.IN)
         pin.value(<span style="color: #B452CD">0</span>)
+    
+    <span style="color: #228B22"># Activar el dígito correspondiente</span>
+    digits[digit].init(Pin.OUT)
+    digits[digit].value(<span style="color: #B452CD">1</span>)
 
-        <span style="color: #228B22"># Activar el dígito correspondiente</span>
-        digits[digit].init(Pin.OUT)
-        digits[digit].value(<span style="color: #B452CD">1</span>)
-
-        <span style="color: #228B22"># Activar segmentos según el valor decodificado</span>
-        segment_values = decode_segments(segment_map[value])
-        <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658b00">enumerate</span>(segments):
+    <span style="color: #228B22"># Activar segmentos según el valor decodificado</span>
+    segment_values = decode_segments(segment_map[value])
+    <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658B00">enumerate</span>(segments):
         <span style="color: #8B008B; font-weight: bold">if</span> segment_values[i]:
-        pin.init(Pin.OUT)
-        pin.value(<span style="color: #B452CD">0</span>)  <span style="color: #228B22"># Activo (cátodo común)</span>
+            pin.init(Pin.OUT)
+            pin.value(<span style="color: #B452CD">0</span>)  <span style="color: #228B22"># Activo (cátodo común)</span>
 
-        <span style="color: #228B22"># Callback function for the timer</span>
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">update_diplay</span>(timer):
-        <span style="color: #8B008B; font-weight: bold">global</span> j
-        <span style="color: #8B008B; font-weight: bold">if</span> j&lt;<span style="color: #B452CD">3</span>:
+<span style="color: #228B22"># Callback function for the timer</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">update_diplay</span>(timer):
+    <span style="color: #8B008B; font-weight: bold">global</span> j
+    <span style="color: #8B008B; font-weight: bold">if</span> j&lt;<span style="color: #B452CD">3</span>:
         j = j + <span style="color: #B452CD">1</span>
-        <span style="color: #8B008B; font-weight: bold">else</span>:
+    <span style="color: #8B008B; font-weight: bold">else</span>:
         j = <span style="color: #B452CD">0</span>
-        display_digit(j, params.get(<span style="color: #CD5555">&quot;d&quot;</span>+<span style="color: #658b00">str</span>(j+<span style="color: #B452CD">1</span>), <span style="color: #CD5555">&quot; &quot;</span>))
+    display_digit(j, params.get(<span style="color: #CD5555">&quot;d&quot;</span>+<span style="color: #658B00">str</span>(j+<span style="color: #B452CD">1</span>), <span style="color: #CD5555">&quot; &quot;</span>))
 
-        <span style="color: #228B22"># Create a periodic timer</span>
-        blink_timer = Timer(<span style="color: #B452CD">1</span>)
-        blink_timer.init(mode=Timer.PERIODIC, period=<span style="color: #B452CD">5</span>, callback=update_diplay)  <span style="color: #228B22"># Timer repeats 10ms</span>
+<span style="color: #228B22"># Create a periodic timer</span>
+blink_timer = Timer(<span style="color: #B452CD">1</span>)
+blink_timer.init(mode=Timer.PERIODIC, period=<span style="color: #B452CD">5</span>, callback=update_diplay)  <span style="color: #228B22"># Timer repeats 10ms</span>
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">web_page</span>(param):
-        f = <span style="color: #658b00">open</span>(<span style="color: #CD5555">&#39;html_7_segment.html&#39;</span>)
-        text = f.read()
-        f.close()
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">web_page</span>(param):
+    f = <span style="color: #658B00">open</span>(<span style="color: #CD5555">&#39;html_7_segment.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658B00">str</span>(text)
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d1&quot;</span>, <span style="color: #658B00">str</span>(params.get(<span style="color: #CD5555">&quot;d1&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d2&quot;</span>, <span style="color: #658B00">str</span>(params.get(<span style="color: #CD5555">&quot;d2&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d3&quot;</span>, <span style="color: #658B00">str</span>(params.get(<span style="color: #CD5555">&quot;d3&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d4&quot;</span>, <span style="color: #658B00">str</span>(params.get(<span style="color: #CD5555">&quot;d4&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
+    <span style="color: #8B008B; font-weight: bold">return</span> html
 
-        html = <span style="color: #658b00">str</span>(text)
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d1&quot;</span>, <span style="color: #658b00">str</span>(params.get(<span style="color: #CD5555">&quot;d1&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d2&quot;</span>, <span style="color: #658b00">str</span>(params.get(<span style="color: #CD5555">&quot;d2&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d3&quot;</span>, <span style="color: #658b00">str</span>(params.get(<span style="color: #CD5555">&quot;d3&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
-        html = <span style="color: #658b00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d4&quot;</span>, <span style="color: #658b00">str</span>(params.get(<span style="color: #CD5555">&quot;d4&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
-        <span style="color: #8B008B; font-weight: bold">return</span> html
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
 
-        <span style="color: #228B22"># Create a Socket</span>
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        <span style="color: #228B22"># </span>
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
-        <span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
-        s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
-        <span style="color: #228B22"># Accept maximum 5 connections</span>
-        s.listen(<span style="color: #B452CD">5</span>)
-
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
-        r, w, err = select.select((s,), (), (), <span style="color: #B452CD">1</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> r:
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
+    <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
+    r, w, err = select.select((s,), (), (), <span style="color: #B452CD">1</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r:
         <span style="color: #8B008B; font-weight: bold">for</span> readable <span style="color: #8B008B">in</span> r:
-        <span style="color: #228B22"># When a client connects, the connection is accepted</span>
-        conn, addr = s.accept()
+            <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+            conn, addr = s.accept()
+            
+            <span style="color: #228B22"># Get the received request of the client</span>
+            request = conn.recv(<span style="color: #B452CD">1024</span>)
+            request = request.decode()
 
-        <span style="color: #228B22"># Get the received request of the client</span>
-        request = conn.recv(<span style="color: #B452CD">1024</span>)
-        request = request.decode()
+            <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
+                body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
+                params = {<span style="color: #CD5555">&quot;d&quot;</span>+<span style="color: #658B00">str</span>(i+<span style="color: #B452CD">1</span>): param <span style="color: #8B008B; font-weight: bold">for</span> i,param <span style="color: #8B008B">in</span> <span style="color: #658B00">enumerate</span>(body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>))}
+                <span style="color: #658B00">print</span>(<span style="color: #CD5555">f&quot;d1: {</span>params.get(<span style="color: #CD5555">&quot;d1&quot;</span>,<span style="color: #BBB"> </span><span style="color: #CD5555">&quot; &quot;</span>)<span style="color: #CD5555">}, d2: {</span>params.get(<span style="color: #CD5555">&quot;d2&quot;</span>,<span style="color: #BBB"> </span><span style="color: #CD5555">&quot; &quot;</span>)<span style="color: #CD5555">}, d3: {</span>params.get(<span style="color: #CD5555">&quot;d3&quot;</span>,<span style="color: #BBB"> </span><span style="color: #CD5555">&quot; &quot;</span>)<span style="color: #CD5555">}, d4: {</span>params.get(<span style="color: #CD5555">&quot;d4&quot;</span>,<span style="color: #BBB"> </span><span style="color: #CD5555">&quot; &quot;</span>)<span style="color: #CD5555">}&quot;</span>)
 
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
-        body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
-        params = {<span style="color: #CD5555">&quot;d&quot;</span>+<span style="color: #658b00">str</span>(i+<span style="color: #B452CD">1</span>): param <span style="color: #8B008B; font-weight: bold">for</span> i,param <span style="color: #8B008B">in</span> <span style="color: #658b00">enumerate</span>(body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>))}
-        <span style="color: #8B008B; font-weight: bold">print</span>(f<span style="color: #CD5555">&quot;d1: {params.get(&quot;</span>d1<span style="color: #CD5555">&quot;, &quot;</span> <span style="color: #CD5555">&quot;)}, d2: {params.get(&quot;</span>d2<span style="color: #CD5555">&quot;, &quot;</span> <span style="color: #CD5555">&quot;)}, d3: {params.get(&quot;</span>d3<span style="color: #CD5555">&quot;, &quot;</span> <span style="color: #CD5555">&quot;)}, d4: {params.get(&quot;</span>d4<span style="color: #CD5555">&quot;, &quot;</span> <span style="color: #CD5555">&quot;)}&quot;</span>)
+            <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;GET&#39;</span> <span style="color: #8B008B">in</span> request:
+                <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+                response = web_page(params)
+                <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+                conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+                conn.sendall(response)
 
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;GET&#39;</span> <span style="color: #8B008B">in</span> request:
-        <span style="color: #228B22"># Generate the HTML text of Web Site</span>
-        response = web_page(params)
-        <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
-        conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
-        conn.sendall(response)
-
-        conn.close()
-        </pre>
-        </div>    
+            conn.close()
+</pre></div>
 
                             <h3>html_7_segment.html:</h3>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%"><span style="color: #1e889b">&lt;!DOCTYPE html&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;head&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;title&gt;</span>Control de Display 7 Segmentos<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;viewport&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;style&gt;</span>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><span style="color: #1e889b">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;head&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;title&gt;</span>Control de Display 7 Segmentos<span style="color: #8B008B; font-weight: bold">&lt;/title&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;meta</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;viewport&quot;</span> <span style="color: #658b00">content=</span><span style="color: #CD5555">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;style&gt;</span>
         <span style="color: #8B008B; font-weight: bold">body</span> { <span style="color: #8B008B; font-weight: bold">font-family</span>: Arial; <span style="color: #8B008B; font-weight: bold">text-align</span>: <span style="color: #8B008B; font-weight: bold">center</span>; <span style="color: #8B008B; font-weight: bold">margin</span>: <span style="color: #B452CD">20px</span>; }
         <span style="color: #8B008B; font-weight: bold">h1</span> { <span style="color: #8B008B; font-weight: bold">color</span>: <span style="color: #B452CD">#333</span>; }
         <span style="color: #008b45; font-weight: bold">.dropdown</span> { <span style="color: #8B008B; font-weight: bold">width</span>: <span style="color: #B452CD">100px</span>; <span style="color: #8B008B; font-weight: bold">margin</span>: <span style="color: #B452CD">10px</span>; }
         <span style="color: #008b45">#display</span> { <span style="color: #8B008B; font-weight: bold">font-size</span>: <span style="color: #B452CD">2</span>rem; <span style="color: #8B008B; font-weight: bold">margin-top</span>: <span style="color: #B452CD">20px</span>; }
-        <span style="color: #8B008B; font-weight: bold">&lt;/style&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/head&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>Control de Display 7 Segmentos<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;div</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;display&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>    <span style="color: #8B008B; font-weight: bold">&lt;/div&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;form&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;/style&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/head&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;body&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;h1&gt;</span>Control de Display 7 Segmentos<span style="color: #8B008B; font-weight: bold">&lt;/h1&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;div</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;display&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>    <span style="color: #8B008B; font-weight: bold">&lt;/div&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;form&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;digit1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Digito 1:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;select</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;digit1&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;dropdown&quot;</span> <span style="color: #658b00">onchange=</span><span style="color: #CD5555">&quot;updateDisplay()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot; &quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> <span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>0<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>1<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>2<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>3<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>4<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>5<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;6&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>6<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;7&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>7<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;8&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>8<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;9&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>9<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;A&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>A<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;B&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>B<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;C&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>C<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;D&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>D<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;E&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>E<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;F&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>F<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;G&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>G<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;H&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>H<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;I&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>I<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;J&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>J<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;K&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>K<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;L&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>L<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;M&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>M<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;N&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>N<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;O&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>O<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;P&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>P<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Q&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Q<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;R&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>R<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;S&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>S<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;T&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>T<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;U&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>U<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;V&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>V<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;W&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>W<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;X&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>X<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Y&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Y<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Z&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Z<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot; &quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> <span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>0<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>1<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>2<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>3<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>4<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>5<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;6&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>6<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;7&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>7<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;8&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>8<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;9&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>9<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;A&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>A<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;B&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>B<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;C&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>C<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;D&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>D<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;E&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>E<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;F&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>F<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;G&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>G<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;H&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>H<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;I&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>I<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;J&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>J<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;K&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>K<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;L&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>L<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;M&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>M<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;N&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>N<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;O&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>O<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;P&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>P<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Q&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Q<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;R&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>R<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;S&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>S<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;T&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>T<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;U&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>U<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;V&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>V<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;W&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>W<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;X&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>X<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Y&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Y<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Z&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Z<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;/select&gt;&lt;br&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;digit2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Digito 2:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;select</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;digit2&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;dropdown&quot;</span> <span style="color: #658b00">onchange=</span><span style="color: #CD5555">&quot;updateDisplay()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot; &quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> <span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>0<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>1<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>2<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>3<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>4<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>5<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;6&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>6<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;7&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>7<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;8&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>8<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;9&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>9<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;A&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>A<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;B&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>B<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;C&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>C<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;D&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>D<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;E&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>E<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;F&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>F<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;G&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>G<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;H&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>H<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;I&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>I<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;J&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>J<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;K&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>K<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;L&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>L<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;M&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>M<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;N&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>N<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;O&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>O<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;P&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>P<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Q&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Q<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;R&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>R<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;S&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>S<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;T&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>T<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;U&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>U<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;V&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>V<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;W&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>W<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;X&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>X<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Y&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Y<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Z&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Z<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot; &quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> <span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>0<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>1<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>2<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>3<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>4<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>5<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;6&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>6<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;7&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>7<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;8&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>8<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;9&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>9<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;A&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>A<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;B&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>B<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;C&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>C<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;D&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>D<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;E&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>E<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;F&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>F<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;G&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>G<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;H&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>H<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;I&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>I<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;J&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>J<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;K&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>K<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;L&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>L<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;M&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>M<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;N&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>N<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;O&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>O<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;P&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>P<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Q&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Q<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;R&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>R<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;S&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>S<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;T&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>T<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;U&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>U<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;V&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>V<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;W&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>W<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;X&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>X<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Y&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Y<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Z&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Z<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;/select&gt;&lt;br&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;digit3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Digito 3:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;select</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;digit3&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;dropdown&quot;</span> <span style="color: #658b00">onchange=</span><span style="color: #CD5555">&quot;updateDisplay()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot; &quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> <span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>0<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>1<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>2<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>3<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>4<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>5<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;6&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>6<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;7&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>7<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;8&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>8<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;9&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>9<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;A&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>A<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;B&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>B<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;C&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>C<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;D&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>D<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;E&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>E<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;F&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>F<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;G&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>G<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;H&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>H<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;I&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>I<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;J&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>J<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;K&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>K<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;L&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>L<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;M&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>M<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;N&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>N<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;O&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>O<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;P&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>P<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Q&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Q<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;R&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>R<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;S&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>S<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;T&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>T<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;U&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>U<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;V&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>V<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;W&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>W<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;X&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>X<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Y&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Y<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Z&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Z<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot; &quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> <span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>0<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>1<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>2<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>3<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>4<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>5<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;6&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>6<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;7&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>7<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;8&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>8<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;9&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>9<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;A&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>A<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;B&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>B<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;C&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>C<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;D&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>D<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;E&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>E<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;F&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>F<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;G&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>G<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;H&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>H<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;I&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>I<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;J&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>J<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;K&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>K<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;L&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>L<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;M&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>M<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;N&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>N<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;O&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>O<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;P&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>P<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Q&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Q<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;R&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>R<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;S&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>S<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;T&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>T<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;U&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>U<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;V&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>V<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;W&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>W<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;X&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>X<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Y&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Y<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Z&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Z<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;/select&gt;&lt;br&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;label</span> <span style="color: #658b00">for=</span><span style="color: #CD5555">&quot;digit4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Digito 4:<span style="color: #8B008B; font-weight: bold">&lt;/label&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;select</span> <span style="color: #658b00">id=</span><span style="color: #CD5555">&quot;digit4&quot;</span> <span style="color: #658b00">class=</span><span style="color: #CD5555">&quot;dropdown&quot;</span> <span style="color: #658b00">onchange=</span><span style="color: #CD5555">&quot;updateDisplay()&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot; &quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> <span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>0<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>1<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>2<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>3<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>4<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>5<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;6&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>6<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;7&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>7<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;8&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>8<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;9&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>9<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;A&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>A<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;B&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>B<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;C&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>C<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;D&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>D<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;E&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>E<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;F&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>F<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;G&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>G<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;H&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>H<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;I&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>I<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;J&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>J<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;K&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>K<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;L&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>L<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;M&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>M<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;N&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>N<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;O&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>O<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;P&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>P<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Q&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Q<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;R&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>R<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;S&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>S<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;T&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>T<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;U&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>U<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;V&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>V<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;W&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>W<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;X&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>X<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Y&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Y<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Z&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Z<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot; &quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span> <span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>0<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;1&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>1<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;2&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>2<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;3&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>3<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;4&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>4<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;5&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>5<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;6&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>6<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;7&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>7<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;8&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>8<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;9&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>9<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;A&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>A<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;B&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>B<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;C&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>C<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;D&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>D<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;E&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>E<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;F&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>F<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;G&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>G<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;H&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>H<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;I&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>I<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;J&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>J<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;K&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>K<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;L&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>L<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;M&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>M<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;N&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>N<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;O&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>O<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;P&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>P<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Q&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Q<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;R&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>R<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;S&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>S<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;T&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>T<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;U&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>U<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;V&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>V<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;W&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>W<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;X&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>X<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Y&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Y<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
+            <span style="color: #8B008B; font-weight: bold">&lt;option</span> <span style="color: #658b00">value=</span><span style="color: #CD5555">&quot;Z&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>Z<span style="color: #8B008B; font-weight: bold">&lt;/option&gt;</span>
         <span style="color: #8B008B; font-weight: bold">&lt;/select&gt;&lt;br&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/form&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;/form&gt;</span>
 
-        <span style="color: #8B008B; font-weight: bold">&lt;script&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;script&gt;</span>
         <span style="color: #8B008B; font-weight: bold">function</span> initDisplay() {
-        <span style="color: #8B008B; font-weight: bold">let</span> digit1 = %d1+ <span style="color: #CD5555">&quot;&quot;</span>;
-        <span style="color: #8B008B; font-weight: bold">let</span> digit2 = %d2+ <span style="color: #CD5555">&quot;&quot;</span>;
-        <span style="color: #8B008B; font-weight: bold">let</span> digit3 = %d3+ <span style="color: #CD5555">&quot;&quot;</span>;
-        <span style="color: #8B008B; font-weight: bold">let</span> digit4 = %d4+ <span style="color: #CD5555">&quot;&quot;</span>;
+            <span style="color: #8B008B; font-weight: bold">let</span> digit1 = %d1+ <span style="color: #CD5555">&quot;&quot;</span>;
+            <span style="color: #8B008B; font-weight: bold">let</span> digit2 = %d2+ <span style="color: #CD5555">&quot;&quot;</span>;
+            <span style="color: #8B008B; font-weight: bold">let</span> digit3 = %d3+ <span style="color: #CD5555">&quot;&quot;</span>;
+            <span style="color: #8B008B; font-weight: bold">let</span> digit4 = %d4+ <span style="color: #CD5555">&quot;&quot;</span>;
 
-        <span style="color: #228B22">// Actualizar visualización</span>
-        <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit1&quot;</span>).value = digit1;
-        <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit2&quot;</span>).value = digit2;
-        <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit3&quot;</span>).value = digit3;
-        <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit4&quot;</span>).value = digit4;
-        <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;display&quot;</span>).innerText = digit1 + digit2 + digit3 + digit4;
+            <span style="color: #228B22">// Actualizar visualización</span>
+            <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit1&quot;</span>).value = digit1;
+            <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit2&quot;</span>).value = digit2;
+            <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit3&quot;</span>).value = digit3;
+            <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit4&quot;</span>).value = digit4;
+            <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;display&quot;</span>).innerText = digit1 + digit2 + digit3 + digit4;
         }
-        <span style="color: #8B008B; font-weight: bold">&lt;/script&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;script&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;/script&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;script&gt;</span>
         <span style="color: #8B008B; font-weight: bold">function</span> updateDisplay() {
-        <span style="color: #8B008B; font-weight: bold">let</span> digit1 = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit1&quot;</span>).value;
-        <span style="color: #8B008B; font-weight: bold">let</span> digit2 = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit2&quot;</span>).value;
-        <span style="color: #8B008B; font-weight: bold">let</span> digit3 = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit3&quot;</span>).value;
-        <span style="color: #8B008B; font-weight: bold">let</span> digit4 = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit4&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> digit1 = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit1&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> digit2 = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit2&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> digit3 = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit3&quot;</span>).value;
+            <span style="color: #8B008B; font-weight: bold">let</span> digit4 = <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;digit4&quot;</span>).value;
 
-        <span style="color: #228B22">// Actualizar visualización</span>
-        <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;display&quot;</span>).innerText = digit1 + digit2 + digit3 + digit4;
+            <span style="color: #228B22">// Actualizar visualización</span>
+            <span style="color: #658b00">document</span>.getElementById(<span style="color: #CD5555">&quot;display&quot;</span>).innerText = digit1 + digit2 + digit3 + digit4;
 
-        <span style="color: #228B22">// Enviar valores al servidor</span>
-        <span style="color: #8B008B; font-weight: bold">let</span> xhr = <span style="color: #8B008B; font-weight: bold">new</span> XMLHttpRequest();
-        xhr.open(<span style="color: #CD5555">&quot;POST&quot;</span>, <span style="color: #CD5555">&quot;/&quot;</span>, <span style="color: #8B008B; font-weight: bold">true</span>);
-        xhr.setRequestHeader(<span style="color: #CD5555">&quot;Content-Type&quot;</span>, <span style="color: #CD5555">&quot;application/x-www-form-urlencoded&quot;</span>);
-        xhr.send(<span style="color: #a61717; background-color: #e3d2d2">`</span>${digit1}&amp;${digit2}&amp;${digit3}&amp;${digit4}<span style="color: #a61717; background-color: #e3d2d2">`</span>);
+            <span style="color: #228B22">// Enviar valores al servidor</span>
+            <span style="color: #8B008B; font-weight: bold">let</span> xhr = <span style="color: #8B008B; font-weight: bold">new</span> XMLHttpRequest();
+            xhr.open(<span style="color: #CD5555">&quot;POST&quot;</span>, <span style="color: #CD5555">&quot;/&quot;</span>, <span style="color: #8B008B; font-weight: bold">true</span>);
+            xhr.setRequestHeader(<span style="color: #CD5555">&quot;Content-Type&quot;</span>, <span style="color: #CD5555">&quot;application/x-www-form-urlencoded&quot;</span>);
+            xhr.send(<span style="color: #a61717; background-color: #e3d2d2">`</span>${digit1}&amp;${digit2}&amp;${digit3}&amp;${digit4}<span style="color: #a61717; background-color: #e3d2d2">`</span>);
         }
-        <span style="color: #8B008B; font-weight: bold">&lt;/script&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;/script&gt;</span>
 
-        <span style="color: #8B008B; font-weight: bold">&lt;body</span> <span style="color: #658b00">onload=</span><span style="color: #CD5555">&quot;initDisplay();&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
-        <span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
-        </pre>
-        </div>
-
+    <span style="color: #8B008B; font-weight: bold">&lt;body</span> <span style="color: #658b00">onload=</span><span style="color: #CD5555">&quot;initDisplay();&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
+</pre>
+</div>
 
                             <h2>Explicación paso a paso</h2>
-
-                            <h3>boot.py:</h3>
-
-                            <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
-                                en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
-                            </p>
-
-                            <ul>
-                                <li>XXX: Nombre de su red WiFi</li>
-                                <li>YYY: Contraseña de su red WiFi</li>
-                            </ul>
                             
                             <h3>main.py:</h3>
 
@@ -498,14 +477,268 @@
                             <p> En primer lugar importamos las librerías necesarias para este ejercicio: 
                             </p>
 
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, Timer
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">network</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">uselect</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">as</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">select</span>
+</pre></div>
+
+                            <p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">False</span>)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
+        config = wlan.ifconfig()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
+                            
+                            <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
+                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
+                                en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+                            </p>
+
+                            <ul>
+                                <li>XXX: Nombre de su red WiFi</li>
+                                <li>YYY: Contraseña de su red WiFi</li>
+                            </ul>
+
+                            <p> Ahora se va a configurar los pines del ESP32 que se utilizarán para controlar los segmentos y los dígitos del display de 7 segmentos. 
+                                Se asume que el display es de cátodo común, lo que significa que todos los cátodos de los dígitos están conectados juntos y se controlan mediante pines separados:
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Configuración de pines para los segmentos (a-g, punto decimal)</span>
+segments = [Pin(i, Pin.OUT) <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> [<span style="color: #B452CD">15</span>,<span style="color: #B452CD">16</span>,<span style="color: #B452CD">17</span>,<span style="color: #B452CD">18</span>,<span style="color: #B452CD">19</span>,<span style="color: #B452CD">21</span>,<span style="color: #B452CD">22</span>]]
+<span style="color: #228B22"># Configuración de pines para los dígitos (catodos/anodos)</span>
+digits = [Pin(i, Pin.OUT) <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> [<span style="color: #B452CD">13</span>,<span style="color: #B452CD">12</span>,<span style="color: #B452CD">14</span>,<span style="color: #B452CD">27</span>]]
+
+j = <span style="color: #B452CD">0</span>
+
+<span style="color: #228B22"># Tabla de segmentos para números y letras</span>
+segment_map = {
+    <span style="color: #CD5555">&#39; &#39;</span>: <span style="color: #B452CD">0</span>,
+    <span style="color: #CD5555">&#39;0&#39;</span>: <span style="color: #B452CD">63</span>,
+    <span style="color: #CD5555">&#39;1&#39;</span>: <span style="color: #B452CD">6</span>,
+    <span style="color: #CD5555">&#39;2&#39;</span>: <span style="color: #B452CD">91</span>,
+    <span style="color: #CD5555">&#39;3&#39;</span>: <span style="color: #B452CD">79</span>,
+    <span style="color: #CD5555">&#39;4&#39;</span>: <span style="color: #B452CD">102</span>,
+    <span style="color: #CD5555">&#39;5&#39;</span>: <span style="color: #B452CD">109</span>,
+    <span style="color: #CD5555">&#39;6&#39;</span>: <span style="color: #B452CD">125</span>,
+    <span style="color: #CD5555">&#39;7&#39;</span>: <span style="color: #B452CD">7</span>,
+    <span style="color: #CD5555">&#39;8&#39;</span>: <span style="color: #B452CD">127</span>,
+    <span style="color: #CD5555">&#39;9&#39;</span>: <span style="color: #B452CD">103</span>,
+    <span style="color: #CD5555">&#39;A&#39;</span>: <span style="color: #B452CD">119</span>,
+    <span style="color: #CD5555">&#39;B&#39;</span>: <span style="color: #B452CD">124</span>,
+    <span style="color: #CD5555">&#39;C&#39;</span>: <span style="color: #B452CD">57</span>,
+    <span style="color: #CD5555">&#39;D&#39;</span>: <span style="color: #B452CD">94</span>,
+    <span style="color: #CD5555">&#39;E&#39;</span>: <span style="color: #B452CD">121</span>,
+    <span style="color: #CD5555">&#39;F&#39;</span>: <span style="color: #B452CD">113</span>,
+    <span style="color: #CD5555">&#39;G&#39;</span>: <span style="color: #B452CD">111</span>,
+    <span style="color: #CD5555">&#39;H&#39;</span>: <span style="color: #B452CD">118</span>,
+    <span style="color: #CD5555">&#39;I&#39;</span>: <span style="color: #B452CD">25</span>,
+    <span style="color: #CD5555">&#39;J&#39;</span>: <span style="color: #B452CD">30</span>,
+    <span style="color: #CD5555">&#39;K&#39;</span>: <span style="color: #B452CD">122</span>,
+    <span style="color: #CD5555">&#39;L&#39;</span>: <span style="color: #B452CD">56</span>,
+    <span style="color: #CD5555">&#39;M&#39;</span>: <span style="color: #B452CD">55</span>,
+    <span style="color: #CD5555">&#39;N&#39;</span>: <span style="color: #B452CD">84</span>,
+    <span style="color: #CD5555">&#39;O&#39;</span>: <span style="color: #B452CD">63</span>,
+    <span style="color: #CD5555">&#39;P&#39;</span>: <span style="color: #B452CD">115</span>,
+    <span style="color: #CD5555">&#39;Q&#39;</span>: <span style="color: #B452CD">103</span>,
+    <span style="color: #CD5555">&#39;R&#39;</span>: <span style="color: #B452CD">80</span>,
+    <span style="color: #CD5555">&#39;S&#39;</span>: <span style="color: #B452CD">109</span>,
+    <span style="color: #CD5555">&#39;T&#39;</span>: <span style="color: #B452CD">120</span>,
+    <span style="color: #CD5555">&#39;U&#39;</span>: <span style="color: #B452CD">28</span>,
+    <span style="color: #CD5555">&#39;V&#39;</span>: <span style="color: #B452CD">62</span>,
+    <span style="color: #CD5555">&#39;W&#39;</span>: <span style="color: #B452CD">29</span>,
+    <span style="color: #CD5555">&#39;X&#39;</span>: <span style="color: #B452CD">112</span>,
+    <span style="color: #CD5555">&#39;Y&#39;</span>: <span style="color: #B452CD">110</span>,
+    <span style="color: #CD5555">&#39;Z&#39;</span>: <span style="color: #B452CD">73</span>,
+}
+
+params = {
+    <span style="color: #CD5555">&#39;d1&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
+    <span style="color: #CD5555">&#39;d2&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
+    <span style="color: #CD5555">&#39;d3&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>,
+    <span style="color: #CD5555">&#39;d4&#39;</span>: <span style="color: #CD5555">&quot; &quot;</span>
+}
+</pre>
+</div>
+
+                            <p> La función <em>decode_segments</em> toma un valor entero y genera un array de tamaño 7 que representa el estado de cada segmento del display de 7 segmentos: </p>
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">decode_segments</span>(value):
+    <span style="color: #228B22"># Generar un array de tamaño 7 representando cada segmento</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> [(value &gt;&gt; i) &amp; <span style="color: #B452CD">1</span> <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">0</span>, <span style="color: #B452CD">7</span>, <span style="color: #B452CD">1</span>)]
+</pre>
+</div>
+
+                            <p> La función <em>display_digit</em> se encarga de mostrar un dígito en el display de 7 segmentos: </p>
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">display_digit</span>(digit, value):
+    <span style="color: #228B22"># Desactivar todos los dígitos</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658B00">enumerate</span>(digits):
+        pin.init(pin.IN)
+        pin.value(<span style="color: #B452CD">0</span>)
+    
+    <span style="color: #228B22"># Desactivar todos los segmentos</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658B00">enumerate</span>(segments):
+        pin.init(pin.IN)
+        pin.value(<span style="color: #B452CD">0</span>)
+    
+    <span style="color: #228B22"># Activar el dígito correspondiente</span>
+    digits[digit].init(Pin.OUT)
+    digits[digit].value(<span style="color: #B452CD">1</span>)
+
+    <span style="color: #228B22"># Activar segmentos según el valor decodificado</span>
+    segment_values = decode_segments(segment_map[value])
+    <span style="color: #8B008B; font-weight: bold">for</span> i, pin <span style="color: #8B008B">in</span> <span style="color: #658B00">enumerate</span>(segments):
+        <span style="color: #8B008B; font-weight: bold">if</span> segment_values[i]:
+            pin.init(Pin.OUT)
+            pin.value(<span style="color: #B452CD">0</span>)  <span style="color: #228B22"># Activo (cátodo común)</span>
+</pre>
+</div>
+
+                            <p> La función <em>update_display</em> se encarga de actualizar el dígito mostrado en el display de 7 segmentos. Y se configura con un Timer para ejecutarse periódicamente:</p>
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Callback function for the timer</span>
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">update_diplay</span>(timer):
+    <span style="color: #8B008B; font-weight: bold">global</span> j
+    <span style="color: #8B008B; font-weight: bold">if</span> j&lt;<span style="color: #B452CD">3</span>:
+        j = j + <span style="color: #B452CD">1</span>
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        j = <span style="color: #B452CD">0</span>
+    display_digit(j, params.get(<span style="color: #CD5555">&quot;d&quot;</span>+<span style="color: #658B00">str</span>(j+<span style="color: #B452CD">1</span>), <span style="color: #CD5555">&quot; &quot;</span>))
+
+<span style="color: #228B22"># Create a periodic timer</span>
+blink_timer = Timer(<span style="color: #B452CD">1</span>)
+blink_timer.init(mode=Timer.PERIODIC, period=<span style="color: #B452CD">5</span>, callback=update_diplay)  <span style="color: #228B22"># Timer repeats 10ms</span>
+</pre>
+</div>
+
+                            <p> Se crea una función llamada <em>web_page</em>. Se procede a leer el archivo <em>html_7_segment.html</em> que contiene la página web 
+                                a mostrar en el servidor web, se convierte en un variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para 
+                                reemplazar el string <em>%d1</em> por el valor de la variable <em>d1</em>, el string <em>%d2</em> por la variable <em>d2</em>, el string 
+                                <em>%d3</em> por la variable <em>d3</em> y el string <em>%d4</em> por la variable <em>d4</em>. Por último se retorna la página web modificada:
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">web_page</span>(param):
+    f = <span style="color: #658B00">open</span>(<span style="color: #CD5555">&#39;html_7_segment.html&#39;</span>)
+    text = f.read()
+    f.close()
+    
+    html = <span style="color: #658B00">str</span>(text)
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d1&quot;</span>, <span style="color: #658B00">str</span>(params.get(<span style="color: #CD5555">&quot;d1&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d2&quot;</span>, <span style="color: #658B00">str</span>(params.get(<span style="color: #CD5555">&quot;d2&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d3&quot;</span>, <span style="color: #658B00">str</span>(params.get(<span style="color: #CD5555">&quot;d3&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
+    html = <span style="color: #658B00">str</span>(html).replace(<span style="color: #CD5555">&quot;%d4&quot;</span>, <span style="color: #658B00">str</span>(params.get(<span style="color: #CD5555">&quot;d4&quot;</span>, <span style="color: #CD5555">&quot; &quot;</span>)))
+    <span style="color: #8B008B; font-weight: bold">return</span> html
+</pre>
+</div>
+
+                            <p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
+                                <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
+                                definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
+                                el socket para recibir máximo 5 conexiones de manera simultánea:
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #228B22"># Create a Socket</span>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<span style="color: #228B22"># </span>
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span style="color: #B452CD">1</span>)
+<span style="color: #228B22"># Bind the socket to a IP Address and Port</span>
+s.bind((<span style="color: #CD5555">&#39;&#39;</span>, <span style="color: #B452CD">80</span>))
+<span style="color: #228B22"># Accept maximum 5 connections</span>
+s.listen(<span style="color: #B452CD">5</span>)
+</pre>
+</div>
+
+                            <p> Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
+                                entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente. Luego se recibe los datos del socket 
+                                enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se decodifica:
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    <span style="color: #228B22"># Check incoming client each 0.5 seg</span>
+    r, w, err = select.select((s,), (), (), <span style="color: #B452CD">0.5</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r:
+        <span style="color: #8B008B; font-weight: bold">for</span> readable <span style="color: #8B008B">in</span> r:
+            <span style="color: #228B22"># When a client connects, the connection is accepted</span>
+            conn, addr = s.accept()
+            
+            <span style="color: #228B22"># Get the received request of the client</span>
+            request = conn.recv(<span style="color: #B452CD">1024</span>)
+            request = request.decode()
+</pre>
+</div>
+
+                            <p> Aqui se procesan 2 tipos de comandos
+                                
+                                <ol>
+                                    <li><strong>POST:</strong> Si el comando recibido es de tipo POST, se procede a separar el cuerpo del mensaje del encabezado, 
+                                        luego se divide el cuerpo en parámetros individuales utilizando el carácter '&' como separador. 
+                                        Cada parámetro se asigna a un diccionario llamado <em>params</em> con claves 'd1', 'd2', 'd3' y 'd4'. 
+                                        Finalmente, se imprimen los valores recibidos en la consola del ESP32.
+                                    </li>
+                                    <li><strong>GET:</strong> Si el comando recibido es de tipo GET, se procede a generar la respuesta HTML utilizando los parámetros recibidos. 
+                                        Se llama a la función <em>web_page(params)</em> para obtener el contenido HTML actualizado. 
+                                        Luego, se envía la respuesta al cliente siguiendo el protocolo HTTP, incluyendo los encabezados necesarios.
+                                    </li>
+                                </ol>
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+            <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;POST&#39;</span> <span style="color: #8B008B">in</span> request:
+                body = request.split(<span style="color: #CD5555">&#39;\r\n\r\n&#39;</span>)[<span style="color: #B452CD">1</span>]
+                params = {<span style="color: #CD5555">&quot;d&quot;</span>+<span style="color: #658B00">str</span>(i+<span style="color: #B452CD">1</span>): param <span style="color: #8B008B; font-weight: bold">for</span> i,param <span style="color: #8B008B">in</span> <span style="color: #658B00">enumerate</span>(body.split(<span style="color: #CD5555">&#39;&amp;&#39;</span>))}
+                <span style="color: #658B00">print</span>(<span style="color: #CD5555">f&quot;d1: {</span>params.get(<span style="color: #CD5555">&quot;d1&quot;</span>,<span style="color: #BBB"> </span><span style="color: #CD5555">&quot; &quot;</span>)<span style="color: #CD5555">}, d2: {</span>params.get(<span style="color: #CD5555">&quot;d2&quot;</span>,<span style="color: #BBB"> </span><span style="color: #CD5555">&quot; &quot;</span>)<span style="color: #CD5555">}, d3: {</span>params.get(<span style="color: #CD5555">&quot;d3&quot;</span>,<span style="color: #BBB"> </span><span style="color: #CD5555">&quot; &quot;</span>)<span style="color: #CD5555">}, d4: {</span>params.get(<span style="color: #CD5555">&quot;d4&quot;</span>,<span style="color: #BBB"> </span><span style="color: #CD5555">&quot; &quot;</span>)<span style="color: #CD5555">}&quot;</span>)
+
+            <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&#39;GET&#39;</span> <span style="color: #8B008B">in</span> request:
+                <span style="color: #228B22"># Generate the HTML text of Web Site</span>
+                response = web_page(params)
+                <span style="color: #228B22"># Send the responde to client following HTML protocols</span>
+                conn.send(<span style="color: #CD5555">&#39;HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n&#39;</span>)
+                conn.sendall(response)
+
+            conn.close()
+</pre>
+</div>
+
                             <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/Con_ESP32_ejercicio_8.png" width ="100%" height="auto">
                             </p>
 
-                            <p>Luego de subir los archivos <em>boot.py</em> y <em>html_7_segment.html</em> al dispositivo ESP32, en consola se va a mostrar:</p>
+                            <p><b>Luego procedemos a subir el archivo <em>html_7_segment.html</em> al dispositivo ESP32.</b></p>                            
+
+                            <p>Después, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/resultado1_ejercicio_8.png" width ="100%" height="auto">

@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
           link.insertAdjacentElement("afterend", toggle);
         }
 
-        // Estado inicial
+        // Estado inicial: cerrado
         submenu.style.display = "none";
       });
     }
@@ -55,7 +55,52 @@ document.addEventListener("DOMContentLoaded", () => {
     // Observer: inicializa al inyectar el HTML
     const obs = new MutationObserver(() => {
       const root = container.querySelector("aside.sidebar, nav, ul");
-      if (root) wireNav(root);
+      if (root) {
+        wireNav(root);
+
+        // === NUEVO: abrir automáticamente el menú de la página actual ===
+        const currentPath = window.location.pathname.replace(/\/+$/, "");
+
+        // Buscar coincidencia exacta primero
+        let currentLink = container.querySelector(`a[href="${currentPath}"]`);
+
+        // Si no hay coincidencia exacta, buscar el enlace cuyo href sea prefijo más largo de la URL
+        if (!currentLink) {
+          let bestMatch = null;
+          let bestLength = 0;
+          container.querySelectorAll("a[href]").forEach(a => {
+            const href = a.getAttribute("href").replace(/\/+$/, "");
+            if (currentPath.startsWith(href) && href.length > bestLength) {
+              bestMatch = a;
+              bestLength = href.length;
+            }
+          });
+          currentLink = bestMatch;
+        }
+
+        if (currentLink) {
+          currentLink.classList.add("active");
+
+          // Deshabilitar el link actual
+          currentLink.removeAttribute("href");
+          currentLink.style.pointerEvents = "none"; // por seguridad
+          currentLink.style.cursor = "default";
+          
+          // Abre todos los padres
+          let li = currentLink.closest("li");
+          while (li) {
+            li.classList.add("open");
+            li.setAttribute("aria-expanded", "true");
+            const submenu = li.querySelector(":scope > ul");
+            if (submenu) submenu.style.display = "block";
+
+            const tgl = li.querySelector(":scope > .submenu-toggle");
+            if (tgl) tgl.classList.add("open");
+
+            li = li.parentElement.closest("li");
+          }
+        }
+      }
     });
     obs.observe(container, { childList: true, subtree: true });
   });

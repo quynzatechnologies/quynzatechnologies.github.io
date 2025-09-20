@@ -70,62 +70,93 @@
                             <h2>Código</h2>
                             <p>Para este ejercicio se necesitará el archivo:</p>
                             <ol>
-                                <li>boot.py: Script de Python especial que siempre se ejecuta al encender el ESP32. Contiene el código para conexión a una red WiFi 
-                                    específica</li>
-                                <li>main.py: Script principal de Python. Contiene el código para acceder a la página web con protocolo <em>HTTP</em>.</li>
+                                <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica y acceder a la página web con protocolo <em>HTTP</em>.</li>
                             </ol>
-
-                            <h3>boot.py:</h3>
-
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">network</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-
-        p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
-
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">do_connect</span>(ssid,pwd):
-        wlan = network.WLAN(network.STA_IF)
-        wlan.active(<span style="color: #658b00">True</span>)
-        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        p2.off()
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;connecting to network...&#39;</span>)
-        wlan.connect(ssid, pwd)
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
-        <span style="color: #8B008B; font-weight: bold">pass</span>
-        p2.on()
-
-        do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
-        </pre>
-        </div>
 
                             <h3>main.py:</h3>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">network</span>
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">http_get</span>(url):
-        _, _, host, path = url.split(<span style="color: #CD5555">&#39;/&#39;</span>, <span style="color: #B452CD">3</span>)
-        addr = socket.getaddrinfo(host, <span style="color: #B452CD">80</span>)[<span style="color: #B452CD">0</span>][-<span style="color: #B452CD">1</span>]
-        s = socket.socket()
-        s.connect(addr)
-        s.send(<span style="color: #658b00">bytes</span>(<span style="color: #CD5555">&#39;GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n&#39;</span> % (path, host), <span style="color: #CD5555">&#39;utf8&#39;</span>))
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">False</span>)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
+        config = wlan.ifconfig()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+
+<span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">http_get</span>(url):
+    _, _, host, path = url.split(<span style="color: #CD5555">&#39;/&#39;</span>, <span style="color: #B452CD">3</span>)
+    addr = socket.getaddrinfo(host, <span style="color: #B452CD">80</span>)[<span style="color: #B452CD">0</span>][-<span style="color: #B452CD">1</span>]
+    s = socket.socket()
+    s.connect(addr)
+    s.send(<span style="color: #658B00">bytes</span>(<span style="color: #CD5555">&#39;GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n&#39;</span> % (path, host), <span style="color: #CD5555">&#39;utf8&#39;</span>))
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
         data = s.recv(<span style="color: #B452CD">100</span>)
         <span style="color: #8B008B; font-weight: bold">if</span> data:
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #658b00">str</span>(data, <span style="color: #CD5555">&#39;utf8&#39;</span>), end=<span style="color: #CD5555">&#39;&#39;</span>)
+            <span style="color: #658B00">print</span>(<span style="color: #658B00">str</span>(data, <span style="color: #CD5555">&#39;utf8&#39;</span>), end=<span style="color: #CD5555">&#39;&#39;</span>)
         <span style="color: #8B008B; font-weight: bold">else</span>:
-        <span style="color: #8B008B; font-weight: bold">break</span>
-        s.close()
+            <span style="color: #8B008B; font-weight: bold">break</span>
+    s.close()
 
-        http_get(<span style="color: #CD5555">&#39;http://XXX/ZZZ&#39;</span>)
-        </pre>
-        </div>
+http_get(<span style="color: #CD5555">&#39;http://httpforever.com/&#39;</span>)
+</pre>
+</div>
 
                             <h2>Explicación paso a paso</h2>
 
-                            <h3>boot.py</h3>
+                            <h3>main.py</h3>
+
+                            <p>Con la teoría explicada en la sección anterior, se procede a explicar el código desarrollado:
+                            </p>
+
+                            <p>En primer lugar importamos las librerías <em>machine.Pin</em>, <em>socket</em> y <em>network</em>:
+                            </p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">socket</span>
+<span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">network</span>
+</pre>
+</div>
+
+                            <p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">False</span>)
+    wlan.active(<span style="color: #8B008B; font-weight: bold">True</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+        p2.off()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conectando a red WiFi...&#39;</span>)
+        wlan.connect(ssid, pwd)
+        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B">not</span> wlan.isconnected():
+            <span style="color: #8B008B; font-weight: bold">pass</span>
+        p2.on()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&#39;Conexión exitosa!&#39;</span>)
+        config = wlan.ifconfig()
+        <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;IP address: &quot;</span> + config[<span style="color: #B452CD">0</span>] + <span style="color: #CD5555">&quot;, subnet mask: &quot;</span>+ config[<span style="color: #B452CD">1</span>] + <span style="color: #CD5555">&quot;, gateway: &quot;</span> + config[<span style="color: #B452CD">2</span>] + <span style="color: #CD5555">&quot;, DNS server: &quot;</span> + config[<span style="color: #B452CD">3</span>])
+
+do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
+</pre>
+</div>
+
                             <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
                                 <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
                                 en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
@@ -136,29 +167,15 @@
                                 <li>YYY: Contraseña de su red WiFi</li>
                             </ul>
 
-                            <h3>main.py</h3>
-
-                            <p>Con la teoría explicada en la sección anterior, se procede a explicar el código desarrollado:
-                            </p>
-
-                            <p>En primer lugar importamos la librería socket:
-                            </p>
-
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">socket</span>
-        </pre>
-        </div>
-
-                            <p> Se crea una función llamada <em>http_get</em> que recibe un parámetro: <em>url</em> que corresponde a la dirección web de la página
+                            <p> Despues, se crea una función llamada <em>http_get</em> que recibe un parámetro: <em>url</em> que corresponde a la dirección web de la página
                                 <em>HTTP</em> deseada:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">http_get</span>(url):
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">http_get</span>(url):
+</pre>
+</div>
 
                             <p> Luego se divide esta dirección recibida en dos partes:
                             </p>
@@ -169,76 +186,76 @@
                             </ul>
 
                             <p style="text-align:center;">
-                                <img src="m/img/Diagrama3_ejercicio_5.png" width ="100%" height="auto">
+                                <img src="./img/Diagrama3_ejercicio_5.png" width ="100%" height="auto">
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        _, _, host, path = url.split(<span style="color: #CD5555">&#39;/&#39;</span>, <span style="color: #B452CD">3</span>)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    _, _, host, path = url.split(<span style="color: #CD5555">&#39;/&#39;</span>, <span style="color: #B452CD">3</span>)
+</pre>
+</div>
 
                             <p> Se utiliza la función <em>socket.getaddrinfo()</em> para obtener la dirección IP y puerto al cual se va a conectar el socket teniendo
                                 en cuenta que se va a conectar a un host (de la dirección ingresada) y puerto (80 para el caso de protocolo <em>HTTP</em>) específico:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        addr = socket.getaddrinfo(host, <span style="color: #B452CD">80</span>)[<span style="color: #B452CD">0</span>][-<span style="color: #B452CD">1</span>]
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    addr = socket.getaddrinfo(host, <span style="color: #B452CD">80</span>)[<span style="color: #B452CD">0</span>][-<span style="color: #B452CD">1</span>]
+</pre>
+</div>
 
                             <p> Luego se crea el objeto <em>s</em> de clase <em>socket.socket</em> y se conecta a la dirección IP obtenida en el código anterior.
                                 Se procede a enviar el comando <em>GET</em>:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        s = socket.socket()
-        s.connect(addr)
-        s.send(<span style="color: #658b00">bytes</span>(<span style="color: #CD5555">&#39;GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n&#39;</span> % (path, host), <span style="color: #CD5555">&#39;utf8&#39;</span>))
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    s = socket.socket()
+    s.connect(addr)
+    s.send(<span style="color: #658b00">bytes</span>(<span style="color: #CD5555">&#39;GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n&#39;</span> % (path, host), <span style="color: #CD5555">&#39;utf8&#39;</span>))
+</pre>
+</div>
 
                             <p>Y en un ciclo se va imprimiendo en consola toda la respuesta dada por el servidor, que contiene el código fuente de la página solicitada:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
         data = s.recv(<span style="color: #B452CD">100</span>)
         <span style="color: #8B008B; font-weight: bold">if</span> data:
-        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #658b00">str</span>(data, <span style="color: #CD5555">&#39;utf8&#39;</span>), end=<span style="color: #CD5555">&#39;&#39;</span>)
+            <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #658b00">str</span>(data, <span style="color: #CD5555">&#39;utf8&#39;</span>), end=<span style="color: #CD5555">&#39;&#39;</span>)
         <span style="color: #8B008B; font-weight: bold">else</span>:
-        <span style="color: #8B008B; font-weight: bold">break</span>
-        s.close()
-        </pre>
-        </div>
+            <span style="color: #8B008B; font-weight: bold">break</span>
+    s.close()
+</pre>
+</div>
 
                             <p> Por último se llama a la función <em>http_get</em>. Se debe tener muy en cuenta de reemplazar la url para que siga la estructura de:
                                 <em>http://host/path</em>, es decir que esta función solo funciona para páginas con protocolo <em>HTTP</em>:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        http_get(<span style="color: #CD5555">&#39;http://XXX/ZZZ&#39;</span>)
-        </pre>
-        </div>                                  
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+http_get(<span style="color: #CD5555">&#39;http://XXX/ZZZ&#39;</span>)
+</pre>
+</div>                                   
 
                             <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
                             <p style="text-align:center;">
                                 <img src="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
                             </p>
 
-                            <p>Luego de subir el archivo <em>boot.py</em> al dispositivo ESP32, en consola se va a mostrar:</p>
+                            <p>Después ejecutamos el archivo <em>main.py</em> al dispositivo ESP32 y en consola se va a mostrar la dirección IP asignada dentro de la red WiFi que se conecto:</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/resultado1_ejercicio_4.png" width ="100%" height="auto">
                             </p>
 
-                            <p>Después ejecutamos el archivo <em>main.py</em> al dispositivo ESP32 y en consola se va a mostrar:</p>
+                            <p>Luego se va a visualizar el encabezado y código fuente de la página web conectada:</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/resultado_ejercicio_5.png" width ="100%" height="auto">

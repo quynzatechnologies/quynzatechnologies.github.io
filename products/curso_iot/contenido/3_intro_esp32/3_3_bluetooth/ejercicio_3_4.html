@@ -85,37 +85,37 @@
                             <p>Se debe crear el archivo <strong>main.py</strong> que contiene el siguiente código:
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">bluetooth</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">ble_uart_peripheral</span> <span style="color: #8B008B; font-weight: bold">import</span> BLEUART
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">bluetooth</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">ble_uart_peripheral</span> <span style="color: #8B008B; font-weight: bold">import</span> BLEUART
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
 
-        ble = bluetooth.BLE()
-        uart = BLEUART(ble, name=<span style="color: #CD5555">&quot;ESP32&quot;</span>)
-        led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+ble = bluetooth.BLE()
+uart = BLEUART(ble, name=<span style="color: #CD5555">&quot;ESP32&quot;</span>)
+led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
 
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_rx</span>():
-        rx_recibe = uart.read().decode().strip()
-        <span style="color: #8B008B; font-weight: bold">print</span>(rx_recibe)
-        uart.write(<span style="color: #CD5555">&quot;Mensaje recibido: &quot;</span> + rx_recibe + <span style="color: #CD5555">&quot;\n&quot;</span>)
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_rx</span>():
+    rx_recibe = uart.read().decode().strip()
+    <span style="color: #8B008B; font-weight: bold">print</span>(rx_recibe)
+    uart.write(<span style="color: #CD5555">&quot;Mensaje recibido: &quot;</span> + rx_recibe + <span style="color: #CD5555">&quot;\n&quot;</span>)
 
-        <span style="color: #8B008B; font-weight: bold">if</span> rx_recibe == <span style="color: #CD5555">&quot;0&quot;</span>:
+    <span style="color: #8B008B; font-weight: bold">if</span> rx_recibe == <span style="color: #CD5555">&quot;0&quot;</span>:
         led.off()
-        <span style="color: #8B008B; font-weight: bold">elif</span> rx_recibe == <span style="color: #CD5555">&quot;1&quot;</span>:
+    <span style="color: #8B008B; font-weight: bold">elif</span> rx_recibe == <span style="color: #CD5555">&quot;1&quot;</span>:
         led.on()
 
-        uart.irq(handler=on_rx)
+uart.irq(handler=on_rx)
 
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        <span style="color: #8B008B; font-weight: bold">try</span>:
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    <span style="color: #8B008B; font-weight: bold">try</span>:
         time.sleep_ms(<span style="color: #B452CD">1000</span>)
-        <span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008b45; font-weight: bold">KeyboardInterrupt</span>:
+    <span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008b45; font-weight: bold">KeyboardInterrupt</span>:
         uart.close()
         <span style="color: #8B008B; font-weight: bold">break</span>
-        </pre>
-        </div>
+</pre>
+</div>
 
                             <p>
                                 Este programa tiene configurado una función interruptor que imprimirá en la consola el mensaje recibido a través del Bluetooth.
@@ -140,27 +140,27 @@
                                 para obtener la hora y fecha actuales, medir intervalos de tiempo y retrasos. En este ejercicio se va a utilizar para hacer un temporizador</li>
                             </ul>
                             
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">bluetooth</span>
-        <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">ble_uart_peripheral</span> <span style="color: #8B008B; font-weight: bold">import</span> BLEUART
-        <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">machine</span> <span style="color: #8B008B; font-weight: bold">import</span> Pin
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">bluetooth</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">ble_uart_peripheral</span> <span style="color: #8B008B; font-weight: bold">import</span> BLEUART
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+</pre>
+</div>
 
                             <p>
                                 Luego, se crea una instancia de la clase <i>BLE</i> y se inicializa la clase <i>BLEUART</i> con el nombre del dispositivo <em>ESP32</em>. Además, se configura un pin GPIO
                                 como salida para controlar un LED conectado al pin 2 de la placa ESP32.
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        ble = bluetooth.BLE()
-        uart = BLEUART(ble, name=<span style="color: #CD5555">&quot;ESP32&quot;</span>)
-        led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+ble = bluetooth.BLE()
+uart = BLEUART(ble, name=<span style="color: #CD5555">&quot;ESP32&quot;</span>)
+led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+</pre>
+</div>
 
                             <p>
                                 A continuación, se define una función <i>on_rx</i> que se ejecutará cuando se reciba un mensaje a través del Bluetooth. Esta función decodifica el mensaje recibido,
@@ -168,51 +168,51 @@
                                 LED, y si es <em>1</em>, se enciende el LED. 
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_rx</span>():
-        rx_recibe = uart.read().decode().strip()
-        <span style="color: #8B008B; font-weight: bold">print</span>(rx_recibe)
-        uart.write(<span style="color: #CD5555">&quot;Mensaje recibido: &quot;</span> + rx_recibe + <span style="color: #CD5555">&quot;\n&quot;</span>)
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_rx</span>():
+    rx_recibe = uart.read().decode().strip()
+    <span style="color: #8B008B; font-weight: bold">print</span>(rx_recibe)
+    uart.write(<span style="color: #CD5555">&quot;Mensaje recibido: &quot;</span> + rx_recibe + <span style="color: #CD5555">&quot;\n&quot;</span>)
 
-        <span style="color: #8B008B; font-weight: bold">if</span> rx_recibe == <span style="color: #CD5555">&quot;0&quot;</span>:
+    <span style="color: #8B008B; font-weight: bold">if</span> rx_recibe == <span style="color: #CD5555">&quot;0&quot;</span>:
         led.off()
-        <span style="color: #8B008B; font-weight: bold">elif</span> rx_recibe == <span style="color: #CD5555">&quot;1&quot;</span>:
+    <span style="color: #8B008B; font-weight: bold">elif</span> rx_recibe == <span style="color: #CD5555">&quot;1&quot;</span>:
         led.on()
-        </pre>
-        </div>
+</pre>
+</div>
 
                             <p>
                                 Luego, se configura la interrupción del UART para que llame a la función <i>on_rx</i> cuando se reciba un mensaje.
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        uart.irq(handler=on_rx)
-        </pre>
-        </div>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+uart.irq(handler=on_rx)
+</pre>
+</div>
 
                             <p>
-                                Finalmente, se inicia un bucle infinito que mantiene el programa en ejecución. Dentro de este bucle, se utiliza un temporizador para hacer una pausa de 1 segundo
-                                entre iteraciones. Si se presiona <i>Ctrl+C</i>, se cierra la conexión UART y se sale del bucle.
+                                Finalmente, se inicia un ciclo infinito que mantiene el programa en ejecución. Dentro de este ciclo, se utiliza un temporizador para hacer una pausa de 1 segundo
+                                entre iteraciones. Si se presiona <i>Ctrl+C</i>, se cierra la conexión UART y se sale del ciclo.
                             </p>
 
-        <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
-        <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
-        <span style="color: #8B008B; font-weight: bold">try</span>:
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+    <span style="color: #8B008B; font-weight: bold">try</span>:
         time.sleep_ms(<span style="color: #B452CD">1000</span>)
-        <span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008b45; font-weight: bold">KeyboardInterrupt</span>:
+    <span style="color: #8B008B; font-weight: bold">except</span> <span style="color: #008b45; font-weight: bold">KeyboardInterrupt</span>:
         uart.close()
         <span style="color: #8B008B; font-weight: bold">break</span>
-        </pre>
-        </div>
+</pre>
+</div>
                             <p>
                                 Con este código, el ESP32 estará configurado para recibir mensajes a través del Bluetooth y controlar un LED en función de los mensajes recibidos.
                             </p>
 
                             <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro ordenador mediante USB:</p>
+                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
                             <p style="text-align:center;">
                                 <img src="./img/Con_ESP32_ejercicio_4.png" width ="75%" height="auto">

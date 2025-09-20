@@ -54,10 +54,44 @@
                             <p>
                                 Las <strong>estructuras de control de flujo</strong> en Python permiten decidir qué instrucciones se ejecutan 
                                 y cuántas veces, dependiendo de condiciones o repeticiones necesarias en el programa. Existen tres tipos 
-                                principales: <strong>secuencia</strong>, <strong>selección</strong> y <strong>ciclo</strong>.
+                                principales: <strong>secuencia</strong>, <strong>selección</strong> y <strong>ciclos</strong>.
                             </p>
                             <p>
                                 <ol>
+                                    <li>
+                                        <strong>Estructuras de selección (condicionales)</strong>
+                                        <br><br>
+                                        Las secuencias son la forma más simple de control de flujo en Python. Consisten en ejecutar instrucciones 
+                                        una tras otra, siguiendo el orden en que aparecen en el programa, de arriba hacia abajo, sin saltos ni 
+                                        repeticiones automáticas.
+                                        <br><br>
+                                        <u>Ejemplo:</u>
+                                        <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Inicio del programa&quot;</span>)
+x = <span style="color: #B452CD">5</span>
+y = <span style="color: #B452CD">10</span>
+suma = x + y
+<span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;La suma es:&quot;</span>, suma)
+<span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Fin del programa&quot;</span>)
+</pre>
+</div>
+
+                                        <br>
+                                        En este caso, cada línea se ejecuta en orden:
+                                        <br><br>
+                                        <ol>
+                                            <li>Se imprime un mensaje inicial.</li>
+                                            <li>Se asignan valores a las variables x y y.</li>
+                                            <li>Se calcula la suma.</li>
+                                            <li>Se muestra el resultado.</li>
+                                            <li>Se imprime el mensaje final.</li>
+                                        </ol>
+                                        <br>
+                                        Este comportamiento “línea por línea” es la base de cualquier programa, sobre la cual luego se aplican 
+                                        estructuras más avanzadas como condicionales o ciclos.
+                                        <br><br>
+                                    </li>
                                     <li>
                                         <strong>Estructuras de selección (condicionales)</strong>
                                         <br><br>
@@ -102,7 +136,7 @@
                                         <br>
                                     </li>
                                     <li>
-                                        <strong>Estructuras repetitivas (bucles)</strong>
+                                        <strong>Estructuras repetitivas (ciclos)</strong>
                                         <br><br>
                                         <ol>
                                             <li>
@@ -133,7 +167,7 @@
                                                     </li>
                                                 </ul>
                                                 <br>
-                                                <u>Ejemplo 1 con bucle for:</u>
+                                                <u>Ejemplo 1 con ciclo for:</u>
                                                 <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">5</span>):
@@ -141,7 +175,7 @@
 </pre>
 </div>
                                                 <br>
-                                                <u>Ejemplo 2 con bucle for:</u>
+                                                <u>Ejemplo 2 con ciclo for:</u>
                                                 <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">7</span>):
@@ -174,7 +208,7 @@
                                                 </ul>
                                                 <br>
 
-                                                <u>Ejemplo 1 con bucle while:</u>
+                                                <u>Ejemplo 1 con ciclo while:</u>
                                                 <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span>contador = <span style="color: #B452CD">1</span>
@@ -185,7 +219,7 @@
 </div>
                                                 <br>
 
-                                                <u>Ejemplo 2 con bucle while:</u>
+                                                <u>Ejemplo 2 con ciclo while:</u>
                                                 <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #8B008B; font-weight: bold">True</span>:
@@ -203,16 +237,16 @@
                                         </ol>
                                     </li>
                                     <li>
-                                        <strong>Control del flujo dentro de bucles:</strong>
+                                        <strong>Control del flujo dentro de ciclos:</strong>
                                         <br><br>
                                         Python dispone de instrucciones especiales:
                                         <br><br>
                                         <ul>
-                                            <li><em>break</em>: sale inmediatamente del bucle.</li>
+                                            <li><em>break</em>: sale inmediatamente del ciclo.</li>
                                             <li><em>continue</em>: salta el resto del código de la iteración actual y continúa con la siguiente.</li>
                                         </ul>
                                         <br>
-                                        <u>Ejemplo de control de flujo dentro de bucles:</u>
+                                        <u>Ejemplo de control de flujo dentro de ciclos:</u>
                                         <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">6</span>):
@@ -257,7 +291,7 @@
                                     <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
                                     Anterior
                                 </a>
-                                <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_3_flujo/ejercicio_2_2.html" class="btn btn-neutral float-right" title="Ejercicio 2-2: Tabla de multiplicar del 8 con bucle while" accesskey="n" rel="next">
+                                <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_3_flujo/ejercicio_2_2.html" class="btn btn-neutral float-right" title="Ejercicio 2-2: Tabla de multiplicar del 8 con ciclo while" accesskey="n" rel="next">
                                     <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
                                     Siguiente
                                 </a>

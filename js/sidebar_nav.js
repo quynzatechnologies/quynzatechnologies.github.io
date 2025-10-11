@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const setups = [
-    { containerId: "aside-nav-curso-micropython-container", buttonId: "toggle-sidebar" },
-    { containerId: "aside-nav-curso-iot-container", buttonId: "toggle-sidebar-iot" }
+    { containerId: "aside-nav-curso-micropython-container", buttonId: "toggle-sidebar-micropython" },
+    { containerId: "aside-nav-curso-iot-container", buttonId: "toggle-sidebar-iot" },
+    { containerId: "aside-nav-curso-logica-container", buttonId: "toggle-sidebar-logica" }
   ];
 
   setups.forEach(({ containerId, buttonId }) => {

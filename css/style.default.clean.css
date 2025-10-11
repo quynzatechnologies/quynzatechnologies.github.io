@@ -1715,8 +1715,7 @@ main {
 }
 .sidebar a.active {
   font-weight: bold;
-  color: #267280;
-  text-decoration: underline; /* subrayado permanente */
+  color: #194c54;
 }
 
 .content {
@@ -1989,7 +1988,8 @@ address {
   margin:0 auto;
 }/* Sidebar */
 #aside-nav-curso-micropython-container, 
-#aside-nav-curso-iot-container {
+#aside-nav-curso-iot-container, 
+#aside-nav-curso-logica-container {
   flex:0 0 580px;
   background:#f2f2f2;
   border-radius:6px;
@@ -1997,24 +1997,28 @@ address {
   transition:all .3s ease;
 }/* Colapso total */
 #aside-nav-curso-micropython-container.is-collapsed,
-#aside-nav-curso-iot-container.is-collapsed {
+#aside-nav-curso-iot-container.is-collapsed,
+#aside-nav-curso-logica-container.is-collapsed {
   flex:0 0 0 !important;
   width:0 !important;
   padding:0 !important;
   overflow:hidden;
 }/* --- MENÚ --- *//* Todos los li como bloque por defecto */
 #aside-nav-curso-micropython-container li,
-#aside-nav-curso-iot-container li {
+#aside-nav-curso-iot-container li,
+#aside-nav-curso-logica-container li {
   display:block;
   position:relative;
 }/* Solo los li con submenú usan flex (texto + flecha a la derecha) */
 #aside-nav-curso-micropython-container li.has-submenu,
-#aside-nav-curso-iot-container li.has-submenu {
+#aside-nav-curso-iot-container li.has-submenu,
+#aside-nav-curso-logica-container li.has-submenu {
   align-items:center;
   justify-content:space-between;
 }/* Texto recortado si es largo */
 #aside-nav-curso-micropython-container li.has-submenu > a,
-#aside-nav-curso-iot-container li.has-submenu > a {
+#aside-nav-curso-iot-container li.has-submenu > a,
+#aside-nav-curso-logica-container li.has-submenu > a {
   flex:1 1 auto;
   min-width:0;
   overflow:hidden;
@@ -2022,7 +2026,8 @@ address {
   white-space:nowrap;
 }/* Flecha fija a la derecha (sin float) */
 #aside-nav-curso-micropython-container .submenu-toggle,
-#aside-nav-curso-iot-container .submenu-toggle {
+#aside-nav-curso-iot-container .submenu-toggle,
+#aside-nav-curso-logica-container .submenu-toggle {
   flex:0 0 auto;
   margin-left:8px;
   cursor:pointer;
@@ -2033,37 +2038,45 @@ address {
   float:none !important;
 }
 #aside-nav-curso-micropython-container .submenu-toggle,
-#aside-nav-curso-iot-container .submenu-toggle {
+#aside-nav-curso-iot-container .submenu-toggle,
+#aside-nav-curso-logica-container .submenu-toggle {
   transform: rotate(0);
   transition: transform .15s ease;
 }/* Submenús en bloque vertical */
 #aside-nav-curso-micropython-container li > ul,
-#aside-nav-curso-iot-container li > ul {
+#aside-nav-curso-iot-container li > ul,
+#aside-nav-curso-logica-container li > ul {
   display:none;
   padding-left:15px;
 }
 #aside-nav-curso-micropython-container li.open > ul,
-#aside-nav-curso-iot-container li.open > ul {
+#aside-nav-curso-iot-container li.open > ul,
+#aside-nav-curso-logica-container li.open > ul {
   display:block;
 }/* Resalte opcional del ítem abierto */
 #aside-nav-curso-micropython-container li.open > a,
-#aside-nav-curso-iot-container li.open > a {
+#aside-nav-curso-iot-container li.open > a,
+#aside-nav-curso-logica-container li.open > a {
   font-weight:700;
 }/* Cada fila de título (link + flecha) */
 #aside-nav-curso-micropython-container .menu-item-header,
-#aside-nav-curso-iot-container .menu-item-header {
+#aside-nav-curso-iot-container .menu-item-header,
+#aside-nav-curso-logica-container .menu-item-header {
   position: relative;
   display: block;                  /* no flex en el <li>, solo aquí */
   border-radius: 4px;
 }/* Hover y cuando el li está abierto */
 #aside-nav-curso-micropython-container li.open > .menu-item-header,
 #aside-nav-curso-iot-container li.open > .menu-item-header,
+#aside-nav-curso-logica-container li.open > .menu-item-header,
 #aside-nav-curso-micropython-container .menu-item-header:hover,
-#aside-nav-curso-iot-container .menu-item-header:hover {
+#aside-nav-curso-iot-container .menu-item-header:hover,
+#aside-nav-curso-logica-container .menu-item-header:hover {
   background: rgba(255,255,255,0.18);
 }/* Texto: recorte con "..." si no cabe */
 #aside-nav-curso-micropython-container .menu-item-header > a,
-#aside-nav-curso-iot-container .menu-item-header > a {
+#aside-nav-curso-iot-container .menu-item-header > a,
+#aside-nav-curso-logica-container .menu-item-header > a {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2073,7 +2086,8 @@ address {
   margin-right: 10px;
 }/* Flecha pegada al borde derecho, centrada verticalmente */
 #aside-nav-curso-micropython-container .menu-item-header > .submenu-toggle,
-#aside-nav-curso-iot-container .menu-item-header > .submenu-toggle {
+#aside-nav-curso-iot-container .menu-item-header > .submenu-toggle,
+#aside-nav-curso-logica-container .menu-item-header > .submenu-toggle {
   position: absolute;
   right: 8px;
   top: 50%;
@@ -2085,11 +2099,13 @@ address {
   line-height: 1;
 }
 #aside-nav-curso-micropython-container li.open > .menu-item-header > .submenu-toggle,
-#aside-nav-curso-iot-container li.open > .menu-item-header > .submenu-toggle {
+#aside-nav-curso-iot-container li.open > .menu-item-header > .submenu-toggle,
+#aside-nav-curso-logica-container li.open > .menu-item-header > .submenu-toggle {
   transform: rotate(90deg);
 }/* Submenús en bloque vertical, sin “caja” propia */
 #aside-nav-curso-micropython-container li > ul,
-#aside-nav-curso-iot-container li > ul {
+#aside-nav-curso-iot-container li > ul,
+#aside-nav-curso-logica-container li > ul {
   display: none;                /* se abre por JS añadiendo .open al li */
   padding-left: 16px;
   margin: 6px 0 0 0;
@@ -2097,13 +2113,16 @@ address {
   border: 0;
 }
 #aside-nav-curso-micropython-container li.open > ul,
-#aside-nav-curso-iot-container li.open > ul {
+#aside-nav-curso-iot-container li.open > ul,
+#aside-nav-curso-logica-container li.open > ul {
   display: block;
 }/* Evita fondos heredados que crean bandas raras */
 #aside-nav-curso-micropython-container li,
 #aside-nav-curso-micropython-container ul,
 #aside-nav-curso-iot-container li,
-#aside-nav-curso-iot-container ul {
+#aside-nav-curso-iot-container ul,
+#aside-nav-curso-logica-container li,
+#aside-nav-curso-logica-container ul {
   background: transparent;
   border: 0;
 }/* Contenido principal */
@@ -2114,24 +2133,11 @@ address {
   padding:20px;
   border-radius:6px;
 }/* Botón (sticky, no fixed) */
-#toggle-sidebar{
-  position:sticky;
-  top:20px;
-  align-self:flex-start;
-  background:#626262;
-  color:#fff;
-  border:none;
-  padding:8px 12px;
-  margin:10px;
-  border-radius:4px;
-  font-weight:bold;
-  cursor:pointer;
-  z-index:200;
-}
-#toggle-sidebar:hover{ background:#4e4e4e; }
 
-/* Botón IoT (igual que el de Micropython, pero con id distinto) */
-#toggle-sidebar-iot {
+/* Botón */
+#toggle-sidebar-micropython,
+#toggle-sidebar-iot,
+#toggle-sidebar-logica {
   position:sticky;
   top:20px;
   align-self:flex-start;
@@ -2145,13 +2151,18 @@ address {
   cursor:pointer;
   z-index:200;
 }
-#toggle-sidebar-iot:hover{ background:#4e4e4e; }
+#toggle-sidebar-micropython:hover,
+#toggle-sidebar-iot:hover,
+#toggle-sidebar-logica:hover {
+  background:#4e4e4e; 
+}
 
 /* Responsive */
 @media (max-width: 992px){
   .div-content{ flex-direction:column; }
   #aside-nav-curso-micropython-container,
-  #aside-nav-curso-iot-container{ 
+  #aside-nav-curso-iot-container,
+  #aside-nav-curso-logica-container{ 
     width:100%; 
     flex:none; 
   }

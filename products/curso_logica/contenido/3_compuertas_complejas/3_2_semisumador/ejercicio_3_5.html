@@ -54,7 +54,88 @@
                         </div>
                         
                         <div id="content">
-                            
+                            <p>
+                                El semisumador es un circuito que se utiliza para sumar dos dígitos binarios de una posición, uno está en la entrada A, 
+                                y el otro en la entrada B. Nuevamente se tienen cuatro combinaciones. El resultado de la suma es S y el acarreo es C. 
+                                Se llama semisumador porque no suma el acarreo que puede venir de otro circuito. Su diseño más simple incluye una 
+                                compuerta XOR y una compuerta AND. 
+                            </p>
+
+                            <p><b>Objetivo.</b> Comprobar la tabla de verdad de un circuito semisumador.</p>
+                            <img style="display: block;margin: auto;width: 50%;" src="./img/semisumador.png" alt="Conexión de Semisumador" class="img-fluid icon-hover">
+
+                            <p><b>Procedimiento.</b></p>
+                            <p>
+                                En este caso como se puede observar, las entradas A y B se deben llevar tanto a la compuerta XOR como a la compuerta AND, 
+                                por lo que se deben utilizar los auxiliares 1 y 2.
+                            </p>
+                            <p>
+                                <ol>
+                                    <li>
+                                        Conectar la salida del interruptor 1, entrada A, a uno de los pines de AUX 1. Conectar la salida del interruptor 2, 
+                                        entrada B, a uno de los pines de AUX 2.  
+                                    </li>
+                                    <li>Conectar uno de los pines de AUX  1 al pin 1 del 74LS86, conectar uno de los pines de AUX 2 al pin 2 del 74LS86. </li>
+                                    <li>Conectar el pin 3 del 74LS86. al borne de uno de los LEDs de visualización, es la salida S, la suma de los dos bits.  </li>
+                                    <li>Conectar otro de los pines de AUX  1 al pin 1 del 74LS08, conectar otro de los pines de AUX 2 al pin 2 del 74LS08, compuerta NAND. </li>
+                                    <li>Conectar la salida 3 de la compuerta NAND (74LS08) C, al borne de uno de los LEDs</li>
+                                    <li>Ponga el  interruptor en ON.</li>
+                                    <li>
+                                        Llenar la tabla de verdad para comprobar el semisumador.
+                                        <br><br>
+                                        <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+                                        overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg th{border-color:black;border-style:solid;border-width:1px;
+                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+                                        .tg .tg-xwyx{border-width:0px;}
+                                        </style>
+                                        <table class="tg"><thead>
+                                        <tr>
+                                            <th class="tg-18eh" colspan="2"><span style="color:black">Entrada</span></th>
+                                            <th class="tg-18eh"><span style="color:black">74LS86</span></th>
+                                            <th class="tg-18eh"><span style="color:black">74LS08</span></th>
+                                        </tr></thead>
+                                        <tbody>
+                                        <tr>
+                                            <th class="tg-18eh">A</th>
+                                            <th class="tg-18eh">B</th>
+                                            <th class="tg-18eh">S<br>Pin 3</th>
+                                            <th class="tg-18eh">C<br>Pin 3</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        </tbody></table>
+                                    </li>
+
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

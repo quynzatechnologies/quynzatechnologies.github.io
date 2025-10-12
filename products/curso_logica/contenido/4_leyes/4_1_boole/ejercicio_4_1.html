@@ -54,7 +54,212 @@
                         </div>
                         
                         <div id="content">
-                            
+                            <p>
+                                <b>Objetivo.</b> En este ejercicio se va a probar la propiedad. Considerando que muchas de las leyes del algebra de alguna manera ya se han estudiado, 
+                                vamos a utilizar como una de las señales de entrada el reloj, para así ir viendo la función operativa del reloj. 
+                            </p>
+
+                            <p><b>Procedimiento 1.</b></p>
+                            <img style="display: block;margin: auto;width: 30%;" src="./img/ley_conmutativa_1.png" alt="Ley conmutativa compuertas OR" class="img-fluid icon-hover">
+
+                            <p>Ley Conmutativa, <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>A</mn><mo>∨</mo><mn>B</mn><mo>=</mo><mn>B</mn><mo>∨</mo><mn>A</mn></math></p>
+
+                            <p>
+                                <ol>
+                                    <li>Conectar la salida del reloj entrada A, a uno de los pines de AUX 1. </li>
+                                    <li>Conectar la salida del interruptor 1, como entrada B, a uno de los pines de AUX 2.  </li>
+                                    <li>
+                                        Conectar uno de los pines de AUX  1, entrada A,  al pin 1 de la compuerta OR del 74LS32; conectar uno de los pines de AUX  2, entrada B, al 
+                                        pin 2 de la compuerta OR del 74LS32. 
+                                    </li>
+                                    <li>Conectar la salida 3 de la compuerta OR del 74LS32 al borne de uno de los LEDs, esta es la salida S1.</li>
+                                    <li>Conectar otro de los pines de AUX  1, entrada A,  al pin 12 de la compuerta OR del 74LS32; conectar uno de los pines de AUX  2, entrada B, al 
+                                        pin 13 de la compuerta OR del 74LS32. 
+                                    </li>
+                                    <li>
+                                        Conectar la salida 11 de la compuerta OR del 74LS32 al borne de uno de los LEDs, esta es la salida S2.</li>
+                                    <li>Ponga el  interruptor en ON.</li>
+                                    <li>
+                                        Llenar la siguiente tabla de verdad. Compare S1 y S2, saque una conclusión.
+                                        <br><br>
+                                        <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+                                        overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg th{border-color:black;border-style:solid;border-width:1px;
+                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+                                        .tg .tg-xwyx{border-width:0px;}
+                                        </style>
+                                        <table class="tg"><thead>
+                                        <tr>
+                                            <th class="tg-18eh" colspan="3"><span style="color:black">OR 74LS32 (1)</span></th>
+                                            <th class="tg-18eh" colspan="3"><span style="color:black">OR 74LS32 (2)</span></th>
+                                        </tr></thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="tg-18eh">A<br>Pin 1</td>
+                                            <td class="tg-18eh">B<br>Pin 2</td>
+                                            <td class="tg-18eh">S1<br>Pin 3</td>
+                                            <td class="tg-18eh">A<br>Pin 10</td>
+                                            <td class="tg-18eh">B<br>Pin 9</td>
+                                            <td class="tg-18eh">S2<br>Pin 8</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        </tbody></table>
+                                    </li>
+                                </ol>
+                            </p>
+
+                            <p><b>Procedimiento 2.</b></p>
+                            <img style="display: block;margin: auto;width: 30%;" src="./img/ley_conmutativa_2.png" alt="Ley conmutativa compuertas AND" class="img-fluid icon-hover">
+
+                            <p>Ley Conmutativa, <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>A</mn><mo>∧</mo><mn>B</mn><mo>=</mo><mn>B</mn><mo>∧</mo><mn>A</mn></math></p>
+
+                            <p>
+                                <ol>
+                                    <li>Conectar la salida del reloj, entrada A, a uno de los pines de AUX 1. </li>
+                                    <li>Conectar la salida del interruptor 1,  como entrada B.  </li>
+                                    <li>
+                                        Conectar uno de los pines de AUX  1, entrada A,  al pin 1 de la compuerta AND (74LS08); conectar uno de los pines de AUX  2, entrada B, al 
+                                        pin 2 de la compuerta AND (74LS08). 
+                                    </li>
+                                    <li>Conectar la salida 3 de la compuerta AND (74LS08) al borne de uno de los LEDs, esta es la salida S1.</li>
+                                    <li>
+                                        Conectar otro de los pines de AUX  1, entrada A,  al pin 12 de la compuerta AND (74LS08); conectar uno de los pines de AUX  2, entrada B, al 
+                                        pin 13 de la compuerta AND (74LS08). 
+                                    </li>
+                                    <li>Conectar la salida 11 de la compuerta AND (74LS08) a otro borne de uno de los LEDs, esta es la salida S2.</li>
+                                    <li>Ponga el  interruptor en ON.</li>
+                                    <li>
+                                        Llenar la siguiente tabla de verdad. Compare S1 yS2, saque una conclusión.
+                                        <br><br>
+                                        <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+                                        overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg th{border-color:black;border-style:solid;border-width:1px;
+                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+                                        .tg .tg-xwyx{border-width:0px;}
+                                        </style>
+                                        <table class="tg"><thead>
+                                        <tr>
+                                            <th class="tg-18eh" colspan="3"><span style="color:black">AND 74LS08 (1)</span></th>
+                                            <th class="tg-18eh" colspan="3"><span style="color:black">AND 74LS08 (2)</span></th>
+                                        </tr></thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="tg-18eh">A<br>Pin 1</td>
+                                            <td class="tg-18eh">B<br>Pin 2</td>
+                                            <td class="tg-18eh">S1<br>Pin 3</td>
+                                            <td class="tg-18eh">A<br>Pin 10</td>
+                                            <td class="tg-18eh">B<br>Pin 9</td>
+                                            <td class="tg-18eh">S2<br>Pin 8</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td>
+                                                <img style="display: block;margin:auto;width: 50%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                                            </td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        </tbody></table>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

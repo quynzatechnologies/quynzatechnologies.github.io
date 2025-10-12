@@ -54,7 +54,100 @@
                         </div>
                         
                         <div id="content">
-                            
+                            <p>
+                                <b>Objetivo.</b> Aprender a crear una compuerta AND de tres entradas. Las entradas son A, B, y C, su salida es D. 
+                                Como son tres entradas lógicas las combinaciones son 
+                                <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mn>3</mn></msup><mo>=</mo><mn>8</mn></math>.
+                            </p>
+                            <img style="display: block;margin: auto;width: 50%;" src="./img/compuerta_3_and.png" alt="Conexión de la compuerta AND 3 entradas" class="img-fluid icon-hover">
+
+                            <p><b>Procedimiento</b></p>
+                            <p>
+                                <ol>
+                                    <li>Conecte la salida del interruptor 1 al pin 1 de la compuerta AND (74LS08) corresponde a la entrada A.</li>
+                                    <li>Conecte la salida del interruptor 2 al pin 2 de la compuerta AND (74LS08) corresponde a la entrada B.</li>
+                                    <li>Conecte la salida del interruptor 3 al pin 12 de la compuerta AND (74LS08) corresponde a la entrada C.</li>
+                                    <li>La salida de la compuerta AND, pin 3, conéctela al pin 13 de la compuerta AND (74LS08).</li>
+                                    <li>Conecte la salida 11 de la compuerta AND (74LS08) D, al borne de uno de los LEDs.</li>
+                                    <li>Ponga el  interruptor en ON.</li>
+                                    <li>
+                                        Llenar la tabla de verdad para una compuerta AND de tres entrada.
+                                        <br><br>
+                                        <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+                                        overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg th{border-color:black;border-style:solid;border-width:1px;
+                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+                                        .tg .tg-xwyx{border-width:0px;}
+                                        </style>
+                                        <table class="tg"><thead>
+                                        <tr>
+                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (1)</span></th>
+                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (2)</span></th>
+                                        </tr></thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="tg-18eh">A<br>Pin 1</td>
+                                            <td class="tg-18eh">B<br>Pin 2</td>
+                                            <td class="tg-18eh">C<br>Pin 13</td>
+                                            <td class="tg-18eh">D<br>Pin 11</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                        </tr>
+                                        </tbody></table>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

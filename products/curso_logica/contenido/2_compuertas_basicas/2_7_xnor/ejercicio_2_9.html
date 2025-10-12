@@ -54,7 +54,100 @@
                         </div>
                         
                         <div id="content">
-                            
+                            <p>
+                                <b>Objetivo.</b> Aprender a crear la compuerta XNOR, con base en las compuertas XOR de circuito y 74LS86 NOT del circuito 74LS04. 
+                                Comprobar la tabla de verdad de la compuerta XNOR.
+                            </p>
+
+                            <p><b>Procedimiento.</b></p>
+                            <img style="display: block;margin: auto;width: 90%;" src="./img/conexion_not_xor.png" alt="Conexión NOT-XOR" class="img-fluid icon-hover">
+
+                            <p>
+                                <ol>
+                                    <li>Conecte la salida del interruptor 1 al pin 1 de la compuerta XOR (74LS86).</li>
+                                    <li>Conecte la salida del interruptor 2 al pin 2 de la compuerta XOR (74LS86).</li>
+                                    <li>La salida de la compuerta, pin 3 conéctela al pin 1 de la compuerta NOT (74LS04).</li>
+                                    <li>Conecte la salida 2 de la compuerta AND (74LS04) al borne de uno de los LEDs.</li>
+                                    <li>Ponga el  interruptor en ON.</li>
+                                    <li>Diligencie la primera parte de la tabla (Pin 2 de la compuerta 74LS04).</li>
+                                    <li>
+                                        Efectúe el mismo procedimiento; interruptor 1 - pin 12 (del circuito 74LS86), interruptor 2 - pin 13 (del circuito 74LS86); 
+                                        la salida pin 11 (del circuito 74LS86) al pin 11 (del circuito AND 74LS04) -conecte la salida 10 de la compuerta NOT (74LS04) 
+                                        al borne de uno de los LEDs; conectar el equipo y diligencie la tabla (Pin 10 de la compuerta 74LS04).
+                                        <br><br>
+                                        <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+                                        overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg th{border-color:black;border-style:solid;border-width:1px;
+                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+                                        .tg .tg-xwyx{border-width:0px;}
+                                        </style>
+                                        <table class="tg"><thead>
+                                        <tr>
+                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS86</span></th>
+                                            <th class="tg-18eh"><span style="color:black">74LS04</span></th>
+                                            <th class="tg-0a7q"></th>
+                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS86</span></th>
+                                            <th class="tg-18eh"><span style="color:black">74LS04</span></th>
+                                        </tr></thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="tg-18eh">A<br>Pin 1</td>
+                                            <td class="tg-18eh">B<br>Pin 2</td>
+                                            <td class="tg-18eh">C<br>Pin 2</td>
+                                            <td class="tg-0a7q"></td>
+                                            <td class="tg-18eh">A<br>Pin 12</td>
+                                            <td class="tg-18eh">B<br>Pin 13</td>
+                                            <td class="tg-18eh">C<br>Pin 10</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw"><span style="color:black">0</span></td>
+                                            <td class="tg-xwyw"><span style="color:black">0</span></td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyx"></td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyx"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw"><span style="color:black">0</span></td>
+                                            <td class="tg-xwyw"><span style="color:black">1</span></td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyx"></td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyx"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw"><span style="color:black">1</span></td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyx"></td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">0</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyx"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-xwyw"><span style="color:black">1</span></td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyx"></td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw">1</td>
+                                            <td class="tg-xwyw"></td>
+                                            <td class="tg-xwyx"></td>
+                                        </tr>
+                                        </tbody></table>
+                                    </li>
+                                </ol>
+                            </p>
                         </div>
 
                         <footer class="btn-course">

@@ -1,265 +1,189 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-logica") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_logica.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<p>
+    Un mutiplexer es un circuito electrónico digital que permite seleccionar una señal de entrada de varias posibles, con base en una señal de control. 
+    Este tipo de circuitos es muy común en transmisión de datos tanto de señales digitales como analógicas. En el ejercicio se va a seleccionar la 
+    entrada A o B, dependiendo de la señal de control S, la salida se da por Y. 
+</p>
 
-    <title>Ejercicio 3-7. Multiplexor de dos entradas</title>
-</head>
+<p><b>Objetivo.</b> Conocer y estudiar el funcionamiento de un multiplexer de dos entradas. </p>
+<img style="display: block;margin: auto;width: 60%;" src="./3_compuertas_complejas/3_4_multiplexor/img/conexion_multiplexor.png" alt="Conexión de Multiplexor" class="img-fluid icon-hover">
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
+<p><b>Procedimiento 1.</b></p>
+<p>
+    En este caso como se puede observar, la entrada S, la señal de control,  se debe llevar a la compuerta AND, y a la compuerta NOT, por lo que se debe 
+    utilizar el auxiliar 1. 
+</p>
 
-        <header id="header-nav-main-container"></header>
+<p>
+    <ol>
+        <li>Conectar la salida del interruptor 1,  la entrada A, al pin 1 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida del interruptor 2,  la entrada B, al pin 13 de la compuerta AND (74LS08). </li>
+        <li>
+            Conectar la entrada S a uno de los pines de AUX  1. Conectar uno de los pines de AUX 1 al pin 1 de la compuerta NOT (74LS04). Conectar 
+            otro de los pines de AUX 1 al pin 12 de la compuerta AND (74LS08). 
+        </li>
+        <li>Conectar el pin 2 de la compuerta NOT (74LS04) al pin 2 de la compuerta AND (74LS08).</li>
+        <li>Conectar la salida 3 de la compuerta NAND (74LS08), a la entrada 1 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 11 de la compuerta NAND (74LS08), a la entrada 2 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs, hay se tiene la salida S. </li>
+        <li>Ponga el  interruptor en ON.</li>
+        <li>
+            Llenar la tabla de verdad. 
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh"><span style="color:black">A</span></th>
+                <th class="tg-18eh"><span style="color:black">S</span></th>
+                <th class="tg-18eh"><span style="color:black">B</span></th>
+                <th class="tg-18eh"><span style="color:black">Y</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            </tbody></table>
+        </li>
+    </ol>
+</p>
 
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-logica">☰ Menú</button>
-                    <div id="aside-nav-curso-logica-container"></div>
+<p><b>Procedimiento 2.</b></p>
+<p>
+    En este caso como se puede observar, la entrada S, la señal de control,  se debe llevar a la compuerta AND, y a la compuerta NOT, por lo que 
+    se debe utilizar el auxiliar 1. En este caso se va a tomar como entraba B la señal del reloj. Suponemos que el reloj comienza en 1. Recordemos 
+    como es la señal del reloj:
+</p>
+<img style="display: block;margin: auto;width: 75%;" src="./3_compuertas_complejas/3_4_multiplexor/img/senal_reloj.png" alt="Señal reloj entrenador" class="img-fluid icon-hover">
 
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 3-7. Multiplexor de dos entradas</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/3_compuertas_complejas/">3. Compuertas de Múltiples Entradas y Circuitos Combinacionales</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/3_compuertas_complejas/3_4_multiplexor/">3.4. Multiplexor de dos entradas</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/3_compuertas_complejas/3_4_multiplexor/ejercicio_3_7.html" class="not-active">Ejercicio 3-7. Multiplexor de dos entradas</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                Un mutiplexer es un circuito electrónico digital que permite seleccionar una señal de entrada de varias posibles, con base en una señal de control. 
-                                Este tipo de circuitos es muy común en transmisión de datos tanto de señales digitales como analógicas. En el ejercicio se va a seleccionar la 
-                                entrada A o B, dependiendo de la señal de control S, la salida se da por Y. 
-                            </p>
-
-                            <p><b>Objetivo.</b> Conocer y estudiar el funcionamiento de un multiplexer de dos entradas. </p>
-                            <img style="display: block;margin: auto;width: 60%;" src="./img/conexion_multiplexor.png" alt="Conexión de Multiplexor" class="img-fluid icon-hover">
-
-                            <p><b>Procedimiento 1.</b></p>
-                            <p>
-                                En este caso como se puede observar, la entrada S, la señal de control,  se debe llevar a la compuerta AND, y a la compuerta NOT, por lo que se debe 
-                                utilizar el auxiliar 1. 
-                            </p>
-
-                            <p>
-                                <ol>
-                                    <li>Conectar la salida del interruptor 1,  la entrada A, al pin 1 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida del interruptor 2,  la entrada B, al pin 13 de la compuerta AND (74LS08). </li>
-                                    <li>
-                                        Conectar la entrada S a uno de los pines de AUX  1. Conectar uno de los pines de AUX 1 al pin 1 de la compuerta NOT (74LS04). Conectar 
-                                        otro de los pines de AUX 1 al pin 12 de la compuerta AND (74LS08). 
-                                    </li>
-                                    <li>Conectar el pin 2 de la compuerta NOT (74LS04) al pin 2 de la compuerta AND (74LS08).</li>
-                                    <li>Conectar la salida 3 de la compuerta NAND (74LS08), a la entrada 1 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 11 de la compuerta NAND (74LS08), a la entrada 2 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs, hay se tiene la salida S. </li>
-                                    <li>Ponga el  interruptor en ON.</li>
-                                    <li>
-                                        Llenar la tabla de verdad. 
-                                        <br><br>
-                                        <style type="text/css">
-                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
-                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
-                                        overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg th{border-color:black;border-style:solid;border-width:1px;
-                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
-                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
-                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
-                                        .tg .tg-xwyx{border-width:0px;}
-                                        </style>
-                                        <table class="tg"><thead>
-                                        <tr>
-                                            <th class="tg-18eh"><span style="color:black">A</span></th>
-                                            <th class="tg-18eh"><span style="color:black">S</span></th>
-                                            <th class="tg-18eh"><span style="color:black">B</span></th>
-                                            <th class="tg-18eh"><span style="color:black">Y</span></th>
-                                        </tr></thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        </tbody></table>
-                                    </li>
-                                </ol>
-                            </p>
-
-                            <p><b>Procedimiento 2.</b></p>
-                            <p>
-                                En este caso como se puede observar, la entrada S, la señal de control,  se debe llevar a la compuerta AND, y a la compuerta NOT, por lo que 
-                                se debe utilizar el auxiliar 1. En este caso se va a tomar como entraba B la señal del reloj. Suponemos que el reloj comienza en 1. Recordemos 
-                                como es la señal del reloj:
-                            </p>
-                            <img style="display: block;margin: auto;width: 75%;" src="./img/senal_reloj.png" alt="Señal reloj entrenador" class="img-fluid icon-hover">
-
-                            <p>
-                                <ol>
-                                    <li>Conectar la salida del interruptor 1,  la entrada A, al pin 1 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar el reloj como entrada S, al pin 13 de la compuerta AND (74LS08). </li>
-                                    <li>
-                                        Conectar la entrada B a uno de los pines de AUX  1. Conectar uno de los pines de AUX 1 al pin 1 de la compuerta NOT (74LS04). Conectar 
-                                        otro de los pines de AUX 1 al pin 12 de la compuerta AND (74LS08). 
-                                    </li>
-                                    <li>Conectar el pin 2 de la compuerta NOT (74LS04) al pin 2 de la compuerta AND (74LS08).</li>
-                                    <li>Conectar la salida 3 de la compuerta NAND (74LS08), a la entrada 1 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 11 de la compuerta NAND (74LS08), a la entrada 2 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs, hay se tiene la salida S. </li>
-                                    <li>Ponga el  interruptor en ON.</li>
-                                    <li>
-                                        Llenar la tabla de verdad
-                                        <br><br>
-                                        <style type="text/css">
-                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
-                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
-                                        overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg th{border-color:black;border-style:solid;border-width:1px;
-                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
-                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
-                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
-                                        .tg .tg-xwyx{border-width:0px;}
-                                        </style>
-                                        <table class="tg"><thead>
-                                        <tr>
-                                            <th class="tg-18eh"><span style="color:black">A</span></th>
-                                            <th class="tg-18eh"><span style="color:black">S</span></th>
-                                            <th class="tg-18eh"><span style="color:black">B</span></th>
-                                            <th class="tg-18eh"><span style="color:black">Y</span></th>
-                                        </tr></thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td>
-                                                <img style="display: block;margin:auto;width: 100%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
-                                            </td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td>
-                                                <img style="display: block;margin:auto;width: 100%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
-                                            </td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td>
-                                                <img style="display: block;margin:auto;width: 100%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
-                                            </td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td>
-                                                <img style="display: block;margin:auto;width: 100%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
-                                            </td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        </tbody></table>
-                                    </li>
-                                </ol>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_logica/contenido/3_compuertas_complejas/3_4_multiplexor/" class="btn btn-neutral float-left" title="Multiplexor de dos entradas" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_logica/contenido/4_leyes/" class="btn btn-neutral float-right" title="Álgebra de Boole y Leyes Fundamentales" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p>
+    <ol>
+        <li>Conectar la salida del interruptor 1,  la entrada A, al pin 1 de la compuerta AND (74LS08). </li>
+        <li>Conectar el reloj como entrada S, al pin 13 de la compuerta AND (74LS08). </li>
+        <li>
+            Conectar la entrada B a uno de los pines de AUX  1. Conectar uno de los pines de AUX 1 al pin 1 de la compuerta NOT (74LS04). Conectar 
+            otro de los pines de AUX 1 al pin 12 de la compuerta AND (74LS08). 
+        </li>
+        <li>Conectar el pin 2 de la compuerta NOT (74LS04) al pin 2 de la compuerta AND (74LS08).</li>
+        <li>Conectar la salida 3 de la compuerta NAND (74LS08), a la entrada 1 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 11 de la compuerta NAND (74LS08), a la entrada 2 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs, hay se tiene la salida S. </li>
+        <li>Ponga el  interruptor en ON.</li>
+        <li>
+            Llenar la tabla de verdad
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh"><span style="color:black">A</span></th>
+                <th class="tg-18eh"><span style="color:black">S</span></th>
+                <th class="tg-18eh"><span style="color:black">B</span></th>
+                <th class="tg-18eh"><span style="color:black">Y</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td>
+                    <img style="display: block;margin:auto;width: 100%;" src="./3_compuertas_complejas/3_4_multiplexor/img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                </td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td>
+                    <img style="display: block;margin:auto;width: 100%;" src="./3_compuertas_complejas/3_4_multiplexor/img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                </td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td>
+                    <img style="display: block;margin:auto;width: 100%;" src="./3_compuertas_complejas/3_4_multiplexor/img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                </td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td>
+                    <img style="display: block;margin:auto;width: 100%;" src="./3_compuertas_complejas/3_4_multiplexor/img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                </td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            </tbody></table>
+        </li>
+    </ol>
+</p>

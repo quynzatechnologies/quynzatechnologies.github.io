@@ -1,150 +1,74 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-logica") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_logica.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<p>
+    <b>Objetivo.</b> Aprender a reconocer los diferentes componentes del equipo. A continuación se observa y explica la distribución de los componentes 
+    del entrenador, para que el estudiante se habitué y reconozca dichos componentes. 
+</p>
 
-    <title>Ejercicio 1-1. Reconocimiento del equipo</title>
-</head>
+<img style="display: block;margin: auto;width: 100%;" src="./1_introduccion/1_3_entrenador/img/partes_qlt.png" alt="Partes de entrenador QLT-010" class="img-fluid icon-hover">
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
+<p><b>Procedimiento.</b></p>
+<p>
+    <ol>
+        <li>Entrada de alimentación del entrenador por cable tipo C3.</li>
+        <li>Interruptor principal. Una vez esté en ON el LED del reloj se prende periódicamente.</li>
+        <li>
+            Salida de los resultados de los ejercicios. Son 8 LEDs, que permiten visualizar las salidas lógicas de las señales. Se usa especialmente 
+            para comprobar los resultados de un ejercicio, LED prendido 1, LED apagado 0. Estas señales se alimentan por los bornes que aparecen en la 
+            parte inferior. Son bornes tipo hembra. 
+        </li>
+        <li>
+            Bornes de entrada y de salida de las compuertas, son de tipo macho. Para cada circuito integrado hay dos juegos de estos. Uno en la parte 
+            superior y otro en la parte inferior. El de la parte inferior corresponde a los pines 1 a 6 de cada integrado. El pin 7, que es Gnd tierra, 
+            ya está conectado. El de la parte superior corresponde a los pines 13 a 8 de cada integrado. El pin 14, que es Vcc de alimentación ya está 
+            conectado. De manera que no hay que cablear los pines 7 y 14, pues ya están conectados.
+        </li>
+        <li>Compuerta OR. Ver diagrama del circuito integrado 74LS32. </li>
+        <li>Bornes auxiliares. Permite que una señal se distribuya hasta en tres salidas. Hay dos grupos de estos auxiliares, se pueden utilizar a voluntad.</li>
+        <li>Compuerta NOR. Ver diagrama del circuito integrado 74LS02. Compuerta NOT. Ver diagrama del circuito integrado 74LS04.</li>
+        <li>Salida de las señales que entran por los interruptores. Vienen dobles por lo que se puede sacar la misma señal dos veces.</li>
+        <li>
+            Juego de interruptores de salida de las señales, LEDs y pines. Al oprimir un interruptor se produce un 1, LED encendido; sin oprimir se 
+            produce un 0, LED apagado. Esta señal se puede sacar por el par de pines correspondiente. Con estas señales 0 o 1, que se generan por los 
+            interruptores, se alimentan las entradas de las compuertas lógicas. 
+        </li>
+        <li>
+            Reloj. Es un circuito que provee una señal de reloj, con un periodo de aproximadamente 3 segundos, 3 segundos en 1, enciende el LED, 3 
+            segundos en 0, LED apagado.
+            <br><br>
+            <img style="display: block;margin: auto;width: 100%;" src="./1_introduccion/1_3_entrenador/img/senal_reloj.png" alt="Señal reloj" class="img-fluid icon-hover">
+            <br>
+        </li>
+        <li>Compuerta NAND. Ver diagrama del circuito integrado 74LS00.</li>
+        <li>Compuerta XOR. Ver diagrama del circuito integrado 74LS86.</li>
+        <li>Compuerta AND. Ver diagrama del circuito integrado 74LS08.</li>
+    </ol>
+</p>
+<p><b>NOTA.</b> Recordar que la alimentación y la tierra de los circuitos integrados ya vienen cableados en el circuito impreso de la tarjeta. </p>
 
-        <header id="header-nav-main-container"></header>
-
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-logica">☰ Menú</button>
-                    <div id="aside-nav-curso-logica-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 1-1. Reconocimiento del equipo</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/1_introduccion/">1. Introducción a la lógica digital y al entrenador QLT-010</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/1_introduccion/1_3_entrenador/">1.3. El entrenador QLT-010</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/1_introduccion/1_3_entrenador/ejercicio_1_1.html" class="not-active">Ejercicio 1-1. Reconocimiento del equipo</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <b>Objetivo.</b> Aprender a reconocer los diferentes componentes del equipo. A continuación se observa y explica la distribución de los componentes 
-                                del entrenador, para que el estudiante se habitué y reconozca dichos componentes. 
-                            </p>
-
-                            <img style="display: block;margin: auto;width: 100%;" src="./img/partes_qlt.png" alt="Partes de entrenador QLT-010" class="img-fluid icon-hover">
-
-                            <p><b>Procedimiento.</b></p>
-                            <p>
-                                <ol>
-                                    <li>Entrada de alimentación del entrenador por cable tipo C3.</li>
-                                    <li>Interruptor principal. Una vez esté en ON el LED del reloj se prende periódicamente.</li>
-                                    <li>
-                                        Salida de los resultados de los ejercicios. Son 8 LEDs, que permiten visualizar las salidas lógicas de las señales. Se usa especialmente 
-                                        para comprobar los resultados de un ejercicio, LED prendido 1, LED apagado 0. Estas señales se alimentan por los bornes que aparecen en la 
-                                        parte inferior. Son bornes tipo hembra. 
-                                    </li>
-                                    <li>
-                                        Bornes de entrada y de salida de las compuertas, son de tipo macho. Para cada circuito integrado hay dos juegos de estos. Uno en la parte 
-                                        superior y otro en la parte inferior. El de la parte inferior corresponde a los pines 1 a 6 de cada integrado. El pin 7, que es Gnd tierra, 
-                                        ya está conectado. El de la parte superior corresponde a los pines 13 a 8 de cada integrado. El pin 14, que es Vcc de alimentación ya está 
-                                        conectado. De manera que no hay que cablear los pines 7 y 14, pues ya están conectados.
-                                    </li>
-                                    <li>Compuerta OR. Ver diagrama del circuito integrado 74LS32. </li>
-                                    <li>Bornes auxiliares. Permite que una señal se distribuya hasta en tres salidas. Hay dos grupos de estos auxiliares, se pueden utilizar a voluntad.</li>
-                                    <li>Compuerta NOR. Ver diagrama del circuito integrado 74LS02. Compuerta NOT. Ver diagrama del circuito integrado 74LS04.</li>
-                                    <li>Salida de las señales que entran por los interruptores. Vienen dobles por lo que se puede sacar la misma señal dos veces.</li>
-                                    <li>
-                                        Juego de interruptores de salida de las señales, LEDs y pines. Al oprimir un interruptor se produce un 1, LED encendido; sin oprimir se 
-                                        produce un 0, LED apagado. Esta señal se puede sacar por el par de pines correspondiente. Con estas señales 0 o 1, que se generan por los 
-                                        interruptores, se alimentan las entradas de las compuertas lógicas. 
-                                    </li>
-                                    <li>
-                                        Reloj. Es un circuito que provee una señal de reloj, con un periodo de aproximadamente 3 segundos, 3 segundos en 1, enciende el LED, 3 
-                                        segundos en 0, LED apagado.
-                                        <br><br>
-                                        <img style="display: block;margin: auto;width: 100%;" src="./img/senal_reloj.png" alt="Señal reloj" class="img-fluid icon-hover">
-                                        <br>
-                                    </li>
-                                    <li>Compuerta NAND. Ver diagrama del circuito integrado 74LS00.</li>
-                                    <li>Compuerta XOR. Ver diagrama del circuito integrado 74LS86.</li>
-                                    <li>Compuerta AND. Ver diagrama del circuito integrado 74LS08.</li>
-                                </ol>
-                            </p>
-                            <p><b>NOTA.</b> Recordar que la alimentación y la tierra de los circuitos integrados ya vienen cableados en el circuito impreso de la tarjeta. </p>
-
-                            <p><b>Actividades sugeridas.</b></p>
-                            <p>
-                                <ul>
-                                    <li>
-                                        Sin conectar el equipo, revise detalladamente las partes que lo componen. Identifique los integrados, los bornes de alimentación de las señales, 
-                                        los LEDs de entrada y los LEDs de salida, el circuito del reloj y los pines auxiliares.
-                                    </li>
-                                    <li>
-                                        Sin conectar el equipo, gane práctica para conectar y desconectar los cables. Son tipo hembra-hembra, tome varios cables, y conecte y desconecte 
-                                        varios bornes, hasta que pueda hacerlo sin ninguna dificultad.
-                                    </li>
-                                    <li>
-                                        Conecte el equipo, alimente los LEDs de salida con señales provenientes de los interruptores. Haga el cableado, prenda y apague los LEDs de 
-                                        entrada y de salida
-                                    </li>
-                                    <li>
-                                        Sin conectar el equipo, lleve una sola señal de entrada a un AUX, de ahí saque tres cables y con ellos alimente tres LEDs de salida diferentes. 
-                                        Conecte el equipo, vea como se prenden los 3 LEDs.
-                                    </li>
-                                </ul>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_logica/contenido/1_introduccion/1_3_entrenador/" class="btn btn-neutral float-left" title="El entrenador QLT-010" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_logica/contenido/1_introduccion/1_4_reconocimiento/" class="btn btn-neutral float-right" title="Reconocimiento práctico y primeros montajes" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p><b>Actividades sugeridas.</b></p>
+<p>
+    <ul>
+        <li>
+            Sin conectar el equipo, revise detalladamente las partes que lo componen. Identifique los integrados, los bornes de alimentación de las señales, 
+            los LEDs de entrada y los LEDs de salida, el circuito del reloj y los pines auxiliares.
+        </li>
+        <li>
+            Sin conectar el equipo, gane práctica para conectar y desconectar los cables. Son tipo hembra-hembra, tome varios cables, y conecte y desconecte 
+            varios bornes, hasta que pueda hacerlo sin ninguna dificultad.
+        </li>
+        <li>
+            Conecte el equipo, alimente los LEDs de salida con señales provenientes de los interruptores. Haga el cableado, prenda y apague los LEDs de 
+            entrada y de salida
+        </li>
+        <li>
+            Sin conectar el equipo, lleve una sola señal de entrada a un AUX, de ahí saque tres cables y con ellos alimente tres LEDs de salida diferentes. 
+            Conecte el equipo, vea como se prenden los 3 LEDs.
+        </li>
+    </ul>
+</p>

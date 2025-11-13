@@ -1,0 +1,461 @@
+{
+    "id": "curso_logica",
+    "titulo": "Curso de Lógica Digital",
+    "estructura": [
+        {
+            "id": "inicio",
+            "titulo": "Curso de Lógica Digital",
+            "archivo": "inicio/content.html"
+        },
+        {
+            "id": "1_introduccion",
+            "titulo": "1. Introducción a la lógica digital y al entrenador QLT-010",
+            "archivo": "1_introduccion/content.html",
+            "items": [
+                {
+                    "id": "1_1_fundamentos",
+                    "titulo": "1.1. Fundamentos de la lógica digital",
+                    "archivo": "1_introduccion/1_1_fundamentos/content.html"
+                },
+                {
+                    "id": "1_2_compuertas",
+                    "titulo": "1.2. Introducción a las compuertas lógicas",
+                    "archivo": "1_introduccion/1_2_compuertas/content.html"
+                },
+                {
+                    "id": "1_3_entrenador",
+                    "titulo": "1.3 El entrenador QLT-010",
+                    "archivo": "1_introduccion/1_3_entrenador/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_1_1",
+                            "titulo": "Ejercicio 1-1. Reconocimiento del equipo",
+                            "archivo": "1_introduccion/1_3_entrenador/ejercicio_1_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "1_4_reconocimiento",
+                    "titulo": "1.4. Reconocimiento práctico y primeros montajes",
+                    "archivo": "1_introduccion/1_4_reconocimiento/content.html"
+                }
+            ]
+        },
+        {
+            "id": "2_compuertas_basicas",
+            "titulo": "2. Compuertas lógicas básicas y sus tablas de verdad",
+            "archivo": "2_compuertas_basicas/content.html",
+            "items": [
+                {
+                    "id": "2_1_and",
+                    "titulo": "2.1. Compuerta AND",
+                    "archivo": "2_compuertas_basicas/2_1_and/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_1",
+                            "titulo": "Ejercicio 2-1. Comprobar la Tabla de Verdad de la compuerta AND",
+                            "archivo": "2_compuertas_basicas/2_1_and/ejercicio_2_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_2_or",
+                    "titulo": "2.2. Compuerta OR",
+                    "archivo": "2_compuertas_basicas/2_2_or/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_2",
+                            "titulo": "Ejercicio 2-2. Comprobar la Tabla de Verdad de la compuerta OR",
+                            "archivo": "2_compuertas_basicas/2_2_or/ejercicio_2_2.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_3_not",
+                    "titulo": "2.3. Compuerta NOT (Inversor)",
+                    "archivo": "2_compuertas_basicas/2_3_not/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_3",
+                            "titulo": "Ejercicio 2-3. Comprobar la Tabla de Verdad de la compuerta NOT",
+                            "archivo": "2_compuertas_basicas/2_3_not/ejercicio_2_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_4_nand",
+                    "titulo": "2.4. Compuerta NAND",
+                    "archivo": "2_compuertas_basicas/2_4_nand/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_4",
+                            "titulo": "Ejercicio 2-4. Comprobar la Tabla de Verdad de la compuerta NAND",
+                            "archivo": "2_compuertas_basicas/2_4_nand/ejercicio_2_4.html"
+                        },
+                        {
+                            "id": "ejercicio_2_5",
+                            "titulo": "Ejercicio 2-5. Tabla de Verdad de la compuerta NAND, usando compuertas AND y NOT",
+                            "archivo": "2_compuertas_basicas/2_4_nand/ejercicio_2_5.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_5_nor",
+                    "titulo": "2.5. Compuerta NOR",
+                    "archivo": "2_compuertas_basicas/2_5_nor/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_6",
+                            "titulo": "Ejercicio 2-6. Comprobar la Tabla de Verdad de la compuerta NOR",
+                            "archivo": "2_compuertas_basicas/2_5_nor/ejercicio_2_6.html"
+                        },
+                        {
+                            "id": "ejercicio_2_7",
+                            "titulo": "Ejercicio 2-7. Tabla de Verdad de la compuerta NOR, usando compuertas OR y NOT",
+                            "archivo": "2_compuertas_basicas/2_5_nor/ejercicio_2_7.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_6_xor",
+                    "titulo": "2.6. Compuerta XOR (O-exclusiva)",
+                    "archivo": "2_compuertas_basicas/2_6_xor/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_8",
+                            "titulo": "Ejercicio 2-8. Comprobar la Tabla de Verdad de la compuerta XOR",
+                            "archivo": "2_compuertas_basicas/2_6_xor/ejercicio_2_8.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_7_xnor",
+                    "titulo": "2.7. Compuerta XNOR (Equivalencia lógica)",
+                    "archivo": "2_compuertas_basicas/2_7_xnor/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_9",
+                            "titulo": "Ejercicio 2-9. Comprobar la Tabla de Verdad de la compuerta XNOR",
+                            "archivo": "2_compuertas_basicas/2_7_xnor/ejercicio_2_9.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "3_compuertas_complejas",
+            "titulo": "3. Compuertas de Múltiples Entradas y Circuitos Combinacionales",
+            "archivo": "3_compuertas_complejas/content.html",
+            "items": [
+                {
+                    "id": "3_1_compuertas",
+                    "titulo": "3.1. Compuertas de tres entradas",
+                    "archivo": "3_compuertas_complejas/3_1_compuertas/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_3_1",
+                            "titulo": "Ejercicio 3-1. Comprobar la Tabla de Verdad de la compuerta AND de tres entradas",
+                            "archivo": "3_compuertas_complejas/3_1_compuertas/ejercicio_3_1.html"
+                        },
+                        {
+                            "id": "ejercicio_3_2",
+                            "titulo": "Ejercicio 3-2. Comprobar la Tabla de Verdad de la compuerta NAND con tres entradas",
+                            "archivo": "3_compuertas_complejas/3_1_compuertas/ejercicio_3_2.html"
+                        },
+                        {
+                            "id": "ejercicio_3_3",
+                            "titulo": "Ejercicio 3-3. Comprobar la Tabla de Verdad de la compuerta OR con tres entradas",
+                            "archivo": "3_compuertas_complejas/3_1_compuertas/ejercicio_3_3.html"
+                        },
+                        {
+                            "id": "ejercicio_3_4",
+                            "titulo": "Ejercicio 3-4. Comprobar la Tabla de Verdad de la compuerta NOR con tres entradas",
+                            "archivo": "3_compuertas_complejas/3_1_compuertas/ejercicio_3_4.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "3_2_semisumador",
+                    "titulo": "3.2. Semisumador",
+                    "archivo": "3_compuertas_complejas/3_2_semisumador/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_3_5",
+                            "titulo": "Ejercicio 3-5. Semisumador",
+                            "archivo": "3_compuertas_complejas/3_2_semisumador/ejercicio_3_5.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "3_3_sumador",
+                    "titulo": "3.3. Sumador completo",
+                    "archivo": "3_compuertas_complejas/3_3_sumador/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_3_6",
+                            "titulo": "Ejercicio 3-6. Sumador completo",
+                            "archivo": "3_compuertas_complejas/3_3_sumador/ejercicio_3_6.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "3_4_multiplexor",
+                    "titulo": "3.4. Multiplexor de dos entradas",
+                    "archivo": "3_compuertas_complejas/3_4_multiplexor/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_3_7",
+                            "titulo": "Ejercicio 3-7. Multiplexor de dos entradas",
+                            "archivo": "3_compuertas_complejas/3_4_multiplexor/ejercicio_3_7.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "4_leyes",
+            "titulo": "4. Álgebra de Boole y Leyes Fundamentales",
+            "archivo": "4_leyes/content.html",
+            "items": [
+                {
+                    "id": "4_1_boole",
+                    "titulo": "4.1. Propiedades fundamentales del álgebra de Boole",
+                    "archivo": "4_leyes/4_1_boole/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_1",
+                            "titulo": "Ejercicio 4-1. Algebra de Boole (Ley conmutativa)",
+                            "archivo": "4_leyes/4_1_boole/ejercicio_4_1.html"
+                        },
+                        {
+                            "id": "ejercicio_4_2",
+                            "titulo": "Ejercicio 4-2. Algebra de Boole (Ley asociativa y distributiva)",
+                            "archivo": "4_leyes/4_1_boole/ejercicio_4_2.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_2_identidad",
+                    "titulo": "4.2. Leyes de identidad e idempotencia",
+                    "archivo": "4_leyes/4_2_identidad/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_3",
+                            "titulo": "Ejercicio 4-3. Algebra de Boole (Ley de idempotencia)",
+                            "archivo": "4_leyes/4_2_identidad/ejercicio_4_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_3_complemento",
+                    "titulo": "4.3. Leyes de complemento y doble negación",
+                    "archivo": "4_leyes/4_3_complemento/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_4",
+                            "titulo": "Ejercicio 4-4. Algebra de Boole (Ley de complemento)",
+                            "archivo": "4_leyes/4_3_complemento/ejercicio_4_4.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_4_demorgan",
+                    "titulo": "4.4. Leyes de DeMorgan",
+                    "archivo": "4_leyes/4_4_demorgan/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_5",
+                            "titulo": "Ejercicio 4-5. Leyes de DeMorgan",
+                            "archivo": "4_leyes/4_4_demorgan/ejercicio_4_5.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "5_secuenciales",
+            "titulo": "5. Circuitos Secuenciales Básicos",
+            "archivo": "5_secuenciales/content.html",
+            "items": [
+                {
+                    "id": "5_1_introduccion",
+                    "titulo": "5.1. Introducción a circuitos secuenciales",
+                    "archivo": "5_secuenciales/5_1_introduccion/content.html"
+                },
+                {
+                    "id": "5_2_reloj",
+                    "titulo": "5.2. Uso del reloj del QLT-010",
+                    "archivo": "5_secuenciales/5_2_reloj/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_1",
+                            "titulo": "Ejercicio 5-1. Empleo del reloj",
+                            "archivo": "5_secuenciales/5_2_reloj/ejercicio_5_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_3_flip_flop_rs",
+                    "titulo": "5.3. Flip-Flop RS",
+                    "archivo": "5_secuenciales/5_3_flip_flop_rs/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_2",
+                            "titulo": "Ejercicio 5-2. Unidad básica de memoria, el Flip-flop",
+                            "archivo": "5_secuenciales/5_3_flip_flop_rs/ejercicio_5_2.html"
+                        },
+                        {
+                            "id": "ejercicio_5_3",
+                            "titulo": "Ejercicio 5-3. Flip-flop RS con reloj",
+                            "archivo": "5_secuenciales/5_3_flip_flop_rs/ejercicio_5_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_4_flip_flop_d",
+                    "titulo": "5.4. Flip-Flop D",
+                    "archivo": "5_secuenciales/5_4_flip_flop_d/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_4",
+                            "titulo": "Ejercicio 5-4. Flip-flop tipo D",
+                            "archivo": "5_secuenciales/5_4_flip_flop_d/ejercicio_5_4.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "6_argumentacion",
+            "titulo": "6. Argumentación Lógica con Compuertas Digitales",
+            "archivo": "6_argumentacion/content.html",
+            "items": [
+                {
+                    "id": "6_1_introduccion",
+                    "titulo": "6.1. Introducción a la lógica proposicional",
+                    "archivo": "6_argumentacion/6_1_introduccion/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_1",
+                            "titulo": "Ejercicio 6-1. Identificar las palabras de premisas y conclusiones",
+                            "archivo": "6_argumentacion/6_1_introduccion/ejercicio_6_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "6_2_representacion",
+                    "titulo": "6.2. Representación de proposiciones con compuertas",
+                    "archivo": "6_argumentacion/6_2_representacion/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_2",
+                            "titulo": "Ejercicio 6-2. Utilizando de compuertas NOT",
+                            "archivo": "6_argumentacion/6_2_representacion/ejercicio_6_2.html"
+                        },
+                        {
+                            "id": "ejercicio_6_3",
+                            "titulo": "Ejercicio 6-3. Utilizando la compuerta lógica AND",
+                            "archivo": "6_argumentacion/6_2_representacion/ejercicio_6_3.html"
+                        },
+                        {
+                            "id": "ejercicio_6_4",
+                            "titulo": "Ejercicio 6-4. Utilizando la compuerta lógica OR",
+                            "archivo": "6_argumentacion/6_2_representacion/ejercicio_6_4.html"
+                        },
+                        {
+                            "id": "ejercicio_6_5",
+                            "titulo": "Ejercicio 6-5. Utilizando la compuerta lógica XOR",
+                            "archivo": "6_argumentacion/6_2_representacion/ejercicio_6_5.html"
+                        },
+                        {
+                            "id": "ejercicio_6_6",
+                            "titulo": "Ejercicio 6-6. Utilizando la compuerta lógica NAND",
+                            "archivo": "6_argumentacion/6_2_representacion/ejercicio_6_6.html"
+                        },
+                        {
+                            "id": "ejercicio_6_7",
+                            "titulo": "Ejercicio 6-7. Utilizando la compuerta lógica NOR",
+                            "archivo": "6_argumentacion/6_2_representacion/ejercicio_6_7.html"
+                        },
+                        {
+                            "id": "ejercicio_6_8",
+                            "titulo": "Ejercicio 6-8. Operación XNOR",
+                            "archivo": "6_argumentacion/6_2_representacion/ejercicio_6_8.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "6_3_implicacion",
+                    "titulo": "6.3. Implicación y Modus Ponens",
+                    "archivo": "6_argumentacion/6_3_implicacion/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_9",
+                            "titulo": "Ejercicio 6-9. Implicación",
+                            "archivo": "6_argumentacion/6_3_implicacion/ejercicio_6_9.html"
+                        },
+                        {
+                            "id": "ejercicio_6_10",
+                            "titulo": "Ejercicio 6-10. Modus Ponens",
+                            "archivo": "6_argumentacion/6_3_implicacion/ejercicio_6_10.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "6_4_tautologia",
+                    "titulo": "6.4. Tautología, contradicción y bicondicional",
+                    "archivo": "6_argumentacion/6_4_tautologia/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_11",
+                            "titulo": "Ejercicio 6-11. Tautología 1",
+                            "archivo": "6_argumentacion/6_4_tautologia/ejercicio_6_11.html"
+                        },
+                        {
+                            "id": "ejercicio_6_12",
+                            "titulo": "Ejercicio 6-12. Tautología 2",
+                            "archivo": "6_argumentacion/6_4_tautologia/ejercicio_6_12.html"
+                        },
+                        {
+                            "id": "ejercicio_6_13",
+                            "titulo": "Ejercicio 6-13. Contradicción",
+                            "archivo": "6_argumentacion/6_4_tautologia/ejercicio_6_13.html"
+                        },
+                        {
+                            "id": "ejercicio_6_14",
+                            "titulo": "Ejercicio 6-14. Bicondicional",
+                            "archivo": "6_argumentacion/6_4_tautologia/ejercicio_6_14.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "7_proyecto",
+            "titulo": "7. Proyecto final",
+            "archivo": "7_proyecto/content.html",
+            "items": [
+                {
+                    "id": "7_1_definicion",
+                    "titulo": "7.1. Definición del proyecto y objetivos",
+                    "archivo": "7_proyecto/7_1_definicion/content.html"
+                },
+                {
+                    "id": "7_2_diseno",
+                    "titulo": "7.2. Planificación del diseño y montajes",
+                    "archivo": "7_proyecto/7_2_diseno/content.html"
+                },
+                {
+                    "id": "7_3_desarrollo",
+                    "titulo": "7.3. Desarrollo y pruebas",
+                    "archivo": "7_proyecto/7_3_desarrollo/content.html"
+                },
+                {
+                    "id": "7_4_documentacion",
+                    "titulo": "7.4. Documentación y presentación",
+                    "archivo": "7_proyecto/7_4_documentacion/content.html"
+                }
+            ]
+        }
+    ]
+}

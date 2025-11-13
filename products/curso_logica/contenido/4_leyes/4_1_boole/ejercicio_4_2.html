@@ -1,703 +1,627 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-logica") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_logica.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<p>
+    <b>Objetivo.</b> En este ejercicio se van a probar las propiedades Asociativa, Conmutativa y Complemento. Considerando que muchas de las 
+    leyes del algebra de alguna manera ya se han estudiado, vamos a utilizar como una de las señales de entrada el reloj, para así ir viendo 
+    la función operativa del reloj.
+</p>
 
-    <title>Ejercicio 4-2. Algebra de Boole (Ley asociativa y distributiva)</title>
-</head>
+<p><b>Procedimiento 1.</b></p>
+<img style="display: block;margin: auto;width: 85%;" src="./4_leyes/4_1_boole/img/ley_asociativa_1.png" alt="Ley asociativa compuertas OR" class="img-fluid icon-hover">
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
+<p>
+    Ley Asociativa, compuertas OR: 
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mn>A</mn><mo>∨</mo><mo>(</mo><mn>B</mn><mo>∨</mo><mn>C</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>A</mn><mo>∨</mo><mn>B</mn><mo>)</mo><mo>∨</mo><mn>C</mn>
+    </math>
+</p>
 
-        <header id="header-nav-main-container"></header>
+<p>
+    <ol>
+        <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida del interruptor 2, la entrada B, al pin 13 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida11 de la compuerta OR (74LS32) al pin 2 de la compuerta OR (74LS08).   </li>
+        <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne  de uno de los LEDs, hay se tiene la salida S1.</li>
+        <li>Ponga el interruptor en ON.</li>
+        <li>Llene la tabla de verdad de abajo a la izquierda.</li>
+        <li>Ponga el interruptor en OFF.</li>
+        <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida del interruptor 2, la entrada B, al pin 2 de la compuerta OR (74L32). </li>
+        <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 3 de la compuerta OR (74LS32) al pin 13 de la compuerta OR (74LS32).   </li>
+        <li>Conectar la salida 11 de la compuerta OR (74LS32) al borne de uno de los LEDs, ahí se tiene la salida S2.</li>
+        <li>
+            Llene la tabla de verdad de abajo a la derecha.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh" colspan="2"><span style="color:black">74LS32 (1)</span></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">74LS32 (2)</span></th>
+                <th class="tg-0a7q"></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">74LS32 (1)</span></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">74LS32 (2)</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh">B<br>Pin 4</td>
+                <td class="tg-18eh">C<br>Pin 5</td>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">S1<br>Pin 3</td>
+                <th class="tg-0a7q"></th>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">B<br>Pin 2</td>
+                <td class="tg-18eh">C<br>Pin 5</td>
+                <td class="tg-18eh">S2<br>Pin 6</td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            </tbody></table>
+        </li>
+    </ol>
+</p>
 
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-logica">☰ Menú</button>
-                    <div id="aside-nav-curso-logica-container"></div>
+<p><b>Procedimiento 2.</b></p>
+<img style="display: block;margin: auto;width: 85%;" src="./4_leyes/4_1_boole/img/ley_asociativa_2.png" alt="Ley asociativa compuertas AND" class="img-fluid icon-hover">
 
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 4-2. Algebra de Boole (Ley asociativa y distributiva)</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
+<p>
+    Ley Asociativa, compuertas AND: 
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mn>A</mn><mo>∧</mo><mo>(</mo><mn>B</mn><mo>∧</mo><mn>C</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>A</mn><mo>∧</mo><mn>B</mn><mo>)</mo><mo>∧</mo><mn>C</mn>
+    </math>
+</p>
 
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/4_leyes/">4. Álgebra de Boole y Leyes Fundamentales</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/4_leyes/4_1_boole/">4.1. Propiedades fundamentales del álgebra de Boole</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/4_leyes/4_1_boole/ejercicio_4_2.html" class="not-active">Ejercicio 4-2. Algebra de Boole (Ley asociativa y distributiva)</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <b>Objetivo.</b> En este ejercicio se van a probar las propiedades Asociativa, Conmutativa y Complemento. Considerando que muchas de las 
-                                leyes del algebra de alguna manera ya se han estudiado, vamos a utilizar como una de las señales de entrada el reloj, para así ir viendo 
-                                la función operativa del reloj.
-                            </p>
+<p>
+    <ol>
+        <li></li>
+        <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida del interruptor 2, la entrada B, al pin 13 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida 11 de la compuerta AND (74LS08) al pin 2 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida 3 de la compuerta AND (74LS08) al borne de uno de los LEDs, hay se tiene la salida S1.</li>
+        <li>Ponga el interruptor en ON.</li>
+        <li>Llene la tabla de verdad de abajo a la izquierda.</li>
+        <li>Ponga el interruptor en OFF.</li>
+        <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida del interruptor 2, la entrada B, al pin 2 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida 3 de la compuerta AND (74LS08) al pin 13 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida 11 de la compuerta AND (74LS08) al borne de uno de los LEDs, hay se tiene la salida S2.</li>
+        <li>
+            Llene la tabla de verdad de abajo a la derecha.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (1)</span></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (2)</span></th>
+                <th class="tg-0a7q"></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (1)</span></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (2)</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">B<br>Pin 2</td>
+                <td class="tg-18eh">C<br>Pin 5</td>
+                <td class="tg-18eh">S1<br>Pin 6</td>
+                <th class="tg-0a7q"></th>
+                <td class="tg-18eh">B<br>Pin 4</td>
+                <td class="tg-18eh">C<br>Pin 5</td>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">S2<br>Pin 3</td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            </tbody></table>
+        </li>
+    </ol>
+</p>
 
-                            <p><b>Procedimiento 1.</b></p>
-                            <img style="display: block;margin: auto;width: 85%;" src="./img/ley_asociativa_1.png" alt="Ley asociativa compuertas OR" class="img-fluid icon-hover">
+<p><b>Procedimiento 3.</b></p>
+<img style="display: block;margin: auto;width: 85%;" src="./4_leyes/4_1_boole/img/ley_distributiva_1.png" alt="Ley distributiva compuertas AND con respecto a OR" class="img-fluid icon-hover">
 
-                            <p>
-                                Ley Asociativa, compuertas OR: 
-                                <math xmlns="http://www.w3.org/1998/Math/MathML">
-                                    <mn>A</mn><mo>∨</mo><mo>(</mo><mn>B</mn><mo>∨</mo><mn>C</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>A</mn><mo>∨</mo><mn>B</mn><mo>)</mo><mo>∨</mo><mn>C</mn>
-                                </math>
-                            </p>
+<p>
+    Ley distributiva de la operación AND con respecto a la operación OR: 
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mn>A</mn><mo>∧</mo><mo>(</mo><mn>B</mn><mo>∨</mo><mn>C</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>A</mn><mo>∧</mo><mn>B</mn><mo>)</mo><mo>∨</mo><mo>(</mo><mn>A</mn><mo>∧</mo><mn>C</mn><mo>)</mo>
+    </math>
+</p>
 
-                            <p>
-                                <ol>
-                                    <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida del interruptor 2, la entrada B, al pin 13 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida11 de la compuerta OR (74LS32) al pin 2 de la compuerta OR (74LS08).   </li>
-                                    <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne  de uno de los LEDs, hay se tiene la salida S1.</li>
-                                    <li>Ponga el interruptor en ON.</li>
-                                    <li>Llene la tabla de verdad de abajo a la izquierda.</li>
-                                    <li>Ponga el interruptor en OFF.</li>
-                                    <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida del interruptor 2, la entrada B, al pin 2 de la compuerta OR (74L32). </li>
-                                    <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 3 de la compuerta OR (74LS32) al pin 13 de la compuerta OR (74LS32).   </li>
-                                    <li>Conectar la salida 11 de la compuerta OR (74LS32) al borne de uno de los LEDs, ahí se tiene la salida S2.</li>
-                                    <li>
-                                        Llene la tabla de verdad de abajo a la derecha.
-                                        <br><br>
-                                        <style type="text/css">
-                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
-                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
-                                        overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg th{border-color:black;border-style:solid;border-width:1px;
-                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
-                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
-                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
-                                        .tg .tg-xwyx{border-width:0px;}
-                                        </style>
-                                        <table class="tg"><thead>
-                                        <tr>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS32 (1)</span></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS32 (2)</span></th>
-                                            <th class="tg-0a7q"></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS32 (1)</span></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS32 (2)</span></th>
-                                        </tr></thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="tg-18eh">B<br>Pin 4</td>
-                                            <td class="tg-18eh">C<br>Pin 5</td>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">S1<br>Pin 3</td>
-                                            <th class="tg-0a7q"></th>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">B<br>Pin 2</td>
-                                            <td class="tg-18eh">C<br>Pin 5</td>
-                                            <td class="tg-18eh">S2<br>Pin 6</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        </tbody></table>
-                                    </li>
-                                </ol>
-                            </p>
+<p>
+    <ol>
+        <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida del interruptor 2, la entrada B, al pin 1 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida del interruptor 3, la entrada C, al pin 2 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida 3 de la compuerta AND (74LS08) al pin 2 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs, hay se tiene la salida S1.</li>
+        <li>Ponga el interruptor en ON.</li>
+        <li>Llene la tabla de verdad de abajo a la izquierda.</li>
+        <li>Ponga el interruptor en OFF.</li>
+        <li>Conectar la salida del interruptor 1, la entrada A, a uno de los bornes del AUX 1.</li>
+        <li>Conectar uno de los bornes de AUX1, entrada A, al pin 1 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida del interruptor 2, la entrada B, al pin 2 de la compuerta OR (74LS32).</li>
+        <li>Conectar otro de los bornes de AUX1, entrada A, al pin 13 de la compuerta OR (74LS32).</li>
+        <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 3 de la compuerta OR (74LS32) al pin 1 de la compuerta AND (74LS08).   </li>
+        <li>Conectar la salida 13 de la compuerta OR (74LS32) al pin 2 de la compuerta AND (74LS08).     </li>
+        <li>Conectar la salida 3 de la compuerta AND (74LS08) al borne de uno de los LEDs, hay se tiene la salida S2.</li>
+        <li>
+            Llene la tabla de verdad de abajo a la derecha.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh" colspan="2"><span style="color:black">OR 74LS32</span></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">AND 74LS08</span></th>
+                <th class="tg-0a7q"></th>
+                <th class="tg-18eh" colspan="3"><span style="color:black">AND 74LS08 (1)(2)</span></th>
+                <th class="tg-18eh"><span style="color:black">OR 74LS32</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh">B<br>Pin 1</td>
+                <td class="tg-18eh">C<br>Pin 2</td>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">S1<br>Pin 3</td>
+                <th class="tg-0a7q"></th>
+                <td class="tg-18eh">A<br>Pin 1,12</td>
+                <td class="tg-18eh">B<br>Pin 2</td>
+                <td class="tg-18eh">C<br>Pin 13</td>
+                <td class="tg-18eh">S2<br>Pin 3</td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            </tbody></table>
+        </li>
+    </ol>
+</p>
 
-                            <p><b>Procedimiento 2.</b></p>
-                            <img style="display: block;margin: auto;width: 85%;" src="./img/ley_asociativa_2.png" alt="Ley asociativa compuertas AND" class="img-fluid icon-hover">
+<p><b>Procedimiento 4.</b></p>
+<img style="display: block;margin: auto;width: 85%;" src="./4_leyes/4_1_boole/img/ley_distributiva_2.png" alt="Ley asociativa compuertas OR con respecto a AND" class="img-fluid icon-hover">
 
-                            <p>
-                                Ley Asociativa, compuertas AND: 
-                                <math xmlns="http://www.w3.org/1998/Math/MathML">
-                                    <mn>A</mn><mo>∧</mo><mo>(</mo><mn>B</mn><mo>∧</mo><mn>C</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>A</mn><mo>∧</mo><mn>B</mn><mo>)</mo><mo>∧</mo><mn>C</mn>
-                                </math>
-                            </p>
+<p>
+    Ley distributiva de la operación OR con respecto a la operación AND: 
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mn>A</mn><mo>∨</mo><mo>(</mo><mn>B</mn><mo>∧</mo><mn>C</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>A</mn><mo>∨</mo><mn>B</mn><mo>)</mo><mo>∧</mo><mo>(</mo><mn>A</mn><mo>∨</mo><mn>C</mn><mo>)</mo>
+    </math>
+</p>
 
-                            <p>
-                                <ol>
-                                    <li></li>
-                                    <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida del interruptor 2, la entrada B, al pin 13 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida 11 de la compuerta AND (74LS08) al pin 2 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida 3 de la compuerta AND (74LS08) al borne de uno de los LEDs, hay se tiene la salida S1.</li>
-                                    <li>Ponga el interruptor en ON.</li>
-                                    <li>Llene la tabla de verdad de abajo a la izquierda.</li>
-                                    <li>Ponga el interruptor en OFF.</li>
-                                    <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida del interruptor 2, la entrada B, al pin 2 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida 3 de la compuerta AND (74LS08) al pin 13 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida 11 de la compuerta AND (74LS08) al borne de uno de los LEDs, hay se tiene la salida S2.</li>
-                                    <li>
-                                        Llene la tabla de verdad de abajo a la derecha.
-                                        <br><br>
-                                        <style type="text/css">
-                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
-                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
-                                        overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg th{border-color:black;border-style:solid;border-width:1px;
-                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
-                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
-                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
-                                        .tg .tg-xwyx{border-width:0px;}
-                                        </style>
-                                        <table class="tg"><thead>
-                                        <tr>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (1)</span></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (2)</span></th>
-                                            <th class="tg-0a7q"></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (1)</span></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">74LS08 (2)</span></th>
-                                        </tr></thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">B<br>Pin 2</td>
-                                            <td class="tg-18eh">C<br>Pin 5</td>
-                                            <td class="tg-18eh">S1<br>Pin 6</td>
-                                            <th class="tg-0a7q"></th>
-                                            <td class="tg-18eh">B<br>Pin 4</td>
-                                            <td class="tg-18eh">C<br>Pin 5</td>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">S2<br>Pin 3</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        </tbody></table>
-                                    </li>
-                                </ol>
-                            </p>
-
-                            <p><b>Procedimiento 3.</b></p>
-                            <img style="display: block;margin: auto;width: 85%;" src="./img/ley_distributiva_1.png" alt="Ley distributiva compuertas AND con respecto a OR" class="img-fluid icon-hover">
-
-                            <p>
-                                Ley distributiva de la operación AND con respecto a la operación OR: 
-                                <math xmlns="http://www.w3.org/1998/Math/MathML">
-                                    <mn>A</mn><mo>∧</mo><mo>(</mo><mn>B</mn><mo>∨</mo><mn>C</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>A</mn><mo>∧</mo><mn>B</mn><mo>)</mo><mo>∨</mo><mo>(</mo><mn>A</mn><mo>∧</mo><mn>C</mn><mo>)</mo>
-                                </math>
-                            </p>
-
-                            <p>
-                                <ol>
-                                    <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida del interruptor 2, la entrada B, al pin 1 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida del interruptor 3, la entrada C, al pin 2 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida 3 de la compuerta AND (74LS08) al pin 2 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs, hay se tiene la salida S1.</li>
-                                    <li>Ponga el interruptor en ON.</li>
-                                    <li>Llene la tabla de verdad de abajo a la izquierda.</li>
-                                    <li>Ponga el interruptor en OFF.</li>
-                                    <li>Conectar la salida del interruptor 1, la entrada A, a uno de los bornes del AUX 1.</li>
-                                    <li>Conectar uno de los bornes de AUX1, entrada A, al pin 1 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida del interruptor 2, la entrada B, al pin 2 de la compuerta OR (74LS32).</li>
-                                    <li>Conectar otro de los bornes de AUX1, entrada A, al pin 13 de la compuerta OR (74LS32).</li>
-                                    <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 3 de la compuerta OR (74LS32) al pin 1 de la compuerta AND (74LS08).   </li>
-                                    <li>Conectar la salida 13 de la compuerta OR (74LS32) al pin 2 de la compuerta AND (74LS08).     </li>
-                                    <li>Conectar la salida 3 de la compuerta AND (74LS08) al borne de uno de los LEDs, hay se tiene la salida S2.</li>
-                                    <li>
-                                        Llene la tabla de verdad de abajo a la derecha.
-                                        <br><br>
-                                        <style type="text/css">
-                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
-                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
-                                        overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg th{border-color:black;border-style:solid;border-width:1px;
-                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
-                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
-                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
-                                        .tg .tg-xwyx{border-width:0px;}
-                                        </style>
-                                        <table class="tg"><thead>
-                                        <tr>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">OR 74LS32</span></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">AND 74LS08</span></th>
-                                            <th class="tg-0a7q"></th>
-                                            <th class="tg-18eh" colspan="3"><span style="color:black">AND 74LS08 (1)(2)</span></th>
-                                            <th class="tg-18eh"><span style="color:black">OR 74LS32</span></th>
-                                        </tr></thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="tg-18eh">B<br>Pin 1</td>
-                                            <td class="tg-18eh">C<br>Pin 2</td>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">S1<br>Pin 3</td>
-                                            <th class="tg-0a7q"></th>
-                                            <td class="tg-18eh">A<br>Pin 1,12</td>
-                                            <td class="tg-18eh">B<br>Pin 2</td>
-                                            <td class="tg-18eh">C<br>Pin 13</td>
-                                            <td class="tg-18eh">S2<br>Pin 3</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        </tbody></table>
-                                    </li>
-                                </ol>
-                            </p>
-
-                            <p><b>Procedimiento 4.</b></p>
-                            <img style="display: block;margin: auto;width: 85%;" src="./img/ley_distributiva_2.png" alt="Ley asociativa compuertas OR con respecto a AND" class="img-fluid icon-hover">
-
-                            <p>
-                                Ley distributiva de la operación OR con respecto a la operación AND: 
-                                <math xmlns="http://www.w3.org/1998/Math/MathML">
-                                    <mn>A</mn><mo>∨</mo><mo>(</mo><mn>B</mn><mo>∧</mo><mn>C</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>A</mn><mo>∨</mo><mn>B</mn><mo>)</mo><mo>∧</mo><mo>(</mo><mn>A</mn><mo>∨</mo><mn>C</mn><mo>)</mo>
-                                </math>
-                            </p>
-
-                            <p>
-                                <ol>
-                                    <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida del interruptor 2, la entrada B, al pin 1 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida del interruptor 3, la entrada C, al pin 2 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida 3 de la compuerta AND (74LS08) al pin 2 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs, hay se tiene la salida S1.</li>
-                                    <li>Ponga el interruptor en ON.</li>
-                                    <li>Llene la tabla de verdad de abajo a la izquierda.</li>
-                                    <li>Ponga el interruptor en OFF.</li>
-                                    <li>Conectar la salida del interruptor 1, la entrada A, a uno de los bornes del AUX 1.</li>
-                                    <li>Conectar uno de los bornes de AUX1, entrada A, al pin 1 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida del interruptor 2, la entrada B, al pin 2 de la compuerta AND (74LS08).</li>
-                                    <li>Conectar otro de los bornes de AUX1, entrada A, al pin 13 de la compuerta AND (74LS08).</li>
-                                    <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta AND (74LS08). </li>
-                                    <li>Conectar la salida 3 de la compuerta AND (74LS08) al pin 1 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 13 de la compuerta AND (74LS08) al pin 2 de la compuerta OR (74LS32). </li>
-                                    <li>Conectar la salida 3 de la compuerta OR (74LS08) al borne de uno de los LEDs, hay se tiene la salida S2. </li>
-                                    <li>
-                                        Llene la tabla de verdad de abajo a la derecha.
-                                        <br><br>
-                                        <style type="text/css">
-                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
-                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
-                                        overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg th{border-color:black;border-style:solid;border-width:1px;
-                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
-                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
-                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
-                                        .tg .tg-xwyx{border-width:0px;}
-                                        </style>
-                                        <table class="tg"><thead>
-                                        <tr>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">AND 74LS08</span></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">OR 74LS32</span></th>
-                                            <th class="tg-0a7q"></th>
-                                            <th class="tg-18eh" colspan="3"><span style="color:black">OR 74LS32 (1)(2)</span></th>
-                                            <th class="tg-18eh"><span style="color:black">AND 74LS08</span></th>
-                                        </tr></thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="tg-18eh">B<br>Pin 1</td>
-                                            <td class="tg-18eh">C<br>Pin 2</td>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">S1<br>Pin 3</td>
-                                            <th class="tg-0a7q"></th>
-                                            <td class="tg-18eh">A<br>Pin 1,12</td>
-                                            <td class="tg-18eh">B<br>Pin 2</td>
-                                            <td class="tg-18eh">C<br>Pin 13</td>
-                                            <td class="tg-18eh">S2<br>Pin 3</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">0</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                            <td class="tg-xwyx"></td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw">1</td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        </tbody></table>
-                                    </li>
-                                </ol>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_logica/contenido/4_leyes/4_1_boole/ejercicio_4_1.html" class="btn btn-neutral float-left" title="Ejercicio 4-1. Algebra de Boole (Ley conmutativa)" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_logica/contenido/4_leyes/4_2_identidad/" class="btn btn-neutral float-right" title="Leyes de identidad e idempotencia" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p>
+    <ol>
+        <li>Conectar la salida del interruptor 1, la entrada A, al pin 1 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida del interruptor 2, la entrada B, al pin 1 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida del interruptor 3, la entrada C, al pin 2 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida 3 de la compuerta AND (74LS08) al pin 2 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs, hay se tiene la salida S1.</li>
+        <li>Ponga el interruptor en ON.</li>
+        <li>Llene la tabla de verdad de abajo a la izquierda.</li>
+        <li>Ponga el interruptor en OFF.</li>
+        <li>Conectar la salida del interruptor 1, la entrada A, a uno de los bornes del AUX 1.</li>
+        <li>Conectar uno de los bornes de AUX1, entrada A, al pin 1 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida del interruptor 2, la entrada B, al pin 2 de la compuerta AND (74LS08).</li>
+        <li>Conectar otro de los bornes de AUX1, entrada A, al pin 13 de la compuerta AND (74LS08).</li>
+        <li>Conectar la salida del interruptor 3, la entrada C, al pin 12 de la compuerta AND (74LS08). </li>
+        <li>Conectar la salida 3 de la compuerta AND (74LS08) al pin 1 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 13 de la compuerta AND (74LS08) al pin 2 de la compuerta OR (74LS32). </li>
+        <li>Conectar la salida 3 de la compuerta OR (74LS08) al borne de uno de los LEDs, hay se tiene la salida S2. </li>
+        <li>
+            Llene la tabla de verdad de abajo a la derecha.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh" colspan="2"><span style="color:black">AND 74LS08</span></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">OR 74LS32</span></th>
+                <th class="tg-0a7q"></th>
+                <th class="tg-18eh" colspan="3"><span style="color:black">OR 74LS32 (1)(2)</span></th>
+                <th class="tg-18eh"><span style="color:black">AND 74LS08</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh">B<br>Pin 1</td>
+                <td class="tg-18eh">C<br>Pin 2</td>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">S1<br>Pin 3</td>
+                <th class="tg-0a7q"></th>
+                <td class="tg-18eh">A<br>Pin 1,12</td>
+                <td class="tg-18eh">B<br>Pin 2</td>
+                <td class="tg-18eh">C<br>Pin 13</td>
+                <td class="tg-18eh">S2<br>Pin 3</td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">0</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+                <td class="tg-xwyx"></td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw">1</td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            </tbody></table>
+        </li>
+    </ol>
+</p>

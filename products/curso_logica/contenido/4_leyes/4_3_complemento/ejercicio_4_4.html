@@ -1,196 +1,120 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-logica") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_logica.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<p>
+    <b>Objetivo.</b> En este ejercicio se van a probar las propiedades Asociativa, Conmutativa y Complemento. Considerando que muchas de las 
+    leyes del algebra de alguna manera ya se han estudiado, vamos a utilizar como una de las señales de entrada el reloj, para así ir viendo 
+    la función operativa del reloj.
+</p>
 
-    <title>Ejercicio 4-4. Algebra de Boole (Ley de complemento)</title>
-</head>
+<p><b>Procedimiento 1.</b></p>
+<img style="display: block;margin: auto;width: 50%;" src="./4_leyes/4_3_complemento/img/ley_complemento_1.png" alt="Ley complemento compuertas OR" class="img-fluid icon-hover">
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
+<p>Ley de complemento, <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>A</mn><mo>∨</mo><mo>~</mo><mn>A</mn><mo>=</mo><mi>1</mi></math></p>
 
-        <header id="header-nav-main-container"></header>
+<p>
+    <ol>
+        <li>Conectar la salida del reloj, entrada A, a uno de los pines de AUX 1.  </li>
+        <li>Conectar uno de los pines de AUX  1, entrada A,  al pin 1 de la compuerta OR del 74LS32. </li>
+        <li>Conectar otro de los pines de AUX  1, entrada A,  al pin 1 de la compuerta NOT del 74LS04.  </li>
+        <li>Conectar la salida 2 de la compuerta NOT del 74LS04 al pin 2 de la compuerta OR del 74LS32</li>
+        <li>Conectar la salida 3 de la compuerta NOT del 74LS04 al borne de uno de los LEDs, esta es la salida C.</li>
+        <li>Ponga el  interruptor en ON.</li>
+        <li>
+            Llenar la siguiente tabla de verdad. Saque una conclusión.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh"><span style="color:black">NOT 74LS04</span></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">OR 74LS32</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">C<br>Pin 3</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img style="display: block;margin:auto;width: 15%;" src="./4_leyes/4_3_complemento/img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                </td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img style="display: block;margin:auto;width: 15%;" src="./4_leyes/4_3_complemento/img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                </td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            </tbody></table>
+        </li>
+    </ol>
+</p>
 
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-logica">☰ Menú</button>
-                    <div id="aside-nav-curso-logica-container"></div>
+<p><b>Procedimiento 2.</b></p>
+<img style="display: block;margin: auto;width: 50%;" src="./4_leyes/4_3_complemento/img/ley_complemento_2.png" alt="Ley complemento compuertas AND" class="img-fluid icon-hover">
 
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 4-4. Algebra de Boole (Ley de complemento)</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
+<p>Ley de complemento, <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>A</mn><mo>∧</mo><mo>~</mo><mn>A</mn><mo>=</mo><mi>0</mi></math></p>
 
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/4_leyes/">4. Álgebra de Boole y Leyes Fundamentales</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/4_leyes/4_3_complemento/">4.3. Leyes de complemento y doble negación</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_logica/contenido/4_leyes/4_3_complemento/ejercicio_4_4.html" class="not-active">Ejercicio 4-4. Algebra de Boole (Ley de complemento)</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <b>Objetivo.</b> En este ejercicio se van a probar las propiedades Asociativa, Conmutativa y Complemento. Considerando que muchas de las 
-                                leyes del algebra de alguna manera ya se han estudiado, vamos a utilizar como una de las señales de entrada el reloj, para así ir viendo 
-                                la función operativa del reloj.
-                            </p>
-
-                            <p><b>Procedimiento 1.</b></p>
-                            <img style="display: block;margin: auto;width: 50%;" src="./img/ley_complemento_1.png" alt="Ley complemento compuertas OR" class="img-fluid icon-hover">
-
-                            <p>Ley de complemento, <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>A</mn><mo>∨</mo><mo>~</mo><mn>A</mn><mo>=</mo><mi>1</mi></math></p>
-
-                            <p>
-                                <ol>
-                                    <li>Conectar la salida del reloj, entrada A, a uno de los pines de AUX 1.  </li>
-                                    <li>Conectar uno de los pines de AUX  1, entrada A,  al pin 1 de la compuerta OR del 74LS32. </li>
-                                    <li>Conectar otro de los pines de AUX  1, entrada A,  al pin 1 de la compuerta NOT del 74LS04.  </li>
-                                    <li>Conectar la salida 2 de la compuerta NOT del 74LS04 al pin 2 de la compuerta OR del 74LS32</li>
-                                    <li>Conectar la salida 3 de la compuerta NOT del 74LS04 al borne de uno de los LEDs, esta es la salida C.</li>
-                                    <li>Ponga el  interruptor en ON.</li>
-                                    <li>
-                                        Llenar la siguiente tabla de verdad. Saque una conclusión.
-                                        <br><br>
-                                        <style type="text/css">
-                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
-                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
-                                        overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg th{border-color:black;border-style:solid;border-width:1px;
-                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
-                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
-                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
-                                        .tg .tg-xwyx{border-width:0px;}
-                                        </style>
-                                        <table class="tg"><thead>
-                                        <tr>
-                                            <th class="tg-18eh"><span style="color:black">NOT 74LS04</span></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">OR 74LS32</span></th>
-                                        </tr></thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">C<br>Pin 3</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <img style="display: block;margin:auto;width: 15%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
-                                            </td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <img style="display: block;margin:auto;width: 15%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
-                                            </td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        </tbody></table>
-                                    </li>
-                                </ol>
-                            </p>
-
-                            <p><b>Procedimiento 2.</b></p>
-                            <img style="display: block;margin: auto;width: 50%;" src="./img/ley_complemento_2.png" alt="Ley complemento compuertas AND" class="img-fluid icon-hover">
-
-                            <p>Ley de complemento, <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>A</mn><mo>∧</mo><mo>~</mo><mn>A</mn><mo>=</mo><mi>0</mi></math></p>
-
-                            <p>
-                                <ol>
-                                    <li>Conectar la salida del reloj, entrada A, a uno de los pines de AUX 1.  </li>
-                                    <li>Conectar uno de los pines de AUX  1, entrada A,  al pin 1 de la compuerta AND del 74LS08. </li>
-                                    <li>Conectar otro de los pines de AUX  1, entrada A,  al pin 2 de la compuerta OR del 74LS32. Conectar la salida 3 de la compuerta OR del 74LS08 al borne de uno de los LEDs, esta es la salida S. </li>
-                                    <li>Ponga el  interruptor en ON.</li>
-                                    <li>
-                                        Llenar la siguiente tabla de verdad. Saque una conclusión.
-                                        <br><br>
-                                        <style type="text/css">
-                                        .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
-                                        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
-                                        overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg th{border-color:black;border-style:solid;border-width:1px;
-                                        font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
-                                        .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
-                                        .tg .tg-0a7q{border-color:#000000;border-width:0px;}
-                                        .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
-                                        .tg .tg-xwyx{border-width:0px;}
-                                        </style>
-                                        <table class="tg"><thead>
-                                        <tr>
-                                            <th class="tg-18eh"><span style="color:black">NOT 74LS04</span></th>
-                                            <th class="tg-18eh" colspan="2"><span style="color:black">AND 74LS08</span></th>
-                                        </tr></thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">A<br>Pin 1</td>
-                                            <td class="tg-18eh">C<br>Pin 3</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <img style="display: block;margin:auto;width: 15%;" src="./img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
-                                            </td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <img style="display: block;margin:auto;width: 15%;" src="./img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
-                                            </td>
-                                            <td class="tg-xwyw"></td>
-                                        </tr>
-                                        </tbody></table>
-                                    </li>
-                                </ol>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_logica/contenido/4_leyes/4_3_complemento/" class="btn btn-neutral float-left" title="Leyes de complemento y doble negación" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_logica/contenido/4_leyes/4_4_demorgan/" class="btn btn-neutral float-right" title="Leyes de DeMorgan" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p>
+    <ol>
+        <li>Conectar la salida del reloj, entrada A, a uno de los pines de AUX 1.  </li>
+        <li>Conectar uno de los pines de AUX  1, entrada A,  al pin 1 de la compuerta AND del 74LS08. </li>
+        <li>Conectar otro de los pines de AUX  1, entrada A,  al pin 2 de la compuerta OR del 74LS32. Conectar la salida 3 de la compuerta OR del 74LS08 al borne de uno de los LEDs, esta es la salida S. </li>
+        <li>Ponga el  interruptor en ON.</li>
+        <li>
+            Llenar la siguiente tabla de verdad. Saque una conclusión.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh"><span style="color:black">NOT 74LS04</span></th>
+                <th class="tg-18eh" colspan="2"><span style="color:black">AND 74LS08</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">A<br>Pin 1</td>
+                <td class="tg-18eh">C<br>Pin 3</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img style="display: block;margin:auto;width: 15%;" src="./4_leyes/4_3_complemento/img/pulso_alto.png" alt="Pulso alto" class="img-fluid icon-hover">
+                </td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img style="display: block;margin:auto;width: 15%;" src="./4_leyes/4_3_complemento/img/pulso_bajo.png" alt="Pulso bajo" class="img-fluid icon-hover">
+                </td>
+                <td class="tg-xwyw"></td>
+            </tr>
+            </tbody></table>
+        </li>
+    </ol>
+</p>

@@ -1,0 +1,445 @@
+<script>
+if (sessionStorage.getItem("logueado-iot") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Protocolos de comunicación en IoT:</h1>
+<p>
+    En el ecosistema del Internet de las Cosas (IoT), los protocolos de comunicación constituyen la columna vertebral del intercambio 
+    de datos entre dispositivos, gateways y plataformas en la nube. Estos protocolos definen cómo se codifican, transmiten y reciben 
+    los mensajes, lo cual incide directamente en la eficiencia, seguridad, latencia y consumo energético del sistema. Su correcta 
+    elección no solo mejora el desempeño del sistema, sino que también permite una integración fluida entre dispositivos heterogéneos.
+</p>
+
+<h2>Modelos de comunicación</h2>
+<p>Los sistemas IoT pueden adoptar diferentes modelos de arquitectura para gestionar la comunicación entre nodos:</p>
+
+<p>
+    <ul>
+        <li>
+            Modelo Cliente-Servidor: Este modelo sigue una estructura tradicional en la que un cliente realiza una solicitud al 
+            servidor, y este responde con la información requerida. Es intuitivo y ampliamente utilizado por protocolos como HTTP y CoAP. 
+            Sin embargo, su eficiencia disminuye en aplicaciones con actualizaciones constantes, donde el tráfico generado por solicitudes 
+            periódicas puede saturar la red.
+        </li>
+        <li>
+            Modelo Publicación-Suscripción: Aquí los dispositivos publican mensajes a un "broker" que actúa como intermediario. Los 
+            nodos interesados en ciertos temas se suscriben y reciben únicamente la información relevante. Este modelo, empleado por 
+            MQTT, permite una comunicación asincrónica, distribuida y escalable, ideal para arquitecturas con gran cantidad de nodos o 
+            actualizaciones frecuentes.
+        </li>
+        <li>
+            Modelo Peer-to-Peer (P2P): En esta arquitectura, los dispositivos se comunican directamente entre sí sin necesidad de 
+            un servidor o intermediario central. Una aplicación común de este modelo son las redes ad hoc, donde los nodos se organizan 
+            dinámicamente sin infraestructura previa, adaptándose a cambios topológicos. Este enfoque es útil en redes vehiculares, 
+            entornos colaborativos o zonas sin conectividad centralizada. Su principal ventaja es la autonomía y resiliencia de la red, 
+            aunque puede requerir mayor complejidad en el manejo de direcciones, sincronización y control de flujos.
+        </li>
+    </ul>
+</p>
+
+<img style="display: block;margin: auto;width: 100%;" src="./6_conectividad/6_2_protocolos/img/tipos_modelos.png" alt="Tipo de modelos comunicación" class="img-fluid icon-hover">
+<p style="text-align: center">Figura 3: Comparación gráfica de arquitecturas de comunicación. Elaboración propia</p>
+
+<p>
+    Cada arquitectura tiene sus ventajas y limitaciones, y su elección debe responder al tipo de aplicación IoT, la cantidad de nodos, 
+    los recursos disponibles y los requerimientos de latencia o confiabilidad.
+</p>
+
+<p>
+    <ul>
+        <li>
+            El modelo Publicación-Suscripción genera menos tráfico generalizado, ya que los mensajes solo se distribuyen a los nodos 
+            suscritos y no a todos los participantes de la red.
+        </li>
+        <li>
+            El modelo Cliente-Servidor puede generar más tráfico redundante si hay múltiples solicitudes periódicas desde clientes a un 
+            mismo servidor.
+        </li>
+        <li>
+            El modelo Peer-to-Peer tiende a requerir mayor gestión y complejidad técnica, especialmente en redes grandes, debido a la 
+            falta de un punto central de coordinación.
+        </li>
+    </ul>
+</p>
+
+<h2>Protocolos comunes en IoT</h2>
+
+<iframe style="display: block;margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/d23ORZ8wETQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p style="text-align: center">Video 2: 
+    <a href="https://www.youtube.com/watch?v=d23ORZ8wETQ" target="_blank">Protocolos de Comunicación IoT e IIoT</a><br>
+    <i>Ver completo</i>
+</p>
+
+<p>
+    <ul>
+        <li>
+            MQTT (Message Queuing Telemetry Transport): Diseñado específicamente para sistemas con recursos limitados y redes 
+            inestables, MQTT emplea el modelo publicación-suscripción. Destaca por su bajo consumo de ancho de banda, tolerancia a 
+            la latencia y soporte para niveles de calidad de servicio. Se utiliza ampliamente en monitoreo ambiental, sistemas 
+            industriales y aplicaciones remotas.CoAP (Constrained Application Protocol)
+        </li>
+        <li>
+            CoAP (Constrained Application Protocol): CoAP adopta el modelo cliente-servidor sobre UDP, siendo una alternativa ligera 
+            a HTTP. Es compatible con operaciones REST (GET, POST, PUT, DELETE) y permite su uso en dispositivos con limitaciones 
+            energéticas y computacionales. Es común en sensores embebidos y redes LPWAN.
+        </li>
+        <li>
+            HTTP / HTTPS: HTTP es el protocolo por excelencia de la web y también se emplea en IoT, sobre todo en soluciones con 
+            conectividad constante y alto poder de procesamiento. Aunque es más pesado que MQTT o CoAP, facilita la integración con 
+            APIs REST y servicios en la nube, siendo útil en mashups y tableros de visualización.
+        </li>
+    </ul>
+</p>
+
+<table style="margin: auto;" class="table-objetive-module">
+    <thead>
+        <tr>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Protocolo</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Arquitectura</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Peso del protocolo</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Consumo energético</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Tolerancia a fallos</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="tg-cly1">MQTT</td>
+            <td class="tg-cly1">Publicación/Suscripción</td>
+            <td class="tg-cly1">Bajo</td>
+            <td class="tg-cly1">Bajo</td>
+            <td class="tg-cly1">Alta</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">CoAP</td>
+            <td class="tg-cly1">Cliente/Servidor (UDP)</td>
+            <td class="tg-cly1">Muy bajo</td>
+            <td class="tg-cly1">Muy bajo</td>
+            <td class="tg-cly1">Media</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">HTTP</td>
+            <td class="tg-cly1">Cliente/Servidor (TCP)</td>
+            <td class="tg-cly1">Alto</td>
+            <td class="tg-cly1">Alto</td>
+            <td class="tg-cly1">Baja</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    Además de MQTT, CoAP y HTTP, existen otros protocolos que, aunque menos comunes, son ampliamente utilizados en escenarios 
+    especializados del IoT:
+</p>
+<p>
+    <ul>
+        <li>
+            AMQP (Advanced Message Queuing Protocol): Diseñado para aplicaciones empresariales, AMQP proporciona mensajería confiable 
+            con soporte de seguridad, transacciones y control de flujo. Es adecuado para entornos donde la integridad y la seguridad 
+            de los datos son críticos.
+        </li>
+        <li>
+            DDS (Data Distribution Service): Protocolo orientado a tiempo real, utilizado en sistemas embebidos avanzados como robótica 
+            y automoción. No requiere broker y permite baja latencia y alta eficiencia.
+        </li>
+        <li>
+            WebSocket: Ideal para la comunicación persistente y bidireccional entre navegadores y servidores. Se emplea frecuentemente 
+            en dashboards IoT y aplicaciones de visualización en tiempo real.
+        </li>
+        <li>
+            LoRaWAN (Long Range Wide Area Network): Aunque es más que un protocolo de comunicación, incluye funcionalidades a nivel de 
+            red que definen cómo los dispositivos IoT se comunican de manera eficiente con gateways en aplicaciones de bajo consumo y 
+            largo alcance.
+        </li>
+    </ul>
+</p>
+
+<table style="margin: auto;" class="table-objetive-module">
+    <thead>
+        <tr>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Protocolo</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Arquitectura</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Peso del protocolo</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Consumo energético</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Tolerancia a fallos</span></th>
+        <th class="tg-vyu2"><span style="font-weight:bold;">Aplicación</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="tg-cly1">ADQP</td>
+            <td class="tg-cly1">Publicación/Suscripción</td>
+            <td class="tg-cly1">Medio</td>
+            <td class="tg-cly1">Medio</td>
+            <td class="tg-cly1">Alta</td>
+            <td class="tg-cly1">Aplicaciones empresariales críticas</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">DDS</td>
+            <td class="tg-cly1">Publicación/Suscripción</td>
+            <td class="tg-cly1">Medio</td>
+            <td class="tg-cly1">Bajo</td>
+            <td class="tg-cly1">Muy alta</td>
+            <td class="tg-cly1">Sistemas en tiempo real</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">WebSocket</td>
+            <td class="tg-cly1">Cliente/Servidor (TCP)</td>
+            <td class="tg-cly1">Medio</td>
+            <td class="tg-cly1">Medio</td>
+            <td class="tg-cly1">Media</td>
+            <td class="tg-cly1">Dashboards web en tiempo real</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">LoRaWAN</td>
+            <td class="tg-cly1">Cliente/Servidor (MAC)</td>
+            <td class="tg-cly1">Bajo</td>
+            <td class="tg-cly1">Muy bajo</td>
+            <td class="tg-cly1">Alta</td>
+            <td class="tg-cly1">Redes LPWAN con sensores distribuidos</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Criterios de selección de protocolo</h2>
+<p>
+    La elección del protocolo de comunicación en IoT depende de varios factores técnicos y operativos que deben ser analizados 
+    cuidadosamente para asegurar eficiencia, estabilidad y escalabilidad del sistema. A continuación, se enumeran los criterios más relevantes:
+</p>
+<p>
+    <ul>
+        <li>Capacidad del dispositivo: RAM, CPU, batería disponible.</li>
+        <li>Frecuencia de actualización: datos constantes vs. datos esporádicos.</li>
+        <li>Calidad de la red: estabilidad, latencia, ancho de banda.</li>
+        <li>Integración esperada: compatibilidad con plataformas web o servicios externos.</li>
+        <li>Escalabilidad: número de nodos, necesidad de sincronización distribuida.</li>
+    </ul>
+</p>
+<p>
+    Para facilitar el análisis, se presenta a continuación una tabla que actúa como guía práctica para la toma de decisiones. La tabla 
+    propone una recomendación principal y alternativas viables basadas en preguntas clave que permiten identificar el protocolo más 
+    adecuado según el contexto de la aplicación:
+</p>
+
+<table style="margin: auto;" class="table-objetive-module">
+    <thead>
+        <tr>
+            <th class="tg-vyu2"><span style="font-weight:bold;">Pregunta clave</span></th>
+            <th class="tg-vyu2"><span style="font-weight:bold;">Recomendación principal</span></th>
+            <th class="tg-vyu2"><span style="font-weight:bold;">Alternativas posibles</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="tg-cly1">¿El dispositivo tiene recursos muy limitados (RAM, CPU, energía)?</td>
+            <td class="tg-cly1">CoAP</td>
+            <td class="tg-cly1">MQTT, LoRaWAN</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">¿Requiere comunicación confiable y continua entre muchos nodos?</td>
+            <td class="tg-cly1">MQTT</td>
+            <td class="tg-cly1">AMQP, DDS</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">¿Debe integrarse con servicios web REST o dashboards en tiempo real?</td>
+            <td class="tg-cly1">HTTP / WebSocket</td>
+            <td class="tg-cly1">MQTT + API Gateway</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">¿El sistema opera en zonas rurales o remotas con red limitada?</td>
+            <td class="tg-cly1">LoRaWAN</td>
+            <td class="tg-cly1">NB-IoT, CoAP</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">¿Es una aplicación crítica de empresa con requisitos de integridad y seguridad?</td>
+            <td class="tg-cly1">AMQP</td>
+            <td class="tg-cly1">DDS</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">¿Es un sistema embebido de control en tiempo real (vehículo, robot, etc.)?</td>
+            <td class="tg-cly1">DDS</td>
+            <td class="tg-cly1">MQTT-SN, protocolos propietarios</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">¿La aplicación tiene eventos poco frecuentes y esporádicos?</td>
+            <td class="tg-cly1">CoAP</td>
+            <td class="tg-cly1">HTTP (si hay conectividad estable)</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">¿La red está compuesta por nodos móviles sin infraestructura fija?</td>
+            <td class="tg-cly1">DDS (P2P) o CoAP (ad hoc)</td>
+            <td class="tg-cly1">Redes mesh Zigbee con MQTT</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Aplicaciones prácticas</h2>
+<p>
+    La elección del protocolo de comunicación en IoT debe considerar las condiciones reales de operación del sistema, como el entorno 
+    físico, la infraestructura disponible y el tipo de datos a transmitir. A continuación, se presenta una tabla que resume ejemplos 
+    representativos de aplicaciones y su correspondencia con protocolos adecuados, considerando tanto limitaciones técnicas como 
+    criterios funcionales:
+</p>
+</p>
+
+<table style="margin: auto;" class="table-objetive-module">
+    <thead>
+        <tr>
+            <th class="tg-vyu2"><span style="font-weight:bold;">Tipo de aplicación</span></th>
+            <th class="tg-vyu2"><span style="font-weight:bold;">Condiciones clave</span></th>
+            <th class="tg-vyu2"><span style="font-weight:bold;">Protocolo recomendado</span></th>
+            <th class="tg-vyu2"><span style="font-weight:bold;">Justificación principal</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="tg-cly1">Agricultura de precisión en zona remota</td>
+            <td class="tg-cly1">Poca conectividad, alta autonomía requerida</td>
+            <td class="tg-cly1">LoRaWAN</td>
+            <td class="tg-cly1">Bajo consumo, largo alcance</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">Red de sensores embebidos de bajo consumo</td>
+            <td class="tg-cly1">Datos esporádicos, dispositivos con poca RAM/CPU</td>
+            <td class="tg-cly1">CoAP</td>
+            <td class="tg-cly1">Ligero, eficiente y basado en UDP</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">Monitoreo ambiental en granjas industriales</td>
+            <td class="tg-cly1">Datos frecuentes, dispositivos distribuidos</td>
+            <td class="tg-cly1">MQTT</td>
+            <td class="tg-cly1">Tolerante a desconexiones, modelo publish-subscribe</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">Tablero web de monitoreo en tiempo real</td>
+            <td class="tg-cly1">Conectividad estable, visualización por navegador</td>
+            <td class="tg-cly1">WebSocket / HTTP</td>
+            <td class="tg-cly1">Full-duplex o REST para integración web</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">Automatización de procesos industriales críticos</td>
+            <td class="tg-cly1">Alta confiabilidad, control de flujo, seguridad avanzada</td>
+            <td class="tg-cly1">AMQP</td>
+            <td class="tg-cly1">Soporta QoS, autenticación, y persistencia</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">Comunicación entre robots o sistemas embebidos</td>
+            <td class="tg-cly1">Tiempo real, latencia mínima, sincronización directa</td>
+            <td class="tg-cly1">DDS</td>
+            <td class="tg-cly1">Comunicación determinista sin broker</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">Báscula inteligente doméstica</td>
+            <td class="tg-cly1">Datos simples, conectividad intermitente</td>
+            <td class="tg-cly1">CoAP</td>
+            <td class="tg-cly1">Ligereza, compatibilidad con REST</td>
+        </tr>
+        <tr>
+            <td class="tg-cly1">Red vehicular o despliegue temporal sin red fija</td>
+            <td class="tg-cly1">Movilidad, redes dinámicas, sin infraestructura</td>
+            <td class="tg-cly1">DDS / CoAP (ad hoc)</td>
+            <td class="tg-cly1">Comunicación directa entre nodos</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    Esta tabla permite visualizar de forma clara cómo los factores contextuales (como autonomía energética, tipo de red, necesidad de 
+    visualización o criticidad del sistema) influyen directamente en la elección del protocolo. De este modo, el estudiante podrá 
+    justificar técnicamente sus decisiones de diseño en ejercicios prácticos o estudios de caso.
+</p>
+
+<!--
+<h2>Actividades</h2>
+<p>
+    <ol>
+        <li>
+            Mini juego digital: “Acierta el protocolo”
+            <ul>
+                <li>Ubicación: Al final de la sección.</li>
+                <li>Propuesta: Crear tarjetas con escenarios (por ejemplo: “Sistema de sensores en túnel de riego”), el estudiante debe arrastrar y soltar el protocolo ideal.</li>
+                <li>Herramienta sugerida: Genially o Kahoot.</li>
+            </ul>
+        </li>
+        <li>
+            Simulación práctica guiada con Node-RED y MQTT
+            <ul>
+                <li>Ubicación: Transición hacia la sección 6.3</li>
+                <li>Descripción: Actividad guiada donde los estudiantes simulan un sistema de monitoreo de temperatura con MQTT y visualización en Node-RED.</li>
+            </ul>
+        </li>
+    </ol>
+</p>
+-->
+
+<h2>Conclusiones</h2>
+<p>
+    La comunicación eficiente en IoT no depende únicamente de tener conectividad, sino de utilizar el protocolo más adecuado para cada 
+    contexto. Los protocolos MQTT, CoAP y HTTP ofrecen opciones complementarias, cada uno con fortalezas específicas frente a consumo 
+    energético, arquitectura de red, interoperabilidad y tolerancia a fallos.
+</p>
+<p>
+    Una selección informada del protocolo permite construir sistemas más robustos, escalables y sostenibles. Por ejemplo, elegir MQTT 
+    en lugar de HTTP puede extender la duración de la batería en entornos remotos. De igual forma, comprender las limitaciones del 
+    modelo cliente-servidor frente al modelo publicación-suscripción puede ayudar a evitar cuellos de botella en arquitecturas 
+    distribuidas.
+</p>
+
+<h2>Referencias</h2>
+<p>
+    <ol>
+        <li>A. Čólaković and M. Hadžialić, "IoT: A review of enabling technologies, challenges, and open research issues," Computer Networks, vol. 144, pp. 17–39, 2018.</li>
+        <li>J. Lin et al., "A Survey on Internet of Things: Architecture, Enabling Technologies, Security and Privacy," IEEE IoT J., vol. 4, no. 5, pp. 1125–1142, Oct. 2017.</li>
+        <li>H. Kashif et al., "Selection of Network Protocols for IoT Applications: A Review," IEEE Int. Conf. Semant. Comput., 2020.</li>
+        <li>N. Shahid and S. Aneja, "Internet of Things: Vision, Application Areas and Research Challenges," IEEE I-SMAC, pp. 583–585, 2017.</li>
+        <li>A. Ud Din et al., "The IoT: A review of enabled technologies and future challenges," Computer Networks, vol. 144, pp. 12–22, 2019.</li>
+        <li>X. Xia, "IoT Research and Application of IT," Int. Conf. on Intelligent Transportation, Big Data & Smart City, 2020.</li>
+    </ol>
+</p>
+
+<!--
+<p>Los protocolos de comunicación en el Internet de las Cosas (IoT) son conjuntos de reglas y estándares que permiten a los dispositivos 
+    IoT intercambiar información de manera efectiva y eficiente. Estos protocolos son fundamentales para garantizar que los datos se 
+    transmitan de forma segura y rápida entre los dispositivos, así como entre los dispositivos y las plataformas de análisis o servidores. 
+    La elección del protocolo adecuado puede influir significativamente en el rendimiento, la escalabilidad y la eficiencia de una red IoT.
+</p>
+<p>Entre los beneficios del uso de protocolos de comunicación específicos para IoT se incluyen la reducción del consumo de energía, la 
+    optimización del uso del ancho de banda y la mejora de la latencia en la comunicación. Esto es especialmente importante en entornos 
+    donde los recursos son limitados y la conexión de red puede ser inestable. Además, los protocolos permiten la interoperabilidad entre 
+    diferentes dispositivos y plataformas, facilitando la integración de tecnologías diversas en un mismo sistema.
+</p>
+<ul>
+    <li> MQTT (Message Queuing Telemetry Transport)
+        <ul>
+            <li>Descripción: Protocolo de mensajería ligero diseñado para la transmisión de datos entre dispositivos y servidores.</li>
+            <li>Características: Utiliza un modelo de publicación/suscripción que permite una comunicación eficiente en redes con ancho de 
+                banda limitado y alta latencia. Es ideal para aplicaciones donde se necesita un intercambio frecuente de datos y baja 
+                sobrecarga de red.
+            </li>
+        </ul>
+    </li>
+    <li> CoAP (Constrained Application Protocol)
+        <ul>
+            <li>Descripción: Protocolo ligero destinado a dispositivos con recursos limitados, diseñado para facilitar la comunicación en 
+                entornos con restricciones.
+            </li>
+            <li>Características: CoAP es un protocolo orientado a la solicitud/respuesta, similar a HTTP, pero optimizado para operaciones 
+                de bajo consumo. Su diseño permite su uso en dispositivos que operan con poca potencia y en redes de baja velocidad.
+            </li>
+        </ul>
+    </li>
+    <li> HTTP/HTTPS
+        <ul>
+            <li>Descripción: Protocolo de transferencia de hipertexto utilizado comúnmente en aplicaciones IoT para la comunicación con 
+                servidores web.
+            </li>
+            <li>Características: A pesar de ser más pesado que otros protocolos como MQTT y CoAP, HTTP/HTTPS es ampliamente reconocido y 
+                utilizado en la web. Su uso en IoT permite la interacción con servicios en la nube y la integración con aplicaciones web, 
+                facilitando el acceso a datos y recursos desde dispositivos IoT.
+            </li>
+        </ul>
+    </li>
+</ul>
+-->

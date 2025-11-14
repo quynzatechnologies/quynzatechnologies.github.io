@@ -1,82 +1,33 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-iot") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
-    
-    <title>Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos</title>
-</head>
+<h1>Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos</h1>
+<h2>Descripción</h2>
+<p> Usando Micropython, con el <strong>Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos</strong> se va a 
+    aprender a controlar los dígitos de un display de 7 segmentos con 4 dígitos, por medio de una interfaz 
+    conectada a un servidor Web administrado por el ESP32.
+</p>
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
+<p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
+</p>
 
-        <header id="header-nav-main-container"></header>
+<p style="text-align:center;">
+    <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+</p>
 
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-iot">☰ Menú</button>
-                    <div id="aside-nav-curso-iot-container"></div>
+<h2>Código</h2>
 
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
+<p>Para este ejercicio se necesitará el archivo:</p>
+<ol>
+    <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica, crear el servidor web para controlar el display 7 segmentos.</li>
+    <li>html_7_segment.html: Texto HTML para interfaz gráfica del ejercicio. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
+</ol>
 
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/">4. Desarrollo de interfaces web y control local en ESP32</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/">4.3. Implementación de control local con sensores y actuadores</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/ejercicio_4_6.html" class="not-active">Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <h1>Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos</h1>
-                            <h2>Descripción</h2>
-                            <p> Usando Micropython, con el <strong>Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos</strong> se va a 
-                                aprender a controlar los dígitos de un display de 7 segmentos con 4 dígitos, por medio de una interfaz 
-                                conectada a un servidor Web administrado por el ESP32.
-                            </p>
-
-                            <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
-                            </p>
-
-                            <p style="text-align:center;">
-                                <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
-                            </p>
-
-                            <h2>Código</h2>
-
-                            <p>Para este ejercicio se necesitará el archivo:</p>
-                            <ol>
-                                <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica, crear el servidor web para controlar el display 7 segmentos.</li>
-                                <li>html_7_segment.html: Texto HTML para interfaz gráfica del ejercicio. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
-                            </ol>
-
-                            <h3>main.py:</h3>
+<h3>main.py:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, Timer
@@ -245,7 +196,7 @@ s.listen(<span style="color: #B452CD">5</span>)
             conn.close()
 </pre></div>
 
-                            <h3>html_7_segment.html:</h3>
+<h3>html_7_segment.html:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%"><span style="color: #1e889b">&lt;!DOCTYPE html&gt;</span>
@@ -465,17 +416,17 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <h2>Explicación paso a paso</h2>
-                            
-                            <h3>main.py:</h3>
+<h2>Explicación paso a paso</h2>
 
-                            <p> Teniendo en claro el funcionamiento de los socket para creación de servidores web con ESP32 (véase 
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/ejercicio_4_1.html#socket_p5">explicación</a>), se procede a explicar el 
-                                código desarrollado:
-                            </p>
+<h3>main.py:</h3>
 
-                            <p> En primer lugar importamos las librerías necesarias para este ejercicio: 
-                            </p>
+<p> Teniendo en claro el funcionamiento de los socket para creación de servidores web con ESP32 (véase 
+    <a href="#socket_p5" data-lesson="4_1_principios">explicación</a>), se procede a explicar el 
+    código desarrollado:
+</p>
+
+<p> En primer lugar importamos las librerías necesarias para este ejercicio: 
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, Timer
@@ -484,7 +435,7 @@ s.listen(<span style="color: #B452CD">5</span>)
 <span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">uselect</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">as</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">select</span>
 </pre></div>
 
-                            <p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
+<p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
@@ -505,20 +456,20 @@ s.listen(<span style="color: #B452CD">5</span>)
 do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
 </pre>
 </div>
-                            
-                            <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
-                                en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
-                            </p>
 
-                            <ul>
-                                <li>XXX: Nombre de su red WiFi</li>
-                                <li>YYY: Contraseña de su red WiFi</li>
-                            </ul>
+<p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
+    <a href="#explicacion" data-lesson="ejercicio_3_2">explicación paso a paso</a>. Se debe tener
+    en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+</p>
 
-                            <p> Ahora se va a configurar los pines del ESP32 que se utilizarán para controlar los segmentos y los dígitos del display de 7 segmentos. 
-                                Se asume que el display es de cátodo común, lo que significa que todos los cátodos de los dígitos están conectados juntos y se controlan mediante pines separados:
-                            </p>
+<ul>
+    <li>XXX: Nombre de su red WiFi</li>
+    <li>YYY: Contraseña de su red WiFi</li>
+</ul>
+
+<p> Ahora se va a configurar los pines del ESP32 que se utilizarán para controlar los segmentos y los dígitos del display de 7 segmentos. 
+    Se asume que el display es de cátodo común, lo que significa que todos los cátodos de los dígitos están conectados juntos y se controlan mediante pines separados:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Configuración de pines para los segmentos (a-g, punto decimal)</span>
@@ -578,8 +529,8 @@ params = {
 </pre>
 </div>
 
-                            <p> La función <em>decode_segments</em> toma un valor entero y genera un array de tamaño 7 que representa el estado de cada segmento del display de 7 segmentos: </p>
-                            </p>
+<p> La función <em>decode_segments</em> toma un valor entero y genera un array de tamaño 7 que representa el estado de cada segmento del display de 7 segmentos: </p>
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">decode_segments</span>(value):
@@ -588,8 +539,8 @@ params = {
 </pre>
 </div>
 
-                            <p> La función <em>display_digit</em> se encarga de mostrar un dígito en el display de 7 segmentos: </p>
-                            </p>
+<p> La función <em>display_digit</em> se encarga de mostrar un dígito en el display de 7 segmentos: </p>
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">display_digit</span>(digit, value):
@@ -616,8 +567,8 @@ params = {
 </pre>
 </div>
 
-                            <p> La función <em>update_display</em> se encarga de actualizar el dígito mostrado en el display de 7 segmentos. Y se configura con un Timer para ejecutarse periódicamente:</p>
-                            </p>
+<p> La función <em>update_display</em> se encarga de actualizar el dígito mostrado en el display de 7 segmentos. Y se configura con un Timer para ejecutarse periódicamente:</p>
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
     <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Callback function for the timer</span>
@@ -635,11 +586,11 @@ blink_timer.init(mode=Timer.PERIODIC, period=<span style="color: #B452CD">5</spa
 </pre>
 </div>
 
-                            <p> Se crea una función llamada <em>web_page</em>. Se procede a leer el archivo <em>html_7_segment.html</em> que contiene la página web 
-                                a mostrar en el servidor web, se convierte en un variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para 
-                                reemplazar el string <em>%d1</em> por el valor de la variable <em>d1</em>, el string <em>%d2</em> por la variable <em>d2</em>, el string 
-                                <em>%d3</em> por la variable <em>d3</em> y el string <em>%d4</em> por la variable <em>d4</em>. Por último se retorna la página web modificada:
-                            </p>
+<p> Se crea una función llamada <em>web_page</em>. Se procede a leer el archivo <em>html_7_segment.html</em> que contiene la página web 
+    a mostrar en el servidor web, se convierte en un variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para 
+    reemplazar el string <em>%d1</em> por el valor de la variable <em>d1</em>, el string <em>%d2</em> por la variable <em>d2</em>, el string 
+    <em>%d3</em> por la variable <em>d3</em> y el string <em>%d4</em> por la variable <em>d4</em>. Por último se retorna la página web modificada:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">web_page</span>(param):
@@ -656,11 +607,11 @@ blink_timer.init(mode=Timer.PERIODIC, period=<span style="color: #B452CD">5</spa
 </pre>
 </div>
 
-                            <p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
-                                <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
-                                definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
-                                el socket para recibir máximo 5 conexiones de manera simultánea:
-                            </p>
+<p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
+    <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
+    definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
+    el socket para recibir máximo 5 conexiones de manera simultánea:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -675,10 +626,10 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p> Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
-                                entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente. Luego se recibe los datos del socket 
-                                enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se decodifica:
-                            </p>
+<p> Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
+    entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente. Luego se recibe los datos del socket 
+    enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se decodifica:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -696,20 +647,20 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p> Aqui se procesan 2 tipos de comandos
-                                
-                                <ol>
-                                    <li><strong>POST:</strong> Si el comando recibido es de tipo POST, se procede a separar el cuerpo del mensaje del encabezado, 
-                                        luego se divide el cuerpo en parámetros individuales utilizando el carácter '&' como separador. 
-                                        Cada parámetro se asigna a un diccionario llamado <em>params</em> con claves 'd1', 'd2', 'd3' y 'd4'. 
-                                        Finalmente, se imprimen los valores recibidos en la consola del ESP32.
-                                    </li>
-                                    <li><strong>GET:</strong> Si el comando recibido es de tipo GET, se procede a generar la respuesta HTML utilizando los parámetros recibidos. 
-                                        Se llama a la función <em>web_page(params)</em> para obtener el contenido HTML actualizado. 
-                                        Luego, se envía la respuesta al cliente siguiendo el protocolo HTTP, incluyendo los encabezados necesarios.
-                                    </li>
-                                </ol>
-                            </p>
+<p> Aqui se procesan 2 tipos de comandos
+    
+    <ol>
+        <li><strong>POST:</strong> Si el comando recibido es de tipo POST, se procede a separar el cuerpo del mensaje del encabezado, 
+            luego se divide el cuerpo en parámetros individuales utilizando el carácter '&' como separador. 
+            Cada parámetro se asigna a un diccionario llamado <em>params</em> con claves 'd1', 'd2', 'd3' y 'd4'. 
+            Finalmente, se imprimen los valores recibidos en la consola del ESP32.
+        </li>
+        <li><strong>GET:</strong> Si el comando recibido es de tipo GET, se procede a generar la respuesta HTML utilizando los parámetros recibidos. 
+            Se llama a la función <em>web_page(params)</em> para obtener el contenido HTML actualizado. 
+            Luego, se envía la respuesta al cliente siguiendo el protocolo HTTP, incluyendo los encabezados necesarios.
+        </li>
+    </ol>
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -729,44 +680,17 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
+<h2>Testeo en ESP32</h2>
+<p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/Con_ESP32_ejercicio_8.png" width ="100%" height="auto">
-                            </p>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_3_implementacion/img/Con_ESP32_ejercicio_8.png" width ="100%" height="auto">
+</p>
 
-                            <p><b>Luego procedemos a subir el archivo <em>html_7_segment.html</em> al dispositivo ESP32.</b></p>                            
+<p><b>Luego procedemos a subir el archivo <em>html_7_segment.html</em> al dispositivo ESP32.</b></p>                            
 
-                            <p>Después, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p>
+<p>Después, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/resultado1_ejercicio_8.png" width ="100%" height="auto">
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/ejercicio_4_5.html" class="btn btn-neutral float-left" title="Ejercicio 4-5: Control de LEDs RGB con Interfaz Web" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_iot/contenido/5_node_red/" class="btn btn-neutral float-right" title="5. Node-RED para monitoreo en la nube" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-        </main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_3_implementacion/img/resultado1_ejercicio_8.png" width ="100%" height="auto">
+</p>

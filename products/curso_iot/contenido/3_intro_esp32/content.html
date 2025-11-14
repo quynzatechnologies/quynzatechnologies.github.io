@@ -1,0 +1,119 @@
+<script>
+if (sessionStorage.getItem("logueado-iot") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 3. Introducción práctica a la programación con ESP32</h1>
+<p>
+	Duración estimada: XX horas
+</p>
+
+<h2>Planteamiento general</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo general</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Dominar la conexión WiFi y Bluetooth del ESP32 y su configuración mediante scripts en MicroPython</td>
+			<td class="tg-cly1">Desarrolla programas básicos de conexión a red, exploración de redes y comunicación entre dispositivos</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Metodología:</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo específico</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Evidencias de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Actividades de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Link</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Configurar el entorno de desarrollo y ejecutar scripts básicos en MicroPython sobre el ESP32</td>
+			<td class="tg-cly1">Instala correctamente el entorno y ejecuta scripts de prueba desde el computador al microcontrolador</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Captura de consola con scripts básicos funcionando</li>
+					<li>Lista de comandos ejecutados</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Guía paso a paso de instalación</li>
+					<li>Práctica inicial: parpadeo de LED interno</li>
+					<li>Explicación guiada de cada script</li>
+				</ul>
+			</td>
+			<td class="tg-cly1"><a href="#" data-lesson="3_1_micropython">3.1. Introducción al ESP32 y MicroPython</a></td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Programar al ESP32 para conectarse a una red WiFi local mediante código en MicroPython</td>
+			<td class="tg-cly1">Establece conexión funcional con una red WiFi y comprueba conectividad desde consola</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Captura de pantalla mostrando dirección IP asignada</li>
+					<li>Script comentado entregado</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Desarrollo de script de conexión</li>
+					<li>Actividad de prueba: encendido de LED tras conexión exitosa</li>
+				</ul>
+			</td>
+			<td class="tg-cly1"><a href="#" data-lesson="3_2_wifi">3.2. Conexión WiFi del ESP32</a></td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Habilitar la comunicación Bluetooth en el ESP32 y enviar/recibir datos desde un dispositivo móvil</td>
+			<td class="tg-cly1">Transmite datos básicos entre el ESP32 y una app móvil mediante BLE</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Evidencia de recepción de datos en app móvil</li>
+					<li>Registro de prueba de conexión BLE</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Actividad práctica: transmitir temperatura simulada a celular</li>
+					<li>Análisis del flujo de datos entre microcontrolador y app</li>
+				</ul>
+			</td>
+			<td class="tg-cly1"><a href="#" data-lesson="3_3_bluetooth">3.3. Módulo Bluetooth del ESP32</a></td>
+		</tr>
+	</tbody>
+</table>
+
+
+<!--
+<p>Los sistemas IoT tienen diferentes componentes principales:</p>
+<ul>
+	<li>Dispositivos IoT: Está compuesto por los sensores, que se encargan de recolección de datos del ambiente, y los actuadores, que 
+		se encargan de realizar acciones basadas en las instrucciones recibidas por el sistema.
+	</li>
+	<li>Protocolos de comunicación IoT: Los dispositivos necesitan un lenguaje común para comunicarse entre ellos. Dependiendo del 
+		contexto y requerimientos (alcance, seguridad, robustez, entre otros) puede utilizarse una gran variedad como HTTP, ZigBee, 
+		LoRa, MQTT, entre otros.
+	</li>
+	<li>Sistemas IoT de control: Provee la lógica necesaria y las capacidades de toma decisión a partir de los datos recopilados por 
+		los sensores e instrucciones del usuario, este decide las acciones apropiadas a realizar a través de los actuadores.
+	</li>
+	<li>Plataformas IoT: Provee las herramientas e infraestructura para que los dispositivos operen e interactúen entre sí. Además, 
+		logra desempeñar funcionalidades necesarias para la integridad del sistema, como administración de dispositivos y bases de datos, 
+		interconectividad con otros sistemas preexistentes, capacidades analíticas hasta despliegue de interfaces de usuario.
+	</li>
+	<li>Interfaz de usuario: Este es el enlace directo entre el sistema IoT con los usuarios, ya que con este se logra transmitir la 
+		información construida a través de los sensores y la lógica de negocios de cada aplicación, y permite capacidades para que el 
+		usuario ejecute decisiones sobre el sistema.
+	</li>
+</ul>
+-->

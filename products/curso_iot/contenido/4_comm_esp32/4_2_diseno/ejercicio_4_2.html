@@ -1,82 +1,33 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-iot") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
-    
-    <title>Ejercicio 4-2: Crear servidor web en ESP32 e interfaz web</title>
-</head>
+<h1>Ejercicio 4-2: Crear servidor web en ESP32 e interfaz web</h1>
+<h2>Descripción</h2>
+<p>Todas las páginas web que se ven en internet están alojadas en un servidor, que continuamente esperan conexiones entrantes de clientes. Usando 
+    Micropython, con el <strong>Ejercicio 4-2: Crear servidor web en ESP32 e interfaz web</strong> se va a aprender a crear un servidor Web
+    en el cual se muestre una interfaz sencilla en cualquier navegador.
+</p>
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
+<p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
+</p>
 
-        <header id="header-nav-main-container"></header>
+<p style="text-align:center;">
+    <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+</p>
 
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-iot">☰ Menú</button>
-                    <div id="aside-nav-curso-iot-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                                <div class="row">
-                                        <h1>Ejercicio 4-2: Crear servidor web en ESP32 e interfaz web</h1>
-                                        <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                                </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/">4. Desarrollo de interfaces web y control local en ESP32</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/4_2_diseno/">4.2. Diseño de interfaces web básicas</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/4_2_diseno/ejercicio_4_2.html" class="not-active">Ejercicio 4-2: Crear servidor web en ESP32 e interfaz web</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <h1>Ejercicio 4-2: Crear servidor web en ESP32 e interfaz web</h1>
-                            <h2>Descripción</h2>
-                            <p>Todas las páginas web que se ven en internet están alojadas en un servidor, que continuamente esperan conexiones entrantes de clientes. Usando 
-                                Micropython, con el <strong>Ejercicio 4-2: Crear servidor web en ESP32 e interfaz web</strong> se va a aprender a crear un servidor Web
-                                en el cual se muestre una interfaz sencilla en cualquier navegador.
-                            </p>
-
-                            <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
-                            </p>
-
-                            <p style="text-align:center;">
-                                <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
-                            </p>
-
-                            <h2>Código</h2>
-                            <p>Para este ejercicio se necesitará el archivo:</p>
-                            <ol>
-                                <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica, crear el servidor web y comunicarse con los clientes que se conecten.</li>
-                                <li>html_led.html: Texto HTML para interfaz gráfica del ejercicio. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
-                            </ol>
+<h2>Código</h2>
+<p>Para este ejercicio se necesitará el archivo:</p>
+<ol>
+    <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica, crear el servidor web y comunicarse con los clientes que se conecten.</li>
+    <li>html_led.html: Texto HTML para interfaz gráfica del ejercicio. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
+</ol>
 
 
-                            <h3>main.py:</h3>
+<h3>main.py:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
@@ -156,9 +107,8 @@ s.listen(<span style="color: #B452CD">5</span>)
     conn.close()
 </pre>
 </div>
- 
 
-                            <h3>html_led.html:</h3>
+<h3>html_led.html:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -184,18 +134,18 @@ s.listen(<span style="color: #B452CD">5</span>)
 <span style="color: #8B008B; font-weight: bold">&lt;/html&gt;</span>
 </pre></div>
 
-                            <h2>Explicación paso a paso</h2>
+<h2>Explicación paso a paso</h2>
 
-                            <h3>boot.py</h3>
+<h3>boot.py</h3>
 
-                            <h3>main.py</h3>
+<h3>main.py</h3>
 
-                            <p>Con la teoría explicada en la sección anterior, se procede a explicar el código desarrollado:</p>
+<p>Con la teoría explicada en la sección anterior, se procede a explicar el código desarrollado:</p>
 
-                            <p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">socket</a></em>, <em>Network</em> y la clase
-                                <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em>. La clase <em>Pin</em> es usada para controlar
-                                los pines GPIO (General-purpose Input-Output) del ESP32:
-                            </p>
+<p>En primer lugar importamos la librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">socket</a></em>, <em>Network</em> y la clase
+    <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em>. La clase <em>Pin</em> es usada para controlar
+    los pines GPIO (General-purpose Input-Output) del ESP32:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -205,9 +155,9 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
-                                en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
-                            </p>
+<p> Luego un objeto llamado <em>p2</em> con clase <em>Pin</em>, el cual se va a vincular con el <em>GPIO2</em> del ESP32 con una configuración
+    en modo salida (<em>Pin.OUT</em>). Para las tarjetas ESP32, el <em>GPIO2</em> está conectado al LED interno:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -215,7 +165,7 @@ p2 = Pin(<span style="color: #B452CD">2</span>,Pin.OUT)
 </pre>
 </div>
 
-                            <p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
+<p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
@@ -237,22 +187,22 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
 
-                            <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
-                                en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
-                            </p>
+<p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
+    <a href="#explicacion" data-lesson="ejercicio_3_2">explicación paso a paso</a>. Se debe tener
+    en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+</p>
 
-                            <ul>
-                                <li>XXX: Nombre de su red WiFi</li>
-                                <li>YYY: Contraseña de su red WiFi</li>
-                            </ul>
+<ul>
+    <li>XXX: Nombre de su red WiFi</li>
+    <li>YYY: Contraseña de su red WiFi</li>
+</ul>
 
-                            <p> Despues, se crea una función llamada <em>web_page</em>. En este se llama la función <em>p2.value()</em> para determinar el estado LED <em>p2</em>:
-                                si está encendido entonces se define la variable <em>gpio_state</em> como "<em>ON</em>", en caso contrario como  como "<em>OFF</em>".
-                                Luego se procede a leer el archivo <em>html_led.html</em> que contiene la página web a mostrar en el servidor web, se convierte en un
-                                variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para reemplazar el string <em>%led</em> por el valor de 
-                                la variable <em>gpio_state</em>. Por último se retorna la página web modificada:
-                            </p>
+<p> Despues, se crea una función llamada <em>web_page</em>. En este se llama la función <em>p2.value()</em> para determinar el estado LED <em>p2</em>:
+    si está encendido entonces se define la variable <em>gpio_state</em> como "<em>ON</em>", en caso contrario como  como "<em>OFF</em>".
+    Luego se procede a leer el archivo <em>html_led.html</em> que contiene la página web a mostrar en el servidor web, se convierte en un
+    variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para reemplazar el string <em>%led</em> por el valor de 
+    la variable <em>gpio_state</em>. Por último se retorna la página web modificada:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -272,11 +222,11 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
 
-                            <p>Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
-                                <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
-                                definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
-                                el socket para recibir máximo 5 conexiones de manera simultánea:
-                            </p>
+<p>Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
+    <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
+    definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
+    el socket para recibir máximo 5 conexiones de manera simultánea:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -289,9 +239,9 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p>Se procede a habilitar al socket a aceptar las conexiones entrantes de clientes que accedan a la dirección web especificada anteriormente y
-                                se imprime en consola la dirección del cliente:
-                            </p>
+<p>Se procede a habilitar al socket a aceptar las conexiones entrantes de clientes que accedan a la dirección web especificada anteriormente y
+    se imprime en consola la dirección del cliente:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -302,9 +252,9 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p>Luego se recibe los datos del socket enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se 
-                                imprime en consola:
-                            </p>
+<p>Luego se recibe los datos del socket enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se 
+    imprime en consola:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -315,20 +265,20 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p>La página web tiene dos botones:
-                            </p>
+<p>La página web tiene dos botones:
+</p>
 
-                            <ul>
-                                <li>Botón encendido (ON): Que envía el comando <em>/?led=on</em></li>
-                                <li>Botón apagado (OFF): Que envía el comando <em>/?led=off</em></li>
-                            </ul>
+<ul>
+    <li>Botón encendido (ON): Que envía el comando <em>/?led=on</em></li>
+    <li>Botón apagado (OFF): Que envía el comando <em>/?led=off</em></li>
+</ul>
 
-                            <p>Cuando el cliente presiona alguno de los dos botones el cliente envía una solicitud al servidor que contiene el comando correspondiente.
-                            </p>
+<p>Cuando el cliente presiona alguno de los dos botones el cliente envía una solicitud al servidor que contiene el comando correspondiente.
+</p>
 
-                            <p>Con la función <em>request.find("XXX")</em> se busca el string "<em>XXX</em>" dentro del string "<em>request</em>". En caso que el valor 
-                                de esta búsqueda sea igual a 6 (si se encontró) entonces se cambia el estado del LED mediante la función <em>p2.value(i)</em>:
-                            </p>
+<p>Con la función <em>request.find("XXX")</em> se busca el string "<em>XXX</em>" dentro del string "<em>request</em>". En caso que el valor 
+    de esta búsqueda sea igual a 6 (si se encontró) entonces se cambia el estado del LED mediante la función <em>p2.value(i)</em>:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -344,9 +294,9 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p> Luego de definir la función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con el valor actual
-                                del led:
-                            </p>
+<p> Luego de definir la función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con el valor actual
+    del led:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -355,8 +305,8 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p> Después se envía los datos requeridos por el navegador del cliente para mostrar la página web (Encabezado + Contenido):
-                            </p>
+<p> Después se envía los datos requeridos por el navegador del cliente para mostrar la página web (Encabezado + Contenido):
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -366,8 +316,8 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p>Por último, se cierra el socket creado para el cliente:
-                            </p>
+<p>Por último, se cierra el socket creado para el cliente:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -376,59 +326,32 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
+<h2>Testeo en ESP32</h2>
+<p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
-                            <p style="text-align:center;">
-                                <img src="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
-                            </p>
+<p style="text-align:center;">
+    <img src="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
+</p>
 
-                            <p> <b>Luego procedemos a subir el archivo <em>html_led.html</em> al dispositivo ESP32.</b></p>
+<p> <b>Luego procedemos a subir el archivo <em>html_led.html</em> al dispositivo ESP32.</b></p>
 
-                            <p> Despues, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos:</p> 
+<p> Despues, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos:</p> 
 
-                            <p style="text-align:center;">
-                                <img src="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/img/resultado1_ejercicio_4.png" width ="100%" height="auto">
-                            </p>
-                            
-                            <p> Y con un computador o dispositivo móvil que esté conectado
-                                en la misma red WiFi que el ESP32, por medio de un navegador se debe conectar a la dirección web anotada en pasos anteriores:
-                            </p>
+<p style="text-align:center;">
+    <img src="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/img/resultado1_ejercicio_4.png" width ="100%" height="auto">
+</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/resultado2_ejercicio_4.png" width ="100%" height="auto">
-                            </p>
+<p> Y con un computador o dispositivo móvil que esté conectado
+    en la misma red WiFi que el ESP32, por medio de un navegador se debe conectar a la dirección web anotada en pasos anteriores:
+</p>
 
-                            <p> Si presionamos en botón <em>ON</em> se encenderá el LED de ESP32 como se muestra a continuación:
-                            </p>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_2_diseno/img/resultado2_ejercicio_4.png" width ="100%" height="auto">
+</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/resultado3_ejercicio_4.png" width ="100%" height="auto">
-                            </p>
-                        </div>
+<p> Si presionamos en botón <em>ON</em> se encenderá el LED de ESP32 como se muestra a continuación:
+</p>
 
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_2_diseno/" class="btn btn-neutral float-left" title="4.2. Diseño de interfaces web básicas" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/" class="btn btn-neutral float-right" title="4.3. Implementación de control local con sensores y actuadores" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-        </main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_2_diseno/img/resultado3_ejercicio_4.png" width ="100%" height="auto">
+</p>

@@ -1,0 +1,338 @@
+{
+    "id": "curso_iot",
+    "titulo": "Curso de IoT",
+    "estructura": [
+        {
+            "id": "inicio",
+            "titulo": "Curso de IoT",
+            "archivo": "inicio/content.html"
+        },
+        {
+            "id": "recopilacion_ejercicios",
+            "titulo": "Recopilación de Ejercicios",
+            "archivo": "recopilacion_ejercicios/content.html",
+            "excluirOrden": true
+        },
+        {
+            "id": "1_introduccion_iot",
+            "titulo": "1. Introducción al IoT",
+            "archivo": "1_introduccion_iot/content.html",
+            "items": [
+                {
+                    "id": "1_1_que_es",
+                    "titulo": "1.1. ¿Qué es el Internet de las Cosas (IoT)?",
+                    "archivo": "1_introduccion_iot/1_1_que_es/content.html"
+                },
+                {
+                    "id": "1_2_historia",
+                    "titulo": "1.2. Historia y Evolución del IoT",
+                    "archivo": "1_introduccion_iot/1_2_historia/content.html"
+                },
+                {
+                    "id": "1_3_impacto",
+                    "titulo": "1.3. Impacto en la Electrónica y la Programación",
+                    "archivo": "1_introduccion_iot/1_3_impacto/content.html"
+                }
+            ]
+        },
+        {
+            "id": "2_componentes_claves",
+            "titulo": "2. Componentes Claves del IoT",
+            "archivo": "2_componentes_claves/content.html",
+            "items": [
+                {
+                    "id": "2_1_sensores",
+                    "titulo": "2.1. Sensores en IoT",
+                    "archivo": "2_componentes_claves/2_1_sensores/content.html"
+                },
+                {
+                    "id": "2_2_actuadores",
+                    "titulo": "2.2. Actuadores en IoT",
+                    "archivo": "2_componentes_claves/2_2_actuadores/content.html"
+                },
+                {
+                    "id": "2_3_arquitectura",
+                    "titulo": "2.3. Arquitectura general de un sistema IoT",
+                    "archivo": "2_componentes_claves/2_3_arquitectura/content.html"
+                },
+                {
+                    "id": "2_4_procesamiento",
+                    "titulo": "2.4. Procesamiento de datos: Edge, Cloud y Fog",
+                    "archivo": "2_componentes_claves/2_4_procesamiento/content.html"
+                }
+            ]
+        },
+        {
+            "id": "3_intro_esp32",
+            "titulo": "3. Introducción práctica a la programación con ESP32",
+            "archivo": "3_intro_esp32/content.html",
+            "items": [
+                {
+                    "id": "3_1_micropython",
+                    "titulo": "3.1. Introducción al ESP32 y MicroPython",
+                    "archivo": "3_intro_esp32/3_1_micropython/content.html",
+                    "items": [
+                        {
+                            "id": "gs_thonny",
+                            "titulo": "Getting Started: Thonny MicroPython IDE para ESP32",
+                            "archivo": "3_intro_esp32/3_1_micropython/gs_thonny.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "3_2_wifi",
+                    "titulo": "3.2. Conexión WiFi del ESP32",
+                    "archivo": "3_intro_esp32/3_2_wifi/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_3_1",
+                            "titulo": "Ejercicio 3-1: Visualizar lista redes WiFi",
+                            "archivo": "3_intro_esp32/3_2_wifi/ejercicio_3_1.html"
+                        },
+                        {
+                            "id": "ejercicio_3_2",
+                            "titulo": "Ejercicio 3-2: Conectarse a red WiFi",
+                            "archivo": "3_intro_esp32/3_2_wifi/ejercicio_3_2.html"
+                        },
+                        {
+                            "id": "ejercicio_3_3",
+                            "titulo": "Ejercicio 3-3: Crear red WiFi",
+                            "archivo": "3_intro_esp32/3_2_wifi/ejercicio_3_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "3_3_bluetooth",
+                    "titulo": "3.3. Módulo Bluetooth del ESP32",
+                    "archivo": "3_intro_esp32/3_3_bluetooth/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_3_4",
+                            "titulo": "Ejercicio 3-4: Utilizar módulo Bluetooth de ESP32",
+                            "archivo": "3_intro_esp32/3_3_bluetooth/ejercicio_3_4.html"
+                        },
+                        {
+                            "id": "ejercicio_3_5",
+                            "titulo": "Ejercicio 3-5: Control de Dispositivos a través de Bluetooth con el ESP32",
+                            "archivo": "3_intro_esp32/3_3_bluetooth/ejercicio_3_5.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "4_comm_esp32",
+            "titulo": "4. Desarrollo de interfaces web y control local en ESP32",
+            "archivo": "4_comm_esp32/content.html",
+            "items": [
+                {
+                    "id": "4_1_principios",
+                    "titulo": "4.1. Principios de comunicación cliente-servidor en IoT",
+                    "archivo": "4_comm_esp32/4_1_principios/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_1",
+                            "titulo": "Ejercicio 4-1: Acceder a dirección Web",
+                            "archivo": "4_comm_esp32/4_1_principios/ejercicio_4_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_2_diseno",
+                    "titulo": "4.2. Diseño de interfaces web básicas",
+                    "archivo": "4_comm_esp32/4_2_diseno/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_2",
+                            "titulo": "Ejercicio 4-2: Crear servidor web en ESP32 e interfaz web",
+                            "archivo": "4_comm_esp32/4_2_diseno/ejercicio_4_2.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_3_implementacion",
+                    "titulo": "4.3. Implementación de control local con sensores y actuadores",
+                    "archivo": "4_comm_esp32/4_3_implementacion/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_3",
+                            "titulo": "Ejercicio 4-3: Monitoreo de Temperatura y Humedad con DHT11",
+                            "archivo": "4_comm_esp32/4_3_implementacion/ejercicio_4_3.html"
+                        },
+                        {
+                            "id": "ejercicio_4_4",
+                            "titulo": "Ejercicio 4-4: Sistema de Alarma con Sensor Infrarrojo y Notificación Web",
+                            "archivo": "4_comm_esp32/4_3_implementacion/ejercicio_4_4.html"
+                        },
+                        {
+                            "id": "ejercicio_4_5",
+                            "titulo": "Ejercicio 4-5: Control de LEDs RGB con Interfaz Web",
+                            "archivo": "4_comm_esp32/4_3_implementacion/ejercicio_4_5.html"
+                        },
+                        {
+                            "id": "ejercicio_4_6",
+                            "titulo": "Ejercicio 4-6: Interfaz Web para Controlar un Display de 7 Segmentos",
+                            "archivo": "4_comm_esp32/4_3_implementacion/ejercicio_4_6.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "5_node_red",
+            "titulo": "5. Node-RED para monitoreo en la nube",
+            "archivo": "5_node_red/content.html",
+            "items": [
+                {
+                    "id": "5_1_introduccion",
+                    "titulo": "5.1. Introducción a Node-RED",
+                    "archivo": "5_node_red/5_1_introduccion/content.html",
+                    "items": [
+                        {
+                            "id": "gs_node_red",
+                            "titulo": "Getting Started: Node-RED",
+                            "archivo": "5_node_red/5_1_introduccion/gs_node_red.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_2_integracion",
+                    "titulo": "5.2. Integración de ESP32 con Node-RED",
+                    "archivo": "5_node_red/5_2_integracion/content.html"
+                },
+                {
+                    "id": "5_3_monitoreo",
+                    "titulo": "5.3. Construcción de un sistema de monitoreo",
+                    "archivo": "5_node_red/5_3_monitoreo/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_1",
+                            "titulo": "Ejercicio 5-1: Plataforma de Monitoreo en la Nube con Node-RED",
+                            "archivo": "5_node_red/5_3_monitoreo/ejercicio_5_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_4_condiciones",
+                    "titulo": "5.4. Automatización basada en condiciones con Node-RED",
+                    "archivo": "5_node_red/5_4_condiciones/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_2",
+                            "titulo": "Ejercicio 5-2: Sistema con Sensor Infrarrojo y Alertas en Node-RED",
+                            "archivo": "5_node_red/5_4_condiciones/ejercicio_5_2.html"
+                        },
+                        {
+                            "id": "ejercicio_5_3",
+                            "titulo": "Ejercicio 5-3: Automatización del Riego Basado en Humedad con Node-RED",
+                            "archivo": "5_node_red/5_4_condiciones/ejercicio_5_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_5_actuadores",
+                    "titulo": "5.5. Control de actuadores desde dashboard",
+                    "archivo": "5_node_red/5_5_actuadores/content.html"
+                },
+                {
+                    "id": "5_6_bluetooth",
+                    "titulo": "5.6. Integración con Bluetooth y app móvil",
+                    "archivo": "5_node_red/5_6_bluetooth/content.html"
+                }
+            ]
+        },
+        {
+            "id": "6_conectividad",
+            "titulo": "6. Protocolos y conectividad en IoT",
+            "archivo": "6_conectividad/content.html",
+            "items": [
+                {
+                    "id": "6_1_redes",
+                    "titulo": "6.1. Tipos de redes aplicadas en IoT",
+                    "archivo": "6_conectividad/6_1_redes/content.html"
+                },
+                {
+                    "id": "6_2_protocolos",
+                    "titulo": "6.2. Protocolos de comunicación en IoT",
+                    "archivo": "6_conectividad/6_2_protocolos/content.html"
+                },
+                {
+                    "id": "6_3_implementacion",
+                    "titulo": "6.3. Implementación práctica con MQTT",
+                    "archivo": "6_conectividad/6_3_implementacion/content.html",
+                    "items": [
+                        {
+                            "id": "gs_mosquitto",
+                            "titulo": "Getting Started: Mosquitto",
+                            "archivo": "6_conectividad/6_3_implementacion/gs_mosquitto.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "7_tecnologias",
+            "titulo": "7. Tecnologías habilitantes para IoT",
+            "archivo": "7_tecnologias/content.html",
+            "items": [
+                {
+                    "id": "7_1_ia",
+                    "titulo": "7.1. Inteligencia artificial aplicada a IoT",
+                    "archivo": "7_tecnologias/7_1_ia/content.html"
+                },
+                {
+                    "id": "7_2_5g",
+                    "titulo": "7.2. 5G y su impacto en sistemas IoT",
+                    "archivo": "7_tecnologias/7_2_5g/content.html"
+                },
+                {
+                    "id": "7_3_edge",
+                    "titulo": "7.3. Edge Computing y procesamiento distribuido",
+                    "archivo": "7_tecnologias/7_3_edge/content.html"
+                },
+                {
+                    "id": "7_4_ciberseguridad",
+                    "titulo": "7.4. Ciberseguridad en entornos IoT",
+                    "archivo": "7_tecnologias/7_4_ciberseguridad/content.html"
+                },
+                {
+                    "id": "7_5_privacidad",
+                    "titulo": "7.5. Privacidad y ética en entornos conectados",
+                    "archivo": "7_tecnologias/7_5_privacidad/content.html"
+                },
+                {
+                    "id": "7_6_futuro",
+                    "titulo": "7.6. El futuro de IoT",
+                    "archivo": "7_tecnologias/7_6_futuro/content.html"
+                }
+            ]
+        },
+        {
+            "id": "8_proyecto",
+            "titulo": "8. Proyecto final integrador",
+            "archivo": "8_proyecto/content.html",
+            "items": [
+                {
+                    "id": "8_1_planteamiento",
+                    "titulo": "8.1. Planteamiento del proyecto",
+                    "archivo": "8_proyecto/8_1_planteamiento/content.html"
+                },
+                {
+                    "id": "8_2_desarrollo",
+                    "titulo": "8.2. Desarrollo y documentación técnica",
+                    "archivo": "8_proyecto/8_2_desarrollo/content.html"
+                },
+                {
+                    "id": "8_3_presentacion",
+                    "titulo": "8.3. Presentación del proyecto",
+                    "archivo": "8_proyecto/8_3_presentacion/content.html"
+                }
+            ]
+        },
+        {
+            "id": "9_proximos_pasos",
+            "titulo": "9. Próximos Pasos",
+            "archivo": "9_proximos_pasos/content.html"
+        }
+    ]
+}

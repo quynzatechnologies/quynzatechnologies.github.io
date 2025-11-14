@@ -1,82 +1,33 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-iot") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
-    
-    <title>Ejercicio 4-3: Monitoreo de Temperatura y Humedad con DHT11 y Visualización Web</title>
-</head>
+<h1>Ejercicio 4-3: Monitoreo de Temperatura y Humedad con DHT11 y Visualización Web</h1>
+<h2>Descripción</h2>
+<p> Usando Micropython, con el <strong>Ejercicio 4-3: Monitoreo de Temperatura y Humedad con DHT11 y Visualización Web</strong> se va a aprender
+    a realizar un monitoreo de la variables de temperatura y humedad ambiental por medio del sensor DHT11, el cual por medio de ESP32 se hará
+    una visualización con interfaz web.
+</p>
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
+<p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
+</p>
 
-        <header id="header-nav-main-container"></header>
+<p style="text-align:center;">
+    <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+</p>
 
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-iot">☰ Menú</button>
-                    <div id="aside-nav-curso-iot-container"></div>
+<h2>Código</h2>
+<p>Para este ejercicio se necesitará el archivo:</p>
+<ol>
+    <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica, crear el servidor web para visualización de las lecturas del sensor DHT11
+        y comunicarse con los clientes que se conecten.</li>
+    <li>html_dht11.html: Texto HTML para interfaz gráfica del ejercicio, con la característica que se actualiza automáticamente cada 5 seg. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
+</ol>
 
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 4-3: Monitoreo de Temperatura y Humedad con DHT11 y Visualización Web</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/">4. Desarrollo de interfaces web y control local en ESP32</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/">4.3. Implementación de control local con sensores y actuadores</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/ejercicio_4_3.html" class="not-active">Ejercicio 4-3: Monitoreo de Temperatura y Humedad con DHT11 y Visualización Web</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <h1>Ejercicio 4-3: Monitoreo de Temperatura y Humedad con DHT11 y Visualización Web</h1>
-                            <h2>Descripción</h2>
-                            <p> Usando Micropython, con el <strong>Ejercicio 4-3: Monitoreo de Temperatura y Humedad con DHT11 y Visualización Web</strong> se va a aprender
-                                a realizar un monitoreo de la variables de temperatura y humedad ambiental por medio del sensor DHT11, el cual por medio de ESP32 se hará
-                                una visualización con interfaz web.
-                            </p>
-
-                            <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
-                            </p>
-
-                            <p style="text-align:center;">
-                                <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
-                            </p>
-
-                            <h2>Código</h2>
-                            <p>Para este ejercicio se necesitará el archivo:</p>
-                            <ol>
-                                <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica, crear el servidor web para visualización de las lecturas del sensor DHT11
-                                    y comunicarse con los clientes que se conecten.</li>
-                                <li>html_dht11.html: Texto HTML para interfaz gráfica del ejercicio, con la característica que se actualiza automáticamente cada 5 seg. <b>Este archivo va a ser guardado dentro del ESP32</b>.</li>
-                            </ol>
-
-                            <h3>main.py:</h3>
+<h3>main.py:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
@@ -167,8 +118,8 @@ time1 = time.ticks_us()
             <span style="color: #228B22"># Close Socket</span>
             conn.close()
 </pre></div> 
-                            
-                            <h3>html_dht11.html:</h3>
+
+<h3>html_dht11.html:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -206,35 +157,35 @@ time1 = time.ticks_us()
 </pre>
 </div>
 
-                            <h2>Explicación paso a paso</h2>
+<h2>Explicación paso a paso</h2>
 
-                            <h3>boot.py:</h3>
-                            
-                            <h3>main.py:</h3>
+<h3>boot.py:</h3>
 
-                            <p> Teniendo en claro el funcionamiento de los socket para creación de servidores web con ESP32 (véase 
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/ejercicio_4_1.html#socket_p5">explicación</a>), se procede a explicar el 
-                                código desarrollado:
-                            </p>
+<h3>main.py:</h3>
 
-                            <p> En primer lugar importamos las librerías necesarias para este ejercicio: 
-                            </p>
+<p> Teniendo en claro el funcionamiento de los socket para creación de servidores web con ESP32 (véase 
+    <a href="#socket_p5" data-lesson="4_1_principios">explicación</a>), se procede a explicar el 
+    código desarrollado:
+</p>
 
-                            <ul>
-                                <li><em>socket</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">socket</a></em> es usado para
-                                la creación se sockets con ESP32</li>
-                                <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em> es usado para
-                                controlar los pines GPIO (General-purpose Input-Output) del ESP32</li>
-                                <li><em>uselect</em>: La librería <em><a href="https://docs.micropython.org/en/v1.15/library/uselect.html" target="_blank">uselect</a></em> es para esperar 
-                                eficientemente eventos en múltiples transmisiones. En este ejercicio se utiliza para esperar las conexiones de clientes entrantes sin 
-                                necesidad de detener la operación del ESP32</li>
-                                <li><em>dht</em>: La librería <em><a href="https://docs.micropython.org/en/latest/esp8266/tutorial/dht.html" target="_blank">dht</a></em> es usado para
-                                leer sensores digitales de bajo coste con sensores de humedad capacitivos y termistores para medir el aire circundante (Digital humidity
-                                /& Temperature). En este ejercicio se está utilizando el sensor <em>DHT11</em></li>
-                                <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html" target="_blank">time</a></em> proporciona funciones
-                                para obtener la hora y fecha actuales, medir intervalos de tiempo y retrasos. En este ejercicio se va a utilizar para hacer un temporizador
-                                y medir con el sensor a intervalos fijos</li>
-                            </ul>
+<p> En primer lugar importamos las librerías necesarias para este ejercicio: 
+</p>
+
+<ul>
+    <li><em>socket</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/socket.html" target="_blank">socket</a></em> es usado para
+    la creación se sockets con ESP32</li>
+    <li><em>machine.Pin</em>: La clase <em><a href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank">machine.Pin</a></em> es usado para
+    controlar los pines GPIO (General-purpose Input-Output) del ESP32</li>
+    <li><em>uselect</em>: La librería <em><a href="https://docs.micropython.org/en/v1.15/library/uselect.html" target="_blank">uselect</a></em> es para esperar 
+    eficientemente eventos en múltiples transmisiones. En este ejercicio se utiliza para esperar las conexiones de clientes entrantes sin 
+    necesidad de detener la operación del ESP32</li>
+    <li><em>dht</em>: La librería <em><a href="https://docs.micropython.org/en/latest/esp8266/tutorial/dht.html" target="_blank">dht</a></em> es usado para
+    leer sensores digitales de bajo coste con sensores de humedad capacitivos y termistores para medir el aire circundante (Digital humidity
+    /& Temperature). En este ejercicio se está utilizando el sensor <em>DHT11</em></li>
+    <li><em>time</em>: La librería <em><a href="https://docs.micropython.org/en/latest/library/time.html" target="_blank">time</a></em> proporciona funciones
+    para obtener la hora y fecha actuales, medir intervalos de tiempo y retrasos. En este ejercicio se va a utilizar para hacer un temporizador
+    y medir con el sensor a intervalos fijos</li>
+</ul>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -247,7 +198,7 @@ time1 = time.ticks_us()
 </pre>
 </div>
 
-                            <p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
+<p>Luego se utiliza esta sección de código para establecer la conexión a la red WiFi específica:</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">do_connect</span>(ssid,pwd):
@@ -268,20 +219,20 @@ time1 = time.ticks_us()
 do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="color: #CD5555">&quot;YYY&quot;</span>)
 </pre>
 </div>
-                            
-                            <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
-                                en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
-                            </p>
 
-                            <ul>
-                                <li>XXX: Nombre de su red WiFi</li>
-                                <li>YYY: Contraseña de su red WiFi</li>
-                            </ul>
+<p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
+    <a href="#explicacion" data-lesson="ejercicio_3_2">explicación paso a paso</a>. Se debe tener
+    en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+</p>
 
-                            <p> Después, se crea el objeto <em>sensor</em> de tipo <em>dht</em> que hará referencia al sensor <em>DHT11</em> y que se conectará al pin 23
-                                del ESP32. También se crean las variables globales <em>temp</em> y <em>humi</em>:
-                            </p>
+<ul>
+    <li>XXX: Nombre de su red WiFi</li>
+    <li>YYY: Contraseña de su red WiFi</li>
+</ul>
+
+<p> Después, se crea el objeto <em>sensor</em> de tipo <em>dht</em> que hará referencia al sensor <em>DHT11</em> y que se conectará al pin 23
+    del ESP32. También se crean las variables globales <em>temp</em> y <em>humi</em>:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -291,12 +242,12 @@ humi = <span style="color: #B452CD">0</span>
 </pre>
 </div> 
 
-                            <p> Se crea una función llamada <em>web_page</em>. En este se lee el archivo <em>html_dht11.html</em> que contiene la página web a mostrar 
-                                en el servidor web, se convierte en un variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para reemplazar el 
-                                string <em>%temp</em> por el valor de la variable <em>temp</em>, que contiene el valor de temperatura leído por el sensor, y el string
-                                <em>%hum</em> por el valor de la variable <em>humi</em>, que contiene el valor leído por el sensor. Por último se retorna la página web 
-                                modificada:
-                            </p>
+<p> Se crea una función llamada <em>web_page</em>. En este se lee el archivo <em>html_dht11.html</em> que contiene la página web a mostrar 
+    en el servidor web, se convierte en un variable de tipo <em>String</em> y se usa la función <em>html.replace()</em> para reemplazar el 
+    string <em>%temp</em> por el valor de la variable <em>temp</em>, que contiene el valor de temperatura leído por el sensor, y el string
+    <em>%hum</em> por el valor de la variable <em>humi</em>, que contiene el valor leído por el sensor. Por último se retorna la página web 
+    modificada:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -312,11 +263,11 @@ humi = <span style="color: #B452CD">0</span>
 </pre>
 </div> 
 
-                            <p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
-                                <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
-                                definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
-                                el socket para recibir máximo 5 conexiones de manera simultánea:
-                            </p>
+<p> Siguiendo el diagrama de flujo para la creación de sockets, primero se crea el objeto <em>socket.socket()</em>, donde 
+    <em>socket.AF_INET</em> se utiliza para definir el socket en la familia de direcciones IPv4, <em>socket.SOCK_STREAM</em> se utiliza para 
+    definir el socket como tipo TCP. Luego se vincula el socket a la dirección web del dispositivo al puerto 80. Y se configura
+    el socket para recibir máximo 5 conexiones de manera simultánea:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -331,10 +282,10 @@ s.listen(<span style="color: #B452CD">5</span>)
 </pre>
 </div>
 
-                            <p> Utilizando la función <em>time.ticks_us()</em> que retorna el número de microsegundos transcurridos desde el encendido del ESP32,
-                                en un ciclo, cada 5000000us (equivalente a 5 seg), se ejecutará una medición del sensor DHT11 y se guardarán en las 
-                                variables globales <em>temp</em> y <em>humi</em>:
-                            </p>
+<p> Utilizando la función <em>time.ticks_us()</em> que retorna el número de microsegundos transcurridos desde el encendido del ESP32,
+    en un ciclo, cada 5000000us (equivalente a 5 seg), se ejecutará una medición del sensor DHT11 y se guardarán en las 
+    variables globales <em>temp</em> y <em>humi</em>:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -359,9 +310,9 @@ time1 = time.ticks_us()
 </pre>
 </div> 
 
-                            <p> Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
-                                entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente:
-                            </p>
+<p> Utilizando la función <em>select.select()</em> se estara revisando la conexión del socket <em>s</em>. En caso de haber una conexión
+    entrante se procede a aceptar la conexión y se imprime en consola la dirección del cliente:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -375,11 +326,11 @@ time1 = time.ticks_us()
 </pre>
 </div> 
 
-                            <p> Luego se recibe los datos del socket enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se 
-                                imprime en consola. Se llama a la función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con los 
-                                valores actuales de temperatura y humedad. Después se envía los datos requeridos por el navegador del cliente para mostrar la página web 
-                                (Encabezado + Contenido) y se cierra el socket creado para el cliente:
-                            </p>
+<p> Luego se recibe los datos del socket enviados por el cliente, con un tamaño máximo de 1024 bits, se convierte en <em>String</em> y se 
+    imprime en consola. Se llama a la función <em>web_page</em>, se llama y este automáticamente va a generar el html de la página web con los 
+    valores actuales de temperatura y humedad. Después se envía los datos requeridos por el navegador del cliente para mostrar la página web 
+    (Encabezado + Contenido) y se cierra el socket creado para el cliente:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -400,59 +351,32 @@ time1 = time.ticks_us()
 </pre>
 </div> 
 
-                            <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
+<h2>Testeo en ESP32</h2>
+<p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/Con_ESP32_ejercicio_6.png" width ="100%" height="auto">
-                            </p>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_3_implementacion/img/Con_ESP32_ejercicio_6.png" width ="100%" height="auto">
+</p>
 
-                            <p><b>Luego procedemos a subir el archivo <em>html_dht11.html</em> al dispositivo ESP32.</b></p>
+<p><b>Luego procedemos a subir el archivo <em>html_dht11.html</em> al dispositivo ESP32.</b></p>
 
-                            <p>Después, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p> 
+<p>Después, ejecutamos el script <em>main.py</em> mediante el software Thonny. Se debe anotar el campo <em>IP address</em> para los siguientes pasos.</p> 
 
-                            <p style="text-align:center;">
-                                <img src="./img/resultado1_ejercicio_6.png" width ="100%" height="auto">
-                            </p>
-                            
-                            <p>Y con un computador o dispositivo móvil que esté conectado
-                                en la misma red WiFi que el ESP32, por medio de un navegador se debe conectar a la dirección web anotada en pasos anteriores:
-                            </p>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_3_implementacion/img/resultado1_ejercicio_6.png" width ="100%" height="auto">
+</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/resultado2_ejercicio_6.png" width ="100%" height="auto">
-                            </p>
+<p>Y con un computador o dispositivo móvil que esté conectado
+    en la misma red WiFi que el ESP32, por medio de un navegador se debe conectar a la dirección web anotada en pasos anteriores:
+</p>
 
-                            <p> Si acercamos un dedo al sensor, se podrá observar que cada 5 seg aumenta paulatinamente el valor de humedad:
-                            </p>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_3_implementacion/img/resultado2_ejercicio_6.png" width ="100%" height="auto">
+</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/resultado3_ejercicio_6.png" width ="100%" height="auto">
-                            </p>
-                        </div>
+<p> Si acercamos un dedo al sensor, se podrá observar que cada 5 seg aumenta paulatinamente el valor de humedad:
+</p>
 
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/" class="btn btn-neutral float-left" title="4.3. Implementación de control local con sensores y actuadores" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_3_implementacion/ejercicio_4_4.html" class="btn btn-neutral float-right" title="Ejercicio 4-4: Sistema de Alarma con Sensor Infrarrojo y Notificación Web" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-        </main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_3_implementacion/img/resultado3_ejercicio_6.png" width ="100%" height="auto">
+</p>

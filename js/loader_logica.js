@@ -68,7 +68,7 @@ function buildMappings() {
         PATHS[node.id] = currentPath;
 
         // Solo agregar a ORDER si el nodo tiene archivo
-        if (node.archivo) {
+        if (node.archivo && !node.excluirOrden) {
             ORDER.push(node.id);
         }
 
@@ -181,25 +181,31 @@ async function loadLesson(lessonId, pushState = true) {
         document.getElementById("content").innerHTML = "<p>Error cargando contenido.</p>";
     }
 
-    // 🔥 NUEVO: actualizar título H1
+    // Actualizar título H1
     const h1 = document.querySelector("#heading-breadcrumbs h1");
     if (h1) h1.textContent = lesson.titulo;
 
-    // 🔥 NUEVO: actualizar título <title>
+    // Actualizar título <title>
     document.title = lesson.titulo + " - Curso de Lógica Digital";
 
-    // Actualizar breadcrumbs
     updateBreadcrumbs(lessonId);
-
-    // Prev / Next
     updatePrevNext(lessonId);
-
-    // Resaltar lección activa en el menú
     highlightActiveLesson(lessonId);
+    activateContentLinks();
 
-    // Actualizar URL sin recargar
-    // Ir al inicio de la página
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (anchorId) {
+        // intentar ir al anchor dentro del nuevo contenido
+        const el = document.getElementById(anchorId);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+        } else {
+            // si no existe el anchor, al inicio de la página
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     if (pushState) {
         history.pushState({ lessonId }, "", `?lesson=${lessonId}`);
     }
@@ -229,7 +235,7 @@ function updateBreadcrumbs(lessonId) {
         // Si estamos en inicio → mostrar como elemento actual
         const span = document.createElement("span");
         span.textContent = "Inicio";
-        span.classList.add("not-active");   // 🔥 Se aplica el estilo de página actual
+        span.classList.add("not-active");
         rootLi.appendChild(span);
     }
 
@@ -254,7 +260,7 @@ function updateBreadcrumbs(lessonId) {
             // Nivel actual → no es link, tiene clase not-active
             const span = document.createElement("span");
             span.textContent = level.titulo;
-            span.classList.add("not-active");  // 🔥 Aquí va la clase
+            span.classList.add("not-active");
             li.appendChild(span);
         } else {
             // Niveles superiores → son links
@@ -288,6 +294,23 @@ function updatePrevNext(lessonId) {
         btnPrev.onclick = () => loadLesson(prevId);
     } else {
         btnPrev.style.visibility = "hidden";
+    }
+
+    // Ocultar botón siguiente SOLO en la página de ejercicios
+    if (lessonId === "recopilacion_ejercicios") {
+
+        // Mostrar Anterior que lleve a Inicio
+        btnPrev.style.visibility = "visible";
+        btnPrev.textContent = "← Anterior";
+        btnPrev.dataset.lesson = "inicio";
+        btnPrev.onclick = () => loadLesson("inicio");
+
+        // Ocultar Next
+        btnNext.style.visibility = "hidden";
+        btnNext.onclick = null;
+        btnNext.textContent = "";
+
+        return; // salir y no procesar el flujo normal
     }
 
     // Next
@@ -360,4 +383,27 @@ function highlightActiveLesson(lessonId) {
     if (currentLi && currentLi.tagName.toLowerCase() === "li") {
         currentLi.setAttribute("aria-expanded", "true");
     }
+}
+
+/* ============================================================
+   Convertir <a data-lesson=""> en enlaces SPA
+   ============================================================ */
+function activateContentLinks() {
+    const links = document.querySelectorAll("#content a[data-lesson]");
+
+    links.forEach(a => {
+        a.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const lessonId = a.dataset.lesson;
+            let anchorId = null;
+
+            const href = a.getAttribute("href") || "";
+            if (href.startsWith("#") && href.length > 1) {
+                anchorId = href.substring(1);
+            }
+
+            loadLesson(lessonId, true, anchorId);
+        });
+    });
 }

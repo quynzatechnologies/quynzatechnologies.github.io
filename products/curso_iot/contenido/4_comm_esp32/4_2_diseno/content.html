@@ -1,0 +1,127 @@
+<script>
+if (sessionStorage.getItem("logueado-iot") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 4.2. Diseño de interfaces web básicas</h1>
+<p>
+    En muchos proyectos de IoT, la visualización de información o el control de actuadores se realiza desde plataformas 
+    web remotas o interfaces móviles. Sin embargo, existe un enfoque alternativo especialmente útil en escenarios donde 
+    se requiere autonomía de red o interacción local: la creación de interfaces web directamente en el microcontrolador. 
+    Este submódulo aborda cómo el ESP32 puede servir páginas HTML a través de su propio servidor, permitiendo diseñar 
+    interfaces visuales accesibles desde cualquier navegador conectado a la misma red.
+</p>
+
+<h2>¿Qué es una interfaz web?</h2>
+<p>
+    Una interfaz web es una forma visual y accesible de interactuar con un sistema a través de un navegador de internet. 
+    En el contexto de dispositivos IoT como el ESP32, una interfaz web permite que un usuario pueda visualizar datos 
+    del dispositivo (como lecturas de sensores) o enviarle comandos (como encender un LED) sin necesidad de instalar 
+    software adicional.
+</p>
+<p>A nivel general, toda interfaz web está compuesta por dos partes:</p>
+<p>
+    <ul>
+        <li><b>Frontend</b>, que es lo que el usuario ve y manipula directamente (textos, botones, gráficos).</li>
+        <li><b>Backend</b>, que se encarga de procesar la información, responder solicitudes y mantener la lógica del sistema.</li>
+    </ul>
+</p>
+<p>En sistemas embebidos, la interfaz web suele ser sencilla y estática, pero efectiva para control y monitoreo local.</p>
+
+<h3>Componentes de una página web básica</h3>
+<p>Una página web está conformada principalmente por archivos escritos en HTML, y en algunos casos acompañados de CSS o JavaScript:</p>
+<p>
+    <ul>
+        <li>
+            <b>HTML (HyperText Markup Language)</b>: es el lenguaje que da estructura al contenido de la página. Define 
+            títulos, párrafos, enlaces, formularios y botones.
+        </li>
+        <li>
+            <b>CSS (Cascading Style Sheets)</b>: permite aplicar estilos visuales como colores, tamaños de texto o 
+            posicionamiento de elementos. En este submódulo solo se menciona de forma opcional.
+        </li>
+        <li>
+            <b>JavaScript</b>: se utiliza para añadir interactividad avanzada (como animaciones o procesamiento local), 
+            pero no será implementado aquí.
+        </li>
+    </ul>
+</p>
+<p>Cuando un navegador recibe un archivo HTML, lo interpreta y lo convierte en una interfaz gráfica para el usuario.</p>
+
+
+<h2>¿Qué es un servidor web?</h2>
+<p>
+    Un servidor web es cualquier dispositivo capaz de escuchar peticiones HTTP y responderlas con contenido (como 
+    páginas HTML). Funciona como un "mozo en un restaurante": espera una orden, la interpreta, y luego sirve la 
+    respuesta solicitada.
+</p>
+<p>
+    En el contexto del ESP32, este microcontrolador puede actuar como un servidor web básico que escucha peticiones en 
+    el puerto 80 (HTTP estándar) y responde con contenido HTML predefinido.
+</p>
+<p>El protocolo HTTP define reglas sobre cómo se comunican cliente y servidor:</p>
+<p>
+    <ul>
+        <li>Una solicitud HTTP (por ejemplo, GET) es enviada por el navegador.</li>
+        <li>El servidor responde con un encabezado y un cuerpo (generalmente en HTML).</li>
+        <li>El navegador interpreta la respuesta y muestra la página al usuario.</li>
+    </ul>
+</p>
+
+<h3>¿Cómo puede el ESP32 actuar como servidor web?</h3>
+<p>
+    Gracias a sus capacidades de red, el ESP32 puede operar como servidor utilizando MicroPython. Esto se logra con ayuda 
+    de las siguientes librerías:
+</p>
+<p>
+    <ul>
+        <li><i>network</i>: para conectarse a una red WiFi en modo estación (STA_IF).</li>
+        <li><i>socket</i>: para crear un servidor TCP/IP que escuche en el puerto 80.</li>
+    </ul>
+</p>
+<p>
+    Cuando un navegador se conecta a la dirección IP del ESP32, el microcontrolador detecta esta conexión, analiza la 
+    solicitud, y responde con un archivo HTML definido en su memoria.
+</p>
+<p>
+    Este mecanismo tiene limitaciones: el contenido servido debe ser liviano, el manejo de múltiples conexiones es 
+    restringido, y no se recomienda para sitios dinámicos o con muchos recursos visuales. Sin embargo, es ideal para 
+    aplicaciones IoT locales donde se necesita monitoreo o control rápido y directo.
+</p>
+
+<h3>Flujo de trabajo para crear una interfaz web en ESP32</h3>
+<p>Para implementar una interfaz web básica en el ESP32, se siguen los siguientes pasos conceptuales:</p>
+<p>
+    <ol>
+        <li>
+            <b>Conexión a WiFi</b>: El ESP32 se conecta a una red WiFi usando su modo estación. Esto le permite obtener 
+            una dirección IP dentro de la red local.
+        </li>
+        <li>
+            <b>Creación del servidor</b>: Con la dirección IP obtenida, se establece un socket TCP/IP en el puerto 80. 
+            El ESP32 queda así a la espera de conexiones entrantes.
+        </li>
+        <li>
+            <b>Esperar conexión del navegador</b>: Un dispositivo como un celular o computador, conectado a la misma red, 
+            ingresa la IP del ESP32 en su navegador.
+        </li>
+        <li>
+            <b>Recepción de la solicitud</b>: El ESP32 detecta que hay un cliente conectado al socket, y lee la solicitud 
+            HTTP enviada (generalmente una petición GET).
+        </li>
+        <li>
+            <b>Respuesta con HTML</b>: El ESP32 prepara una respuesta HTTP con encabezado estándar y cuerpo HTML, que se 
+            envía de vuelta al cliente.
+        </li>
+        <li>
+            <b>Visualización en el navegador</b>: El navegador del cliente interpreta la respuesta y muestra la interfaz 
+            web programada.
+        </li>
+    </ol>
+</p>
+<p>
+    Este proceso permite que el ESP32 muestre una página accesible desde cualquier navegador conectado a la misma red 
+    local, sin necesidad de servidores externos ni conexión a internet.
+</p>

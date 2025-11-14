@@ -1,0 +1,582 @@
+{
+    "id": "curso_micropython",
+    "titulo": "Curso de MicroPython",
+    "estructura": [
+        {
+            "id": "inicio",
+            "titulo": "Inicio",
+            "archivo": "inicio/content.html"
+        },
+        {
+            "id": "recopilacion_ejercicios",
+            "titulo": "Recopilación de ejercicios",
+            "archivo": "recopilacion_ejercicios/content.html",
+            "excluirOrden": true
+        },
+        {
+            "id": "1_introduccion",
+            "titulo": "1. Introducción y fundamentos",
+            "archivo": "1_introduccion/content.html",
+            "items": [
+                {
+                    "id": "1_1_que_es",
+                    "titulo": "1.1. ¿Qué es un microcontrolador?",
+                    "archivo": "1_introduccion/1_1_que_es/content.html"
+                },
+                {
+                    "id": "1_2_thonny",
+                    "titulo": "1.2. Entorno de desarrollo: Thonny",
+                    "archivo": "1_introduccion/1_2_thonny/content.html",
+                    "items": [
+                        {
+                            "id": "intro_micropython",
+                            "titulo": "1.2.1. Introducción al ESP32 y MicroPython",
+                            "archivo": "1_introduccion/1_2_thonny/intro_micropython.html"
+                        },
+                        {
+                            "id": "gs_thonny",
+                            "titulo": "Getting Started: Thonny MicroPython IDE para ESP32",
+                            "archivo": "1_introduccion/1_2_thonny/gs_thonny.html"
+                        },
+                        {
+                            "id": "ejercicio_1_1",
+                            "titulo": "Ejercicio 1-1: Conectando y probando el ESP32",
+                            "archivo": "1_introduccion/1_2_thonny/ejercicio_1_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "1_3_programacion",
+                    "titulo": "1.3. Conceptos básicos de MicroPython",
+                    "archivo": "1_introduccion/1_3_programacion/content.html"
+                },
+                {
+                    "id": "1_4_python_micropython",
+                    "titulo": "1.4. Introducción a Python y MicroPython",
+                    "archivo": "1_introduccion/1_4_python_micropython/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_1_2",
+                            "titulo": "Ejercicio 1-2: Hola Mundo en MicroPython",
+                            "archivo": "1_introduccion/1_4_python_micropython/ejercicio_1_2.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "2_fundamentos_python",
+            "titulo": "2. Fundamentos de Python aplicados a MicroPython",
+            "archivo": "2_fundamentos_python/content.html",
+            "items": [
+                {
+                    "id": "2_1_datos",
+                    "titulo": "2.1. Tipos de datos y variables",
+                    "archivo": "2_fundamentos_python/2_1_datos/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_1",
+                            "titulo": "Ejercicio 2-1: Declaración y conversión de tipos de datos",
+                            "archivo": "2_fundamentos_python/2_1_datos/ejercicio_2_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_2_operadores",
+                    "titulo": "2.2. Operadores y expresiones",
+                    "archivo": "2_fundamentos_python/2_2_operadores/content.html"
+                },
+                {
+                    "id": "2_3_flujo",
+                    "titulo": "2.3. Estructuras de control de flujo",
+                    "archivo": "2_fundamentos_python/2_3_flujo/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_2",
+                            "titulo": "Ejercicio 2-2: Tabla de multiplicar del 8 con ciclo while",
+                            "archivo": "2_fundamentos_python/2_3_flujo/ejercicio_2_2.html"
+                        },
+                        {
+                            "id": "ejercicio_2_3",
+                            "titulo": "Ejercicio 2-3: Tabla de multiplicar del 1 al 10 con ciclos anidados",
+                            "archivo": "2_fundamentos_python/2_3_flujo/ejercicio_2_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_4_funciones",
+                    "titulo": "2.4. Funciones y manejo de librerías",
+                    "archivo": "2_fundamentos_python/2_4_funciones/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_4",
+                            "titulo": "Ejercicio 2-4: Tablas de multiplicar con funciones definidas por el usuario",
+                            "archivo": "2_fundamentos_python/2_4_funciones/ejercicio_2_4.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_5_entrada_salida",
+                    "titulo": "2.5. Entrada y salida de datos",
+                    "archivo": "2_fundamentos_python/2_5_entrada_salida/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_5",
+                            "titulo": "Ejercicio 2-5: Juego de adivinar número con búsqueda binaria",
+                            "archivo": "2_fundamentos_python/2_5_entrada_salida/ejercicio_2_5.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_6_colecciones",
+                    "titulo": "2.6. Manejo de colecciones",
+                    "archivo": "2_fundamentos_python/2_6_colecciones/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_6",
+                            "titulo": "Ejercicio 2-6: Generador de menú semanal sin repeticiones",
+                            "archivo": "2_fundamentos_python/2_6_colecciones/ejercicio_2_6.html"
+                        },
+                        {
+                            "id": "ejercicio_2_7",
+                            "titulo": "Ejercicio 2-7: Simulación de lecturas de temperatura con listas y diccionarios",
+                            "archivo": "2_fundamentos_python/2_6_colecciones/ejercicio_2_7.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "2_7_ejercicios",
+                    "titulo": "2.7. Ejercicios iniciales en Thonny con ESP32",
+                    "archivo": "2_fundamentos_python/2_7_ejercicios/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_2_8",
+                            "titulo": "Ejercicio 2-8: Encender LED con pulsador en MicroPython",
+                            "archivo": "2_fundamentos_python/2_7_ejercicios/ejercicio_2_8.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "3_entrenador",
+            "titulo": "3. Entrenador QMT-020: Pines, periféricos y conexiones",
+            "archivo": "3_entrenador/content.html",
+            "items": [
+                {
+                    "id": "3_1_distribucion",
+                    "titulo": "3.1. Distribución de pines y periféricos del QMT-020",
+                    "archivo": "3_entrenador/3_1_distribucion/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_3_1",
+                            "titulo": "Ejercicio 3-1: Identificación de componentes y pines del entrenador QMT-020",
+                            "archivo": "3_entrenador/3_1_distribucion/ejercicio_3_1.html"
+                        },
+                        {
+                            "id": "ejercicio_3_2",
+                            "titulo": "Ejercicio 3-2: Mapeo de conectores de entrenador QMT-020",
+                            "archivo": "3_entrenador/3_1_distribucion/ejercicio_3_2.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "3_2_uso_gpio",
+                    "titulo": "3.2. Uso de GPIOs",
+                    "archivo": "3_entrenador/3_2_uso/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_3_3",
+                            "titulo": "Ejercicio 3-3: Mapeo del uso de GPIOs en el ESP32 con el entrenador QMT-020",
+                            "archivo": "3_entrenador/3_2_uso/ejercicio_3_3.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "4_actuadores",
+            "titulo": "4. Programación de actuadores",
+            "archivo": "4_actuadores/content.html",
+            "items": [
+                {
+                    "id": "4_1_control_led_1",
+                    "titulo": "4.1. Encendido y apagado de LEDs",
+                    "archivo": "4_actuadores/4_1_control_led_1/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_1",
+                            "titulo": "Ejercicio 4-1: Control del LED interno del ESP32",
+                            "archivo": "4_actuadores/4_1_control_led_1/ejercicio_4_1.html"
+                        },
+                        {
+                            "id": "ejercicio_4_2",
+                            "titulo": "Ejercicio 4-2: Encender LED externo con estructura while",
+                            "archivo": "4_actuadores/4_1_control_led_1/ejercicio_4_2.html"
+                        },
+                        {
+                            "id": "ejercicio_4_3",
+                            "titulo": "Ejercicio 4-3: Encender y apagar un LEDs externos",
+                            "archivo": "4_actuadores/4_1_control_led_1/ejercicio_4_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_2_control_led_2",
+                    "titulo": "4.2. Manejo de múltiples LEDs y estructuras while/for",
+                    "archivo": "4_actuadores/4_2_control_led_2/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_4",
+                            "titulo": "Ejercicio 4-4: Encendido secuencial de un LED con pausas usando while",
+                            "archivo": "4_actuadores/4_2_control_led_2/ejercicio_4_4.html"
+                        },
+                        {
+                            "id": "ejercicio_4_5",
+                            "titulo": "Ejercicio 4-5: Encendido simultáneo de dos LEDs con ciclo infinito",
+                            "archivo": "4_actuadores/4_2_control_led_2/ejercicio_4_5.html"
+                        },
+                        {
+                            "id": "ejercicio_4_6",
+                            "titulo": "Ejercicio 4-6: Encendido controlado de múltiples LEDs con lista y contador",
+                            "archivo": "4_actuadores/4_2_control_led_2/ejercicio_4_6.html"
+                        },
+                        {
+                            "id": "ejercicio_4_7",
+                            "titulo": "Ejercicio 4-7: Barrido secuencial de 4 LEDs con ciclos anidados",
+                            "archivo": "4_actuadores/4_2_control_led_2/ejercicio_4_7.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_3_display_7_segmentos",
+                    "titulo": "4.3. Control de displays de 7 segmentos",
+                    "archivo": "4_actuadores/4_3_display_7_segmentos/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_8",
+                            "titulo": "Ejercicio 4-8: Mostrar número aleatorio en un display de 7 segmentos",
+                            "archivo": "4_actuadores/4_3_display_7_segmentos/ejercicio_4_8.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_4_lcd1602",
+                    "titulo": "4.4. Manejo de la pantalla LCD1602",
+                    "archivo": "4_actuadores/4_4_lcd1602/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_9",
+                            "titulo": "Ejercicio 4-9: Mostrar lista de nombres en pantalla LCD1602",
+                            "archivo": "4_actuadores/4_4_lcd1602/ejercicio_4_9.html"
+                        },
+                        {
+                            "id": "ejercicio_4_10",
+                            "titulo": "Ejercicio 4-10: Mostrar texto fijo en pantalla LCD1602",
+                            "archivo": "4_actuadores/4_4_lcd1602/ejercicio_4_10.html"
+                        },
+                        {
+                            "id": "ejercicio_4_11",
+                            "titulo": "Ejercicio 4-11: Ordenar y mostrar lista de nombres en LCD1602",
+                            "archivo": "4_actuadores/4_4_lcd1602/ejercicio_4_11.html"
+                        },
+                        {
+                            "id": "ejercicio_4_12",
+                            "titulo": "Ejercicio 4-12: Mostrar nombres ordenados en LCD1602 con ciclos anidados",
+                            "archivo": "4_actuadores/4_4_lcd1602/ejercicio_4_12.html"
+                        },
+                        {
+                            "id": "ejercicio_4_13",
+                            "titulo": "Ejercicio 4-13: Concatenar texto y variables en LCD1602",
+                            "archivo": "4_actuadores/4_4_lcd1602/ejercicio_4_13.html"
+                        },
+                        {
+                            "id": "ejercicio_4_14",
+                            "titulo": "Ejercicio 4-14: Elegir ganador aleatorio y mostrar en LCD1602",
+                            "archivo": "4_actuadores/4_4_lcd1602/ejercicio_4_14.html"
+                        },
+                        {
+                            "id": "ejercicio_4_15",
+                            "titulo": "Ejercicio 4-15: Mostrar dado aleatorio en LCD1602",
+                            "archivo": "4_actuadores/4_4_lcd1602/ejercicio_4_15.html"
+                        },
+                        {
+                            "id": "ejercicio_4_16",
+                            "titulo": "Ejercicio 4-16: Generar y mostrar número de lotería con formato en LCD1602",
+                            "archivo": "4_actuadores/4_4_lcd1602/ejercicio_4_16.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_5_zumbador",
+                    "titulo": "4.5. Uso del zumbador",
+                    "archivo": "4_actuadores/4_5_zumbador/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_17",
+                            "titulo": "Ejercicio 4-17: Generar tono fijo con zumbador usando ciclo for",
+                            "archivo": "4_actuadores/4_5_zumbador/ejercicio_4_17.html"
+                        },
+                        {
+                            "id": "ejercicio_4_18",
+                            "titulo": "Ejercicio 4-18: Reproducir melodía en zumbador usando PWM",
+                            "archivo": "4_actuadores/4_5_zumbador/ejercicio_4_18.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "4_6_led_rgb",
+                    "titulo": "4.6. Control de LEDs RGB con PWM",
+                    "archivo": "4_actuadores/4_6_led_rgb/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_4_19",
+                            "titulo": "Ejercicio 4-19: Cambiar color del LED RGB con PWM",
+                            "archivo": "4_actuadores/4_6_led_rgb/ejercicio_4_19.html"
+                        },
+                        {
+                            "id": "ejercicio_4_20",
+                            "titulo": "Ejercicio 4-20: Cambiar color del LED RGB según condiciones simuladas",
+                            "archivo": "4_actuadores/4_6_led_rgb/ejercicio_4_20.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "5_sensores",
+            "titulo": "5. Programación de sensores",
+            "archivo": "5_sensores/content.html",
+            "items": [
+                {
+                    "id": "5_1_fotorresistencia",
+                    "titulo": "5.1. Lectura de fotorresistencia",
+                    "archivo": "5_sensores/5_1_fotorresistencia/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_1",
+                            "titulo": "Ejercicio 5-1: Lectura analógica básica con fotorresistencia",
+                            "archivo": "5_sensores/5_1_fotorresistencia/ejercicio_5_1.html"
+                        },
+                        {
+                            "id": "ejercicio_5_2",
+                            "titulo": "Ejercicio 5-2: Lectura de fotorresistencia con visualización en LCD",
+                            "archivo": "5_sensores/5_1_fotorresistencia/ejercicio_5_2.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_2_potenciometro",
+                    "titulo": "5.2. Lectura de potenciómetro",
+                    "archivo": "5_sensores/5_2_potenciometro/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_3",
+                            "titulo": "Ejercicio 5-3: Lectura de valores analógicos desde un potenciómetro",
+                            "archivo": "5_sensores/5_2_potenciometro/ejercicio_5_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_3_pulsadores",
+                    "titulo": "5.3. Lectura de pulsadores",
+                    "archivo": "5_sensores/5_3_pulsadores/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_4",
+                            "titulo": "Ejercicio 5-4: Encender LED con pulsador en entrada digital",
+                            "archivo": "5_sensores/5_3_pulsadores/ejercicio_5_4.html"
+                        },
+                        {
+                            "id": "ejercicio_5_5",
+                            "titulo": "Ejercicio 5-5: Control de LED con pulsador en modo toggle",
+                            "archivo": "5_sensores/5_3_pulsadores/ejercicio_5_5.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_4_ultrasonido",
+                    "titulo": "5.4. Uso del sensor de ultrasonido",
+                    "archivo": "5_sensores/5_4_ultrasonido/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_6",
+                            "titulo": "Ejercicio 5-6: Medición continua de distancia con sensor HC-SR04",
+                            "archivo": "5_sensores/5_4_ultrasonido/ejercicio_5_6.html"
+                        },
+                        {
+                            "id": "ejercicio_5_7",
+                            "titulo": "Ejercicio 5-7: Alarma por proximidad con HC-SR04",
+                            "archivo": "5_sensores/5_4_ultrasonido/ejercicio_5_7.html"
+                        },
+                        {
+                            "id": "ejercicio_5_8",
+                            "titulo": "Ejercicio 5-8: Medición parametrizada con HC-SR04 y control de lecturas",
+                            "archivo": "5_sensores/5_4_ultrasonido/ejercicio_5_8.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_5_dht11",
+                    "titulo": "5.5. Lectura de temperatura y humedad con DHT11",
+                    "archivo": "5_sensores/5_5_dht11/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_9",
+                            "titulo": "Ejercicio 5-9: Lectura de temperatura y humedad con sensor DHT11",
+                            "archivo": "5_sensores/5_5_dht11/ejercicio_5_9.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_6_sensor_ir",
+                    "titulo": "5.6. Uso de sensor IR para detección de obstáculos",
+                    "archivo": "5_sensores/5_6_sensor_ir/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_10",
+                            "titulo": "Ejercicio 5-10: Detección de obstáculos con sensor IR digital",
+                            "archivo": "5_sensores/5_6_sensor_ir/ejercicio_5_10.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "5_7_control_remoto",
+                    "titulo": "5.7. Lectura de control remoto IR",
+                    "archivo": "5_sensores/5_7_control_remoto/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_5_11",
+                            "titulo": "Ejercicio 5-11: Recepción y decodificación de señales de control remoto IR",
+                            "archivo": "5_sensores/5_7_control_remoto/ejercicio_5_11.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "6_integracion",
+            "titulo": "6. Integración de sensores y actuadores",
+            "archivo": "6_integracion/content.html",
+            "items": [
+                {
+                    "id": "6_1_obstaculos",
+                    "titulo": "6.1. Detección de obstáculos con alarma visual/sonora",
+                    "archivo": "6_integracion/6_1_obstaculos/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_1",
+                            "titulo": "Ejercicio 6-1: Alarma visual con LEDs rojos usando sensor IR",
+                            "archivo": "6_integracion/6_1_obstaculos/ejercicio_6_1.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "6_2_alarmas",
+                    "titulo": "6.2. Alarma por distancia con zumbador y LCD",
+                    "archivo": "6_integracion/6_2_alarmas/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_2",
+                            "titulo": "Ejercicio 6-2: Alarma sonora con zumbador activada por sensor HC-SR04",
+                            "archivo": "6_integracion/6_2_alarmas/ejercicio_6_2.html"
+                        },
+                        {
+                            "id": "ejercicio_6_3",
+                            "titulo": "Ejercicio 6-3: Alarma sonora y visual en LCD objetos cercanos con HC-SR04",
+                            "archivo": "6_integracion/6_2_alarmas/ejercicio_6_3.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "6_3_control_pulsadores",
+                    "titulo": "6.3. Control de LEDs RGB con pulsadores",
+                    "archivo": "6_integracion/6_3_control_pulsadores/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_4",
+                            "titulo": "Ejercicio 6-4: Control de color en LED RGB mediante pulsadores",
+                            "archivo": "6_integracion/6_3_control_pulsadores/ejercicio_6_4.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "6_4_control_remoto_leds",
+                    "titulo": "6.4. Control remoto IR para manejo de LEDs y otras salidas",
+                    "archivo": "6_integracion/6_4_control_remoto_leds/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_5",
+                            "titulo": "Ejercicio 6-5: Encendido y apagado de LEDs mediante control remoto IR",
+                            "archivo": "6_integracion/6_4_control_remoto_leds/ejercicio_6_5.html"
+                        },
+                        {
+                            "id": "ejercicio_6_6",
+                            "titulo": "Ejercicio 6-6: Calculadora básica controlada por mando IR",
+                            "archivo": "6_integracion/6_4_control_remoto_leds/ejercicio_6_6.html"
+                        }
+                    ]
+                },
+                {
+                    "id": "6_5_ejercicios_combinados",
+                    "titulo": "6.5. Ejercicios combinados de seguridad, monitoreo y control",
+                    "archivo": "6_integracion/6_5_ejercicios_combinados/content.html",
+                    "items": [
+                        {
+                            "id": "ejercicio_6_7",
+                            "titulo": "Ejercicio 6-7: Alerta visual con LEDs según distancia medida con HC-SR04",
+                            "archivo": "6_integracion/6_5_ejercicios_combinados/ejercicio_6_7.html"
+                        },
+                        {
+                            "id": "ejercicio_6_8",
+                            "titulo": "Ejercicio 6-8: Ajuste automático de iluminación RGB con fotorresistencia",
+                            "archivo": "6_integracion/6_5_ejercicios_combinados/ejercicio_6_8.html"
+                        },
+                        {
+                            "id": "ejercicio_6_9",
+                            "titulo": "Ejercicio 6-9: Alarma de intrusión en LCD con sensor IR",
+                            "archivo": "6_integracion/6_5_ejercicios_combinados/ejercicio_6_9.html"
+                        },
+                        {
+                            "id": "ejercicio_6_10",
+                            "titulo": "Ejercicio 6-10: Lectura de temperatura y humedad en LCD con DHT11",
+                            "archivo": "6_integracion/6_5_ejercicios_combinados/ejercicio_6_10.html"
+                        },
+                        {
+                            "id": "ejercicio_6_11",
+                            "titulo": "Ejercicio 6-11: Termostato con control de temperatura y visualización en LCD",
+                            "archivo": "6_integracion/6_5_ejercicios_combinados/ejercicio_6_11.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "7_proyecto",
+            "titulo": "7. Proyecto final",
+            "archivo": "7_proyecto/content.html",
+            "items": [
+                {
+                    "id": "7_1_definicion",
+                    "titulo": "7.1. Definición del proyecto y objetivos",
+                    "archivo": "7_proyecto/7_1_definicion/content.html"
+                },
+                {
+                    "id": "7_2_codigo",
+                    "titulo": "7.2. Planificación del código y conexiones",
+                    "archivo": "7_proyecto/7_2_codigo/content.html"
+                },
+                {
+                    "id": "7_3_desarrollo",
+                    "titulo": "7.3. Desarrollo y pruebas",
+                    "archivo": "7_proyecto/7_3_desarrollo/content.html"
+                },
+                {
+                    "id": "7_4_documentacion",
+                    "titulo": "7.4. Documentación y presentación",
+                    "archivo": "7_proyecto/7_4_documentacion/content.html"
+                }
+            ]
+        }
+    ]
+}

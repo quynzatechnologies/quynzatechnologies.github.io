@@ -1,79 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-iot") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_iot.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
-    
-    <title>Ejercicio 4-1: Acceder a dirección Web</title>
-</head>
+<h1>Ejercicio 4-1: Acceder a dirección Web</h1>
+<h2>Descripción</h2>
+<p>Usando Micropython, con el <strong>Ejercicio 4-1: Acceder a dirección Web</strong> se va a aprender a acceder a una dirección Web 
+    con protocolo <em>HTTP</em> y que se retorne el contenido de este.
+</p>
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
+<p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
+</p>
 
-        <header id="header-nav-main-container"></header>
+<p style="text-align:center;">
+    <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
+</p>
 
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-iot">☰ Menú</button>
-                    <div id="aside-nav-curso-iot-container"></div>
+<section id="socket_p5">
+<h2>Código</h2>
+<p>Para este ejercicio se necesitará el archivo:</p>
+<ol>
+    <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica y acceder a la página web con protocolo <em>HTTP</em>.</li>
+</ol>
 
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 4-1: Acceder a dirección Web</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/">4. Desarrollo de interfaces web y control local en ESP32</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/">4.1. Principios de comunicación cliente-servidor en IoT</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/ejercicio_4_1.html" class="not-active">Ejercicio 4-1: Acceder a dirección Web</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <h1>Ejercicio 4-1: Acceder a dirección Web</h1>
-                            <h2>Descripción</h2>
-                            <p>Usando Micropython, con el <strong>Ejercicio 4-1: Acceder a dirección Web</strong> se va a aprender a acceder a una dirección Web 
-                                con protocolo <em>HTTP</em> y que se retorne el contenido de este.
-                            </p>
-
-                            <p> Para este ejercicio se necesita el <a href="/products/entrenadoresp32/">Entrenador ESP32</a>, ¡el cual puede ser adquirido en este link al mejor precio!
-                            </p>
-
-                            <p style="text-align:center;">
-                                <img src="/img/entrenador_esp32.jpg" width ="100%" height="auto">
-                            </p>
-
-                            <h2>Código</h2>
-                            <p>Para este ejercicio se necesitará el archivo:</p>
-                            <ol>
-                                <li>main.py: Script principal de Python. Contiene el código para conexión a una red WiFi específica y acceder a la página web con protocolo <em>HTTP</em>.</li>
-                            </ol>
-
-                            <h3>main.py:</h3>
+<h3>main.py:</h3>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
@@ -116,16 +68,17 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 http_get(<span style="color: #CD5555">&#39;http://httpforever.com/&#39;</span>)
 </pre>
 </div>
+</section>
 
-                            <h2>Explicación paso a paso</h2>
+<h2>Explicación paso a paso</h2>
 
-                            <h3>main.py</h3>
+<h3>main.py</h3>
 
-                            <p>Con la teoría explicada en la sección anterior, se procede a explicar el código desarrollado:
-                            </p>
+<p>Con la teoría explicada en la sección anterior, se procede a explicar el código desarrollado:
+</p>
 
-                            <p>En primer lugar importamos las librerías <em>machine.Pin</em>, <em>socket</em> y <em>network</em>:
-                            </p>
+<p>En primer lugar importamos las librerías <em>machine.Pin</em>, <em>socket</em> y <em>network</em>:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -157,19 +110,19 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
 
-                            <p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
-                                <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
-                                en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
-                            </p>
+<p>Este es el mismo código definido en el <strong>Ejercicio 3-2: Conectarse a red WiFi</strong>, en el cual se da una 
+    <a href="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/ejercicio_3_2.html#explicacion">explicación paso a paso</a>. Se debe tener
+    en cuenta que se debe cambiar el contenido con la información de la red WiFi propia:
+</p>
 
-                            <ul>
-                                <li>XXX: Nombre de su red WiFi</li>
-                                <li>YYY: Contraseña de su red WiFi</li>
-                            </ul>
+<ul>
+    <li>XXX: Nombre de su red WiFi</li>
+    <li>YYY: Contraseña de su red WiFi</li>
+</ul>
 
-                            <p> Despues, se crea una función llamada <em>http_get</em> que recibe un parámetro: <em>url</em> que corresponde a la dirección web de la página
-                                <em>HTTP</em> deseada:
-                            </p>
+<p> Despues, se crea una función llamada <em>http_get</em> que recibe un parámetro: <em>url</em> que corresponde a la dirección web de la página
+    <em>HTTP</em> deseada:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -177,17 +130,17 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
 
-                            <p> Luego se divide esta dirección recibida en dos partes:
-                            </p>
+<p> Luego se divide esta dirección recibida en dos partes:
+</p>
 
-                            <ul>
-                                <li><em>host</em>: nombre de dominio</li>
-                                <li><em>path</em>: ruta de acceso de un archivo dentro del dominio</li>
-                            </ul>
+<ul>
+    <li><em>host</em>: nombre de dominio</li>
+    <li><em>path</em>: ruta de acceso de un archivo dentro del dominio</li>
+</ul>
 
-                            <p style="text-align:center;">
-                                <img src="./img/Diagrama3_ejercicio_5.png" width ="100%" height="auto">
-                            </p>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_1_principios/img/Diagrama3_ejercicio_5.png" width ="100%" height="auto">
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -195,9 +148,9 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
 
-                            <p> Se utiliza la función <em>socket.getaddrinfo()</em> para obtener la dirección IP y puerto al cual se va a conectar el socket teniendo
-                                en cuenta que se va a conectar a un host (de la dirección ingresada) y puerto (80 para el caso de protocolo <em>HTTP</em>) específico:
-                            </p>
+<p> Se utiliza la función <em>socket.getaddrinfo()</em> para obtener la dirección IP y puerto al cual se va a conectar el socket teniendo
+    en cuenta que se va a conectar a un host (de la dirección ingresada) y puerto (80 para el caso de protocolo <em>HTTP</em>) específico:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -205,9 +158,9 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
 
-                            <p> Luego se crea el objeto <em>s</em> de clase <em>socket.socket</em> y se conecta a la dirección IP obtenida en el código anterior.
-                                Se procede a enviar el comando <em>GET</em>:
-                            </p>
+<p> Luego se crea el objeto <em>s</em> de clase <em>socket.socket</em> y se conecta a la dirección IP obtenida en el código anterior.
+    Se procede a enviar el comando <em>GET</em>:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -217,8 +170,8 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
 
-                            <p>Y en un ciclo se va imprimiendo en consola toda la respuesta dada por el servidor, que contiene el código fuente de la página solicitada:
-                            </p>
+<p>Y en un ciclo se va imprimiendo en consola toda la respuesta dada por el servidor, que contiene el código fuente de la página solicitada:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -232,9 +185,9 @@ do_connect(<span style="color: #CD5555">&quot;XXX&quot;</span>,<span style="colo
 </pre>
 </div>
 
-                            <p> Por último se llama a la función <em>http_get</em>. Se debe tener muy en cuenta de reemplazar la url para que siga la estructura de:
-                                <em>http://host/path</em>, es decir que esta función solo funciona para páginas con protocolo <em>HTTP</em>:
-                            </p>
+<p> Por último se llama a la función <em>http_get</em>. Se debe tener muy en cuenta de reemplazar la url para que siga la estructura de:
+    <em>http://host/path</em>, es decir que esta función solo funciona para páginas con protocolo <em>HTTP</em>:
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">
@@ -242,48 +195,21 @@ http_get(<span style="color: #CD5555">&#39;http://XXX/ZZZ&#39;</span>)
 </pre>
 </div>                                   
 
-                            <h2>Testeo en ESP32</h2>
-                            <p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
+<h2>Testeo en ESP32</h2>
+<p>Primero, se realiza la conexión del ESP32 a nuestro computador mediante USB:</p>
 
-                            <p style="text-align:center;">
-                                <img src="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
-                            </p>
+<p style="text-align:center;">
+    <img src="/products/curso_iot/contenido/3_intro_esp32/3_2_wifi/img/Con_ESP32_ejercicio_1.png" width ="100%" height="auto">
+</p>
 
-                            <p>Después ejecutamos el archivo <em>main.py</em> al dispositivo ESP32 y en consola se va a mostrar la dirección IP asignada dentro de la red WiFi que se conecto:</p>
+<p>Después ejecutamos el archivo <em>main.py</em> al dispositivo ESP32 y en consola se va a mostrar la dirección IP asignada dentro de la red WiFi que se conecto:</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/resultado1_ejercicio_4.png" width ="100%" height="auto">
-                            </p>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_1_principios/img/resultado1_ejercicio_4.png" width ="100%" height="auto">
+</p>
 
-                            <p>Luego se va a visualizar el encabezado y código fuente de la página web conectada:</p>
+<p>Luego se va a visualizar el encabezado y código fuente de la página web conectada:</p>
 
-                            <p style="text-align:center;">
-                                <img src="./img/resultado_ejercicio_5.png" width ="100%" height="auto">
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_1_principios/" class="btn btn-neutral float-left" title="4.1. Principios de comunicación cliente-servidor en IoT" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_iot/contenido/4_comm_esp32/4_2_diseno/" class="btn btn-neutral float-right" title="4.2. Diseño de interfaces web básicas" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-        </main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p style="text-align:center;">
+    <img src="./4_comm_esp32/4_1_principios/img/resultado_ejercicio_5.png" width ="100%" height="auto">
+</p>

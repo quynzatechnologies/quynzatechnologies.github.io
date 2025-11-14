@@ -8,6 +8,12 @@
             "archivo": "inicio/content.html"
         },
         {
+            "id": "recopilacion_ejercicios",
+            "titulo": "Recopilación de Ejercicios",
+            "archivo": "recopilacion_ejercicios/content.html",
+            "excluirOrden": true
+        },
+        {
             "id": "1_introduccion",
             "titulo": "1. Introducción a la lógica digital y al entrenador QLT-010",
             "archivo": "1_introduccion/content.html",
@@ -159,17 +165,17 @@
                         },
                         {
                             "id": "ejercicio_3_2",
-                            "titulo": "Ejercicio 3-2. Comprobar la Tabla de Verdad de la compuerta NAND con tres entradas",
+                            "titulo": "Ejercicio 3-2. Comprobar la Tabla de Verdad de la compuerta NAND de tres entradas",
                             "archivo": "3_compuertas_complejas/3_1_compuertas/ejercicio_3_2.html"
                         },
                         {
                             "id": "ejercicio_3_3",
-                            "titulo": "Ejercicio 3-3. Comprobar la Tabla de Verdad de la compuerta OR con tres entradas",
+                            "titulo": "Ejercicio 3-3. Comprobar la Tabla de Verdad de la compuerta OR de tres entradas",
                             "archivo": "3_compuertas_complejas/3_1_compuertas/ejercicio_3_3.html"
                         },
                         {
                             "id": "ejercicio_3_4",
-                            "titulo": "Ejercicio 3-4. Comprobar la Tabla de Verdad de la compuerta NOR con tres entradas",
+                            "titulo": "Ejercicio 3-4. Comprobar la Tabla de Verdad de la compuerta NOR de tres entradas",
                             "archivo": "3_compuertas_complejas/3_1_compuertas/ejercicio_3_4.html"
                         }
                     ]
@@ -224,12 +230,12 @@
                     "items": [
                         {
                             "id": "ejercicio_4_1",
-                            "titulo": "Ejercicio 4-1. Algebra de Boole (Ley conmutativa)",
+                            "titulo": "Ejercicio 4-1. Álgebra de Boole (Ley conmutativa)",
                             "archivo": "4_leyes/4_1_boole/ejercicio_4_1.html"
                         },
                         {
                             "id": "ejercicio_4_2",
-                            "titulo": "Ejercicio 4-2. Algebra de Boole (Ley asociativa y distributiva)",
+                            "titulo": "Ejercicio 4-2. Álgebra de Boole (Ley asociativa y distributiva)",
                             "archivo": "4_leyes/4_1_boole/ejercicio_4_2.html"
                         }
                     ]
@@ -241,7 +247,7 @@
                     "items": [
                         {
                             "id": "ejercicio_4_3",
-                            "titulo": "Ejercicio 4-3. Algebra de Boole (Ley de idempotencia)",
+                            "titulo": "Ejercicio 4-3. Álgebra de Boole (Ley de idempotencia)",
                             "archivo": "4_leyes/4_2_identidad/ejercicio_4_3.html"
                         }
                     ]
@@ -253,19 +259,19 @@
                     "items": [
                         {
                             "id": "ejercicio_4_4",
-                            "titulo": "Ejercicio 4-4. Algebra de Boole (Ley de complemento)",
+                            "titulo": "Ejercicio 4-4. Álgebra de Boole (Ley de complemento)",
                             "archivo": "4_leyes/4_3_complemento/ejercicio_4_4.html"
                         }
                     ]
                 },
                 {
                     "id": "4_4_demorgan",
-                    "titulo": "4.4. Leyes de DeMorgan",
+                    "titulo": "4.4. Leyes de Morgan",
                     "archivo": "4_leyes/4_4_demorgan/content.html",
                     "items": [
                         {
                             "id": "ejercicio_4_5",
-                            "titulo": "Ejercicio 4-5. Leyes de DeMorgan",
+                            "titulo": "Ejercicio 4-5. Leyes de Morgan",
                             "archivo": "4_leyes/4_4_demorgan/ejercicio_4_5.html"
                         }
                     ]

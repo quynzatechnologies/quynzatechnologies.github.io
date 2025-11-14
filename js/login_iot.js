@@ -35,12 +35,12 @@ $(document).ready(function(){
             if (res.ok) {
                 // Guardar estado de login en sessionStorage
                 sessionStorage.setItem("logueado-iot", "true");
-                alert("✅ Inicio de sesión exitoso");
+                alert("Inicio de sesión exitoso");
 
                 // Redirigir al curso
                 window.location.href = "/products/curso_iot/contenido/";
             } else {
-                alert("❌ " + (data.error || "Error en inicio de sesión"));
+                alert((data.error || "Error en inicio de sesión"));
             }
         } catch(err) {
             console.error("Error en fetch:", err);

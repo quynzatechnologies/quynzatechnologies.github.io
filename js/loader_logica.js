@@ -295,7 +295,7 @@ function updatePrevNext(lessonId) {
     }
 
     // Ocultar botón siguiente SOLO en la página de ejercicios
-    if (lessonId === "recopilacion_ejercicios") {
+    if (lessonId === "recopilacion_ejercicios" || lessonId === "glosario") {
 
         // Mostrar Anterior que lleve a Inicio
         btnPrev.style.visibility = "visible";

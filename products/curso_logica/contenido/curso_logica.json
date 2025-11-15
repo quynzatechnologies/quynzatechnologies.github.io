@@ -14,6 +14,12 @@
             "excluirOrden": true
         },
         {
+            "id": "glosario",
+            "titulo": "Glosario de Términos",
+            "archivo": "glosario/content.html",
+            "excluirOrden": true
+        },
+        {
             "id": "1_introduccion",
             "titulo": "1. Introducción a la lógica digital y al entrenador QLT-010",
             "archivo": "1_introduccion/content.html",

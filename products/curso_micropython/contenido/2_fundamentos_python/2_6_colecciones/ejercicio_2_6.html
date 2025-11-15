@@ -1,83 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_micropython.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
-
-    <title>Ejercicio 2-6: Generador de menú semanal sin repeticiones</title>
-</head>
-
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
-
-        <header id="header-nav-main-container"></header>
-
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-micropython">☰ Menú</button>
-                    <div id="aside-nav-curso-micropython-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 2-6: Generador de menú semanal sin repeticiones</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/2_fundamentos_python/">2. Fundamentos de Python aplicados a MicroPython</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_6_colecciones/ejercicio_2_6.html">2.6. Manejo de colecciones</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_6_colecciones/ejercicio_2_6.html" class="not-active">Ejercicio 2-6: Generador de menú semanal sin repeticiones</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <strong>Objetivo.</strong> Practicar el uso de estructuras condicionales y ciclos en Python. Aplicar la 
-                                validación de entradas y el manejo de intentos para un juego interactivo.
-                            </p>
-                            <p><strong>Procedimiento.</strong></p>
-                            <p>
-                                <ol>
-                                    <li>Abrir Thonny y crear un nuevo archivo <em>.py</em>.</li>
-                                    <li>Generar un número aleatorio entre 1 y 99 usando <em>random.randint()</em>.</li>
-                                    <li>
-                                        Solicitar al usuario que ingrese un número e implementar validaciones para permitir solo 
-                                        entradas numéricas.
-                                    </li>
-                                    <li>
-                                        Comparar el número ingresado con el número secreto:
-                                        <ul>
-                                            <li>Si es correcto, mostrar un mensaje de éxito y el número de intentos realizados.</li>
-                                            <li>Si es menor, indicar que el número secreto es mayor.</li>
-                                            <li>Si es mayor, indicar que el número secreto es menor.</li>
-                                        </ul>
-                                    </li>
-                                    <li>5.	Contabilizar el número de intentos hasta que el usuario acierte.</li>
-                                </ol>
-                            </p>
+<h1>Ejercicio 2-6: Generador de menú semanal sin repeticiones</h1>
+<p>
+    <strong>Objetivo.</strong> Practicar el uso de estructuras condicionales y ciclos en Python. Aplicar la 
+    validación de entradas y el manejo de intentos para un juego interactivo.
+</p>
+<p><strong>Procedimiento.</strong></p>
+<p>
+    <ol>
+        <li>Abrir Thonny y crear un nuevo archivo <em>.py</em>.</li>
+        <li>Generar un número aleatorio entre 1 y 99 usando <em>random.randint()</em>.</li>
+        <li>
+            Solicitar al usuario que ingrese un número e implementar validaciones para permitir solo 
+            entradas numéricas.
+        </li>
+        <li>
+            Comparar el número ingresado con el número secreto:
+            <ul>
+                <li>Si es correcto, mostrar un mensaje de éxito y el número de intentos realizados.</li>
+                <li>Si es menor, indicar que el número secreto es mayor.</li>
+                <li>Si es mayor, indicar que el número secreto es menor.</li>
+            </ul>
+        </li>
+        <li>5.	Contabilizar el número de intentos hasta que el usuario acierte.</li>
+    </ol>
+</p>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">random</span>
 
@@ -103,43 +55,16 @@ i = <span style="color: #B452CD">0</span>
     i = i + <span style="color: #B452CD">1</span>
 </pre>
 </div>
-                            <p><strong>Actividades sugeridas.</strong></p>
-                            <p>
-                                <ul>
-                                    <li>Cambiar el rango del número aleatorio (por ejemplo, entre 1 y 500).</li>
-                                    <li>Añadir un límite máximo de intentos para incrementar la dificultad.</li>
-                                    <li>Mostrar un mensaje especial si el usuario acierta en el primer intento.</li>
-                                    <li>
-                                        Modificar el juego para que sea el usuario quien piense el número y el programa intente 
-                                        adivinarlo usando búsqueda binaria.
-                                    </li>
-                                    <li>Guardar el historial de intentos en un archivo de texto.</li>
-                                </ul>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_6_colecciones/" class="btn btn-neutral float-left" title="Manejo de colecciones" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_6_colecciones/ejercicio_2_7.html" class="btn btn-neutral float-right" title="Ejercicio 2-7: Simulación de lecturas de temperatura con listas y diccionarios" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p><strong>Actividades sugeridas.</strong></p>
+<p>
+    <ul>
+        <li>Cambiar el rango del número aleatorio (por ejemplo, entre 1 y 500).</li>
+        <li>Añadir un límite máximo de intentos para incrementar la dificultad.</li>
+        <li>Mostrar un mensaje especial si el usuario acierta en el primer intento.</li>
+        <li>
+            Modificar el juego para que sea el usuario quien piense el número y el programa intente 
+            adivinarlo usando búsqueda binaria.
+        </li>
+        <li>Guardar el historial de intentos en un archivo de texto.</li>
+    </ul>
+</p>

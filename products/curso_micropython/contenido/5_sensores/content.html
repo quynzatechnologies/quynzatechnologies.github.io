@@ -1,0 +1,111 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 5. Programación de sensores</h1>
+<p>
+	Duración estimada: 2 horas
+</p>
+
+<h2>Planteamiento general</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo general</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Adquirir datos desde diferentes tipos de sensores y procesarlos en el ESP32</td>
+			<td class="tg-cly1">Lee y procesa datos de sensores analógicos y digitales, mostrando resultados en consola o pantalla</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Metodología:</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo específico</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Evidencias de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Actividades de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Link</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Configurar y leer sensores analógicos</td>
+			<td class="tg-cly1">Conecta y programa la lectura de fotorresistencia y potenciómetro, interpretando sus valores para aplicaciones prácticas</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Script de lectura de fotorresistencia</li>
+					<li>Script de lectura de potenciómetro</li>
+					<li>Registro de valores en consola</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Práctica: mostrar nivel de luz en consola</li>
+					<li>Ejercicio: ajustar brillo de un LED según valor del potenciómetro</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="5_1_fotorresistencia">5.1. Lectura de fotorresistencia</a>
+                <br>
+                <a href="#" data-lesson="5_2_potenciometro">5.2. Lectura de potenciómetro</a>
+            </td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Implementar la lectura de sensores digitales</td>
+			<td class="tg-cly1">Configura y lee datos de pulsadores, sensor IR de obstáculos y control remoto IR, reaccionando a sus señales</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Script de detección de pulsador</li>
+					<li>Registro de activación de sensor IR</li>
+					<li>Decodificación de señal de control remoto</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Ejercicio: encender LED al pulsar botón</li>
+					<li>Práctica: activar zumbador al detectar obstáculo</li>
+					<li>Actividad: asignar función a un botón del control remoto</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="5_3_pulsadores">5.3. Lectura de pulsadores</a>
+                <br>
+                <a href="#" data-lesson="5_4_ultrasonido">5.4. Uso del sensor de ultrasonido</a>
+            </td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Programar sensores de medición y distancia</td>
+			<td class="tg-cly1">Obtiene y procesa datos de sensor de ultrasonido y DHT11, mostrando resultados en pantalla o consola</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Script de medición de distancia</li>
+					<li>Lectura de temperatura y humedad</li>
+					<li>Captura de pantalla de resultados</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Práctica: mostrar distancia en LCD1602</li>
+					<li>Ejercicio: registrar temperatura y humedad durante 1 minuto</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="5_5_dht11">5.5. Lectura de temperatura y humedad con DHT11</a>
+                <br>
+                <a href="#" data-lesson="5_6_sensor_ir">5.6. Uso de sensor IR para detección de obstáculos</a>
+                <br>
+                <a href="#" data-lesson="5_7_control_remoto">5.7. Lectura de control remoto IR</a>
+            </td>
+		</tr>
+	</tbody>
+</table>

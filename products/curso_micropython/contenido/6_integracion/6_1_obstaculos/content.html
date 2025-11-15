@@ -1,0 +1,91 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 6.1. Detección de obstáculos con alarma visual/sonora</h1>
+<p>
+    En aplicaciones de <strong>robótica</strong> y <strong>automatización</strong>, es común integrar sensores 
+    de detección con dispositivos de señalización para alertar sobre la presencia de objetos. Un ejemplo 
+    práctico es la combinación de un <strong>sensor infrarrojo (IR)</strong> con <strong>LEDs</strong> y/o 
+    <strong>zumbadores</strong> para indicar visual y sonoramente la proximidad de un obstáculo.
+</p>
+
+<p>
+    <ol>
+        <li>
+            <strong>Sensor IR como detector</strong>
+            <br><br>
+            El sensor infrarrojo funciona emitiendo luz IR y midiendo su reflexión en superficies cercanas.
+            <br><br>
+            <ul>
+                <li>
+                    Si un objeto entra en el rango configurado, el módulo emite una señal digital que 
+                    puede ser interpretada por el ESP32.
+                </li>
+                <li>
+                    Su rápida respuesta lo hace ideal para sistemas de 
+                    <strong>prevención de colisiones</strong> o <strong>alarmas inmediatas</strong>.
+                </li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Integración con LEDs</strong>
+            <br><br>
+            Los <strong>LEDs rojos</strong> son una forma efectiva de advertencia visual:
+            <br><br>
+            <ul>
+                <li>Pueden encenderse de forma fija o intermitente para indicar peligro.</li>
+                <li>El uso de varios LEDs permite aumentar la visibilidad de la señal de alerta.</li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Alarma sonora con zumbador</strong>
+            <br><br>
+            Para reforzar la alerta visual, es posible incluir un <strong>zumbador piezoeléctrico</strong> 
+            que emita un tono cuando se detecte el obstáculo. Esto es útil en entornos ruidosos o cuando 
+            la señal visual no es suficiente.
+            <br><br>
+        </li>
+        <li>
+            <strong>Conexión típica en el entrenador QMT-020</strong>
+            <br><br>
+            <ul>
+                <li><strong>Sensor IR:</strong> conectado al GPIO17 como entrada digital con Pin.PULL_UP.</li>
+                <li><strong>LEDs:</strong> conectados a GPIO26 y GPIO27 mediante resistencias limitadoras.</li>
+                <li>
+                    <strong>Zumbador (opcional):</strong> conectado a un pin GPIO adicional como salida digital 
+                    o PWM.
+                </li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Lógica de control en MicroPython</strong>
+            <br><br>
+            El flujo básico para este sistema sería:
+            <br><br>
+            <ol>
+                <li>Leer el valor del sensor IR en un ciclo continuo.</li>
+                <li>Si se detecta un obstáculo, encender LEDs y activar zumbador por un tiempo determinado.</li>
+                <li>Apagar LEDs y zumbador pasado ese tiempo.</li>
+                <li>Repetir el ciclo de monitoreo.</li>
+            </ol>
+            <br>
+        </li>
+        <li>
+            <strong>Aplicaciones</strong>
+            <br><br>
+            <ul>
+                <li>Vehículos robóticos para evitar colisiones.</li>
+                <li>Alarmas de seguridad perimetral.</li>
+                <li>Sistemas de conteo en líneas de producción.</li>
+                <li>Alertas en zonas de paso restringido.</li>
+            </ul>
+        </li>
+    </ol>
+</p>

@@ -1,0 +1,127 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 2.4. Funciones y manejo de librerías</h1>
+<p>
+    <ol>
+        <li>
+            <strong>Funciones</strong>
+            <br><br>
+            Las funciones son bloques de código reutilizables que realizan una tarea específica. Su uso permite:
+            <br><br>
+            <ul>
+                <li>Estructurar los programas en partes más claras.</li>
+                <li>Reducir la repetición de código.</li>
+                <li>Mejorar la legibilidad y el mantenimiento.</li>
+            </ul>
+            <br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">function</span>(a, b): 
+    ...... 
+    <span style="color: #8B008B; font-weight: bold">return</span> a + b
+</pre>
+</div>
+            <br>
+            <ul>
+                <li><em>def</em>: indica que se está definiendo una nueva función.</li>
+                <li>
+                    <em>function()</em> es el nombre de la función. Por convención, este nombre suele ser en 
+                    minúsculas y representa un verbo/acción.
+                </li>
+                <li>
+                    <em>a,b</em> son los parámetros que se utilizan en el bloque de instrucciones de la 
+                    definición de la función (...). Si la función no tiene parámetros, se utiliza un 
+                    paréntesis vacío ().
+                </li>
+                <li>
+                    La declaración <em>return</em> es una declaración opcional que devuelve el valor de la 
+                    función a la llamada original.
+                </li>
+            </ul>
+            <br>
+            <u>Ejemplo básico:</u>
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">saludar</span>():
+    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Hola desde la función&quot;</span>)
+
+saludar()
+</pre>
+</div>
+            <br>
+            <u>Ejemplo con parámetros:</u>
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">sumar</span>(a, b):
+    resultado = a + b
+    <span style="color: #8B008B; font-weight: bold">return</span> resultado
+
+<span style="color: #658B00">print</span>(sumar(<span style="color: #B452CD">5</span>, <span style="color: #B452CD">3</span>))  <span style="color: #228B22"># Imprime 8</span>
+</pre>
+</div>
+            <br>
+            <u>Ejemplo con valor de retorno:</u>
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">convertir_a_fahrenheit</span>(celsius):
+    <span style="color: #8B008B; font-weight: bold">return</span> (celsius * <span style="color: #B452CD">9</span>/<span style="color: #B452CD">5</span>) + <span style="color: #B452CD">32</span>
+
+temp_f = convertir_a_fahrenheit(<span style="color: #B452CD">25</span>)
+<span style="color: #658B00">print</span>(temp_f)
+</pre>
+</div>
+            <br>
+        </li>
+        <li>
+            <strong>Librerías en Python</strong>
+            <br><br>
+            Una librería es un archivo que contiene funciones, clases o variables reutilizables.
+            <br><br>
+            <ul>
+                <li>Python incluye una amplia variedad de librerías estándar (por ejemplo, math, os, random).</li>
+                <li>Se pueden crear librerías propias para organizar el código.</li>
+            </ul>
+            <br>
+            <u>Ejemplo de importación de librerías:</u>
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">math</span>
+<span style="color: #658B00">print</span>(math.sqrt(<span style="color: #B452CD">16</span>))  <span style="color: #228B22"># Raíz cuadrada</span>
+</pre>
+</div>
+            <br>
+            <u>Ejemplo de importación selectiva::</u>
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">math</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> sqrt
+<span style="color: #658B00">print</span>(sqrt(<span style="color: #B452CD">16</span>))
+</pre>
+</div>
+                <br>
+            </li>
+            <li>
+                <strong>Librerías en Micropython</strong>
+                <br><br>
+                En <strong>MicroPython</strong>, las librerías incluyen control específico de hardware:
+                <br><br>
+                <ul>
+                    <li><em>machine</em>: control de pines, ADC, PWM, I2C, SPI, etc.</li>
+                    <li><em>network</em>: manejo de conexiones WiFi y protocolos de red.</li>
+                </ul>
+                <br>
+
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+led.value(<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># Encender LED</span>
+</pre>
+</div>
+            <br>
+        </li>
+    </ol>
+</p>

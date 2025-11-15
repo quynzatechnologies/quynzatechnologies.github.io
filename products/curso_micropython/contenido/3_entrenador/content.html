@@ -1,0 +1,81 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 3. Entrenador QMT-020: Pines, periféricos y conexiones</h1>
+<p>
+	Duración estimada: 1 hora
+</p>
+
+<h2>Planteamiento general</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo general</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Conocer la arquitectura y conexiones del entrenador para manipular sensores y actuadores</td>
+			<td class="tg-cly1">Identifica los pines GPIO, clasifica periféricos según su tipo de señal y realiza conexiones básicas de entrada/salida</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Metodología:</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo específico</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Evidencias de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Actividades de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Link</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Identificar la distribución de pines y periféricos del QMT-020</td>
+			<td class="tg-cly1">Reconoce la ubicación y función de los pines GPIO, así como los periféricos integrados y conexiones preconfiguradas del entrenador</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Esquema anotado de pines y periféricos</li>
+					<li>Lista clasificada de periféricos según tipo de señal</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Revisión guiada de la ficha técnica</li>
+					<li>Actividad práctica: identificar pines en el entrenador físico</li>
+					<li>Ejercicio de clasificación de periféricos</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="3_1_distribucion">3.1. Distribución de pines y periféricos del QMT-020</a>
+            </td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Configurar y utilizar GPIOs en MicroPython</td>
+			<td class="tg-cly1">Configura pines como entradas o salidas digitales y entradas analógicas para recibir o enviar señales</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Script de prueba de entrada digital y salida digital</li>
+					<li>Script de lectura de una entrada analógica</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Práctica: encender un LED desde un pin configurado como salida</li>
+					<li>Ejercicio: leer un valor de potenciómetro y mostrarlo en consola</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="3_2_uso_gpio">3.2. Uso de GPIOs</a>
+            </td>
+		</tr>
+	</tbody>
+</table>

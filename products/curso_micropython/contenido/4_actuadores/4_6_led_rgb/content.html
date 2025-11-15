@@ -1,0 +1,80 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 4.6. Control de LEDs RGB con PWM</h1>
+<p>
+    El <strong>LED RGB</strong> es un componente que integra tres diodos emisores de luz: uno rojo 
+    (<strong>R</strong>), uno verde (<strong>G</strong>) y uno azul (<strong>B</strong>). Combinando 
+    diferentes niveles de intensidad de cada color es posible generar una amplia gama de colores visibles.
+</p>
+
+<p>
+    En el ESP32, el control de la intensidad de cada color se logra utilizando la 
+    <strong>modulación por ancho de pulso (PWM, Pulse Width Modulation)</strong>. Este método consiste en 
+    encender y apagar un pin a una frecuencia determinada, variando el porcentaje de tiempo en el que la 
+    señal permanece encendida (<strong>Duty Cycle</strong>). Un duty cycle mayor produce mayor intensidad de 
+    luz.
+</p>
+
+<br>
+<img style="display: block;margin: auto;width: 50%;" src="./4_actuadores/4_6_led_rgb/img/funcionamiento_pwm.png" alt="Conexión 1 ejercicio 4.17." class="img-fluid icon-hover">
+<br>
+
+<p>
+    <ol>
+        <li>
+            <strong>Fundamentos de PWM en MicroPython</strong>
+            <br><br>
+            <ul>
+                <li>Se utiliza la clase <em>PWM</em> de la librería <em>machine</em>.</li>
+                <li>
+                    La frecuencia típica para controlar LEDs está entre <strong>500 Hz</strong> y 
+                    <strong>1000 Hz</strong>.
+                </li>
+                <li>
+                    El duty cycle se expresa como un valor entre 0 (apagado) y el máximo permitido por el 
+                    hardware (en el ESP32, 1023 para 100% de brillo).
+                </li>
+            </ul>
+            <br>
+            <u>Ejemplo de creación de un canal PWM:</u>
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin, PWM
+
+led_rojo = PWM(Pin(<span style="color: #B452CD">27</span>))
+led_rojo.freq(<span style="color: #B452CD">1000</span>)  <span style="color: #228B22"># Frecuencia de 1 kHz</span>
+led_rojo.duty(<span style="color: #B452CD">512</span>)   <span style="color: #228B22"># Intensidad al 50%</span>
+</pre>
+</div>
+            <br>
+        </li>
+        <li>
+            <strong>Mezcla de colores</strong>
+            <br><br>
+            Al variar el duty cycle de cada canal (R, G, B) se pueden generar diferentes colores:
+            <br><br>
+            <ul>
+                <li><strong>Rojo</strong>: R alto, G y B bajos.</li>
+                <li><strong>Verde</strong>: G alto, R y B bajos.</li>
+                <li><strong>Azul</strong>: B alto, R y G bajos.</li>
+                <li><strong>Blanco</strong>: R, G y B al máximo.</li>
+                <li><strong>Colores intermedios</strong>: combinaciones proporcionales de los tres.</li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Aplicaciones</strong>
+            <br><br>
+            <ul>
+                <li>Indicadores visuales para representar estados del sistema.</li>
+                <li>Alarmas luminosas basadas en condiciones de sensores.</li>
+                <li>Efectos visuales en proyectos interactivos o decorativos.</li>
+            </ul>
+        </li>
+    </ol>
+</p>

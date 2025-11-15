@@ -153,10 +153,13 @@ async function loadLesson(lessonId, pushState = true, anchorId = null) {
 
     if (anchorId) {
         const el = document.getElementById(anchorId);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-        else window.scrollTo({ top: 0 });
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+        } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
     } else {
-        window.scrollTo({ top: 0 });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     if (pushState) {
@@ -273,7 +276,11 @@ function loadInitialLesson() {
     if (lessonId && ID_TO_NODE[lessonId]) {
         loadLesson(lessonId, false);
     } else {
-        loadLesson("inicio", false);
+        // Cargar "inicio" automáticamente
+        const inicioNode = COURSE_DATA.estructura.find(n => n.id === "inicio");
+        if (inicioNode) {
+            loadLesson("inicio", false);
+        }
     }
 }
 
@@ -292,23 +299,36 @@ window.onpopstate = function (event) {
    10. Resaltar activo
    ============================================================ */
 function highlightActiveLesson(lessonId) {
+
+    // 1. Quitar estados previos
     document.querySelectorAll(".sidebar a.active")
         .forEach(a => a.classList.remove("active"));
 
-    document.querySelectorAll(".sidebar li[aria-expanded]")
-        .forEach(li => li.setAttribute("aria-expanded", "false"));
+    // 2. Cerrar TODO el árbol (aria + display)
+    document.querySelectorAll(".sidebar li[aria-expanded]").forEach(li => {
+        li.setAttribute("aria-expanded", "false");
 
-    const active = document.querySelector(`.sidebar a[data-lesson="${lessonId}"]`);
-    if (!active) return;
+        const ul = li.querySelector(":scope > ul");
+        if (ul) ul.style.display = "none";
+    });
 
-    active.classList.add("active");
+    // 3. Marcar activo
+    const activeLink = document.querySelector(`.sidebar a[data-lesson="${lessonId}"]`);
+    if (!activeLink) return;
+    activeLink.classList.add("active");
 
-    let li = active.parentElement;
-    while (li) {
-        if (li.tagName.toLowerCase() === "li") {
-            li.setAttribute("aria-expanded", "true");
-        }
-        li = li.parentElement.closest("li");
+    // 4. Subir abriendo TODOS los ancestros
+    let currentLi = activeLink.parentElement;
+
+    while (currentLi && currentLi.tagName.toLowerCase() === "li") {
+        currentLi.setAttribute("aria-expanded", "true");
+
+        // Abrir su <ul> interno si lo tiene
+        const innerUl = currentLi.querySelector(":scope > ul");
+        if (innerUl) innerUl.style.display = "block";
+
+        // Subir al padre LI
+        currentLi = currentLi.parentElement.closest("li");
     }
 }
 

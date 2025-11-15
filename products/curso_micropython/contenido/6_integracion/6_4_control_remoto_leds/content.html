@@ -1,0 +1,90 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 6.4. Control remoto IR para manejo de LEDs y otras salidas</h1>
+<p>
+    Los <strong>controles remotos por infrarrojo (IR)</strong> son una tecnología ampliamente utilizada 
+    para enviar señales inalámbricas a corta distancia. Funcionan mediante la emisión de pulsos de luz 
+    infrarroja modulados a una frecuencia específica (generalmente 38 kHz) que son recibidos y 
+    decodificados por un sensor IR.
+</p>
+
+<p>
+    En el ESP32, esta tecnología puede integrarse fácilmente para controlar actuadores como LEDs, 
+    zumbadores o relés, permitiendo <strong>interacción remota</strong> sin necesidad de conexión física.
+</p>
+
+<p>
+    <ol>
+        <li>
+            <strong>Principio de funcionamiento</strong>
+            <br><br>
+            <ul>
+                <li>
+                    <strong>Emisor (control remoto):</strong> genera una secuencia de pulsos que codifican 
+                    una orden (por ejemplo, encender un LED).
+                </li>
+                <li>
+                    <strong>Receptor IR:</strong> detecta la señal, la demodula y entrega un código 
+                    digital único al microcontrolador.
+                </li>
+                <li>
+                    <strong>ESP32:</strong> interpreta el código recibido y ejecuta la acción programada 
+                    (encender, apagar, cambiar color, activar zumbador, etc.).
+                </li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Integración en el QMT-020</strong>
+            <br><br>
+            El módulo receptor IR se conecta normalmente a un 
+            <strong>GPIO configurado como entrada digital</strong>, mientras que las salidas (LEDs, 
+            zumbador, etc.) se conectan a pines de salida.
+            <br><br>
+            <u>Ejemplo de asignaciones:</u>
+            <br><br>
+            <ul>
+                <li>Receptor IR -> GPIO15.</li>
+                <li>LED rojo -> GPIO26.</li>
+                <li>LED verde -> GPIO27.</li>
+                <li>Zumbador -> GPIO19.</li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Decodificación y asignación de funciones</strong>
+            <br><br>
+            En MicroPython se utilizan librerías que permiten:
+            <br><br>
+            <ol>
+                <li>Capturar la señal IR recibida.</li>
+                <li>Traducirla a un <strong>código hexadecimal</strong>.</li>
+                <li>
+                    Asociar cada código a una función específica:
+                    <ul>
+                        <li>Encender/apagar un LED.</li>
+                        <li>Cambiar de color en un LED RGB.</li>
+                        <li>Activar/desactivar un zumbador.</li>
+                        <li>Ejecutar una secuencia de acciones.</li>
+                    </ul>
+                </li>
+            </ol>
+            <br>
+        </li>
+        <li>
+            <strong>Aplicaciones prácticas</strong>
+            <br><br>
+            <ul>
+                <li>Encender y apagar luces de forma remota.</li>
+                <li>Controlar el volumen o estado de un sistema de sonido.</li>
+                <li>Crear interfaces de usuario simplificadas para proyectos IoT.</li>
+                <li>Implementar sistemas de control de múltiples salidas desde un solo control remoto.</li>
+            </ul>
+        </li>
+    </ol>
+</p>

@@ -1,0 +1,119 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 2.5. Entrada y salida de datos</h1>
+<p>
+    En Python y MicroPython, la <strong>entrada y salida de datos</strong> permiten que un programa interactúe 
+    con el usuario o con el entorno físico a través de sensores y actuadores.
+</p>
+<p>
+    <ul>
+        <li>Entrada de datos: el programa recibe información desde el teclado, sensores u otras fuentes.</li>
+        <li>Salida de datos: el programa muestra o envía información al usuario o a otro sistema.</li>
+    </ul>
+</p>
+
+<p>
+    <ol>
+        <li>
+            <strong>Entrada desde datos</strong>
+            <br><br>
+            <ol>
+                <li>
+                    En Python estándar:
+                    <br><br>
+                    En Python, se utiliza la función <em>input()</em> para leer datos desde el teclado. Por 
+                    defecto, devuelve una cadena (<em>str</em>), por lo que a menudo se convierte al tipo 
+                    adecuado:
+                    <br><br>
+                    <ul>
+                        <li>
+                            El parámetro de una función <em>input()</em> es una cadena, string, como: “Entre 
+                            un número: ".
+                        </li>
+                        <li>
+                            La respuesta al input es una llamada en espera, para que el usuario entre una 
+                            cadena, string. Para usar este valor, se debe convertir con otra función, por ej., 
+                            <em>int()</em>.
+                        </li>
+                    </ul>
+                    <br>
+                </li>
+                <li>
+                    En Micropython:
+                    <br><br>
+                    En el ESP32, la entrada desde teclado físico no es habitual. La entrada se realiza:
+                    <br><br>
+                    <ul>
+                        <li>Mediante la consola REPL.</li>
+                        <li>Por comunicación serie desde un PC u otro dispositivo.</li>
+                        <li>A través de sensores conectados al hardware.</li>
+                    </ul>
+                    <br>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong>Salida de datos en consola</strong>
+            <br><br>
+            <ol>
+                <li>
+                    En consola:
+                    <br><br>
+                    Se usa la función <em>print()</em> para mostrar información en pantalla:
+                    <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #658B00">print</span>(y)
+</pre>
+</div>
+                    <br>
+                    <ul>
+                        <li>
+                            El parámetro de esta función puede ser de cualquier tipo. Todos los tipos se 
+                            convierten automáticamente a strings.
+                        </li>
+                    </ul>
+                    <br>
+                </li>
+                <li>
+                    En hardware (Micropython):
+                    <br><br>
+                    La salida de datos también puede ser hacia pantallas, LEDs o zumbadores. Por ejemplo, 
+                    encender un LED para indicar un evento:
+                    <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+led = Pin(<span style="color: #B452CD">2</span>, Pin.OUT)
+led.value(<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># Encender LED</span>
+</pre>
+</div>
+                    <br>
+                    O mostrar texto en una pantalla LCD1602:
+                    <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>lcd.putstr(<span style="color: #CD5555">&quot;Hola Mundo&quot;</span>)
+</pre>
+</div>
+                    <br>
+
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong>Conversión de tipos en entradas</strong>
+            <br><br>
+            Al recibir datos como texto, es común transformarlos al tipo que necesitamos:
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span>valor = <span style="color: #658B00">float</span>(<span style="color: #658B00">input</span>(<span style="color: #CD5555">&quot;Introduce un valor decimal: &quot;</span>))
+<span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;El doble es:&quot;</span>, valor * <span style="color: #B452CD">2</span>)
+</pre>
+</div>
+        </li>
+    </ol>
+</p>

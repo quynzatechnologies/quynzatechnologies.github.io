@@ -1,0 +1,70 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 1.1. ¿Qué es un microcontrolador?</h1>
+<p>
+    Un <strong>microcontrolador (MCU)</strong> es un circuito integrado programable que contiene un procesador, 
+    memoria y periféricos de entrada/salida en un solo chip. Está diseñado para realizar tareas específicas 
+    dentro de sistemas embebidos y es el núcleo de muchos dispositivos electrónicos modernos.
+</p>
+
+<h2>El ESP32 como microcontrolador</h2>
+
+<p>
+    En este curso utilizaremos el <strong>ESP32</strong>, un MCU potente que integra 
+    <strong>WiFi, Bluetooth y Bluetooth Low Energy (BLE)</strong>, orientado a una amplia gama de aplicaciones, 
+    desde redes de sensores de baja potencia hasta tareas exigentes como codificación de voz o aplicaciones IoT.
+</p>
+
+<p>
+    Nuestro entrenador se basa en la placa de desarrollo <strong>ESP32-WROOM-32 DevKit</strong>, que facilita 
+    la conexión directa de periféricos mediante cables y permite programar fácilmente el dispositivo.
+</p>
+
+<h2>Componentes clave del ESP32-WROOM-32 DevKit</h2>
+
+<img style="display: block;margin: auto;width: 75%;" src="./1_introduccion/1_1_que_es/img/partes_esp32.png" alt="Partes de ESP32" class="img-fluid icon-hover">
+
+<p>
+    <ul>
+        <li><strong>ESP32-WROOM-32:</strong> módulo principal que integra el microcontrolador y sus funciones básicas.</li>
+        <li><strong>EN:</strong> botón de reinicio (Reset).</li>
+        <li><strong>BOOT:</strong> botón para entrar en modo de descarga de firmware.</li>
+        <li><strong>USB-to-UART Bridge:</strong> puente para comunicación USB con tasas de hasta 3 Mbps.</li>
+        <li><strong>Puerto Micro USB:</strong> interfaz para alimentación y comunicación con el PC.</li>
+        <li><strong>LED de encendido (5V Power On):</strong> indica alimentación desde USB o fuente externa de 5V.</li>
+        <li><strong>Entradas/Salidas (I/O):</strong> pines reasignados desde la librería para control de periféricos.</li>
+    </ul>
+</p>
+
+<p>El ESP32 también cuenta con múltiples periféricos integrados, como:</p>
+
+<p>
+    <ul>
+        <li>Hasta 34 pines GPIO configurables.</li>
+        <li>Conversores analógico-digital (ADC) y digital-analógico (DAC).</li>
+        <li>Sensores táctiles capacitivos.</li>
+        <li>Interfaz PWM para control de motores y brillo de LEDs.</li>
+        <li>Módulos de comunicación como UART, SPI, I2C, CAN y más.</li>
+
+    </ul>
+</p>
+
+<h2>Ventajas del ESP32</h2>
+
+<p>El ESP32 presenta una serie de ventajas que lo hacen atractivo para aplicaciones:</p>
+
+<p>
+    <ul>
+        <li>Conectividad integrada: Wi-Fi y Bluetooth en un solo chip.</li>
+        <li>Procesador potente: con capacidad para ejecutar múltiples tareas o controlar dispositivos en tiempo real.</li>
+        <li>Bajo consumo energético: cuenta con varios modos de ahorro de energía, incluyendo deep sleep.</li>
+        <li>Versatilidad de entradas y salidas: gran número de pines, compatibilidad con múltiples protocolos de comunicación.</li>
+        <li>Amplia documentación y comunidad: soporte disponible en múltiples lenguajes y plataformas.</li>
+        <li>Costo accesible: relación calidad-precio superior a muchas alternativas comerciales.</li>
+    </ul>
+</p>

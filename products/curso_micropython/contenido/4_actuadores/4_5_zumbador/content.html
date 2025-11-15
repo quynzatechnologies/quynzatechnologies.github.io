@@ -1,0 +1,85 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 4.5. Uso del zumbador</h1>
+<p>
+    El <strong>zumbador</strong> (buzzer) es un componente electrónico capaz de generar sonido al aplicar una 
+    señal eléctrica. Se emplea ampliamente en sistemas de alerta, indicación sonora y reproducción de melodías 
+    simples.
+</p>
+
+<p>
+    En el entrenador QMT-020, el zumbador está conectado a un pin GPIO del ESP32, lo que permite controlarlo 
+    mediante señales digitales o moduladas por ancho de pulso (<strong>PWM</strong>).
+</p>
+
+<p>
+    <ol>
+        <li>
+            <strong>Tipos de zumbadores</strong>
+            <br><br>
+            <ul>
+                <li>
+                    <strong>Pasivos</strong>: requieren una señal alterna para generar sonido, como la que se 
+                    obtiene mediante PWM. Son ideales para reproducir tonos variables y melodías.
+                </li>
+                <li>
+                    <strong>Activos</strong>: integran un oscilador interno y emiten un tono fijo al 
+                    aplicarles tensión continua.
+                </li>
+            </ul>
+            <br>
+            En este curso utilizaremos <strong>zumbadores activo</strong>, ya que permiten mayor control 
+            desde el código.
+            <br><br>
+        </li>
+        <li>
+            <strong>Formas de control</strong>
+            <br><br>
+            <ol>
+                <li>
+                    <strong>Tono fijo</strong> -> Se enciende y apaga el zumbador en intervalos regulares. 
+                    Útil para alarmas simples.
+                </li>
+                <li>
+                    <strong>Melodías</strong> -> Se usan frecuencias específicas para cada nota musical, 
+                    generando secuencias de sonidos reconocibles.
+                </li>
+                <li>
+                    <strong>Alarmas condicionadas</strong> -> El zumbador se activa solo cuando se cumple 
+                    una condición (por ejemplo, un valor de sensor supera un umbral).
+                </li>
+            </ol>
+            <br>
+        </li>
+        <li>
+            <strong>Control digital vs PWM</strong>
+            <br><br>
+            <ul>
+                <li>
+                    <strong>Control digital simple</strong>: el GPIO envía un nivel alto (1) para encender y 
+                    bajo (0) para apagar el zumbador.
+                </li>
+                <li>
+                    <strong>Control PWM</strong>: mediante la modulación del ciclo de trabajo y la frecuencia, 
+                    se pueden variar la altura (pitch) y la intensidad del sonido.
+                </li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Aplicaciones prácticas</strong>
+            <br><br>
+            <ul>
+                <li>Alarmas por temperatura, distancia u otros parámetros críticos.</li>
+                <li>Indicadores acústicos en sistemas de control.</li>
+                <li>Reproducción de melodías como alertas personalizadas.</li>
+                <li>Interfaces hombre-máquina con retroalimentación sonora.</li>
+            </ul>
+        </li>
+    </ol>
+</p>

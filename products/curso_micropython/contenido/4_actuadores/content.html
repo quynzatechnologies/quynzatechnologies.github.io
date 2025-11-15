@@ -1,0 +1,105 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 4. Programación de actuadores</h1>
+<p>
+	Duración estimada: 2 horas
+</p>
+
+<h2>Planteamiento general</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo general</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Controlar dispositivos de salida mediante MicroPython</td>
+			<td class="tg-cly1">Escribe y ejecuta scripts para controlar LEDs, LED RGB, zumbador, displays y pantalla LCD1602</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Metodología:</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo específico</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Evidencias de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Actividades de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Link</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Controlar LEDs simples y múltiples mediante MicroPython</td>
+			<td class="tg-cly1">Configura pines como salidas y controla LEDs individualmente o en secuencia, utilizando ciclos y temporización</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Scripts de encendido/apagado básico</li>
+					<li>Script con secuencia de múltiples LEDs</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Práctica: encender un LED con retardo</li>
+					<li>Ejercicio: crear una secuencia alternada de 4 LEDs usando while/for</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="4_1_control_led_1">4.1. Encendido y apagado de LEDs</a>
+                <br>
+                <a href="#" data-lesson="4_2_control_led_2">4.2. Manejo de múltiples LEDs y estructuras while/for</a>
+            </td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Programar displays de 7 segmentos y pantalla LCD1602</td>
+			<td class="tg-cly1">Muestra información en displays de 7 segmentos y en la LCD1602, gestionando la asignación de pines y el formato de datos</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Código para mostrar números en display</li>
+					<li>Script que muestre texto en LCD1602</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Actividad: generar número aleatorio en display</li>
+					<li>Ejercicio: mostrar mensaje personalizado en LCD</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="4_3_display_7_segmentos">4.3. Control de displays de 7 segmentos</a>
+                <br>
+                <a href="#" data-lesson="4_4_lcd1602">4.4. Manejo de la pantalla LCD1602</a>
+            </td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Implementar control de zumbador y LED RGB con PWM</td>
+			<td class="tg-cly1">Genera señales para producir tonos, melodías y alarmas en el zumbador; controla colores y efectos en el LED RGB</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Script que reproduzca tono fijo y melodía</li>
+					<li>Código que genere cambios de color en LED RGB</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Práctica: alarma sonora al cumplirse una condición</li>
+					<li>Ejercicio: crear efecto de cambio gradual en LED RGB</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="4_5_zumbador">4.5. Uso del zumbador</a>
+                <br>
+                <a href="#" data-lesson="4_6_led_rgb">4.6. Control de LEDs RGB con PWM</a>
+            </td>
+		</tr>
+	</tbody>
+</table>

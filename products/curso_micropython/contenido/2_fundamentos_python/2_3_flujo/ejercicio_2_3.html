@@ -1,85 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_micropython.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<h1>Ejercicio 2-3: Tablas de multiplicar del 1 al 10 con ciclos while anidados</h1>
+<p>
+    <strong>Objetivo.</strong> Practicar el uso de ciclos while anidados. Generar de 
+    forma automática las tablas de multiplicar del 1 al 10.
+</p>
 
-    <title>Ejercicio 2-3: Tabla de multiplicar del 1 al 10 con ciclos anidados</title>
-</head>
+<p><strong>Procedimiento</strong></p>
 
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
-
-        <header id="header-nav-main-container"></header>
-
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-micropython">☰ Menú</button>
-                    <div id="aside-nav-curso-micropython-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 2-3: Tabla de multiplicar del 1 al 10 con ciclos anidados</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/2_fundamentos_python/">2. Fundamentos de Python aplicados a MicroPython</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_3_flujo/">2.3. Estructuras de control de flujo</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_3_flujo/ejercicio_2_3.html" class="not-active">Ejercicio 2-3: Tabla de multiplicar del 1 al 10 con ciclos anidados</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <strong>Objetivo.</strong> Practicar el uso de ciclos while anidados. Generar de 
-                                forma automática las tablas de multiplicar del 1 al 10.
-                            </p>
-
-                            <p><strong>Procedimiento</strong></p>
-
-                            <p>
-                                <ol>
-                                    <li>Abrir Thonny y crear un nuevo archivo <em>.py</em>.</li>
-                                    <li>
-                                        Definir una variable <em>j</em> para representar el número de la tabla 
-                                        actual, iniciando en <em>1</em>.
-                                    </li>
-                                    <li>Usar un ciclo while externo para recorrer las tablas del 1 al 10.</li>
-                                    <li>
-                                        Dentro de este ciclo, definir una variable <em>i</em> para los 
-                                        multiplicadores de cada tabla, iniciando en <em>1</em>.
-                                    </li>
-                                    <li>
-                                        Usar un ciclo while interno para imprimir los productos desde <em>j</em> 
-                                        x <em>1</em> hasta <em>j</em> x <em>9</em>.
-                                    </li>
-                                    <li>Separar cada tabla con un salto de línea.</li>
-                                </ol>
-                            </p>
+<p>
+    <ol>
+        <li>Abrir Thonny y crear un nuevo archivo <em>.py</em>.</li>
+        <li>
+            Definir una variable <em>j</em> para representar el número de la tabla 
+            actual, iniciando en <em>1</em>.
+        </li>
+        <li>Usar un ciclo while externo para recorrer las tablas del 1 al 10.</li>
+        <li>
+            Dentro de este ciclo, definir una variable <em>i</em> para los 
+            multiplicadores de cada tabla, iniciando en <em>1</em>.
+        </li>
+        <li>
+            Usar un ciclo while interno para imprimir los productos desde <em>j</em> 
+            x <em>1</em> hasta <em>j</em> x <em>9</em>.
+        </li>
+        <li>Separar cada tabla con un salto de línea.</li>
+    </ol>
+</p>
 
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Tablas de mulltiplicar del 1 al 10</span>
@@ -95,46 +47,19 @@ j = <span style="color: #B452CD">1</span>
 </pre>
 </div>
 
-                            <p><strong>Actividades sugeridas.</strong></p>
-                            <p>
-                                <ul>
-                                    <li>Modificar el límite de <em>i</em> para mostrar hasta <em>x 12</em>.</li>
-                                    <li>Adaptar el código para usar ciclos <em>for</em> en lugar de <em>while</em>.</li>
-                                    <li>Agregar un separador visual entre tablas, como líneas de guiones.</li>
-                                </ul>
-                            </p>
+<p><strong>Actividades sugeridas.</strong></p>
+<p>
+    <ul>
+        <li>Modificar el límite de <em>i</em> para mostrar hasta <em>x 12</em>.</li>
+        <li>Adaptar el código para usar ciclos <em>for</em> en lugar de <em>while</em>.</li>
+        <li>Agregar un separador visual entre tablas, como líneas de guiones.</li>
+    </ul>
+</p>
 
-                            <p><strong>Experimentos.</strong></p>
-                            <p>
-                                <ul>
-                                    <li>Pedir al usuario el número inicial y final de tablas a mostrar.</li>
-                                    <li>Mostrar las tablas en orden inverso, del 10 al 1.</li>
-                                </ul>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_3_flujo/ejercicio_2_2.html" class="btn btn-neutral float-left" title="Ejercicio 2-2: Tabla de multiplicar del 8 con ciclo while" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_micropython/contenido/2_fundamentos_python/2_4_funciones/" class="btn btn-neutral float-right" title="Funciones y manejo de librerías" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p><strong>Experimentos.</strong></p>
+<p>
+    <ul>
+        <li>Pedir al usuario el número inicial y final de tablas a mostrar.</li>
+        <li>Mostrar las tablas en orden inverso, del 10 al 1.</li>
+    </ul>
+</p>

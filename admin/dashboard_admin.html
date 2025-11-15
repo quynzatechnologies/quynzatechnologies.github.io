@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Cargar cabeceras comunes -->
+    <script src="/js/load_html_created.js" defer></script>
+
+    <!-- Script de logout específico para admin (si usas uno aparte) -->
+    <script src="/admin/js/logout_admin.js" defer></script>
+
+    <!-- Librerías base (igual que los cursos) -->
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
+
+    <!-- Script propio del dashboard -->
+    <script src="/admin/js/dashboard_admin.js" defer></script>
+
+    <title>Dashboard Administrador</title>
+
+    <style>
+        body.protegido { display: none; }
+    </style>
+    <script>
+        // Protección inicial del body
+        document.documentElement.classList.add("protegido-root");
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.add("protegido");
+        });
+
+        // Redirección si NO es admin
+        document.addEventListener("DOMContentLoaded", () => {
+            if (sessionStorage.getItem("admin") !== "true") {
+                window.location.href = "/admin/login_admin.html";
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="all">
+
+        <!-- Headers -->
+        <header id="header-comm-container"></header>
+        <header id="header-nav-main-container"></header>
+
+        <main>
+            <div class="main">
+                <div class="div-content">
+
+                    <!-- No hay menú lateral en el panel admin -->
+                    <div id="content-curso">
+
+                        <!-- Encabezado -->
+                        <div id="heading-breadcrumbs">
+                            <div class="row">
+                                <h1>Panel de Administración</h1>
+
+                                <button id="cerrar-sesion"
+                                        class="btn btn-neutral float-right"
+                                        onclick="cerrarSesionAdmin()">
+                                    Cerrar sesión
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Breadcrumbs -->
+                        <div role="navigation" aria-label="Page navigation">
+                            <ul class="wy-breadcrumbs" id="breadcrumbs">
+                                <li><a href="/admin/dashboard_admin.html">Dashboard</a></li>
+                                <li class="not-active">Inicio</li>
+                            </ul>
+                            <hr>
+                        </div>
+
+                        <!-- CONTENIDO PRINCIPAL DEL PANEL -->
+                        <div id="content" style="padding-bottom: 40px;">
+
+                            <h2>Bienvenido, <span id="admin-name"></span></h2>
+                            <p style="margin-bottom: 30px;">
+                                Este es el panel de administración global. Desde aquí puedes gestionar los cursos,
+                                ver mensajes de contacto y acceder a estadísticas generales.
+                            </p>
+
+                            <div class="row">
+
+                                <!-- Tarjeta: Mensajes de contacto -->
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><h3 class="panel-title" style="text-align: center;">Mensajes de contacto</h3></div>
+                                        <div class="panel-body">
+                                            <p>Ver todos los mensajes enviados por estudiantes o visitantes.</p>
+                                            <a class="btn btn-neutral btn-block" href="/admin/messages_admin.html">
+                                                Gestionar mensajes
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tarjeta: Estadísticas globales -->
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><h3 class="panel-title" style="text-align: center;">Estadísticas globales</h3></div>
+                                        <div class="panel-body">
+                                            <p>Información resumida de actividad y uso de los cursos.</p>
+                                            <a class="btn btn-neutral btn-block" href="/admin/stats_admin.html">
+                                                Ver estadísticas
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tarjeta: Administración de cursos -->
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><h3 class="panel-title" style="text-align: center;">Cursos</h3></div>
+                                        <div class="panel-body">
+                                            <p>Acceso general al panel de administración de cursos disponibles.</p>
+                                            <a class="btn btn-neutral btn-block" href="/admin/courses_admin.html">
+                                                Administrar cursos
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div> <!-- /content -->
+
+                    </div> <!-- /content-curso -->
+
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer" id="footer-main-container"></footer>
+        <div class="copyright" id="footer-copyright-container"></div>
+
+    </div>
+
+    <script>
+        // Mostrar nombre del admin
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("admin-name").innerText =
+                sessionStorage.getItem("admin-username") || "";
+        });
+
+        // Quitar protección visual
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.remove("protegido");
+        });
+
+        function cerrarSesionAdmin() {
+            sessionStorage.removeItem("admin");
+            sessionStorage.removeItem("admin-username");
+            window.location.href = "/admin/login_admin.html";
+        }
+    </script>
+</body>
+</html>

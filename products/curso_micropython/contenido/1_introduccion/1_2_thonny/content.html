@@ -1,0 +1,45 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>1.2. Entorno de desarrollo: Thonny</h1>
+<p>
+    <strong>Thonny</strong> es un entorno de desarrollo integrado (<strong>IDE</strong>) diseñado para ser 
+    simple e intuitivo, ideal para aprender y trabajar con Python y MicroPython. En este curso, será la 
+    herramienta principal para programar el <strong>ESP32</strong>.
+</p>
+
+<img style="display: block;margin: auto;width: 20%;" src="./1_introduccion/1_2_thonny/img/logo_thonny.png" alt="Logo Thonny" class="img-fluid icon-hover">
+
+<p>
+    <ol>
+        <li>
+            <strong>Características útiles de Thonny</strong>
+            <br><br>
+            <ul>
+                <li>Resaltado de sintaxis y autocompletado.</li>
+                <li>Depuración paso a paso.</li>
+                <li>Vista de variables y pila de ejecución.</li>
+                <li>Instalación de paquetes mediante Tools → Manage packages....</li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Ventajas para MicroPython</strong>
+            <br><br>
+            <img style="display: block;margin: auto;width: 75%;" src="./1_introduccion/1_2_thonny/img/ejemplo_thonny.png" alt="Ejemplo Thonny" class="img-fluid icon-hover">
+
+            <br>
+            A diferencia de otros entornos, Thonny permite:
+
+            <ul>
+                <li>Cargar programas y ejecutarlos inmediatamente en el ESP32.</li>
+                <li>Usar la consola interactiva para pruebas rápidas.</li>
+                <li>Integrar el flujo de desarrollo con el trabajo en hardware, ideal para proyectos de IoT.</li>
+            </ul>
+        </li>
+    </ol>
+</p>

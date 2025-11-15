@@ -1,83 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_micropython.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<h1>Ejercicio 4-13: Concatenar texto y variables en LCD1602</h1>
+<p>
+    <strong>Objetivo.</strong> Mostrar en pantalla LCD1602 mensajes que combinen texto fijo y valores 
+    almacenados en variables tipo string. Reforzar el uso de la concatenación de cadenas en MicroPython.
+</p>
 
-    <title>Ejercicio 4-13: Concatenar texto y variables en LCD1602</title>
-</head>
-
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
-
-        <header id="header-nav-main-container"></header>
-
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-micropython">☰ Menú</button>
-                    <div id="aside-nav-curso-micropython-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 4-13: Concatenar texto y variables en LCD1602</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/">4. Programación de actuadores</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/4_4_lcd1602/">4.4. Manejo de la pantalla LCD1602</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/4_4_lcd1602/ejercicio_4_13.html" class="not-active">Ejercicio 4-13: Concatenar texto y variables en LCD1602</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <strong>Objetivo.</strong> Mostrar en pantalla LCD1602 mensajes que combinen texto fijo y valores 
-                                almacenados en variables tipo string. Reforzar el uso de la concatenación de cadenas en MicroPython.
-                            </p>
-
-                            <p><strong>Procedimiento.</strong></p>
-                            <p>
-                                <ol>
-                                    <li>
-                                        Conectar el pin GPIO22 del ESP32 al pin SCL del módulo LCD1602 y el pin GPIO21 al pin SDA.
-                                        <br><br>
-                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexiones_4_9_1.png" alt="Conexión 1 ejercicio 4.13." class="img-fluid icon-hover">
-                                        <br>
-                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_4_9_1.png" alt="Fotos conexión ejercicio 4.13." class="img-fluid icon-hover">
-                                        <br>
-                                    </li>
-                                    <li>Abrir Thonny e importar la librería lcd1602.</li>
-                                    <li>
-                                        Escribir el código proporcionado que toma elementos de una lista y los concatena con un texto para 
-                                        mostrarlos en pantalla.
-                                    </li>
-                                    <li>
-                                        Ejecutar el programa y observar que el mensaje se muestra con cada nombre de la lista.
-                                        <br><br>
+<p><strong>Procedimiento.</strong></p>
+<p>
+    <ol>
+        <li>
+            Conectar el pin GPIO22 del ESP32 al pin SCL del módulo LCD1602 y el pin GPIO21 al pin SDA.
+            <br><br>
+            <img style="display: block;margin: auto;width: 35%;" src="./4_actuadores/4_4_lcd1602/img/conexiones_4_9_1.png" alt="Conexión 1 ejercicio 4.13." class="img-fluid icon-hover">
+            <br>
+            <img style="display: block;margin: auto;width: 50%;" src="./4_actuadores/4_4_lcd1602/img/foto_4_9_1.png" alt="Fotos conexión ejercicio 4.13." class="img-fluid icon-hover">
+            <br>
+        </li>
+        <li>Abrir Thonny e importar la librería lcd1602.</li>
+        <li>
+            Escribir el código proporcionado que toma elementos de una lista y los concatena con un texto para 
+            mostrarlos en pantalla.
+        </li>
+        <li>
+            Ejecutar el programa y observar que el mensaje se muestra con cada nombre de la lista.
+            <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">lcd1602</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> LCD
 <span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
@@ -98,44 +50,17 @@ lcd.clear()
 </pre>
 </div>
 
-                                    </li>
-                                </ol>
-                            </p>
+        </li>
+    </ol>
+</p>
 
-                            <p><strong>Actividades sugeridas.</strong></p>
-                            <p>
-                                <ul>
-                                    <li>Cambiar el mensaje de forma que incluya datos numéricos convertidos a string.</li>
-                                    <li>Añadir una segunda línea con información adicional para cada nombre.</li>
-                                    <li>Mostrar los mensajes en orden inverso al de la lista.</li>
-                                    <li>Guardar el programa en la carpeta local del computador.</li>
-                                    <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
-                                </ul>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_micropython/contenido/4_actuadores/4_4_lcd1602/ejercicio_4_12.html" class="btn btn-neutral float-left" title="Ejercicio 4-12: Mostrar nombres ordenados en LCD1602 con ciclos anidados" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_micropython/contenido/4_actuadores/4_4_lcd1602/ejercicio_4_14.html" class="btn btn-neutral float-right" title="Ejercicio 4-14: Elegir ganador aleatorio y mostrar en LCD1602" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p><strong>Actividades sugeridas.</strong></p>
+<p>
+    <ul>
+        <li>Cambiar el mensaje de forma que incluya datos numéricos convertidos a string.</li>
+        <li>Añadir una segunda línea con información adicional para cada nombre.</li>
+        <li>Mostrar los mensajes en orden inverso al de la lista.</li>
+        <li>Guardar el programa en la carpeta local del computador.</li>
+        <li>Guardar el programa directamente en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+    </ul>
+</p>

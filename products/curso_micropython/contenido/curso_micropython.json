@@ -4,7 +4,7 @@
     "estructura": [
         {
             "id": "inicio",
-            "titulo": "Inicio",
+            "titulo": "Curso de MicroPython",
             "archivo": "inicio/content.html"
         },
         {

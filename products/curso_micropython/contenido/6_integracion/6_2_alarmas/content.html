@@ -1,0 +1,110 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 6.2. Alarma por distancia con zumbador y LCD</h1>
+<p>
+    El <strong>sensor ultrasónico HC-SR04</strong> es un dispositivo que permite medir distancias mediante 
+    la emisión y recepción de ondas de sonido de alta frecuencia. Su funcionamiento se basa en calcular el 
+    tiempo que tarda una onda sonora en ir hasta un objeto y regresar al sensor, utilizando la velocidad 
+    del sonido para convertir ese tiempo en una distancia.
+</p>
+
+<p>
+    Este tipo de sensores se emplea ampliamente en <strong>robótica</strong>, 
+    <strong>sistemas de seguridad</strong> y <strong>automatización industrial</strong>, gracias a su bajo 
+    costo, buena precisión y facilidad de integración con microcontroladores como el ESP32.
+</p>
+
+<p>
+    <ol>
+        <li>
+            <strong>Funcionamiento del sistema</strong>
+            <br><br>
+            En este tema, se busca integrar el sensor HC-SR04 con:
+            <br><br>
+            <ul>
+                <li>Un <strong>zumbador piezoeléctrico</strong>, que actúa como alerta sonora.</li>
+                <li>
+                    Una <strong>pantalla LCD1602</strong> (con interfaz I2C), para mostrar la distancia 
+                    medida y mensajes de advertencia.
+                </li>
+            </ul>
+            <br>
+            El principio es sencillo:
+            <br><br>
+            <ol>
+                <li>El sensor mide continuamente la distancia al objeto.</li>
+                <li>
+                    Si la distancia detectada es menor a un umbral predefinido (ej. <em>5 cm</em>), se 
+                    activa el zumbador.
+                </li>
+                <li>
+                    La pantalla LCD muestra en todo momento la distancia y, en caso de alarma, un mensaje 
+                    especial.
+                </li>
+            </ol>
+            <br>
+        </li>
+        <li>
+            <strong>Conexiones básicas</strong>
+            <br><br>
+            <ul>
+                <li><strong>HC-SR04:</strong> Trigger -> GPIO16, Echo -> GPIO4.</li>
+                <li><strong>LCD1602 (I2C):</strong> SCL -> GPIO22, SDA -> GPIO21.</li>
+                <li>
+                    <strong>Zumbador:</strong> Conectado a un pin de salida digital (por ejemplo GPIO19 o 
+                    GPIO23, según ejercicio).
+                </li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Flujo lógico del programa</strong>
+            <br><br>
+            <ol>
+                <li>Configurar el sensor para obtener medidas de distancia.</li>
+                <li>Mostrar la distancia en la LCD.</li>
+                <li>Comparar la distancia medida con el umbral.</li>
+                <li>
+                    Si se cumple la condición, activar el zumbador con un patrón determinado (intermitente 
+                    o continuo).
+                </li>
+                <li>Repetir el proceso en ciclo.</li>
+            </ol>
+            <br>
+        </li>
+        <li>
+            <strong>Posibles mejoras</strong>
+            <br><br>
+            <ol>
+                <li>Ajustar el <strong>umbral de distancia</strong> para adaptarse a diferentes escenarios.</li>
+                <li>
+                    Variar el <strong>patrón de activación del zumbador</strong> según el nivel de 
+                    proximidad.
+                </li>
+                <li>
+                    Agregar mensajes dinámicos en la LCD, como "Objetivo cercano" o "Área segura".
+                </li>
+                <li>
+                    Implementar retardo entre activaciones para evitar alarmas continuas en casos de 
+                    detección constante.
+                </li>
+            </ol>
+            <br>
+        </li>
+        <li>
+            <strong>Aplicaciones</strong>
+            <br><br>
+            <ul>
+                <li>Alarmas de estacionamiento en vehículos.</li>
+                <li>Detección de intrusos en accesos controlados.</li>
+                <li>Sistemas de advertencia en maquinaria.</li>
+                <li>Monitoreo de distancia en procesos industriales.</li>
+            </ul>
+        </li>
+    </ol>
+</p>

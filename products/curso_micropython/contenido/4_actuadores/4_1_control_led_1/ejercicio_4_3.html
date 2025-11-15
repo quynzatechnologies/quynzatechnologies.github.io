@@ -1,79 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_micropython.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<h1>Ejercicio 4-3: Encender y apagar LEDs externos</h1>
+<p>
+    <strong>Objetivo.</strong> Practicar la configuración de pines GPIO como salidas. Controlar uno o más LEDs 
+    encendiéndolos y apagándolos secuencialmente. Reforzar el uso de instrucciones repetitivas en MicroPython.
+</p>
 
-    <title>Ejercicio 4-3: Encender y apagar LEDs externos</title>
-</head>
-
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
-
-        <header id="header-nav-main-container"></header>
-
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-micropython">☰ Menú</button>
-                    <div id="aside-nav-curso-micropython-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 4-3: Encender y apagar LEDs externos</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/">4. Programación de actuadores</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/4_1_control_led_1/">4.1. Encendido y apagado de LEDs</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/4_1_control_led_1/ejercicio_4_3.html" class="not-active">Ejercicio 4-3: Encender y apagar LEDs externos</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <strong>Objetivo.</strong> Practicar la configuración de pines GPIO como salidas. Controlar uno o más LEDs 
-                                encendiéndolos y apagándolos secuencialmente. Reforzar el uso de instrucciones repetitivas en MicroPython.
-                            </p>
-
-                            <p><strong>Procedimiento.</strong></p>
-                            <p>
-                                <ol>
-                                    <li>
-                                        Conectar un cable desde el pin GPIO26 del microcontrolador al pin del LED azul del entrenador.
-                                        <br><br>
-                                        <img style="display: block;margin: auto;width: 50%;" src="./img/conexiones_4_2_1.png" alt="Conexion 1 ejercicio 4.2." class="img-fluid icon-hover">
-                                        <br>
-                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_4_2_1.png" alt="Foto ejercicio 4.2." class="img-fluid icon-hover">
-                                        <br>
-                                    </li>
-                                    <li>Escribir en Thonny el primer bloque de código para encender y apagar el LED azul tres veces.</li>
-                                    <li>
-                                        Ejecutar el código y observar el parpadeo.
-                                        <br><br>
+<p><strong>Procedimiento.</strong></p>
+<p>
+    <ol>
+        <li>
+            Conectar un cable desde el pin GPIO26 del microcontrolador al pin del LED azul del entrenador.
+            <br><br>
+            <img style="display: block;margin: auto;width: 50%;" src="./4_actuadores/4_1_control_led_1/img/conexiones_4_2_1.png" alt="Conexion 1 ejercicio 4.2." class="img-fluid icon-hover">
+            <br>
+            <img style="display: block;margin: auto;width: 50%;" src="./4_actuadores/4_1_control_led_1/img/foto_4_2_1.png" alt="Foto ejercicio 4.2." class="img-fluid icon-hover">
+            <br>
+        </li>
+        <li>Escribir en Thonny el primer bloque de código para encender y apagar el LED azul tres veces.</li>
+        <li>
+            Ejecutar el código y observar el parpadeo.
+            <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
 <span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
@@ -89,15 +41,15 @@ led_azul = Pin(<span style="color: #B452CD">26</span>, Pin.OUT)
     time.sleep(<span style="color: #B452CD">1.5</span>)
 </pre>
 </div>
-                                        <br>
-                                        <strong>Actividad sugerida.</strong> Cambiar el número de repeticiones en el ciclo y el tiempo de 
-                                        espera para observar el cambio de comportamiento.
-                                        <br><br>
-                                    </li>
-                                    <li>Conectar un segundo cable desde el pin GPIO22 al LED rojo del entrenador.</li>
-                                    <li>
-                                        Escribir en Thonny el segundo bloque de código para encender y apagar ambos LEDs simultáneamente.
-                                        <br><br>
+            <br>
+            <strong>Actividad sugerida.</strong> Cambiar el número de repeticiones en el ciclo y el tiempo de 
+            espera para observar el cambio de comportamiento.
+            <br><br>
+        </li>
+        <li>Conectar un segundo cable desde el pin GPIO22 al LED rojo del entrenador.</li>
+        <li>
+            Escribir en Thonny el segundo bloque de código para encender y apagar ambos LEDs simultáneamente.
+            <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
 <span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
@@ -117,41 +69,14 @@ led_rojo = Pin(<span style="color: #B452CD">22</span>, Pin.OUT)
 </pre>
 </div>
                                         
-                                    </li>
-                                </ol>
-                            </p>
+        </li>
+    </ol>
+</p>
 
-                            <p><strong>Actividades sugeridas.</strong></p>
-                            <p>
-                                <ul>
-                                    <li>Encender los LEDs en secuencia (azul -> rojo) en lugar de simultáneamente.</li>
-                                    <li>Invertir el orden de encendido y observar los cambios.</li>
-                                </ul>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_micropython/contenido/4_actuadores/4_1_control_led_1/ejercicio_4_2.html" class="btn btn-neutral float-left" title="Ejercicio 4-2: Encender LED externo con estructura while" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_micropython/contenido/4_actuadores/4_2_control_led_2/" class="btn btn-neutral float-right" title="Manejo de múltiples LEDs y estructuras while/for" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p><strong>Actividades sugeridas.</strong></p>
+<p>
+    <ul>
+        <li>Encender los LEDs en secuencia (azul -> rojo) en lugar de simultáneamente.</li>
+        <li>Invertir el orden de encendido y observar los cambios.</li>
+    </ul>
+</p>

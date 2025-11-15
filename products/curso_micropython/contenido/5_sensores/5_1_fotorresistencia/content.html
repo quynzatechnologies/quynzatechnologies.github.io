@@ -1,0 +1,89 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 5.1. Lectura de fotorresistencia</h1>
+<p>
+    La <strong>fotorresistencia</strong> o <strong>LDR (Light Dependent Resistor)</strong> es un sensor 
+    analógico cuya resistencia eléctrica varía en función de la cantidad de luz que recibe.
+</p>
+
+<p>
+    <ul>
+        <li><strong>Alta luminosidad</strong> -> baja resistencia -> mayor valor leído por el ADC.</li>
+        <li><strong>Baja luminosidad</strong> -> alta resistencia -> menor valor leído por el ADC.</li>
+    </ul>
+</p>
+
+<p>
+    Este comportamiento permite utilizarla para medir niveles de iluminación y realizar acciones en función 
+    de ellos, como encender luces automáticamente o activar alarmas.
+</p>
+
+<p>
+    <ol>
+        <li>
+            <strong>Conexión al ESP32</strong>
+            <br><br>
+            En el entrenador QMT-020, la fotorresistencia se conecta a un pin de entrada analógica del ESP32, 
+            por ejemplo GPIO36.
+            <br><br>
+            El microcontrolador cuenta con un conversor analógico-digital (ADC) que convierte la señal 
+            analógica en un valor digital comprendido entre 0 y 4095.
+            <br><br>
+        </li>
+        <li>
+            <strong>Configuración en MicroPython</strong>
+            <br><br>
+            Para leer la fotorresistencia:
+            <br><br>
+            <ol>
+                <li>Configurar el pin como entrada analógica (ADC).</li>
+                <li>
+                    Ajustar la atenuación (atten) a <strong>11 dB</strong> para aprovechar el rango completo 
+                    de voltaje que admite el ADC (hasta ~3.6 V).
+                </li>
+                <li>Leer periódicamente el valor y procesarlo según la aplicación.</li>
+            </ol>
+            <br>
+            <u>Ejemplo básico:</u>
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> ADC, Pin
+
+foto = ADC(Pin(<span style="color: #B452CD">36</span>))
+foto.atten(ADC.ATTN_11DB)
+valor = foto.read()
+<span style="color: #658B00">print</span>(valor)
+</pre>
+</div>
+            <br>
+        </li>
+        <li>
+            <strong>Aplicaciones comunes</strong>
+            <br><br>
+            <ul>
+                <li>Control automático de iluminación.</li>
+                <li>Medición de luz ambiental para sistemas de riego o invernaderos.</li>
+                <li>Sensores de seguridad (detección de cambios bruscos de luz).</li>
+                <li>Ajuste de brillo en pantallas.</li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Integración con otros dispositivos</strong>
+            <br><br>
+            El valor leído puede visualizarse:
+            <br><br>
+            <ul>
+                <li>En consola (modo depuración).</li>
+                <li>En una pantalla <strong>LCD1602</strong> mediante comunicación I2C.</li>
+                <li>En sistemas IoT, enviando datos a un servidor o plataforma de monitoreo.</li>
+            </ul>
+            <br>
+        </li>
+    </ol>
+</p>

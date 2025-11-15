@@ -1,0 +1,224 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 4.3. Control de displays de 7 segmentos</h1>
+<p>
+    El <strong>display de 7 segmentos</strong> es un dispositivo de salida compuesto por siete LEDs 
+    dispuestos en forma de número “8” y, en algunos casos, un punto decimal. Encendiendo diferentes 
+    combinaciones de segmentos, es posible representar dígitos del 0 al 9 e incluso algunas letras.
+</p>
+
+<p>
+    <ol>
+        <li>
+            <strong>Tipos de displays</strong>
+            <br><br>
+            Existen dos tipos principales:
+            <br><br>
+            <ul>
+                <li>
+                    <strong>Cátodo común</strong>: todos los cátodos de los LEDs están conectados a un punto 
+                    común a tierra (GND).
+                </li>
+                <li>
+                    <strong>Ánodo común</strong>: todos los ánodos están conectados a un punto común positivo 
+                    (VCC).
+                </li>
+            </ul>
+            <br>
+            En este curso, utilizaremos <strong>displays de cátodo común</strong>, donde cada segmento se 
+            enciende aplicando un nivel lógico alto en su pin correspondiente.
+            <br>
+        </li>
+        <li>
+            <strong>Segmentos y codificación</strong>
+            <br><br>
+            Los segmentos se nombran con las letras <strong>a</strong>, <strong>b</strong>, <strong>c</strong>, 
+            <strong>d</strong>, <strong>e</strong>, <strong>f</strong>, <strong>g</strong>. Cada dígito se 
+            representa encendiendo una combinación específica de estos segmentos. Por ejemplo:
+            <br>
+            <ul>
+                <li>
+                    <strong>0</strong> -> segmentos a, b, c, d, e, f encendidos; g apagado.
+                </li>
+                <li>
+                    <strong>2</strong> -> segmentos a, b, d, e, g encendidos.
+                </li>
+            </ul>
+            <br>
+            <img style="display: block;margin: auto;width: 25%;" src="./4_actuadores/4_3_display_7_segmentos/img/img_7_sgm.png" alt="Imagen de segmentos de 7 segmentos" class="img-fluid icon-hover">
+            <br>
+            El encendido de cada segmento puede controlarse manualmente desde el microcontrolador o utilizando 
+            una tabla de codificación en el programa:
+            <br><br>
+            
+            <table class="table-objetive-module" style="text-align:center;vertical-align:middle">
+                <thead>
+                    <tr>
+                    <th class="tg-vyu2"><span style="font-weight:bold;">a</span></th>
+                    <th class="tg-vyu2"><span style="font-weight:bold;">b</span></th>
+                    <th class="tg-vyu2"><span style="font-weight:bold;">c</span></th>
+                    <th class="tg-vyu2"><span style="font-weight:bold;">d</span></th>
+                    <th class="tg-vyu2"><span style="font-weight:bold;">e</span></th>
+                    <th class="tg-vyu2"><span style="font-weight:bold;">f</span></th>
+                    <th class="tg-vyu2"><span style="font-weight:bold;">g</span></th>
+                    <th class="tg-vyu2"><span style="font-weight:bold;">Digito</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">2</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">3</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">4</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">5</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">6</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">7</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">8</span></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">0</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">1</span></td>
+                        <td class="tg-cly1"><span style="font-weight: normal;">9</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+        </li>
+        <li>
+            <strong>Conexión con el ESP32</strong>
+            <br><br>
+            Para controlar un display de 7 segmentos:
+            <br><br>
+            <ul>
+                <li>Cada segmento se conecta a un pin GPIO configurado como salida digital.</li>
+                <li>
+                    Si el display es múltiple (varios dígitos), se emplea <strong>multiplexado</strong>, 
+                    activando un dígito a la vez de forma rápida para que parezca que todos están encendidos 
+                    simultáneamente.
+                </li>
+            </ul>
+            <br>
+        </li>
+        <li>
+            <strong>Uso en MicroPython</strong>
+            <br><br>
+            El control se realiza configurando los GPIO con la librería machine y activando la combinación de 
+            segmentos necesaria.
+            <br><br>
+            <u>Ejemplo de encendido de un dígito:</u>
+            <br><br>
+<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> Pin
+
+a = Pin(<span style="color: #B452CD">16</span>, Pin.OUT)
+b = Pin(<span style="color: #B452CD">17</span>, Pin.OUT)
+<span style="color: #228B22"># Configurar otros pines...</span>
+a.value(<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># Encender segmento a</span>
+b.value(<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># Encender segmento b</span>
+</pre>
+</div>
+            <br>
+        </li>
+        <li>
+            <strong>Aplicaciones</strong>
+            <br><br>
+            Los displays de 7 segmentos se utilizan para:
+            <br><br>
+            <ul>
+                <li>Mostrar valores numéricos de sensores.</li>
+                <li>Contadores y temporizadores.</li>
+                <li>Indicadores en sistemas de control y medición.</li>
+            </ul>
+        </li>
+    </ol>
+</p>

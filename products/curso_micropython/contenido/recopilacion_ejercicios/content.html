@@ -1,0 +1,205 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Recopilación de ejercicios</h1>
+<p>
+    A continuación se recopilan los ejercicios realizados en el curso de MicroPython, que incluyen el uso del Entrenador QMT-020,
+    sensores y actuadores, así como la implementación de proyectos prácticos con el ESP32.
+</p>
+<br>
+
+<h2>Módulo 1: Introducción y fundamentos</h2>
+<ul>
+    <li>
+        <a href="#" data-lesson="gs_thonny">Getting Started: Thonny MicroPython IDE para ESP32</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_1_1">Ejercicio 1-1: Conectando y probando el ESP32</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_1_2">Ejercicio 1-2: Hola Mundo en MicroPython</a>
+    </li>
+</ul>
+
+<h2>Módulo 2: Fundamentos de Python aplicados a MicroPython</h2>
+<ul>
+    <li>
+        <a href="#" data-lesson="ejercicio_2_1">Ejercicio 2-1: Declaración y conversión de tipos de datos</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_2_2">Ejercicio 2-2: Tabla de multiplicar del 8 con ciclo while</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_2_3">Ejercicio 2-3: Tabla de multiplicar del 1 al 10 con ciclos anidados</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_2_4">Ejercicio 2-4: Tablas de multiplicar con funciones definidas por el usuario</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_2_5">Ejercicio 2-5: Juego de adivinar número con búsqueda binaria</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_2_6">Ejercicio 2-6: Generador de menú semanal sin repeticiones</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_2_7">Ejercicio 2-7: Simulación de lecturas de temperatura con listas y diccionarios</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_2_8">Ejercicio 2-8: Encender LED con pulsador en MicroPython</a>
+    </li>
+</ul>
+
+<h2>Módulo 3: Entrenador QMT-020: Pines, periféricos y conexiones</h2>
+<ul>
+    <li>
+        <a href="#" data-lesson="ejercicio_3_1">Ejercicio 3-1: Identificación de componentes y pines del entrenador QMT-020</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_3_2">Ejercicio 3-2: Mapeo de conectores de entrenador QMT-020</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_3_3">Ejercicio 3-3: Mapeo del uso de GPIOs en el ESP32 con el entrenador QMT-020</a>
+    </li>
+</ul>
+
+<h2>Módulo 4: Programación de actuadores</h2>
+<ul>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_1">Ejercicio 4-1: Control del LED interno del ESP32</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_2">Ejercicio 4-2: Encender LED externo con estructura while</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_3">Ejercicio 4-3: Encender y apagar un LEDs externos</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_4">Ejercicio 4-4: Encendido secuencial de un LED con pausas usando while</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_5">Ejercicio 4-5: Encendido simultáneo de dos LEDs con ciclo infinito</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_6">Ejercicio 4-6: Encendido controlado de múltiples LEDs con lista y contador</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_7">Ejercicio 4-7: Barrido secuencial de 4 LEDs con ciclos anidados</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_8">Ejercicio 4-8: Mostrar número aleatorio en un display de 7 segmentos</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_9">Ejercicio 4-9: Mostrar lista de nombres en pantalla LCD1602</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_10">Ejercicio 4-10: Mostrar texto fijo en pantalla LCD1602</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_11">Ejercicio 4-11: Ordenar y mostrar lista de nombres en LCD1602</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_12">Ejercicio 4-12: Mostrar nombres ordenados en LCD1602 con ciclos anidados</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_13">Ejercicio 4-13: Concatenar texto y variables en LCD1602</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_14">Ejercicio 4-14: Elegir ganador aleatorio y mostrar en LCD1602</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_15">Ejercicio 4-15: Mostrar dado aleatorio en LCD1602</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_16">Ejercicio 4-16: Generar y mostrar número de lotería con formato en LCD1602</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_17">Ejercicio 4-17: Generar tono fijo con zumbador usando ciclo for</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_18">Ejercicio 4-18: Reproducir melodía en zumbador usando PWM</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_19">Ejercicio 4-19: Cambiar color del LED RGB con PWM</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_4_20">Ejercicio 4-20: Cambiar color del LED RGB según condiciones simuladas</a>
+    </li>
+</ul>
+
+<h2>Módulo 5: Programación de sensores</h2>
+<ul>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_1">Ejercicio 5-1: Lectura analógica básica con fotorresistencia</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_2">Ejercicio 5-2: Lectura de fotorresistencia con visualización en LCD</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_3">Ejercicio 5-3: Lectura de valores analógicos desde un potenciómetro</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_4">Ejercicio 5-4: Encender LED con pulsador en entrada digital</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_5">Ejercicio 5-5: Control de LED con pulsador en modo toggle</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_6">Ejercicio 5-6: Medición continua de distancia con sensor HC-SR04</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_7">Ejercicio 5-7: Alarma por proximidad con HC-SR04</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_8">Ejercicio 5-8: Medición parametrizada con HC-SR04 y control de lecturas</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_9">Ejercicio 5-9: Lectura de temperatura y humedad con sensor DHT11</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_10">Ejercicio 5-10: Detección de obstáculos con sensor IR digital</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_5_11">Ejercicio 5-11: Recepción y decodificación de señales de control remoto IR</a>
+    </li>
+</ul>
+
+<h2>Módulo 6: Integración de sensores y actuadores</h2>
+<ul>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_1">Ejercicio 6-1: Alarma visual con LEDs rojos usando sensor IR</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_2">Ejercicio 6-2: Alarma sonora con zumbador activada por sensor HC-SR04</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_3">Ejercicio 6-3: Alarma sonora y visual en LCD para objetos cercanos con HC-SR04</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_4">Ejercicio 6-4: Control de color en LED RGB mediante pulsadores</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_5">Ejercicio 6-5: Encendido y apagado de LEDs mediante control remoto IR</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_6">Ejercicio 6-6: Calculadora básica controlada por mando IR</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_7">Ejercicio 6-7: Alerta visual con LEDs según distancia medida con HC-SR04</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_8">Ejercicio 6-8: Ajuste automático de iluminación RGB con fotorresistencia</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_9">Ejercicio 6-9: Alarma de intrusión en LCD con sensor IR</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_10">Ejercicio 6-10: Lectura de temperatura y humedad en LCD con DHT11</a>
+    </li>
+    <li>
+        <a href="#" data-lesson="ejercicio_6_11">Ejercicio 6-11: Termostato con control de temperatura y visualización en LCD</a>
+    </li>
+</ul>

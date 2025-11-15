@@ -1,86 +1,38 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_micropython.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<h1>Ejercicio 5-6: Medición continua de distancia con sensor HC-SR04</h1>
+<p>
+    <strong>Objetivo.</strong> Aprender a utilizar el sensor ultrasónico HC-SR04 para medir distancias.
+</p>
 
-    <title>Ejercicio 5-6: Medición continua de distancia con sensor HC-SR04</title>
-</head>
-
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
-
-        <header id="header-nav-main-container"></header>
-
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-micropython">☰ Menú</button>
-                    <div id="aside-nav-curso-micropython-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 5-6: Medición continua de distancia con sensor HC-SR04</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/5_sensores/">5. Programación de sensores</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/5_sensores/5_4_ultrasonido/">5.4. Lectura del sensor de ultrasonido</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/5_sensores/5_4_ultrasonido/ejercicio_5_6.html" class="not-active">Ejercicio 5-6: Medición continua de distancia con sensor HC-SR04</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <strong>Objetivo.</strong> Aprender a utilizar el sensor ultrasónico HC-SR04 para medir distancias.
-                            </p>
-
-                            <p><strong>Procedimiento.</strong></p>
-                            <p>
-                                <ol>
-                                    <li>
-                                        Conectar el sensor HC-SR04 al ESP32:
-                                        <br><br>
-                                        <ul>
-                                            <li>Trigger al pin digital (salida) GPIO16</li>
-                                            <li>Echo al pin digital (entrada) GPIO4</li>
-                                        </ul>
-                                        <br>
-                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_5_6_1.png" alt="Conexión 1 ejercicio 5.66." class="img-fluid icon-hover">
-                                        <br>
-                                    </li>
-                                    <li>Abrir Thonny y crear un nuevo archivo .py.</li>
-                                    <li>
-                                        Implementar la función <em>distancia(TRIG, ECHO)</em> que envía un pulso de <em>10 µs</em> y 
-                                        mide el tiempo de respuesta.
-                                    </li>
-                                    <li>Convertir el tiempo medido en distancia usando la velocidad del sonido (<em>340 m/s</em>).</li>
-                                    <li>
-                                        Mostrar continuamente las mediciones en consola.
-                                        <br><br>
+<p><strong>Procedimiento.</strong></p>
+<p>
+    <ol>
+        <li>
+            Conectar el sensor HC-SR04 al ESP32:
+            <br><br>
+            <ul>
+                <li>Trigger al pin digital (salida) GPIO16</li>
+                <li>Echo al pin digital (entrada) GPIO4</li>
+            </ul>
+            <br>
+            <img style="display: block;margin: auto;width: 35%;" src="./5_sensores/5_4_ultrasonido/img/conexion_5_6_1.png" alt="Conexión 1 ejercicio 5.66." class="img-fluid icon-hover">
+            <br>
+        </li>
+        <li>Abrir Thonny y crear un nuevo archivo .py.</li>
+        <li>
+            Implementar la función <em>distancia(TRIG, ECHO)</em> que envía un pulso de <em>10 µs</em> y 
+            mide el tiempo de respuesta.
+        </li>
+        <li>Convertir el tiempo medido en distancia usando la velocidad del sonido (<em>340 m/s</em>).</li>
+        <li>
+            Mostrar continuamente las mediciones en consola.
+            <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
 <span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
@@ -126,46 +78,19 @@ ECHO = machine.Pin(<span style="color: #B452CD">4</span>, machine.Pin.IN)
     <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Distancia: &quot;</span>, dis)
     time.sleep_ms(<span style="color: #B452CD">300</span>)  <span style="color: #228B22"># Espera 300 milisegundos antes de enviar pulsos</span>
 </pre></div>
-                                        <br>
-                                    </li>
-                                </ol>
-                            </p>
-                            <p><strong>Actividades sugeridas.</strong></p>
-                            <p>
-                                <ul>
-                                    <li>Mostrar la distancia medida en una pantalla LCD1602.</li>
-                                    <li>Activar un zumbador si la distancia es menor a un valor umbral.</li>
-                                    <li>
-                                        Cambiar el tiempo de espera <em>time.sleep_ms(300)</em> para ajustar la frecuencia de medición.
-                                    </li>
-                                    <li>Medir la distancia de diferentes objetos y registrar las variaciones.</li>
-                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
-                                </ul>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_micropython/contenido/5_sensores/5_4_ultrasonido/" class="btn btn-neutral float-left" title="Uso de sensor de ultrasonido" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_micropython/contenido/5_sensores/5_4_ultrasonido/ejercicio_5_7.html" class="btn btn-neutral float-right" title="Ejercicio 5-7: Alarma por proximidad con HC-SR04" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+            <br>
+        </li>
+    </ol>
+</p>
+<p><strong>Actividades sugeridas.</strong></p>
+<p>
+    <ul>
+        <li>Mostrar la distancia medida en una pantalla LCD1602.</li>
+        <li>Activar un zumbador si la distancia es menor a un valor umbral.</li>
+        <li>
+            Cambiar el tiempo de espera <em>time.sleep_ms(300)</em> para ajustar la frecuencia de medición.
+        </li>
+        <li>Medir la distancia de diferentes objetos y registrar las variaciones.</li>
+        <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+    </ul>
+</p>

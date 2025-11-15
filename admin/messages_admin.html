@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Cabeceras y scripts -->
+    <script src="/js/load_html_created.js" defer></script>
+    <script src="/admin/js/logout_admin.js" defer></script>
+    <script src="/admin/js/messages_admin.js" defer></script>
+
+    <!-- Librerías -->
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>Mensajes de Contacto - Panel Admin</title>
+
+    <style>
+        body.protegido { display: none; }
+        table td { vertical-align: middle !important; }
+        .message-body {
+            max-width: 350px;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+        }
+        .unread-row {
+            background: #fff8e1 !important;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="all">
+
+        <header id="header-comm-container"></header>
+        <header id="header-nav-main-container"></header>
+
+        <main>
+            <div class="main">
+                <div class="div-content">
+
+                    <div id="content-curso">
+
+                        <div id="heading-breadcrumbs">
+                            <div class="row">
+                                <h1>Mensajes de Contacto</h1>
+                                <button class="btn btn-neutral float-right" onclick="cerrarSesionAdmin()">Cerrar sesión</button>
+                            </div>
+                        </div>
+
+                        <div role="navigation" aria-label="Page navigation">
+                            <ul class="wy-breadcrumbs" id="breadcrumbs">
+                                <li><a href="/admin/dashboard_admin.html">Dashboard</a></li>
+                                <li class="not-active">Mensajes</li>
+                            </ul>
+                            <hr>
+                        </div>
+
+                        <div id="content" style="padding-bottom: 40px">
+
+                            <!-- FILTROS -->
+                            <div class="row" style="margin-bottom: 20px;">
+
+                                <div class="col-md-3">
+                                    <label><strong>Buscar:</strong></label>
+                                    <input id="search-input" type="text" class="form-control"
+                                           placeholder="Buscar por nombre, correo o mensaje...">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label><strong>Motivo:</strong></label>
+                                    <select id="filter-subject" class="form-control">
+                                        <option value="">Todos</option>
+                                        <option value="soporte">Soporte</option>
+                                        <option value="información">Información</option>
+                                        <option value="cotización">Cotización</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label><strong>Fecha desde:</strong></label>
+                                    <input id="filter-date-from" type="date" class="form-control">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label><strong>Fecha hasta:</strong></label>
+                                    <input id="filter-date-to" type="date" class="form-control">
+                                </div>
+
+                            </div>
+
+                            <div id="messages-container">
+                                <p>Cargando mensajes...</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer" id="footer-main-container"></footer>
+        <div class="copyright" id="footer-copyright-container"></div>
+
+    </div>
+</body>
+
+</html>

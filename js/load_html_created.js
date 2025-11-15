@@ -7,15 +7,6 @@ function loadNavigation() {
     document.head.innerHTML += data;
   })
   .catch(error => console.error('Error al cargar las configuraciones en el head:', error));
-
-  fetch('/html/nav_curso_micropython.html')  // Cargar el archivo nav.html
-    .then(response => response.text())  // Convertir la respuesta a texto
-    .then(data => {
-      // Insertar el contenido de nav.html en el contenedor con el id 'sidebar-container'
-      // document.getElementById('aside-nav-curso-micropython-container').innerHTML = data;
-      document.getElementById('aside-nav-curso-micropython-container').insertAdjacentHTML('beforeend', data);
-    })
-    .catch(error => console.error('Error al cargar el panel de navegación:', error));
   
   fetch('/html/nav_header_main.html')  // Cargar el archivo nav.html
     .then(response => response.text())  // Convertir la respuesta a texto

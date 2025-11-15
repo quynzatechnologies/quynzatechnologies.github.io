@@ -165,7 +165,7 @@ function onMenuClick(e) {
 /* ============================================================
    5. Cargar lección dentro de #content
    ============================================================ */
-async function loadLesson(lessonId, pushState = true) {
+async function loadLesson(lessonId, pushState = true, anchorId = null) {
     const lesson = ID_TO_NODE[lessonId];
     if (!lesson) {
         console.error("Lección no encontrada:", lessonId);
@@ -194,12 +194,10 @@ async function loadLesson(lessonId, pushState = true) {
     activateContentLinks();
 
     if (anchorId) {
-        // intentar ir al anchor dentro del nuevo contenido
         const el = document.getElementById(anchorId);
         if (el) {
             el.scrollIntoView({ behavior: "smooth" });
         } else {
-            // si no existe el anchor, al inicio de la página
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
     } else {
@@ -359,31 +357,38 @@ window.onpopstate = function (event) {
    ============================================================ */
 function highlightActiveLesson(lessonId) {
 
-    // 1. Remover estados anteriores
-    document.querySelectorAll(".sidebar a.active").forEach(a => a.classList.remove("active"));
+    // 1. Quitar estados previos
+    document.querySelectorAll(".sidebar a.active")
+        .forEach(a => a.classList.remove("active"));
+
+    // 2. Cerrar TODO el árbol (aria + display)
     document.querySelectorAll(".sidebar li[aria-expanded]").forEach(li => {
         li.setAttribute("aria-expanded", "false");
+
+        const ul = li.querySelector(":scope > ul");
+        if (ul) ul.style.display = "none";
     });
 
-    // 2. Marcar <a> activo
+    // 3. Marcar activo
     const activeLink = document.querySelector(`.sidebar a[data-lesson="${lessonId}"]`);
     if (!activeLink) return;
     activeLink.classList.add("active");
 
-    // 3. Abrir todos los ancestros
-    let currentLi = activeLink.parentElement;  // <li>
-    while (currentLi && currentLi.classList.contains("toctree-l1") === false) {
-        if (currentLi.tagName.toLowerCase() === "li") {
-            currentLi.setAttribute("aria-expanded", "true");
-        }
+    // 4. Subir abriendo TODOS los ancestros
+    let currentLi = activeLink.parentElement;
+
+    while (currentLi && currentLi.tagName.toLowerCase() === "li") {
+        currentLi.setAttribute("aria-expanded", "true");
+
+        // Abrir su <ul> interno si lo tiene
+        const innerUl = currentLi.querySelector(":scope > ul");
+        if (innerUl) innerUl.style.display = "block";
+
+        // Subir al padre LI
         currentLi = currentLi.parentElement.closest("li");
     }
-
-    // 4. El nivel 1 siempre se abre
-    if (currentLi && currentLi.tagName.toLowerCase() === "li") {
-        currentLi.setAttribute("aria-expanded", "true");
-    }
 }
+
 
 /* ============================================================
    Convertir <a data-lesson=""> en enlaces SPA

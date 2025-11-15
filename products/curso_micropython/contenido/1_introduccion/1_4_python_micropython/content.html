@@ -1,0 +1,71 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 1.4. Introducción a Python y MicroPython</h1>
+<p>
+    <strong>Python</strong> es un lenguaje de programación de alto nivel, interpretado y de propósito general, 
+    diseñado para ser legible y fácil de aprender. Su sintaxis clara y estructurada permite que incluso 
+    principiantes puedan desarrollar programas funcionales en poco tiempo. Python se utiliza en una gran 
+    variedad de áreas, incluyendo desarrollo web, ciencia de datos, inteligencia artificial, automatización 
+    e Internet de las Cosas (IoT).
+</p>
+
+<img style="display: block;margin: auto;width: 20%;" src="./1_introduccion/1_4_python_micropython/img/logo_python.png" alt="Logo Python" class="img-fluid icon-hover">
+
+<p>Entre sus características más destacadas se encuentran:</p>
+
+<p>
+    <ul>
+        <li><strong>Sintaxis clara y simple:</strong> reduce la cantidad de código necesario para realizar una tarea.</li>
+        <li><strong>Tipado dinámico:</strong> no es necesario declarar explícitamente el tipo de una variable.</li>
+        <li><strong>Multiplataforma:</strong> funciona en Windows, macOS, Linux y otros sistemas.</li>
+        <li><strong>Extensible:</strong> permite incorporar bibliotecas y librerías para ampliar sus capacidades.</li>
+    </ul>
+</p>
+
+<img style="display: block;margin: auto;width: 50%;" src="./1_introduccion/1_4_python_micropython/img/aplicaciones_python.png" alt="Aplicaciones de Python" class="img-fluid icon-hover">
+
+<p>
+    En Python, todo se basa en <strong>objetos</strong>: números, cadenas de texto, listas y otros elementos 
+    se manipulan mediante variables. Su diseño fomenta la escritura de código claro y ordenado, con una 
+    estructura que depende del uso correcto de indentación (espacios o tabulaciones al inicio de las líneas) 
+    en lugar de llaves {} u otros delimitadores.
+</p>
+
+<p>
+    <strong>MicroPython</strong>, por su parte, es una implementación ligera de Python especialmente 
+    optimizada para ejecutarse en microcontroladores y dispositivos con recursos limitados, como el 
+    <strong>ESP32</strong>. Mantiene gran parte de la sintaxis y funcionalidades básicas de Python, pero está 
+    adaptado para trabajar con hardware directamente (pines, protocolos de comunicación, temporizadores, etc.).
+</p>
+
+<img style="display: block;margin: auto;width: 40%;" src="./1_introduccion/1_4_python_micropython/img/logo_micropython.png" alt="Logo Micropython" class="img-fluid icon-hover">
+
+<p>Diferencias clave entre Python y MicroPython:</p>
+
+<p>
+    <ul>
+        <li>Alcance: Python completo se usa en entornos con mayores recursos, MicroPython está pensado para sistemas embebidos.</li>
+        <li>Librerías: MicroPython incluye librerías específicos para control de hardware (machine, network, etc.), pero no incorpora todas las librerías estándar de Python.</li>
+        <li>Memoria y velocidad: MicroPython está optimizado para ocupar poca memoria y ejecutarse con rapidez en hardware reducido.</li>
+    </ul>
+</p>
+
+<p>En este curso, utilizaremos Thonny IDE como entorno de desarrollo, lo que nos permitirá:</p>
+
+<p>
+    <ul>
+        <li>Escribir y ejecutar programas directamente en el ESP32.</li>
+        <li>Guardar scripts en el dispositivo para funcionamiento autónomo.</li>
+        <li>Probar fragmentos de código en consola interactiva (REPL).</li>
+    </ul>
+</p>
+
+<p>
+    Comprender las bases de Python y cómo se adaptan en MicroPython es esencial para aprovechar el ESP32 en 
+    proyectos de control, monitoreo e IoT.
+</p>

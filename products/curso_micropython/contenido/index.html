@@ -2,27 +2,40 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
     <script src="/js/load_html_created.js" defer></script>
     <script src="/js/logout_micropython.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
     <script src="/js/sidebar_nav.js"></script>
-    
-    <title>Curso de Programación en Micropython</title>
+    <script src="/js/loader_micropython.js" defer></script>
+
+    <title>Curso de Programación en MicroPython</title>
+
+    <style>
+        body.protegido { 
+            display: none; 
+        }
+    </style>
+    <script>
+        document.documentElement.classList.add("protegido-root");
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.add("protegido");
+        });
+    </script>
 </head>
 
 <body>
     <div id="all">
         <header id="header-comm-container"></header>
-
         <header id="header-nav-main-container"></header>
 
-		<main>
-			<div class="main">
+        <main>
+            <div class="main">
                 <div class="div-content">
                     <button id="toggle-sidebar-micropython">☰ Menú</button>
                     <div id="aside-nav-curso-micropython-container"></div>
@@ -30,72 +43,36 @@
                     <div id="content-curso">
                         <div id="heading-breadcrumbs">
                             <div class="row">
-                                <h1>Curso de Programación en Micropython</h1>
+                                <h1>Curso de Programación en MicroPython</h1>
                                 <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
                             </div>
                         </div>
 
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_iot/contenido/" class="not-active">Inicio</a>
-                                </li>
-                            </ul>
+                        <div role="navigation" aria-label="Page navigation">
+                            <ul class="wy-breadcrumbs" id="breadcrumbs"></ul>
                             <hr>
                         </div>
-                        
-                        <div id="content">
-                            <p>
-                                El <strong>ESP32</strong> es un microcontrolador versátil y de alto rendimiento, ampliamente utilizado en 
-                                proyectos de electrónica, automatización e <strong>Internet de las Cosas (IoT)</strong>. Su capacidad para 
-                                integrar conectividad <strong>WiFi y Bluetooth</strong> en un solo chip lo convierte en una plataforma 
-                                ideal para desarrollar aplicaciones que requieran comunicación inalámbrica y control en tiempo real.
-                            </p>
 
-                            <p>
-                                Este curso está diseñado para guiar paso a paso en el aprendizaje de 
-                                <strong>programación en MicroPython con ESP32</strong>, utilizando el <strong>entrenador QMT-020</strong> 
-                                como plataforma de experimentación. A través de una combinación de teoría, ejercicios prácticos y proyectos, 
-                                el estudiante adquirirá las competencias necesarias para:
-                            </p>
-
-                            <p>
-                                <ul>
-                                    <li>Comprender la arquitectura y funcionamiento del microcontrolador.</li>
-                                    <li>Configurar y utilizar el entorno de desarrollo <strong>Thonny</strong>.</li>
-                                    <li>Programar y controlar periféricos, sensores y actuadores.</li>
-                                    <li>Integrar hardware y software en aplicaciones prácticas de monitoreo y control.</li>
-                                </ul>
-                            </p>
-
-                            <p>
-                                El enfoque del curso está orientado a que el aprendizaje sea progresivo y aplicado, de manera que cada 
-                                módulo aporte herramientas concretas para el desarrollo de proyectos reales. Además, se fomenta la 
-                                comprensión de conceptos clave de programación, lógica de control y comunicación entre dispositivos, 
-                                buscando que el estudiante sea capaz de diseñar soluciones innovadoras en el ámbito de la electrónica y 
-                                la automatización.
-                            </p>
-
-                        </div>
+                        <div id="content"></div>
 
                         <footer class="btn-course">
                             <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_micropython/contenido/1_introduccion/" class="btn btn-neutral float-right" title="Introducción y fundamentos" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
+                            <div role="navigation" aria-label="Button navigation">
+                                <button id="btn-prev"
+                                        class="btn btn-neutral float-left"></button>
+
+                                <button id="btn-next"
+                                        class="btn btn-neutral float-right"></button>
                             </div>
                         </footer>
+
                     </div>
                 </div>
-			</div>
-		</main>
+            </div>
+        </main>
 
         <footer class="footer" id="footer-main-container"></footer>
-
         <div class="copyright" id="footer-copyright-container"></div>
     </div>
 </body>
-
 </html>

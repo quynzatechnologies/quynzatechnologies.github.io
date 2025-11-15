@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script src="/js/load_html_created.js" defer></script>
+    <script src="/admin/js/login_admin.js" defer></script>
+
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <title>Panel Administrador - Quynza</title>
+</head>
+
+<body>
+    <div id="all">
+        <!-- Header principal y navbar -->
+        <header id="header-comm-container"></header>
+        <header id="header-nav-main-container"></header>
+
+        <main>
+            <div class="content">
+                <section>
+                    <div id="heading-breadcrumbs">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>Panel de Administración</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div id="content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6" id="blog-post">
+
+                                    <h2>Inicio Sesión Administrador</h2>
+
+                                    <form id="login-admin-form">
+                                        <div class="textbox">
+                                            <input placeholder="Usuario" type="text" id="admin-usuario"
+                                                name="admin-usuario" required>
+                                        </div>
+
+                                        <div class="textbox">
+                                            <input placeholder="Contraseña" type="password" id="admin-contraseña"
+                                                name="admin-contraseña" required>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-neutral">Ingresar</button>
+                                    </form>
+
+                                    <p id="admin-login-error" style="color:red; margin-top:10px;"></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer" id="footer-main-container"></footer>
+        <div class="copyright" id="footer-copyright-container"></div>
+    </div>
+</body>
+</html>

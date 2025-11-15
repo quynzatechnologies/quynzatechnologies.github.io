@@ -1,92 +1,44 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_micropython.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<h1>Ejercicio 6-4: Control de LEDs RGB con pulsadores</h1>
+<p>
+    <strong>Objetivo.</strong> Usar combinaciones de presión de dos pulsadores para controlar el color de 
+    un LED RGB.
+</p>
 
-    <title>Ejercicio 6-4: Control de color en LEDs RGB mediante pulsadores</title>
-</head>
-
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
-
-        <header id="header-nav-main-container"></header>
-
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-micropython">☰ Menú</button>
-                    <div id="aside-nav-curso-micropython-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 6-4: Control de color en LEDs RGB mediante pulsadores</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/6_integracion/">6. Integración de sensores y actuadores</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/6_integracion/6_3_control_pulsadores/">6.3. Control de LEDs RGB con pulsadores</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/6_integracion/6_3_control_pulsadores/ejercicio_6_4.html" class="not-active">Ejercicio 6-4: Control de color en LEDs RGB mediante pulsadores</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <strong>Objetivo.</strong> Usar combinaciones de presión de dos pulsadores para controlar el color de 
-                                un LED RGB.
-                            </p>
-
-                            <p><strong>Procedimiento.</strong></p>
-                            <p>
-                                <ol>
-                                    <li>
-                                        Conectar dos pulsadores a los pines GPIO27 y GPIO18.
-                                        <br>
-                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_4_1.png" alt="Conexión 2 ejercicio 6.4." class="img-fluid icon-hover">
-                                        <br>
-                                    </li>
-                                    <li>
-                                        Conectar el LED RGB a los pines GPIO14 (rojo), GPIO12 (verde) y GPIO13 (azul) mediante 
-                                        resistencias limitadoras.
-                                        <br>
-                                        <img style="display: block;margin: auto;width: 35%;" src="./img/conexion_6_4_2.png" alt="Conexión 1 ejercicio 6.4." class="img-fluid icon-hover">
-                                        <br>
-                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_6_4_1.png" alt="Foto ejercicio 6.4." class="img-fluid icon-hover">
-                                        <br>
-                                    </li>
-                                    <li>
-                                        Programar la lógica para que:
-                                        <br><br>
-                                        <ul>
-                                            <li>Solo pulsador 1 encendido → LED rojo.</li>
-                                            <li>Solo pulsador 2 encendido → LED verde.</li>
-                                            <li>Ambos pulsadores encendidos → LED azul.</li>
-                                            <li>Ninguno encendido → LED apagado.</li>
-                                        </ul>
-                                        <br>
+<p><strong>Procedimiento.</strong></p>
+<p>
+    <ol>
+        <li>
+            Conectar dos pulsadores a los pines GPIO27 y GPIO18.
+            <br>
+            <img style="display: block;margin: auto;width: 35%;" src="./6_integracion/6_3_control_pulsadores/img/conexion_6_4_1.png" alt="Conexión 2 ejercicio 6.4." class="img-fluid icon-hover">
+            <br>
+        </li>
+        <li>
+            Conectar el LED RGB a los pines GPIO14 (rojo), GPIO12 (verde) y GPIO13 (azul) mediante 
+            resistencias limitadoras.
+            <br>
+            <img style="display: block;margin: auto;width: 35%;" src="./6_integracion/6_3_control_pulsadores/img/conexion_6_4_2.png" alt="Conexión 1 ejercicio 6.4." class="img-fluid icon-hover">
+            <br>
+            <img style="display: block;margin: auto;width: 50%;" src="./6_integracion/6_3_control_pulsadores/img/foto_6_4_1.png" alt="Foto ejercicio 6.4." class="img-fluid icon-hover">
+            <br>
+        </li>
+        <li>
+            Programar la lógica para que:
+            <br><br>
+            <ul>
+                <li>Solo pulsador 1 encendido → LED rojo.</li>
+                <li>Solo pulsador 2 encendido → LED verde.</li>
+                <li>Ambos pulsadores encendidos → LED azul.</li>
+                <li>Ninguno encendido → LED apagado.</li>
+            </ul>
+            <br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">machine</span>
 <span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
@@ -137,48 +89,21 @@ during = <span style="color: #B452CD">0</span>
         time.sleep(<span style="color: #B452CD">0.5</span>)
 </pre>
 </div>
-                                        <br>
-                                    </li>
-                                </ol>
-                            </p>
+            <br>
+        </li>
+    </ol>
+</p>
 
-                            <p><strong>Actividades sugeridas.</strong></p>
-                            <p>
-                                <ul>
-                                    <li>Cambiar la combinación de pines y pulsadores usados.</li>
-                                    <li>
-                                        Modificar el código para que se utilicen tres pulsadores y asignar colores diferentes a cada 
-                                        combinación posible.
-                                    </li>
-                                    <li>Cambiar los tiempos de encendido y apagado.</li>
-                                    <li>Probar el código con pulsadores 2 y 4 en lugar de 1 y 3.</li>
-                                    <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
-                                </ul>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_micropython/contenido/6_integracion/6_3_control_pulsadores/" class="btn btn-neutral float-left" title="Control de LEDs RGB con pulsadores" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_micropython/contenido/6_integracion/6_4_control_remoto_leds/" class="btn btn-neutral float-right" title="Control remoto IR para manejo de LEDs y otras salidas" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p><strong>Actividades sugeridas.</strong></p>
+<p>
+    <ul>
+        <li>Cambiar la combinación de pines y pulsadores usados.</li>
+        <li>
+            Modificar el código para que se utilicen tres pulsadores y asignar colores diferentes a cada 
+            combinación posible.
+        </li>
+        <li>Cambiar los tiempos de encendido y apagado.</li>
+        <li>Probar el código con pulsadores 2 y 4 en lugar de 1 y 3.</li>
+        <li>Guardar el programa en el microcontrolador y ejecutarlo sin conexión al PC.</li>
+    </ul>
+</p>

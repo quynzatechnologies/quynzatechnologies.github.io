@@ -1,0 +1,102 @@
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
+
+<h1>Módulo 6. Integración de sensores y actuadores</h1>
+<p>
+	Duración estimada: 2 horas
+</p>
+
+<h2>Planteamiento general</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo general</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Combinar múltiples entradas y salidas para proyectos más complejos</td>
+			<td class="tg-cly1">Integra datos de sensores con el control de actuadores según condiciones predefinidas</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Metodología:</h2>
+<table class="table-objetive-module">
+	<thead>
+		<tr>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Objetivo específico</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Resultado de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Evidencias de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Actividades de aprendizaje</span></th>
+		<th class="tg-vyu2"><span style="font-weight:bold;">Link</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-cly1">Integrar sensores de proximidad y distancia con salidas visuales y sonoras</td>
+			<td class="tg-cly1">Combina datos del sensor IR y del sensor de ultrasonido para activar LEDs, zumbador y LCD en función de condiciones establecidas</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Script que active alarma visual y sonora al detectar obstáculos</li>
+					<li>Código que muestre distancia en LCD con alarma por umbral</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Práctica: detección de objeto con señal visual/sonora</li>
+					<li>Ejercicio: alarma por distancia configurable</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="6_1_obstaculos">6.1. Detección de obstáculos con alarma visual/sonora</a>
+                <br>
+                <a href="#" data-lesson="6_2_alarmas">6.2. Alarma por distancia con zumbador y LCD</a>
+            </td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Controlar actuadores mediante pulsadores y control remoto IR</td>
+			<td class="tg-cly1">Programa LEDs RGB con pulsadores y utiliza control remoto IR para manejar salidas múltiples</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Script de cambio de color en LED RGB mediante pulsadores</li>
+					<li>Código que asigne funciones a botones del control remoto</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Actividad: combinar pulsadores para producir colores específicos</li>
+					<li>Ejercicio: encender/apagar dispositivos con control remoto</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="6_3_control_pulsadores">6.3. Control de LEDs RGB con pulsadores</a>
+                <br>
+                <a href="#" data-lesson="6_4_control_remoto_leds">6.4. Control remoto IR para manejo de LEDs y otras salidas</a>
+            </td>
+		</tr>
+		<tr>
+			<td class="tg-cly1">Desarrollar ejercicios integrados de seguridad, monitoreo y control</td>
+			<td class="tg-cly1">Implementa sistemas que utilicen varios sensores y actuadores en conjunto para cumplir un propósito definido</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Proyecto integrador corto que combine sensores y actuadores</li>
+					<li>Documentación del montaje y código</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+				<ul>
+					<li>Práctica: sistema de seguridad con monitoreo de distancia y control remoto</li>
+				</ul>
+			</td>
+			<td class="tg-cly1">
+                <a href="#" data-lesson="6_5_ejercicios_combinados">6.5. Ejercicios combinados de seguridad, monitoreo y control</a>
+            </td>
+		</tr>
+	</tbody>
+</table>

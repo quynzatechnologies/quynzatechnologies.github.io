@@ -1,82 +1,34 @@
-<!DOCTYPE html>
-<html lang="es">
+<script>
+if (sessionStorage.getItem("logueado-micropython") !== "true") {
+    window.stop();
+    document.documentElement.innerHTML = "";
+}
+</script>
 
-<head>
-    <script src="/js/load_html_created.js" defer></script>
-    <script src="/js/logout_micropython.js" defer></script>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
-    <script src="/js/sidebar_nav.js"></script>
+<h1>Ejercicio 4-2: Encender LED externo con estructura while</h1>
+<p>
+    <strong>Objetivo.</strong> Aprender a cablear un pin de salida del microcontrolador y llevarlo a un pin 
+    de salida de los pines LEDs.  Ejecutar un programa en Micropython con el IDE Thonny y correrlo en el 
+    ambiente del entrenador QMT-020. 
+</p>
 
-    <title>Ejercicio 4-2: Encender LED externo con estructura while</title>
-</head>
-
-<body>
-    <div id="all">
-        <header id="header-comm-container"></header>
-
-        <header id="header-nav-main-container"></header>
-
-        <main>
-			<div class="main">
-                <div class="div-content">
-                    <button id="toggle-sidebar-micropython">☰ Menú</button>
-                    <div id="aside-nav-curso-micropython-container"></div>
-
-                    <div id="content-curso">
-                        <div id="heading-breadcrumbs">
-                            <div class="row">
-                                <h1>Ejercicio 4-2: Encender LED externo con estructura while</h1>
-                                <button id="cerrar-sesion" class="btn btn-neutral float-right" onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-                        </div>
-
-                        <div role="navegation" arial-label="Page navigation">
-                            <ul class="wy-breadcrumbs">
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/">Inicio</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/">4. Programación de actuadores</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/4_1_control_led_1/">4.1. Encendido y apagado de LEDs</a>
-                                </li>
-                                <li class="wy-li">
-                                    <a href="/products/curso_micropython/contenido/4_actuadores/4_1_control_led_1/ejercicio_4_2.html" class="not-active">Ejercicio 4-2: Encender LED externo con estructura while</a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div>
-                        
-                        <div id="content">
-                            <p>
-                                <strong>Objetivo.</strong> Aprender a cablear un pin de salida del microcontrolador y llevarlo a un pin 
-                                de salida de los pines LEDs.  Ejecutar un programa en Micropython con el IDE Thonny y correrlo en el 
-                                ambiente del entrenador QMT-020. 
-                            </p>
-
-                            <p><strong>Procedimiento.</strong></p>
-                            <p>
-                                <ol>
-                                    <li>
-                                        Conectar un cable desde el pin GPIO26 del microcontrolador al primer pin de los LEDs de salida 
-                                        (LED azul).
-                                        <br><br>
-                                        <img style="display: block;margin: auto;width: 50%;" src="./img/conexiones_4_2_1.png" alt="Conexion 1 ejercicio 4.2." class="img-fluid icon-hover">
-                                        <br>
-                                        <img style="display: block;margin: auto;width: 50%;" src="./img/foto_4_2_1.png" alt="Foto ejercicio 4.2." class="img-fluid icon-hover">
-                                        <br>
-                                    </li>
-                                    <li>Abrir Thonny e identificar que el microcontrolador esté conectado correctamente.</li>
-                                    <li>Crear un nuevo archivo en Thonny y escribir el código mostrado a continuación.</li>
-                                    <li>
-                                        Ejecutar el programa y observar el parpadeo del LED.
-                                        <br><br>
+<p><strong>Procedimiento.</strong></p>
+<p>
+    <ol>
+        <li>
+            Conectar un cable desde el pin GPIO26 del microcontrolador al primer pin de los LEDs de salida 
+            (LED azul).
+            <br><br>
+            <img style="display: block;margin: auto;width: 50%;" src="./4_actuadores/4_1_control_led_1/img/conexiones_4_2_1.png" alt="Conexion 1 ejercicio 4.2." class="img-fluid icon-hover">
+            <br>
+            <img style="display: block;margin: auto;width: 50%;" src="./4_actuadores/4_1_control_led_1/img/foto_4_2_1.png" alt="Foto ejercicio 4.2." class="img-fluid icon-hover">
+            <br>
+        </li>
+        <li>Abrir Thonny e identificar que el microcontrolador esté conectado correctamente.</li>
+        <li>Crear un nuevo archivo en Thonny y escribir el código mostrado a continuación.</li>
+        <li>
+            Ejecutar el programa y observar el parpadeo del LED.
+            <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #228B22"># Ejercicio 15: “Encender LED externo con estructura while”</span>
 <span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">time</span>
@@ -91,44 +43,17 @@ led=Pin(<span style="color: #B452CD">26</span>, Pin.OUT) <span style="color: #22
   time.sleep(<span style="color: #B452CD">1.5</span>)
 </pre>
 </div>
-                                    </li>
-                                </ol>
-                            </p>
+        </li>
+    </ol>
+</p>
 
-                            <p><strong>Actividades sugeridas.</strong></p>
-                            <p>
-                                <ul>
-                                    <li>Observar la ejecución del programa y anotar el tiempo de encendido y apagado del LED.</li>
-                                    <li>Disminuir el tiempo de parpadeo del LED.</li>
-                                    <li>Aumentar el tiempo de parpadeo del LED.</li>
-                                    <li>Guarde el programa en la carpeta.</li>
-                                    <li>Guarde el programa en el microcontrolador.</li>
-                                </ul>
-                            </p>
-                        </div>
-
-                        <footer class="btn-course">
-                            <hr>
-                            <div role="navegation" arial-label="Button navigation">
-                                <a href="/products/curso_micropython/contenido/4_actuadores/4_1_control_led_1/ejercicio_4_1.html" class="btn btn-neutral float-left" title="Ejercicio 4-1: Control del LED interno del ESP32" accesskey="p" rel="prev">
-                                    <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
-                                    Anterior
-                                </a>
-                                <a href="/products/curso_micropython/contenido/4_actuadores/4_1_control_led_1/ejercicio_4_3.html" class="btn btn-neutral float-right" title="Ejercicio 4-3: Encender y apagar LEDs externos" accesskey="n" rel="next">
-                                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
-                                    Siguiente
-                                </a>
-                            </div>
-                        </footer>
-                    </div>
-                    </div>
-                </div>
-			</div>
-		</main>
-
-        <footer class="footer" id="footer-main-container"></footer>
-
-        <div class="copyright" id="footer-copyright-container"></div>
-    </div>
-</body>
-</html>
+<p><strong>Actividades sugeridas.</strong></p>
+<p>
+    <ul>
+        <li>Observar la ejecución del programa y anotar el tiempo de encendido y apagado del LED.</li>
+        <li>Disminuir el tiempo de parpadeo del LED.</li>
+        <li>Aumentar el tiempo de parpadeo del LED.</li>
+        <li>Guarde el programa en la carpeta.</li>
+        <li>Guarde el programa en el microcontrolador.</li>
+    </ul>
+</p>

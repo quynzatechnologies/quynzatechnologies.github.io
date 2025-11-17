@@ -18,15 +18,13 @@ if (sessionStorage.getItem("logueado-micropython") !== "true") {
             <strong>Listas (<em>list</em>)</strong>
             <br><br>
             Son colecciones <em>ordenadas</em> y modificables que pueden contener elementos de diferentes tipos.
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>colores = [<span style="color: #CD5555">&quot;rojo&quot;</span>, <span style="color: #CD5555">&quot;verde&quot;</span>, <span style="color: #CD5555">&quot;azul&quot;</span>]
-<span style="color: #658B00">print</span>(colores[<span style="color: #B452CD">0</span>])   <span style="color: #228B22"># Acceder al primer elemento</span>
-colores.append(<span style="color: #CD5555">&quot;amarillo&quot;</span>)  <span style="color: #228B22"># Agregar un elemento</span>
-<span style="color: #658B00">print</span>(colores[<span style="color: #B452CD">3</span>])   <span style="color: #228B22"># Acceder al cuarto elemento</span>
-</pre>
-</div>
             <br>
+<div class="ide-python">
+colores = ["rojo", "verde", "azul"]
+print(colores[0])   # Acceder al primer elemento
+colores.append("amarillo")  # Agregar un elemento
+print(colores[3])   # Acceder al cuarto elemento
+</div>
             <ul>
                 <li>Se accede a los elementos mediante índices (comenzando desde 0).</li>
                 <li>Se pueden modificar, añadir o eliminar elementos.</li>
@@ -38,13 +36,11 @@ colores.append(<span style="color: #CD5555">&quot;amarillo&quot;</span>)  <span 
             <strong>Tuplas (<em>tuple</em>)</strong>
             <br><br>
             Son colecciones <strong>ordenadas</strong> pero inmutables.
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>dimensiones = (<span style="color: #B452CD">640</span>, <span style="color: #B452CD">480</span>)
-<span style="color: #658B00">print</span>(dimensiones[<span style="color: #B452CD">0</span>])
-</pre>
-</div>
             <br>
+<div class="ide-python">
+dimensiones = (640, 480)
+print(dimensiones[0])
+</div>
             <ul>
                 <li>No se pueden modificar después de creadas.</li>
                 <li>Útiles para almacenar datos que no deben cambiar, como configuraciones fijas.</li>
@@ -55,13 +51,11 @@ colores.append(<span style="color: #CD5555">&quot;amarillo&quot;</span>)  <span 
             <strong>Diccionarios (<em>dict</em>)</strong>
             <br><br>
             Almacenan datos en forma de <strong>clave-valor</strong>.
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>sensor = {<span style="color: #CD5555">&quot;tipo&quot;</span>: <span style="color: #CD5555">&quot;DHT11&quot;</span>, <span style="color: #CD5555">&quot;temperatura&quot;</span>: <span style="color: #B452CD">25</span>, <span style="color: #CD5555">&quot;humedad&quot;</span>: <span style="color: #B452CD">60</span>}
-<span style="color: #658B00">print</span>(sensor[<span style="color: #CD5555">&quot;temperatura&quot;</span>])
-</pre>
-</div>
             <br>
+<div class="ide-python">
+sensor = {"tipo": "DHT11", "temperatura": 25, "humedad": 60}
+print(sensor["temperatura"])
+</div>
             <ul>
                 <li>Permiten acceso rápido a los datos mediante la clave.</li>
                 <li>Son útiles para representar objetos o configuraciones.</li>
@@ -72,14 +66,12 @@ colores.append(<span style="color: #CD5555">&quot;amarillo&quot;</span>)  <span 
             <strong>Cadenas (<em>str</em>)</strong>
             <br><br>
             Son secuencias de caracteres que pueden manipularse como listas.
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>mensaje = <span style="color: #CD5555">&quot;ESP32&quot;</span>
-<span style="color: #658B00">print</span>(mensaje[<span style="color: #B452CD">0</span>])  <span style="color: #228B22"># &#39;E&#39;</span>
-<span style="color: #658B00">print</span>(<span style="color: #658B00">len</span>(mensaje))  <span style="color: #228B22"># Longitud</span>
-</pre>
-</div>
             <br>
+<div class="ide-python">
+mensaje = "ESP32"
+print(mensaje[0])  # 'E'
+print(len(mensaje))  # Longitud
+</div>
         </li>
         <li>
             <strong>Operadores y funciones comunes en colecciones</strong>
@@ -92,13 +84,14 @@ colores.append(<span style="color: #CD5555">&quot;amarillo&quot;</span>)  <span 
             </ul>
             <br>
             <u>Ejemplo de uso de operadores:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&quot;rojo&quot;</span> <span style="color: #8B008B">in</span> colores:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;El color rojo está en la lista&quot;</span>)
-</pre>
-</div>
             <br>
+<div class="ide-python">
+colores = ["rojo", "verde", "azul"]
+if "rojo" in colores:
+    print("El color rojo está en la lista")
+if "negro" in colores:
+    print("El color negro está en la lista")
+</div>
         </li>
         <li>
             <strong>Aplicación práctica en ESP32</strong>

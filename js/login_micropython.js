@@ -1,17 +1,20 @@
+$(document).ready(function () {
 
-
-$(document).ready(function(){
-    // Verificar si ya está logueado
-    window.addEventListener('DOMContentLoaded', function() {
+    /* ============================================================
+       AUTO-REDIRECCIÓN SI YA ESTÁ LOGUEADO (CURSO MICROPYTHON)
+       ============================================================ */
+    window.addEventListener("DOMContentLoaded", function () {
         const logueado = sessionStorage.getItem("logueado-micropython");
         if (logueado === "true") {
-            // Si ya está logueado, redirigir directo al curso
             window.location.href = "/products/curso_micropython/contenido/";
         }
     });
 
-    // --- LOGIN ---
-    $("#login-form-micropython").on("submit", async function(e){
+
+    /* ============================================================
+       LOGIN DE USUARIO (CURSO MICROPYTHON)
+       ============================================================ */
+    $("#login-form-micropython").on("submit", async function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -25,6 +28,7 @@ $(document).ready(function(){
                 body: JSON.stringify({ username, password })
             });
 
+            // Parsear JSON
             const text = await res.text();
             let data;
             try {
@@ -34,16 +38,26 @@ $(document).ready(function(){
             }
 
             if (res.ok) {
-                // Guardar estado de login en sessionStorage
+
+                // --------------------------------------------------------
+                // Guardar información de usuario SOLO para este curso
+                // --------------------------------------------------------
+                sessionStorage.setItem("micropython_user_id", data.user.id);
+                sessionStorage.setItem("micropython_username", data.user.username);
+
+                // Marcador de login por curso
                 sessionStorage.setItem("logueado-micropython", "true");
+
                 alert("Inicio de sesión exitoso");
 
-                // Redirigir al curso
+                // Redirigir directamente al contenido
                 window.location.href = "/products/curso_micropython/contenido/";
-            } else {
-                alert((data.error || "Error en inicio de sesión"));
             }
-        } catch(err) {
+            else {
+                alert(data.error || "Error en inicio de sesión");
+            }
+
+        } catch (err) {
             console.error("Error en fetch:", err);
             alert("Error de red al iniciar sesión");
         }
@@ -51,11 +65,14 @@ $(document).ready(function(){
         return false;
     });
 
-    // --- REGISTRO ---
-    $("#register-form").on("submit", async function(e){
-        e.preventDefault(); 
+
+    /* ============================================================
+       REGISTRO DE NUEVO USUARIO
+       ============================================================ */
+    $("#register-form").on("submit", async function (e) {
+        e.preventDefault();
         e.stopImmediatePropagation();
-        
+
         const code = $("#code").val();
         const username = $("#new-usuario").val();
         const password = $("#new-contraseña").val();
@@ -80,11 +97,13 @@ $(document).ready(function(){
             } else {
                 alert("❌ " + (data.error || "Error al registrar usuario"));
             }
-        } catch(err) {
+        }
+        catch (err) {
             console.error("Error en fetch:", err);
             alert("Error de red al registrar usuario");
         }
 
         return false;
     });
+
 });

@@ -44,37 +44,31 @@ if (sessionStorage.getItem("logueado-micropython") !== "true") {
             </ul>
             <br>
             <u>Ejemplo básico:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">saludar</span>():
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Hola desde la función&quot;</span>)
+            <br>
+<div class="ide-python">
+def saludar():
+    print("Hola desde la función")
 
 saludar()
-</pre>
 </div>
-            <br>
             <u>Ejemplo con parámetros:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">sumar</span>(a, b):
+            <br>
+<div class="ide-python">
+def sumar(a, b):
     resultado = a + b
-    <span style="color: #8B008B; font-weight: bold">return</span> resultado
+    return resultado
 
-<span style="color: #658B00">print</span>(sumar(<span style="color: #B452CD">5</span>, <span style="color: #B452CD">3</span>))  <span style="color: #228B22"># Imprime 8</span>
-</pre>
+print(sumar(5, 3))  # Imprime 8
 </div>
-            <br>
             <u>Ejemplo con valor de retorno:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #008B45">convertir_a_fahrenheit</span>(celsius):
-    <span style="color: #8B008B; font-weight: bold">return</span> (celsius * <span style="color: #B452CD">9</span>/<span style="color: #B452CD">5</span>) + <span style="color: #B452CD">32</span>
-
-temp_f = convertir_a_fahrenheit(<span style="color: #B452CD">25</span>)
-<span style="color: #658B00">print</span>(temp_f)
-</pre>
-</div>
             <br>
+<div class="ide-python">
+def convertir_a_fahrenheit(celsius):
+    return (celsius * 9/5) + 32
+
+temp_f = convertir_a_fahrenheit(25)
+print(temp_f)
+</div>
         </li>
         <li>
             <strong>Librerías en Python</strong>
@@ -87,21 +81,17 @@ temp_f = convertir_a_fahrenheit(<span style="color: #B452CD">25</span>)
             </ul>
             <br>
             <u>Ejemplo de importación de librerías:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">math</span>
-<span style="color: #658B00">print</span>(math.sqrt(<span style="color: #B452CD">16</span>))  <span style="color: #228B22"># Raíz cuadrada</span>
-</pre>
-</div>
             <br>
-            <u>Ejemplo de importación selectiva::</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #008B45; text-decoration: underline">math</span><span style="color: #BBB"> </span><span style="color: #8B008B; font-weight: bold">import</span> sqrt
-<span style="color: #658B00">print</span>(sqrt(<span style="color: #B452CD">16</span>))
-</pre>
+<div class="ide-python">
+import math
+print(math.sqrt(16))  # Raíz cuadrada
 </div>
-                <br>
+            <u>Ejemplo de importación selectiva::</u>
+            <br>
+<div class="ide-python">
+from math import sqrt
+print(sqrt(16))
+</div>
             </li>
             <li>
                 <strong>Librerías en Micropython</strong>

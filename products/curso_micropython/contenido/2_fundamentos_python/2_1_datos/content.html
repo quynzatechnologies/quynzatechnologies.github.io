@@ -18,15 +18,13 @@ if (sessionStorage.getItem("logueado-micropython") !== "true") {
             <strong>Asignación de variables</strong>
             <br>
             La asignación de una variable se realiza con el operador =:
-<br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>x = <span style="color: #B452CD">5</span>         <span style="color: #228B22"># Entero (int)</span>
-y = <span style="color: #B452CD">3.14</span>      <span style="color: #228B22"># Número decimal (float)</span>
-nombre = <span style="color: #CD5555">&quot;Ana&quot;</span> <span style="color: #228B22"># Cadena de texto (string)</span>
-activo = <span style="color: #8B008B; font-weight: bold">True</span>  <span style="color: #228B22"># Valor lógico (boolean)</span>
-</pre>
+
+<div class="ide-python">
+x = 5           # Entero (int)
+y = 3.14        # Número decimal (float)
+nombre = "Ana"  # Cadena de texto (string)
+activo = True   # Valor lógico (boolean)
 </div>
-            <br>
         </li>
         <li>
             <strong>Objetos e identificadores</strong>
@@ -40,15 +38,14 @@ activo = <span style="color: #8B008B; font-weight: bold">True</span>  <span styl
                     Un alias ocurre cuando dos variables apuntan al mismo objeto en memoria.
                 </li>
             </ul>
-<br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>a = [<span style="color: #B452CD">1</span>, <span style="color: #B452CD">2</span>, <span style="color: #B452CD">3</span>]
-b = a  <span style="color: #228B22"># b es un alias de a</span>
-</pre></div>
-<br>
+
+<div class="ide-python">
+a = [1, 2, 3]
+b = a           # b es un alias de a
+</div>
             Modificar <em>a</em> también modifica <em>b</em> porque ambos apuntan a la misma lista. Sin 
             embargo, al modificar <em>b</em> deja de ser un alias de <em>a</em>.
-            <br>
+            <br><br>
         </li>
         <li>
             <strong>Tipos de datos básicos en Python</strong>
@@ -95,13 +92,12 @@ b = a  <span style="color: #228B22"># b es un alias de a</span>
             <strong>Conversión de tipos</strong>
             <br>
             En ocasiones, es necesario convertir un valor de un tipo a otro:
-<br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>x = <span style="color: #CD5555">&quot;25&quot;</span>
-y = <span style="color: #658B00">int</span>(x)   <span style="color: #228B22"># Convierte la cadena &quot;25&quot; en entero 25</span>
-z = <span style="color: #658B00">float</span>(x) <span style="color: #228B22"># Convierte la cadena &quot;25&quot; en flotante 25.0</span>
-</pre></div>
-            <br>
+<br>
+<div class="ide-python">
+x = "25"
+y = int(x)   # Convierte la cadena "25" en entero 25
+z = float(x) # Convierte la cadena "25" en flotante 25.0
+</div>
         </li>
         <li>
             <strong>Importancia en MicroPython</strong>

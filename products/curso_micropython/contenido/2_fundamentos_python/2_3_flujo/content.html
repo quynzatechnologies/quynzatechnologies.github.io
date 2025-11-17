@@ -21,18 +21,15 @@ if (sessionStorage.getItem("logueado-micropython") !== "true") {
             repeticiones automáticas.
             <br><br>
             <u>Ejemplo:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Inicio del programa&quot;</span>)
-x = <span style="color: #B452CD">5</span>
-y = <span style="color: #B452CD">10</span>
-suma = x + y
-<span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;La suma es:&quot;</span>, suma)
-<span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Fin del programa&quot;</span>)
-</pre>
-</div>
-
             <br>
+<div class="ide-python">
+print("Inicio del programa")
+x = 5
+y = 10
+suma = x + y
+print("La suma es:", suma)
+print("Fin del programa")
+</div>
             En este caso, cada línea se ejecuta en orden:
             <br><br>
             <ol>
@@ -59,36 +56,32 @@ suma = x + y
             </ul>
             <br>
             <u>Ejemplo básico con if:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>temperatura = <span style="color: #B452CD">25</span>
-<span style="color: #8B008B; font-weight: bold">if</span> temperatura &gt; <span style="color: #B452CD">30</span>:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Hace calor&quot;</span>)
-</pre>
-</div>
             <br>
+<div class="ide-python">
+temperatura = 25
+if temperatura > 30:
+    print("Hace calor")
+</div>
             <u>Ejemplo con if - else:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">if</span> temperatura &gt; <span style="color: #B452CD">30</span>:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Hace calor&quot;</span>)
-<span style="color: #8B008B; font-weight: bold">else</span>:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Temperatura agradable&quot;</span>)
-</pre>
-</div>
             <br>
+<div class="ide-python">
+temperatura = 25
+if temperatura > 30:
+    print("Hace calor")
+else:
+    print("Temperatura agradable")
+</div>
             <u>Ejemplo con if - elif - else:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">if</span> temperatura &gt; <span style="color: #B452CD">30</span>:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Hace calor&quot;</span>)
-<span style="color: #8B008B; font-weight: bold">elif</span> temperatura &lt; <span style="color: #B452CD">15</span>:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Hace frío&quot;</span>)
-<span style="color: #8B008B; font-weight: bold">else</span>:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Temperatura agradable&quot;</span>)
-</pre>
-</div>
             <br>
+<div class="ide-python">
+temperatura = 20
+if temperatura > 30:
+    print("Hace calor")
+elif temperatura < 15:
+    print("Hace frío")
+else:
+    print("Temperatura agradable")
+</div>
         </li>
         <li>
             <strong>Estructuras repetitivas (ciclos)</strong>
@@ -123,13 +116,11 @@ suma = x + y
                     </ul>
                     <br>
                     <u>Ejemplo 1 con ciclo for:</u>
-                    <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">5</span>):
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Número:&quot;</span>, i)
-</pre>
-</div>
                     <br>
+<div class="ide-python">
+for i in range(5):
+    print("Número:", i)
+</div>
                     <u>Ejemplo 2 con ciclo for:</u>
                     <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -164,16 +155,13 @@ suma = x + y
                     <br>
 
                     <u>Ejemplo 1 con ciclo while:</u>
-                    <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>contador = <span style="color: #B452CD">1</span>
-<span style="color: #8B008B; font-weight: bold">while</span> contador &lt;= <span style="color: #B452CD">5</span>:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Número:&quot;</span>, contador)
-    contador += <span style="color: #B452CD">1</span>
-</pre>
-</div>
                     <br>
-
+<div class="ide-python">
+contador = 1
+while contador <= 5:
+    print("Número:", contador)
+    contador += 1
+</div>
                     <u>Ejemplo 2 con ciclo while:</u>
                     <br><br>
 <div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -202,14 +190,13 @@ suma = x + y
             </ul>
             <br>
             <u>Ejemplo de control de flujo dentro de ciclos:</u>
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658B00">range</span>(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">6</span>):
-    <span style="color: #8B008B; font-weight: bold">if</span> i == <span style="color: #B452CD">3</span>:
-        <span style="color: #8B008B; font-weight: bold">continue</span>  <span style="color: #228B22"># Salta el número 3</span>
-    <span style="color: #658B00">print</span>(i)
-</pre></div>
             <br>
+<div class="ide-python">
+for i in range(1, 6):
+    if i == 3:
+        continue  # Salta el número 3
+    print(i)
+</div>
         </li>
         <li>
             <strong>Aplicación en MicroPython con ESP32</strong>

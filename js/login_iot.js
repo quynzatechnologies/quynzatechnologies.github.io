@@ -1,16 +1,20 @@
+$(document).ready(function () {
 
-$(document).ready(function(){
-    // Verificar si ya está logueado
-    window.addEventListener('DOMContentLoaded', function() {
+    /* ============================================================
+       AUTO-REDIRECCIÓN SI YA ESTÁ LOGUEADO
+       ============================================================ */
+    window.addEventListener("DOMContentLoaded", function () {
         const logueado = sessionStorage.getItem("logueado-iot");
         if (logueado === "true") {
-            // Si ya está logueado, redirigir directo al curso
             window.location.href = "/products/curso_iot/contenido/";
         }
     });
 
-    // --- LOGIN ---
-    $("#login-form-iot").on("submit", async function(e){
+
+    /* ============================================================
+       LOGIN DE USUARIO
+       ============================================================ */
+    $("#login-form-iot").on("submit", async function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -24,6 +28,7 @@ $(document).ready(function(){
                 body: JSON.stringify({ username, password })
             });
 
+            // Intentar parsear respuesta como JSON
             const text = await res.text();
             let data;
             try {
@@ -33,16 +38,26 @@ $(document).ready(function(){
             }
 
             if (res.ok) {
-                // Guardar estado de login en sessionStorage
+
+                // --------------------------------------------------------
+                // Guardar información del usuario SOLO para el curso IoT
+                // --------------------------------------------------------
+                sessionStorage.setItem("iot_user_id", data.user.id);
+                sessionStorage.setItem("iot_username", data.user.username);
+
+                // Marcador de login por curso
                 sessionStorage.setItem("logueado-iot", "true");
+
                 alert("Inicio de sesión exitoso");
 
-                // Redirigir al curso
+                // Redirigir al contenido del curso
                 window.location.href = "/products/curso_iot/contenido/";
-            } else {
-                alert((data.error || "Error en inicio de sesión"));
             }
-        } catch(err) {
+            else {
+                alert(data.error || "Error en inicio de sesión");
+            }
+
+        } catch (err) {
             console.error("Error en fetch:", err);
             alert("Error de red al iniciar sesión");
         }
@@ -50,11 +65,14 @@ $(document).ready(function(){
         return false;
     });
 
-    // --- REGISTRO ---
-    $("#register-form").on("submit", async function(e){
-        e.preventDefault(); 
+
+    /* ============================================================
+       REGISTRO DE NUEVO USUARIO
+       ============================================================ */
+    $("#register-form").on("submit", async function (e) {
+        e.preventDefault();
         e.stopImmediatePropagation();
-        
+
         const code = $("#code").val();
         const username = $("#new-usuario").val();
         const password = $("#new-contraseña").val();
@@ -79,11 +97,13 @@ $(document).ready(function(){
             } else {
                 alert("❌ " + (data.error || "Error al registrar usuario"));
             }
-        } catch(err) {
+        }
+        catch (err) {
             console.error("Error en fetch:", err);
             alert("Error de red al registrar usuario");
         }
 
         return false;
     });
+
 });

@@ -17,7 +17,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadCourseData();
     buildMappings();
     buildSidebar();
-    loadInitialLesson();
+
+    // 1. Inicializar progreso del curso MicroPython
+    const progreso = await ProgresoState.init("micropython", COURSE_DATA.estructura);
+
+    // 2. Mostrar ✔ de completadas en el menú
+    highlightCompletedLessons("micropython");
+
+    // 3. Cargar última lección vista si existe
+    if (progreso.ultima_leccion && ID_TO_NODE[progreso.ultima_leccion]) {
+        loadLesson(progreso.ultima_leccion, false);
+    } else {
+        loadInitialLesson();
+    }
 });
 
 
@@ -134,6 +146,7 @@ async function loadLesson(lessonId, pushState = true, anchorId = null) {
         const html = await fetch(`/products/curso_micropython/contenido/${lesson.archivo}`)
             .then(r => r.text());
         document.getElementById("content").innerHTML = html;
+        insertCompletionButton("micropython", lessonId);
     } catch (err) {
         console.error("Error cargando archivo:", err);
         document.getElementById("content").innerHTML = "<p>Error cargando contenido.</p>";
@@ -150,6 +163,7 @@ async function loadLesson(lessonId, pushState = true, anchorId = null) {
     updatePrevNext(lessonId);
     highlightActiveLesson(lessonId);
     activateContentLinks();
+    activarMiniIDEs();
 
     if (anchorId) {
         const el = document.getElementById(anchorId);
@@ -165,6 +179,50 @@ async function loadLesson(lessonId, pushState = true, anchorId = null) {
     if (pushState) {
         history.pushState({ lessonId }, "", `?lesson=${lessonId}`);
     }
+
+    // Registrar progreso
+    ProgresoState.onLessonChange("micropython", lessonId);
+
+    // Actualizar ✔ completadas
+    highlightCompletedLessons("micropython");
+}
+
+function insertCompletionButton(courseId, lessonId) {
+    const st = ProgresoState.getState(courseId);
+    const isCompleted = st?.completadas?.has(lessonId);
+
+    const contentDiv = document.getElementById("content");
+
+    // Eliminar botón previo si recargamos una lección
+    const oldBtn = document.getElementById("btn-completar");
+    if (oldBtn) oldBtn.remove();
+
+    const btn = document.createElement("button");
+    btn.id = "btn-completar";
+    btn.style.marginTop = "20px";
+    btn.className = "btn";
+
+    if (isCompleted) {
+        btn.textContent = "Completado ✔ (click para desmarcar)";
+        btn.style.backgroundColor = "#4CAF50";
+        btn.style.color = "white";
+    } else {
+        btn.textContent = "Marcar como completado";
+        btn.style.backgroundColor = "#e0e0e0";
+        btn.style.color = "#333";
+    }
+
+    btn.addEventListener("click", () => {
+        toggleCompletionState(courseId, lessonId);
+        insertCompletionButton(courseId, lessonId);
+        highlightCompletedLessons(courseId);
+    });
+
+    contentDiv.appendChild(btn);
+}
+
+function toggleCompletionState(courseId, lessonId) {
+    ProgresoState.toggleCompletado(courseId, lessonId);
 }
 
 
@@ -355,3 +413,117 @@ function activateContentLinks() {
         });
     });
 }
+
+/* ============================================================
+   12. Marcar lecciones completadas con ✔ en el menú
+   ============================================================ */
+function highlightCompletedLessons(courseId) {
+    const st = ProgresoState.getState(courseId);
+    if (!st) return;
+
+    // Quitar ✔ previos
+    document.querySelectorAll(".sidebar a.completed").forEach(a => {
+        a.classList.remove("completed");
+        if (a.dataset.originalText)
+            a.innerHTML = a.dataset.originalText;
+    });
+
+    // Colocar ✔
+    st.completadas.forEach(lessonId => {
+        const link = document.querySelector(`.sidebar a[data-lesson="${lessonId}"]`);
+        if (link) {
+            if (!link.dataset.originalText)
+                link.dataset.originalText = link.textContent;
+
+            link.classList.add("completed");
+            link.innerHTML =
+                link.dataset.originalText +
+                ' <span style="color:green; font-weight:bold;">✔</span>';
+        }
+    });
+}
+
+
+/**
+ * Convierte <div class="ide-python"> en un mini IDE con Ace + Skulpt
+ */
+function activarMiniIDEs() {
+    const bloques = document.querySelectorAll(".ide-python");
+
+    bloques.forEach((bloque, index) => {
+
+        // Obtener código inicial
+        const codigoInicial = bloque.textContent.trim();
+
+        // Limpiar el div
+        bloque.innerHTML = "";
+
+        // Crear contenedor
+        const ide = document.createElement("div");
+        ide.className = "mini-ide-container";
+        ide.innerHTML = `
+                <div id="editor-${index}" class="editor-python"></div>
+
+                <div class="mini-ide-buttons">
+                    <button class="btn btn-neutral ejecutar-btn" data-editor="${index}">Ejecutar</button>
+                    <button class="btn btn-neutral copiar-btn" data-editor="${index}">Copiar</button>
+                    <span class="copiar-feedback" id="copiar-feedback-${index}"></span>
+                </div>
+
+                <pre class="output-python" id="output-${index}"></pre>
+        `;
+
+        bloque.appendChild(ide);
+
+        // Crear ACE editor
+        const editor = ace.edit(`editor-${index}`);
+        editor.setTheme("ace/theme/chrome");
+        editor.session.setMode("ace/mode/python");
+        editor.setValue(codigoInicial || "# Escribe tu código aquí...");
+
+        
+        editor.clearSelection();   // Quita selección automática
+        editor.moveCursorTo(0, 0); // Lleva el cursor al inicio
+        editor.blur();             // Quita el foco del editor
+
+        editor.setOptions({ fontSize: "14px", minLines: 2, maxLines: Infinity, autoScrollEditorIntoView: true });
+
+    });
+
+    // Eventos de ejecución
+    document.querySelectorAll(".ejecutar-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-editor");
+            const editor = ace.edit(`editor-${id}`);
+            const codigo = editor.getValue();
+
+            const salida = document.getElementById(`output-${id}`);
+            skulptRunner.ejecutar(codigo, salida);
+        });
+    });
+
+    // Eventos de COPIAR
+    document.querySelectorAll(".copiar-btn").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-editor");
+            const editor = ace.edit(`editor-${id}`);
+            const codigo = editor.getValue();
+
+            try {
+                await navigator.clipboard.writeText(codigo);
+
+                const feedback = document.getElementById(`copiar-feedback-${id}`);
+                feedback.textContent = "Copiado";
+                feedback.style.color = "green";
+
+                setTimeout(() => {
+                    feedback.textContent = "";
+                }, 1200);
+            }
+            catch (err) {
+                alert("No se pudo copiar el código.");
+            }
+        });
+    });
+}
+

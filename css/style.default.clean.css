@@ -2168,3 +2168,35 @@ address {
   }
   #content-curso{ width:100%; max-width:none; }
 }
+
+.editor-python {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.output-python {
+    background: #1e1e1e;
+    color: #fff;
+    padding: 10px;
+    min-height: 80px;
+    white-space: pre-wrap;
+}
+
+.mini-ide-container {
+    margin: 20px 0;
+}
+
+.mini-ide-buttons {
+    margin-bottom: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.copiar-feedback {
+    font-size: 14px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+

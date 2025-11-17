@@ -34,7 +34,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadCourseData();
     buildMappings();
     buildSidebar();
-    loadInitialLesson();
+
+    // 1. Inicializar progreso (mezcla backend + local)
+    const progreso = await ProgresoState.init("logica", COURSE_DATA.estructura);
+
+    // 2. Marcar en el menú ✔ completadas
+    highlightCompletedLessons("logica");
+
+    // 3. Cargar la última lección vista, si existe
+    if (progreso.ultima_leccion && ID_TO_NODE[progreso.ultima_leccion]) {
+        loadLesson(progreso.ultima_leccion, false);
+    } else {
+        loadInitialLesson();
+    }
 });
 
 
@@ -176,6 +188,7 @@ async function loadLesson(lessonId, pushState = true, anchorId = null) {
         const html = await fetch(`/products/curso_logica/contenido/${lesson.archivo}`)
             .then(r => r.text());
         document.getElementById("content").innerHTML = html;
+        insertCompletionButton("logica", lessonId);
     } catch (err) {
         console.error("Error cargando archivo HTML:", err);
         document.getElementById("content").innerHTML = "<p>Error cargando contenido.</p>";
@@ -207,6 +220,50 @@ async function loadLesson(lessonId, pushState = true, anchorId = null) {
     if (pushState) {
         history.pushState({ lessonId }, "", `?lesson=${lessonId}`);
     }
+
+    // Registrar progreso
+    ProgresoState.onLessonChange("logica", lessonId);
+
+    // Actualizar menú lateral ✔/✘
+    highlightCompletedLessons("logica");
+}
+
+function insertCompletionButton(courseId, lessonId) {
+    const st = ProgresoState.getState(courseId);
+    const isCompleted = st?.completadas?.has(lessonId);
+
+    const contentDiv = document.getElementById("content");
+
+    // Eliminar botón previo
+    const oldBtn = document.getElementById("btn-completar");
+    if (oldBtn) oldBtn.remove();
+
+    const btn = document.createElement("button");
+    btn.id = "btn-completar";
+    btn.style.marginTop = "20px";
+    btn.className = "btn";
+
+    if (isCompleted) {
+        btn.textContent = "Completado ✔ (click para desmarcar)";
+        btn.style.backgroundColor = "#4CAF50";
+        btn.style.color = "white";
+    } else {
+        btn.textContent = "Marcar como completado";
+        btn.style.backgroundColor = "#e0e0e0";
+        btn.style.color = "#333";
+    }
+
+    btn.addEventListener("click", () => {
+        toggleCompletionState(courseId, lessonId);
+        insertCompletionButton(courseId, lessonId);
+        highlightCompletedLessons(courseId);
+    });
+
+    contentDiv.appendChild(btn);
+}
+
+function toggleCompletionState(courseId, lessonId) {
+    ProgresoState.toggleCompletado(courseId, lessonId);
 }
 
 
@@ -410,5 +467,34 @@ function activateContentLinks() {
 
             loadLesson(lessonId, true, anchorId);
         });
+    });
+}
+
+/* ============================================================
+   12. Marcar lecciones completadas con ✔ en el menú
+   ============================================================ */
+function highlightCompletedLessons(courseId) {
+    const st = ProgresoState.getState(courseId);
+    if (!st) return;
+
+    // Quitar ✔ anteriores
+    document.querySelectorAll(".sidebar a.completed").forEach(a => {
+        a.classList.remove("completed");
+        if (a.dataset.originalText)
+            a.innerHTML = a.dataset.originalText;
+    });
+
+    // Agregar ✔ a cada lección completada
+    st.completadas.forEach(lessonId => {
+        const link = document.querySelector(`.sidebar a[data-lesson="${lessonId}"]`);
+        if (link) {
+            if (!link.dataset.originalText)
+                link.dataset.originalText = link.textContent;
+
+            link.classList.add("completed");
+            link.innerHTML =
+                link.dataset.originalText +
+                ' <span style="color:green; font-weight:bold;">✔</span>';
+        }
     });
 }

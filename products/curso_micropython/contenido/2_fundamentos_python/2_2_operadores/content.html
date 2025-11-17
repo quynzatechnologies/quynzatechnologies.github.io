@@ -216,31 +216,27 @@ if (sessionStorage.getItem("logueado-micropython") !== "true") {
             <ul>
                 <li>
                     Concatenación de cadenas (+):
-                    <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>mensaje = <span style="color: #CD5555">&quot;Hola&quot;</span> + <span style="color: #CD5555">&quot; Mundo&quot;</span>
-</pre>
-</div>
                     <br>
+<div class="ide-python">
+mensaje = "Hola" + " Mundo"
+print(mensaje)
+</div>
                 </li>
                 <li>
                     Repetición de cadenas (*):
-                    <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span>eco = <span style="color: #CD5555">&quot;ESP32 &quot;</span> * <span style="color: #B452CD">3</span>
-</pre>
-</div>
                     <br>
+<div class="ide-python">
+eco = "ESP32 " * 3
+print(eco)
+</div>
                 </li>
                 <li>
                     Operadores de pertenencia (in, not in):
-                    <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #CD5555">&quot;rojo&quot;</span> <span style="color: #8B008B">in</span> [<span style="color: #CD5555">&quot;rojo&quot;</span>, <span style="color: #CD5555">&quot;azul&quot;</span>]:
-    <span style="color: #658B00">print</span>(<span style="color: #CD5555">&quot;Color encontrado&quot;</span>)
-</pre>
-</div>
                     <br>
+<div class="ide-python">
+if "rojo" in ["rojo", "azul"]:
+    print("Color encontrado")
+</div>
                 </li>
                 <li>
                     Operadores a nivel de bits: permiten operaciones lógicas sobre bits individuales (&, |, ^, ~, <<, >>).
@@ -253,13 +249,13 @@ if (sessionStorage.getItem("logueado-micropython") !== "true") {
             <br><br>
             En proyectos con MicroPython y ESP32, los operadores no solo se usan para cálculos, sino también 
             para evaluar condiciones en el control de sensores y actuadores, por ejemplo:
-            <br><br>
-<div style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%;"><span></span><span style="color: #8B008B; font-weight: bold">if</span> temperatura &gt; <span style="color: #B452CD">30</span> <span style="color: #8B008B">and</span> humedad &lt; <span style="color: #B452CD">50</span>:
-    encender_ventilador()
-</pre>
-</div>
             <br>
+<div class="ide-python">
+temperatura = 38
+humedad = 45
+if temperatura > 30 and humedad < 50:
+    print("Encender ventilador")
+</div>
             Este tipo de expresiones es esencial para condicionar el comportamiento del ESP32 según datos 
             de sensores.
         </li>

@@ -28,8 +28,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadCourseData();
     buildMappings();
     buildSidebar();
-    loadInitialLesson();
+
+    // 1. Inicializar progreso (mezcla backend + local)
+    const progreso = await ProgresoState.init("iot", COURSE_DATA.estructura);
+
+    // 2. Marcar en el menú ✔ completadas
+    highlightCompletedLessons("iot");
+
+    // 3. Cargar última lección vista si existe
+    if (progreso.ultima_leccion && ID_TO_NODE[progreso.ultima_leccion]) {
+        loadLesson(progreso.ultima_leccion, false);
+    } else {
+        loadInitialLesson();
+    }
 });
+
 
 
 /* ============================================================
@@ -144,6 +157,7 @@ async function loadLesson(lessonId, pushState = true, anchorId = null) {
         const html = await fetch(`/products/curso_iot/contenido/${lesson.archivo}`)
             .then(r => r.text());
         document.getElementById("content").innerHTML = html;
+        insertCompletionButton("iot", lessonId); // Insertar botón "Marcar completado / No completado"
     } catch (error) {
         console.error("Error cargando archivo HTML:", error);
         document.getElementById("content").innerHTML =
@@ -176,6 +190,58 @@ async function loadLesson(lessonId, pushState = true, anchorId = null) {
     if (pushState) {
         history.pushState({ lessonId }, "", `?lesson=${lessonId}`);
     }
+
+    // --------------------------------------------------------
+    // Registrar progreso (última visita) + sincronizar backend
+    // --------------------------------------------------------
+    ProgresoState.onLessonChange("iot", lessonId);
+
+    // --------------------------------------------------------
+    // Actualizar UI de ✔ en menú lateral
+    // --------------------------------------------------------
+    highlightCompletedLessons("iot");
+}
+
+function insertCompletionButton(courseId, lessonId) {
+    const st = ProgresoState.getState(courseId);
+    const isCompleted = st?.completadas?.has(lessonId);
+
+    const contentDiv = document.getElementById("content");
+
+    // Eliminar botón previo si recargamos una lección
+    const oldBtn = document.getElementById("btn-completar");
+    if (oldBtn) oldBtn.remove();
+
+    const btn = document.createElement("button");
+    btn.id = "btn-completar";
+    btn.style.marginTop = "20px";
+    btn.className = "btn";
+
+    if (isCompleted) {
+        btn.textContent = "Completado ✔ (click para desmarcar)";
+        btn.style.backgroundColor = "#4CAF50"; // Verde completado
+        btn.style.color = "white";
+    } else {
+        btn.textContent = "Marcar como completado";
+        btn.style.backgroundColor = "#e0e0e0";
+        btn.style.color = "#333";
+    }
+
+    btn.addEventListener("click", () => {
+        toggleCompletionState(courseId, lessonId);
+
+        // Recargar botón para reflejar estado nuevo
+        insertCompletionButton(courseId, lessonId);
+
+        // Actualizar menú lateral ✔/✘
+        highlightCompletedLessons(courseId);
+    });
+
+    contentDiv.appendChild(btn);
+}
+
+function toggleCompletionState(courseId, lessonId) {
+    ProgresoState.toggleCompletado(courseId, lessonId);
 }
 
 
@@ -363,3 +429,33 @@ function activateContentLinks() {
         });
     });
 }
+
+/* ============================================================
+   12. Marcar lecciones completadas con ✔ en el menú
+   ============================================================ */
+function highlightCompletedLessons(courseId) {
+    const st = ProgresoState.getState(courseId);
+    if (!st) return;
+
+    // Quitar ✔ previos
+    document.querySelectorAll(".sidebar a.completed").forEach(a => {
+        a.classList.remove("completed");
+        if (a.dataset.originalText)
+            a.innerHTML = a.dataset.originalText;
+    });
+
+    // Colocar ✔ a cada completada
+    st.completadas.forEach(lessonId => {
+        const link = document.querySelector(`.sidebar a[data-lesson="${lessonId}"]`);
+        if (link) {
+            if (!link.dataset.originalText)
+                link.dataset.originalText = link.textContent;
+
+            link.classList.add("completed");
+            link.innerHTML =
+                link.dataset.originalText +
+                ' <span style="color:green; font-weight:bold;">✔</span>';
+        }
+    });
+}
+

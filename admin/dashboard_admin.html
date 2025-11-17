@@ -35,7 +35,7 @@
 
         // Redirección si NO es admin
         document.addEventListener("DOMContentLoaded", () => {
-            if (sessionStorage.getItem("admin") !== "true") {
+            if (localStorage.getItem("logueado-admin") !== "true") {
                 window.location.href = "/admin/login_admin.html";
             }
         });
@@ -58,6 +58,7 @@
 
                         <!-- Encabezado -->
                         <div id="heading-breadcrumbs">
+                            <div id="usuario-admin" class="user-label"></div>
                             <div class="row">
                                 <h1>Panel de Administración</h1>
 
@@ -72,8 +73,7 @@
                         <!-- Breadcrumbs -->
                         <div role="navigation" aria-label="Page navigation">
                             <ul class="wy-breadcrumbs" id="breadcrumbs">
-                                <li><a href="/admin/dashboard_admin.html">Dashboard</a></li>
-                                <li class="not-active">Inicio</li>
+                                <li class="wy-li not-active">Inicio</li>
                             </ul>
                             <hr>
                         </div>
@@ -148,7 +148,7 @@
         // Mostrar nombre del admin
         document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("admin-name").innerText =
-                sessionStorage.getItem("admin-username") || "";
+                localStorage.getItem("admin-username") || "";
         });
 
         // Quitar protección visual
@@ -157,8 +157,8 @@
         });
 
         function cerrarSesionAdmin() {
-            sessionStorage.removeItem("admin");
-            sessionStorage.removeItem("admin-username");
+            localStorage.removeItem("admin");
+            localStorage.removeItem("admin-username");
             window.location.href = "/admin/login_admin.html";
         }
     </script>

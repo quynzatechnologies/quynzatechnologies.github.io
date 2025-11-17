@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // Verificar si el usuario ha iniciado sesión como ADMIN
-    const isAdmin = sessionStorage.getItem("admin");
+    const isAdmin = localStorage.getItem("logueado-admin");
 
     if (isAdmin !== "true") {
         alert("Debes iniciar sesión como administrador para acceder a esta página.");
@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Función para cerrar sesión de administrador
 function cerrarSesionAdmin() {
-    sessionStorage.removeItem("admin");
-    sessionStorage.removeItem("admin-username");
+    localStorage.removeItem("logueado-admin");
+    localStorage.removeItem("admin-username");
 
     alert("Sesión de administrador finalizada.");
     window.location.href = "/admin/login_admin.html";

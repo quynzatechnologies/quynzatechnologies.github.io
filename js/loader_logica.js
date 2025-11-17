@@ -47,6 +47,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
         loadInitialLesson();
     }
+
+    // 4. Mostrar nombre de usuario en el curso
+    const el = document.getElementById("usuario-curso");
+    if (!el) return;
+
+    // Detectar curso automáticamente
+    let username = null;
+
+    if (localStorage.getItem("logueado-logica") === "true") {
+        username = localStorage.getItem("logica_username");
+    }
+
+    if (username) {
+        el.textContent = "👤 " + username;
+    }
 });
 
 
@@ -54,11 +69,55 @@ document.addEventListener("DOMContentLoaded", async () => {
    1. Cargar JSON maestro del curso
    ============================================================ */
 async function loadCourseData() {
+    const courseId = "logica";
+    const localUrl = "/products/curso_logica/contenido/curso_logica.json";
+    const cacheKey = `course_json_${courseId}`;
+
+    // 1) Intentar leer de sessionStorage
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) {
+        try {
+            COURSE_DATA = JSON.parse(cached);
+            return;
+        } catch (e) {
+            console.warn("No se pudo parsear JSON cacheado de logica:", e);
+        }
+    }
+
+    // 2) Intentar cargar desde backend (Supabase)
     try {
-        const res = await fetch("/products/curso_logica/contenido/curso_logica.json");
-        COURSE_DATA = await res.json();
+        const resp = await fetch(
+            "https://backend-quynza-pages.vercel.app/api/admin/courses?action=get&course_id=" + courseId
+        );
+        if (resp.ok) {
+            const data = await resp.json();
+            if (data && data.data && data.data.json_data) {
+                COURSE_DATA = data.data.json_data;
+                try {
+                    sessionStorage.setItem(cacheKey, JSON.stringify(COURSE_DATA));
+                } catch (e) {
+                    console.warn("No se pudo guardar JSON en sessionStorage:", e);
+                }
+                return;
+            }
+        } else {
+            console.warn("No se pudo cargar JSON de logica desde backend. Status:", resp.status);
+        }
     } catch (err) {
-        console.error("Error cargando curso_logica.json:", err);
+        console.warn("Error llamando backend de cursos (logica):", err);
+    }
+
+    // 3) Fallback a JSON local
+    try {
+        const resLocal = await fetch(localUrl);
+        COURSE_DATA = await resLocal.json();
+        try {
+            sessionStorage.setItem(cacheKey, JSON.stringify(COURSE_DATA));
+        } catch (e) {
+            console.warn("No se pudo guardar JSON local en sessionStorage:", e);
+        }
+    } catch (err2) {
+        console.error("Error cargando JSON local de logica:", err2);
     }
 }
 

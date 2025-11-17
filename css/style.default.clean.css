@@ -2200,3 +2200,10 @@ address {
     font-weight: bold;
 }
 
+.user-label {
+    font-size: 14px;
+    color: #fff;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+}

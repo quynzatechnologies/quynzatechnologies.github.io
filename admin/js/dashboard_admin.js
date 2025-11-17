@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // Seguridad redundante: evitar acceso sin login administrativo
-    const isAdmin = sessionStorage.getItem("admin");
-    const adminName = sessionStorage.getItem("admin-username");
+    const isAdmin = localStorage.getItem("logueado-admin");
+    const adminName = localStorage.getItem("admin-username");
 
     if (isAdmin !== "true") {
         window.location.href = "/admin/login_admin.html";
@@ -17,6 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Cargar estadísticas iniciales
     cargarEstadisticas();
+
+    // Mostrar nombre de usuario en el dashboard
+    const el = document.getElementById("usuario-admin");
+    if (!el) return;
+
+    const username = localStorage.getItem("admin-username");
+    if (username) {
+        el.textContent = "👤 " + username;
+    }
 });
 
 /**

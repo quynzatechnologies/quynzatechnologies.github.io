@@ -3,10 +3,12 @@ $(document).ready(function () {
     /* ============================================================
        AUTO-REDIRECCIÓN SI YA ESTÁ LOGUEADO
        ============================================================ */
-    window.addEventListener("DOMContentLoaded", function () {
-        const logueado = sessionStorage.getItem("logueado-logica");
-        if (logueado === "true") {
-            window.location.href = "/products/curso_logica/contenido/";
+    document.addEventListener("readystatechange", function() {
+        if (document.readyState === "complete") {
+            const logueado = localStorage.getItem("logueado-logica");
+            if (logueado === "true") {
+                window.location.href = "/products/curso_logica/contenido/";
+            }
         }
     });
 
@@ -42,11 +44,11 @@ $(document).ready(function () {
                 // --------------------------------------------------------
                 // Guardar información del usuario SOLO para Curso Lógica
                 // --------------------------------------------------------
-                sessionStorage.setItem("logica_user_id", data.user.id);
-                sessionStorage.setItem("logica_username", data.user.username);
+                localStorage.setItem("logica_user_id", data.user.id);
+                localStorage.setItem("logica_username", data.user.username);
 
                 // Marcador de sesión por curso
-                sessionStorage.setItem("logueado-logica", "true");
+                localStorage.setItem("logueado-logica", "true");
 
                 alert("Inicio de sesión exitoso");
 

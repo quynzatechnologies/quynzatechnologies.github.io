@@ -30,6 +30,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
         loadInitialLesson();
     }
+
+    // 4. Mostrar nombre de usuario en el curso
+    const el = document.getElementById("usuario-curso");
+    if (!el) return;
+
+    // Detectar curso automáticamente
+    let username = null;
+
+    if (localStorage.getItem("logueado-micropython") === "true") {
+        username = localStorage.getItem("micropython_username");
+    }
+
+    if (username) {
+        el.textContent = "👤 " + username;
+    }
 });
 
 
@@ -37,11 +52,52 @@ document.addEventListener("DOMContentLoaded", async () => {
    1. Cargar curso_micropython.json
    ============================================================ */
 async function loadCourseData() {
+    const courseId = "micropython";
+    const localUrl = "/products/curso_micropython/contenido/curso_micropython.json";
+    const cacheKey = `course_json_${courseId}`;
+
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) {
+        try {
+            COURSE_DATA = JSON.parse(cached);
+            return;
+        } catch (e) {
+            console.warn("No se pudo parsear JSON cacheado de micropython:", e);
+        }
+    }
+
     try {
-        const res = await fetch("/products/curso_micropython/contenido/curso_micropython.json");
-        COURSE_DATA = await res.json();
+        const resp = await fetch(
+            "https://backend-quynza-pages.vercel.app/api/admin/courses?action=get&course_id=" + courseId
+        );
+        if (resp.ok) {
+            const data = await resp.json();
+            if (data && data.data && data.data.json_data) {
+                COURSE_DATA = data.data.json_data;
+                try {
+                    sessionStorage.setItem(cacheKey, JSON.stringify(COURSE_DATA));
+                } catch (e) {
+                    console.warn("No se pudo guardar JSON en sessionStorage:", e);
+                }
+                return;
+            }
+        } else {
+            console.warn("No se pudo cargar JSON de micropython desde backend. Status:", resp.status);
+        }
     } catch (err) {
-        console.error("Error cargando curso_micropython.json:", err);
+        console.warn("Error llamando backend de cursos (micropython):", err);
+    }
+
+    try {
+        const resLocal = await fetch(localUrl);
+        COURSE_DATA = await resLocal.json();
+        try {
+            sessionStorage.setItem(cacheKey, JSON.stringify(COURSE_DATA));
+        } catch (e) {
+            console.warn("No se pudo guardar JSON local en sessionStorage:", e);
+        }
+    } catch (err2) {
+        console.error("Error cargando JSON local de micropython:", err2);
     }
 }
 

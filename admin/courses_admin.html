@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Cabeceras y componentes comunes -->
+    <script src="/js/load_html_created.js" defer></script>
+
+    <!-- Librerías base -->
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <title>Administrador de Cursos – Panel Admin</title>
+
+    <style>
+        body.protegido { display: none; }
+        .courses-layout {
+            margin-top: 20px;
+        }
+        .courses-list {
+            border-right: 1px solid #ddd;
+            padding-right: 15px;
+        }
+        .courses-list table {
+            width: 100%;
+        }
+        .courses-list th, .courses-list td {
+            padding: 6px;
+        }
+        #json-editor {
+            width: 100%;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        #validation-results {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            background: #f7f9fc;
+            border: 1px solid #e4e7eb;
+        }
+        #validation-results ul {
+            margin-bottom: 5px;
+        }
+        #course-summary {
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        #course-summary li {
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="all">
+
+    <!-- Headers comunes -->
+    <header id="header-comm-container"></header>
+    <header id="header-nav-main-container"></header>
+
+    <main>
+        <div class="main">
+            <div class="div-content">
+
+                <div id="content-curso">
+
+                    <!-- Breadcrumb y título -->
+                    <div id="heading-breadcrumbs">
+                        <div id="usuario-admin" class="user-label"></div>
+                        <div class="row">
+                            <h1>Administrador de Cursos</h1>
+                            <button class="btn btn-neutral float-right" onclick="cerrarSesionAdmin()">Cerrar sesión</button>
+                        </div>
+                    </div>
+
+                    <div role="navigation" aria-label="Page navigation">
+                        <ul class="wy-breadcrumbs" id="breadcrumbs">
+                            <li class="wy-li"><a href="/admin/dashboard_admin.html">Dashboard</a></li>
+                            <li class="wy-li not-active">Cursos</li>
+                        </ul>
+                        <hr>
+                    </div>
+
+                    <!-- CONTENIDO PRINCIPAL -->
+                    <div id="content" style="padding-bottom: 40px">
+
+                        <div class="row courses-layout">
+
+                            <!-- LISTA DE CURSOS -->
+                            <div class="col-md-4 courses-list">
+                                <h3>Cursos disponibles</h3>
+                                <p style="font-size: 13px;">Selecciona un curso para ver y validar su JSON maestro.</p>
+
+                                <table class="table table-striped" id="tablaCursos">
+                                    <thead>
+                                        <tr>
+                                            <th>Curso</th>
+                                            <th>Última actualización</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Se llena por JS -->
+                                    </tbody>
+                                </table>
+
+                                <button id="btn-recargar-cursos" class="btn btn-default btn-sm">
+                                    Recargar lista
+                                </button>
+                            </div>
+
+                            <!-- DETALLE / EDITOR -->
+                            <div class="col-md-8">
+                                <h3>Detalle del curso seleccionado</h3>
+                                <p id="curso-seleccionado-label" style="font-size: 13px; color: #555;">
+                                    Ningún curso seleccionado.
+                                </p>
+
+                                <ul id="course-summary">
+                                    <!-- Resumen del análisis (se rellena por JS) -->
+                                </ul>
+
+                                <label for="json-editor"><strong>JSON maestro del curso</strong></label>
+                                <textarea id="json-editor" rows="20" placeholder="Selecciona un curso para ver su JSON" disabled></textarea>
+
+                                <div style="margin-top: 10px;">
+                                    <button id="btn-validar-json" class="btn btn-primary btn-sm" disabled>Validar JSON</button>
+                                    <button id="btn-guardar-json" class="btn btn-success btn-sm" disabled>Guardar cambios</button>
+                                    <button id="btn-revertir-json" class="btn btn-default btn-sm" disabled>Revertir cambios</button>
+                                    <button id="btn-probar-curso" class="btn btn-info btn-sm" disabled>Probar curso</button>
+                                    <button id="btn-upload-json" class="btn btn-warning btn-sm" disabled>
+                                        Subir JSON (archivo)
+                                    </button>
+
+                                    <input type="file" id="input-json-file" accept=".json"
+                                        style="display:none;" />
+                                </div>
+
+                                <div id="validation-results" style="margin-top: 15px; display: none;">
+                                    <!-- Resultados de validación -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div> <!-- #content -->
+
+                </div> <!-- #content-curso -->
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" id="footer-main-container"></footer>
+    <div class="copyright" id="footer-copyright-container"></div>
+
+</div>
+
+<script src="/admin/js/logout_admin.js"></script>
+<script src="/admin/js/courses_admin.js"></script>
+
+</body>
+</html>

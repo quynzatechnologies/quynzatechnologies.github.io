@@ -1,7 +1,7 @@
 let mensajesOriginales = [];   // Lista original desde backend
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (sessionStorage.getItem("admin") !== "true") {
+    if (localStorage.getItem("logueado-admin") !== "true") {
         window.location.href = "/admin/login_admin.html";
         return;
     }
@@ -13,6 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("filter-subject").addEventListener("change", filtrarMensajes);
     document.getElementById("filter-date-from").addEventListener("change", filtrarMensajes);
     document.getElementById("filter-date-to").addEventListener("change", filtrarMensajes);
+
+    // Mostrar nombre de usuario en el dashboard
+    const el = document.getElementById("usuario-admin");
+    if (!el) return;
+
+    const username = localStorage.getItem("admin-username");
+    if (username) {
+        el.textContent = "👤 " + username;
+    }
 });
 
 // ==========================

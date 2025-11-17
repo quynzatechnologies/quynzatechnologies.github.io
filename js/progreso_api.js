@@ -50,19 +50,19 @@
   function isLoggedIn(courseId) {
     const cfg = SESSION_KEYS[courseId];
     if (!cfg) return false;
-    return sessionStorage.getItem(cfg.logged) === "true";
+    return localStorage.getItem(cfg.logged) === "true";
   }
 
   function getUserId(courseId) {
     const cfg = SESSION_KEYS[courseId];
     if (!cfg) return null;
-    return sessionStorage.getItem(cfg.userId);
+    return localStorage.getItem(cfg.userId);
   }
 
   function getUsername(courseId) {
     const cfg = SESSION_KEYS[courseId];
     if (!cfg) return null;
-    return sessionStorage.getItem(cfg.username);
+    return localStorage.getItem(cfg.username);
   }
 
   // ------------------------------------------------------------------
@@ -102,7 +102,8 @@
 
     const url =
       API_BASE +
-      "/progreso/obtener?course_id=" +
+      "/progreso?action=obtener" +
+      "&course_id=" +
       encodeURIComponent(courseId) +
       "&user_id=" +
       encodeURIComponent(userId);
@@ -208,7 +209,7 @@
     };
 
     try {
-      const res = await fetch(API_BASE + "/progreso/guardar", {
+      const res = await fetch(API_BASE + "/progreso?action=guardar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

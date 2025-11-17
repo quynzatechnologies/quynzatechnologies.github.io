@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Cabeceras y scripts globales admin -->
+    <script src="/js/load_html_created.js" defer></script>
+
+    <!-- Librerías necesarias -->
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.2.0/dist/chartjs-chart-matrix.min.js"></script>
+
+    <title>Estadísticas – Panel Admin</title>
+
+    <style>
+        body.protegido { display: none; }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .kpi-card {
+            background: #f7f9fc;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e4e7eb;
+            text-align: center;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            gap: 20px;
+            margin-top: 35px;
+        }
+        .chart-card {
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .table-section {
+            margin-top: 40px;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .admin-table th, .admin-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .admin-table th {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+<div id="all">
+
+    <!-- HEADERS CARGADOS POR load_html_created.js -->
+    <header id="header-comm-container"></header>
+    <header id="header-nav-main-container"></header>
+
+    <main>
+        <div class="main">
+            <div class="div-content">
+
+                <div id="content-curso">
+
+                    <!-- BREADCRUMB -->
+                    <div id="heading-breadcrumbs">
+                        <div id="usuario-admin" class="user-label"></div>
+                        <div class="row">
+                            <h1>Estadísticas Generales</h1>
+                            <button class="btn btn-neutral float-right" onclick="cerrarSesionAdmin()">Cerrar sesión</button>
+                        </div>
+                    </div>
+
+                    <div role="navigation" aria-label="Page navigation">
+                        <ul class="wy-breadcrumbs" id="breadcrumbs">
+                            <li class="wy-li"><a href="/admin/dashboard_admin.html">Dashboard</a></li>
+                            <li class="wy-li not-active">Estadísticas</li>
+                        </ul>
+                        <hr>
+                    </div>
+
+                    <!-- Contenido -->
+                    <div id="content" style="padding-bottom: 40px">
+
+                        <!-- KPIS -->
+                        <section id="kpi-section" class="kpi-grid">
+                            <div class="kpi-card">
+                                <h3>Usuarios – Lógica</h3>
+                                <p id="kpi_logica_users">–</p>
+                            </div>
+                            <div class="kpi-card">
+                                <h3>Usuarios – IoT</h3>
+                                <p id="kpi_iot_users">–</p>
+                            </div>
+                            <div class="kpi-card">
+                                <h3>Usuarios – MicroPython</h3>
+                                <p id="kpi_micropython_users">–</p>
+                            </div>
+                            <div class="kpi-card">
+                                <h3>Última Actividad</h3>
+                                <p id="kpi_last_activity">–</p>
+                            </div>
+                        </section>
+
+                        <!-- GRAFICAS -->
+                        <section class="charts-grid">
+                            <div class="chart-card">
+                                <h3>Completado por Curso (%)</h3>
+                                <canvas id="chartCompletado"></canvas>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>Usuarios por Curso</h3>
+                                <canvas id="chartUsuarios"></canvas>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>Actividad por Hora</h3>
+                                <canvas id="chartHora"></canvas>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>Actividad por Día</h3>
+                                <canvas id="chartDia"></canvas>
+                            </div>
+                        </section>
+
+                        <!-- TABLAS -->
+                        <section class="table-section">
+
+                            <h2>Ranking de Usuarios</h2>
+                            <table id="tablaRanking" class="admin-table">
+                                <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Curso</th>
+                                    <th>Completadas</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <h2>Lecciones más Completadas</h2>
+                            <table id="tablaPopulares" class="admin-table">
+                                <thead>
+                                <tr>
+                                    <th>Curso</th>
+                                    <th>Lección</th>
+                                    <th>Completadas</th>
+                                    <th>Visitas</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <h2>Lecciones más Abandonadas</h2>
+                            <table id="tablaAbandonadas" class="admin-table">
+                                <thead>
+                                <tr>
+                                    <th>Curso</th>
+                                    <th>Lección</th>
+                                    <th>Abandonos</th>
+                                    <th>Total</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                        </section>
+
+                    </div> <!-- #content -->
+
+                </div> <!-- #content-curso -->
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" id="footer-main-container"></footer>
+    <div class="copyright" id="footer-copyright-container"></div>
+
+</div>
+
+<!-- Scripts al final -->
+<script src="/admin/js/logout_admin.js"></script>
+<script src="/admin/js/stats_admin.js"></script>
+
+</body>
+</html>

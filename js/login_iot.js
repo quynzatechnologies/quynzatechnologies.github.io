@@ -3,10 +3,12 @@ $(document).ready(function () {
     /* ============================================================
        AUTO-REDIRECCIÓN SI YA ESTÁ LOGUEADO
        ============================================================ */
-    window.addEventListener("DOMContentLoaded", function () {
-        const logueado = sessionStorage.getItem("logueado-iot");
-        if (logueado === "true") {
-            window.location.href = "/products/curso_iot/contenido/";
+    document.addEventListener("readystatechange", function() {
+        if (document.readyState === "complete") {
+            const logueado = localStorage.getItem("logueado-iot");
+            if (logueado === "true") {
+                window.location.href = "/products/curso_iot/contenido/";
+            }
         }
     });
 
@@ -42,11 +44,11 @@ $(document).ready(function () {
                 // --------------------------------------------------------
                 // Guardar información del usuario SOLO para el curso IoT
                 // --------------------------------------------------------
-                sessionStorage.setItem("iot_user_id", data.user.id);
-                sessionStorage.setItem("iot_username", data.user.username);
+                localStorage.setItem("iot_user_id", data.user.id);
+                localStorage.setItem("iot_username", data.user.username);
 
                 // Marcador de login por curso
-                sessionStorage.setItem("logueado-iot", "true");
+                localStorage.setItem("logueado-iot", "true");
 
                 alert("Inicio de sesión exitoso");
 

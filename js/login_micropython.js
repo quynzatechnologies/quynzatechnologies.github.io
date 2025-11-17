@@ -3,10 +3,12 @@ $(document).ready(function () {
     /* ============================================================
        AUTO-REDIRECCIÓN SI YA ESTÁ LOGUEADO (CURSO MICROPYTHON)
        ============================================================ */
-    window.addEventListener("DOMContentLoaded", function () {
-        const logueado = sessionStorage.getItem("logueado-micropython");
-        if (logueado === "true") {
-            window.location.href = "/products/curso_micropython/contenido/";
+    document.addEventListener("readystatechange", function() {
+        if (document.readyState === "complete") {
+            const logueado = localStorage.getItem("logueado-micropython");
+            if (logueado === "true") {
+                window.location.href = "/products/curso_micropython/contenido/";
+            }
         }
     });
 
@@ -42,11 +44,11 @@ $(document).ready(function () {
                 // --------------------------------------------------------
                 // Guardar información de usuario SOLO para este curso
                 // --------------------------------------------------------
-                sessionStorage.setItem("micropython_user_id", data.user.id);
-                sessionStorage.setItem("micropython_username", data.user.username);
+                localStorage.setItem("micropython_user_id", data.user.id);
+                localStorage.setItem("micropython_username", data.user.username);
 
                 // Marcador de login por curso
-                sessionStorage.setItem("logueado-micropython", "true");
+                localStorage.setItem("logueado-micropython", "true");
 
                 alert("Inicio de sesión exitoso");
 

@@ -7,6 +7,12 @@ if (localStorage.getItem("logueado-logica") !== "true") {
 
 <h1>Ejercicio 5-2. Unidad básica de memoria, el flip-flop</h1>
 
+<p>El flip-flop es la unidad de memoria básica, almacena un bit. Hay muchos tipos de flip-flops, aquí vamos a estudiar el más simple, el flip-flop RS.</p>
+
+<p>
+    <b>Objetivo.</b> Se va a trabajar el flip-flop RS con compuertas NAND y compuertas NOR. Sus entradas son S y R; y sus salidas Q y ~Q.
+</p>
+
 <p> Para este ejercicio se necesita el <a href="/products/entrenadorlogica/">Entrenador Lógica Digital</a>, ¡el cual puede ser adquirido en este link al mejor precio!
 </p>
 
@@ -15,3 +21,49 @@ if (localStorage.getItem("logueado-logica") !== "true") {
 </p>
 
 <h2>Contenido</h2>
+
+<p><b>Procedimiento 1.</b></p>
+<p style="text-align:center;"><img src="./5_secuenciales/5_3_flip_flop_rs/img/flip_flop_rs_nand.png" width ="40%" height="auto"></p>
+
+<p>Con compuertas NAND.</p>
+
+<p>
+    <ol>
+        <li>Conectar la salida del interruptor 1, la entrada S, al pin 1 de la compuerta NAND (74LS00).</li>
+        <li>Conectar la salida del interruptor 2, la entrada R, al pin 13 de la compuerta NAND (74LS00).</li>
+        <li>Conectar la salida  3 de la compuerta NAND (74LS00), al AUX 1.</li>
+        <li>Conectar un pin de AUX 1 al pin 2 de la compuerta NAND (74LS00). </li>
+        <li>Conectar la salida 11 de la compuerta NAND (74LS00), al AUX 2.</li>
+        <li>Conectar un pin de AUX 2 al pin 12 de la compuerta NAND (74LS00). </li>
+        <li>Conectar otro pin de AUX 1 al borne de uno de los LEDs, salida Q.</li>
+        <li>Conectar otro pin de AUX 2 al borne de uno de los LEDs, salida ~Q.</li>
+        <li>Ponga el interruptor en ON.</li>
+        <li>
+            Llenar la tabla de verdad de abajo.
+        </li>
+    </ol>
+</p>
+
+
+<p><b>Procedimiento 2.</b></p>
+<p style="text-align:center;"><img src="./5_secuenciales/5_3_flip_flop_rs/img/flip_flop_rs_nor.png" width ="40%" height="auto"></p>
+
+<p>Con compuertas NOR.</p>
+
+<p>
+    <ol>
+        <li>Conectar la salida del interruptor 1, la entrada S, al pin 2 de la compuerta NOR (74LS02).</li>
+        <li>Conectar la salida del interruptor 2, la entrada R, al pin 12 de la compuerta NOR (74LS02).</li>
+        <li>Conectar la salida  1 de la compuerta NOR (74LS02), al AUX 1.</li>
+        <li>Conectar un pin de AUX 1 al pin 11 de la compuerta NOR (74LS02). </li>
+        <li>Conectar la salida 13 de la compuerta NOR (74LS02), al AUX 2.</li>
+        <li>Conectar un pin de AUX 2 al pin 3 de la compuerta NOR (74LS02).</li>
+        <li>Conectar otro pin de AUX 1 al borne de uno de los LEDs, salida Q.</li>
+        <li>Conectar otro pin de AUX 2 al borne de uno de los LEDs, salida ~Q.</li>
+        <li>Ponga el interruptor en ON.</li>
+        <li>
+            Llenar la tabla de verdad de abajo.
+        </li>
+    </ol>
+</p>
+

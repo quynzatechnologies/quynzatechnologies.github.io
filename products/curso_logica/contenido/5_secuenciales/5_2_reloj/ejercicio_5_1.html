@@ -28,7 +28,7 @@ if (localStorage.getItem("logueado-logica") !== "true") {
 <h2>Contenido</h2>
 
 <p><b>Procedimiento 1.</b></p>
-<p style="text-align:center;"><img src="./5_secuenciales/5_2_reloj/img/reloj_compuerta_and.png" width ="30%" height="auto"></p>
+<p style="text-align:center;"><img src="./5_secuenciales/5_2_reloj/img/reloj_compuerta_and.png" width ="40%" height="auto"></p>
 
 <p>Observar el comportamiento de la compuerta AND, con el reloj. </p>
 
@@ -38,12 +38,74 @@ if (localStorage.getItem("logueado-logica") !== "true") {
         <li>Conectar la salida del interruptor 1, al pin 2 de la compuerta AND (74LS08). </li>
         <li>Conectar la salida 3 de la compuerta AND (74LS08) al borne de uno de los LEDs</li>
         <li>Ponga el interruptor en ON.</li>
-        <li>Llene la tabla de verdad de abajo.</li>
+        <li>
+            Llene la tabla de verdad de abajo.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh" colspan="11"><span style="color:black">AND 74LS08</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh" rowspan="2">clk<br>Pin 1</td>
+                <td class="tg-18eh" rowspan="2">A<br>Pin 2</td>
+                <td class="tg-18eh" colspan="9">B - Pin 3</td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">1</td>
+                <td class="tg-18eh">2</td>
+                <td class="tg-18eh">3</td>
+                <td class="tg-18eh">4</td>
+                <td class="tg-18eh">5</td>
+                <td class="tg-18eh">6</td>
+                <td class="tg-18eh">7</td>
+                <td class="tg-18eh">8</td>
+                <td class="tg-18eh">9</td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">clk</td>
+                <td class="tg-18eh">0</td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">clk</td>
+                <td class="tg-18eh">1</td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+            </tr>
+            </tbody></table>
+        </li>
     </ol>
 </p>
 
 <p><b>Procedimiento 2.</b></p>
-<p style="text-align:center;"><img src="./5_secuenciales/5_2_reloj/img/reloj_compuerta_or.png" width ="30%" height="auto"></p>
+<p style="text-align:center;"><img src="./5_secuenciales/5_2_reloj/img/reloj_compuerta_or.png" width ="40%" height="auto"></p>
 
 <p>Observar el comportamiento de la compuerta OR, con el reloj. </p>
 
@@ -53,12 +115,75 @@ if (localStorage.getItem("logueado-logica") !== "true") {
         <li>Conectar la salida del interruptor 1, al pin 2 de la compuerta OR (74LS32).</li>
         <li>Conectar la salida 3 de la compuerta OR (74LS32) al borne de uno de los LEDs</li>
         <li>Ponga el interruptor en ON.</li>
-        <li>Llene la tabla de verdad de abajo.</li>
+        <li>
+            Llene la tabla de verdad de abajo.
+            
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh" colspan="11"><span style="color:black">OR 74LS32</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh" rowspan="2">clk<br>Pin 1</td>
+                <td class="tg-18eh" rowspan="2">A<br>Pin 2</td>
+                <td class="tg-18eh" colspan="9">B - Pin 3</td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">1</td>
+                <td class="tg-18eh">2</td>
+                <td class="tg-18eh">3</td>
+                <td class="tg-18eh">4</td>
+                <td class="tg-18eh">5</td>
+                <td class="tg-18eh">6</td>
+                <td class="tg-18eh">7</td>
+                <td class="tg-18eh">8</td>
+                <td class="tg-18eh">9</td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">clk</td>
+                <td class="tg-18eh">0</td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">clk</td>
+                <td class="tg-18eh">1</td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+            </tr>
+            </tbody></table>
+        </li>
     </ol>
 </p>
 
 <p><b>Procedimiento 3.</b></p>
-<p style="text-align:center;"><img src="./5_secuenciales/5_2_reloj/img/reloj_compuerta_xor.png" width ="30%" height="auto"></p>
+<p style="text-align:center;"><img src="./5_secuenciales/5_2_reloj/img/reloj_compuerta_xor.png" width ="40%" height="auto"></p>
 
 <p>Observar el comportamiento de la compuerta XOR, con el reloj. </p>
 
@@ -68,12 +193,74 @@ if (localStorage.getItem("logueado-logica") !== "true") {
         <li>Conectar la salida del interruptor 1, al pin 2 de la compuerta XOR (74LS86).</li>
         <li>Conectar la salida 3 de la compuerta XOR (74LS86) al borne de uno de los LED</li>
         <li>Ponga el interruptor en ON.</li>
-        <li>Llene la tabla de verdad de abajo.</li>
+        <li>
+            Llene la tabla de verdad de abajo.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh" colspan="11"><span style="color:black">XOR 74LS86</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh" rowspan="2">clk<br>Pin 1</td>
+                <td class="tg-18eh" rowspan="2">A<br>Pin 2</td>
+                <td class="tg-18eh" colspan="9">B - Pin 3</td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">1</td>
+                <td class="tg-18eh">2</td>
+                <td class="tg-18eh">3</td>
+                <td class="tg-18eh">4</td>
+                <td class="tg-18eh">5</td>
+                <td class="tg-18eh">6</td>
+                <td class="tg-18eh">7</td>
+                <td class="tg-18eh">8</td>
+                <td class="tg-18eh">9</td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">clk</td>
+                <td class="tg-18eh">0</td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">clk</td>
+                <td class="tg-18eh">1</td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+            </tr>
+            </tbody></table>
+        </li>
     </ol>
 </p>
 
 <p><b>Procedimiento 4.</b></p>
-<p style="text-align:center;"><img src="./5_secuenciales/5_2_reloj/img/reloj_compuerta_not.png" width ="30%" height="auto"></p>
+<p style="text-align:center;"><img src="./5_secuenciales/5_2_reloj/img/reloj_compuerta_not.png" width ="40%" height="auto"></p>
 
 <p>Observar el comportamiento de la compuerta NOT, con el reloj. </p>
 
@@ -82,6 +269,53 @@ if (localStorage.getItem("logueado-logica") !== "true") {
         <li>Conectar la salida del reloj, al pin 1 de la compuerta NOT (74LS04). </li>
         <li>Conectar la salida 2 de la compuerta NOT (74LS04) al borne de uno de los LED</li>
         <li>Ponga el interruptor en ON.</li>
-        <li>Llene la tabla de verdad de abajo.</li>
+        <li>
+            Llene la tabla de verdad de abajo.
+            <br><br>
+            <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin: auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-size:13px;
+            overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;
+            font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+            .tg .tg-18eh{border-color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+            .tg .tg-0a7q{border-color:#000000;border-width:0px;}
+            .tg .tg-xwyw{border-color:#000000;text-align:center;vertical-align:middle}
+            .tg .tg-xwyx{border-width:0px;}
+            </style>
+            <table class="tg"><thead>
+            <tr>
+                <th class="tg-18eh" colspan="10"><span style="color:black">NOT 74LS04</span></th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td class="tg-18eh" rowspan="2">clk<br>Pin 1</td>
+                <td class="tg-18eh" colspan="9">B - Pin 2</td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">1</td>
+                <td class="tg-18eh">2</td>
+                <td class="tg-18eh">3</td>
+                <td class="tg-18eh">4</td>
+                <td class="tg-18eh">5</td>
+                <td class="tg-18eh">6</td>
+                <td class="tg-18eh">7</td>
+                <td class="tg-18eh">8</td>
+                <td class="tg-18eh">9</td>
+            </tr>
+            <tr>
+                <td class="tg-18eh">clk</td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+                <td class="tg-18eh"></td>
+            </tr>
+            </tbody></table>
+        </li>
     </ol>
 </p>

@@ -19,83 +19,79 @@
 
         <header id="header-nav-main-container"></header>
 
-        <main>
-            <div class="content">
-                <section>
-                    <div id="heading-breadcrumbs">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Servicios</h1>
-                                </div>
-                            </div>
+        <section>
+            <div id="heading-breadcrumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Servicios</h1>
                         </div>
                     </div>
-                </section>
+                </div>
+            </div>
+        </section>
 
-                <section>
-                    <div id="content">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-9" id="blog-listing-medium">
-                                    <ul class="pager">
-                                        <li class="previous disabled"><a href="#">&larr; Más reciente</a></li>
-                                        <li class="next disabled"><a href="#">Más antiguo &rarr;</a></li>
+        <section>
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9" id="blog-listing-medium">
+                            <ul class="pager">
+                                <li class="previous disabled"><a href="#">&larr; Más reciente</a></li>
+                                <li class="next disabled"><a href="#">Más antiguo &rarr;</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel panel-default sidebar-menu">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Buscar</h3>
+                                </div>
+        
+                                <div class="panel-body">
+                                    <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+                                        <div class="input-group">
+                                            <input type="search" name="q" class="form-control" placeholder="Buscar">
+                                            <input type="hidden" name="sitesearch" value="http://localhost:1313/">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-neutral"><i class="fas fa-search"></i></button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="panel panel-default sidebar-menu">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Categorias</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="/categories/lorem">LOREM (2)</a></li>
+                                        <li><a href="/categories/programming">PROGRAMMING (3)</a></li>
+                                        <li><a href="/categories/pseudo">PSEUDO (2)</a></li>
+                                        <li><a href="/categories/starting">STARTING (1)</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="panel panel-default sidebar-menu">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">Buscar</h3>
-                                        </div>
-                
-                                        <div class="panel-body">
-                                            <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
-                                                <div class="input-group">
-                                                    <input type="search" name="q" class="form-control" placeholder="Buscar">
-                                                    <input type="hidden" name="sitesearch" value="http://localhost:1313/">
-                                                    <span class="input-group-btn">
-                                                        <button type="submit" class="btn btn-neutral"><i class="fas fa-search"></i></button>
-                                                    </span>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default sidebar-menu">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">Categorias</h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            <ul class="nav nav-pills nav-stacked">
-                                                <li><a href="/categories/lorem">LOREM (2)</a></li>
-                                                <li><a href="/categories/programming">PROGRAMMING (3)</a></li>
-                                                <li><a href="/categories/pseudo">PSEUDO (2)</a></li>
-                                                <li><a href="/categories/starting">STARTING (1)</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="panel sidebar-menu">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">Palabras clave</h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            <ul class="tag-cloud">
-                                                <li><a href="/tags/go"><i class="fas fa-tags"></i> go</a></li>
-                                                <li><a href="/tags/golang"><i class="fas fa-tags"></i> golang</a></li>
-                                                <li><a href="/tags/hugo"><i class="fas fa-tags"></i> hugo</a></li>
-                                                <li><a href="/tags/ipsum"><i class="fas fa-tags"></i> ipsum</a></li>
-                                                <li><a href="/tags/programming"><i class="fas fa-tags"></i> programming</a></li>
-                                                <li><a href="/tags/theme"><i class="fas fa-tags"></i> theme</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="panel sidebar-menu">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Palabras clave</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="tag-cloud">
+                                        <li><a href="/tags/go"><i class="fas fa-tags"></i> go</a></li>
+                                        <li><a href="/tags/golang"><i class="fas fa-tags"></i> golang</a></li>
+                                        <li><a href="/tags/hugo"><i class="fas fa-tags"></i> hugo</a></li>
+                                        <li><a href="/tags/ipsum"><i class="fas fa-tags"></i> ipsum</a></li>
+                                        <li><a href="/tags/programming"><i class="fas fa-tags"></i> programming</a></li>
+                                        <li><a href="/tags/theme"><i class="fas fa-tags"></i> theme</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
-        </main>
+        </section>
 
         <footer class="footer" id="footer-main-container"></footer>
 

@@ -80,7 +80,7 @@ ul.list-style-none {
 }
 .bg-light {
   background: #ffffff;
-  padding: 50px 0;
+  padding: 15px 0;
 }
 .bg-contact {
   background: url('../img/texture-green.png') center center repeat;
@@ -235,7 +235,7 @@ ul.list-style-none {
   color: #fff;
 }
 .bar.padding-big {
-  padding: 50px 0;
+  padding: 15px 0;
 }
 .bar.padding-horizontal {
   padding-left: 30px;
@@ -643,65 +643,92 @@ ul.list-style-none {
 }#navbar .navbar-nav > li > a:hover {
   color: var(--black);
   border-bottom: 2px solid var(--black);
-}/* Hero banner */
-#hero-banner {
-  background: url('../img/texture-green.png') center center repeat;
-  padding: 20px 50px 20px;
-  background-color: var(--baby-blue-da);
-  color: var(--black);
 }
+
+/* ============================================================
+   HERO BANNER
+   ============================================================ */
+
+#hero-banner {
+  background-color: var(--baby-blue-da);
+  color: #ffffff;
+  background: url('/img/texture-green.png');
+}
+
+/* Hero con imagen de fondo */
+#hero-banner.hero-full-background {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  width: 100%;
+  min-height: 480px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+
+/* Estructura interna */
+#hero-banner .row {
+  width: 100%;
+}
+
+/* Tipografía */
 #hero-banner h1 {
-  font-size: 2.5em;
+  font-size: 3.2rem;
   margin-bottom: 20px;
 }
+
 #hero-banner p {
-  font-size: 1.2em;
-  margin-bottom: 30px;
+  font-size: 1.75rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: black;
 }
+
+/* Botón */
 #hero-banner .btn {
   background-color: var(--green-730);
   color: var(--gray);
-  padding: 10px 20px;
+  padding: 10px 22px;
   border: 1px solid var(--green-730);
   border-radius: 5px;
-  font-size: 1em;
+  font-size: 1.5rem;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 #hero-banner .btn:hover {
   background-color: var(--white);
   color: var(--gray);
-  border: 1px solid var(--green-730);
+  border-color: var(--green-730);
 }
-.hero-full-background {
-  background-size: cover;
-  position: relative;
-  padding: 100px 20px;
-  color: #fff;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+/* Responsive */
+@media (max-width: 768px) {
+  #hero-banner.hero-full-background {
+    padding: 0 30px;
+    min-height: 380px;
+  }
+
+  #hero-banner .col-md-7 {
+    max-width: 100%;
+  }
+
+  #hero-banner h1 {
+    font-size: 2.2rem;
+  }
+
+  #hero-banner p {
+    font-size: 1.1rem;
+  }
 }
-.hero-full-background .overlay {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-}
-.hero-full-background h1 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-}
-.hero-full-background p {
-  font-size: 1.25rem;
-  margin-bottom: 20px;
-}
-.hero-full-background .btn {
-  margin: 5px;
-  padding: 10px 20px;
-}
+
 .image-container {
   margin: 20px auto;
   padding: 20px;
@@ -792,7 +819,7 @@ ul.list-style-none {
   padding-bottom: 20px;
 }/* Caracteristicas */
 #features {
-  padding: 50px 0;
+  padding: 15px 0;
   background-color: var(--white);
 }
 #features h2 {
@@ -817,9 +844,11 @@ ul.list-style-none {
 #features .image-container p {
   color: var(--black);
   line-height: 1.5;
-}/* Especialidades */
+}
+
+/* Especialidades */
 #specialties {
-  padding: 50px 0;
+  padding: 15px 0;
   background-color: var(--white);
 }
 #specialties h2 {
@@ -844,7 +873,38 @@ ul.list-style-none {
 #specialties .image-container p {
   color: var(--black);
   line-height: 1.5;
-}/* Especialidades */
+}
+
+/* Como trabajamos */
+#how-we-work {
+  padding: 15px 0;
+  background-color: var(--white);
+}
+#how-we-work h2 {
+  color: var(--green-730);
+  margin-bottom: 40px;
+}
+#how-we-work .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--green-730);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#how-we-work .image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#how-we-work .image-container h4 {
+  color: var(--green-730);
+  margin-bottom: 10px;
+}
+#how-we-work .image-container p {
+  color: var(--black);
+  line-height: 1.5;
+}
+
+/* Especialidades */
 #blog-post {
   padding: 50px 50px;
   background-color: var(--white);
@@ -901,7 +961,7 @@ ul.list-style-none {
   outline: none;
 }/* Beneficios */
 #benefits {
-  padding: 50px 0;
+  padding: 15px 0;
   background-color: var(--white);
 }
 #benefits h2 {
@@ -943,7 +1003,6 @@ ul.list-style-none {
 #detalle-servicio p {
   color: var(--black); /* Texto descriptivo en negro */
   line-height: 1.6;
-  margin-bottom: 30px;
 }
 #detalle-servicio .image-container {
   padding: 20px;
@@ -983,7 +1042,7 @@ ul.list-style-none {
   border: 1px solid var(--green-730);
 }/* Video y Galería */
 #video-gallery {
-  padding: 50px 0;
+  padding: 15px 0;
   background-color: var(--white);
 }
 #video-gallery h2 {
@@ -1016,7 +1075,7 @@ ul.list-style-none {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }/* Cursos Gratis */
 #courses {
-  padding: 50px 0;
+  padding: 15px 0;
   background-color: var(--white);
 }
 #courses h2 {
@@ -1054,7 +1113,7 @@ ul.list-style-none {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }/* Productos Relacionados */
 #related-products {
-  padding: 50px 0;
+  padding: 15px 0;
   background-color: var(--white);
 }
 #related-products h2 {

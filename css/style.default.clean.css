@@ -56,7 +56,6 @@ button {
 @media (max-width: 991px) {
   
 }
-p
 section,
 div.section {
   margin-bottom: 0px;
@@ -737,7 +736,7 @@ ul.list-style-none {
 }
 .image-container img {
   margin-bottom: 20px;
-  max-width: 50%;
+  height: 100px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
 }
@@ -844,6 +843,11 @@ ul.list-style-none {
 #features .image-container p {
   color: var(--black);
   line-height: 1.5;
+}
+#features .row .col-md-4,
+#features .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 /* Especialidades */
@@ -986,7 +990,13 @@ ul.list-style-none {
 #benefits .image-container p {
   color: var(--black);
   line-height: 1.5;
-}/* Servicios */
+}
+#benefits .row .col-md-4,
+#benefits .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+/* Servicios */
 #detalle-servicio {
   background-color: var(--white); /* Fondo en Baby Blue DA */
   color: var(--black); /* Texto en negro para mejor legibilidad */
@@ -1164,7 +1174,13 @@ ul.list-style-none {
   background-color: var(--white);
   color: var(--gray);
   border: 1px solid var(--red-f45);
-}/* CTA */
+}
+#related-products .row .col-md-4,
+#related-products .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+/* CTA */
 #cta {
   padding: 10px 0;
   color: var(--black);
@@ -1839,6 +1855,12 @@ hr {
   white-space: nowrap;
 }
 /* labels */
+.contact-info ul li {
+  color: var(--black);
+}
+.contact-info ul li a {
+  color: var(--button-border);
+}
 .label {
   font-family: "Montserrat", Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -1862,6 +1884,9 @@ label {
 }
 .form-group {
   margin-bottom: 20px;
+}
+.form-group label {
+  color: var(--black);
 }
 .table-objetive-module {
   border-collapse:collapse;

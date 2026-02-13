@@ -1,0 +1,781 @@
+/* ============================================================
+   CONTENT SECTION - DIV PRINCIPAL DE LOS CONTENIDOS
+   ============================================================ */
+
+#content {
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  background-color: var(--white);
+}
+#content h1 {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+#content h2 {
+  color: var(--green-730);
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+#content h3 {
+  color: var(--baby-blue-da);
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+#content h4 {
+  color: var(--red-f45);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#content .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--black);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#content .image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#content a{
+  color: var(--link-hover-bg);
+}
+#content img {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}#content p {
+  font-size: 1.3em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#content >ul {
+  font-size: 1.3em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#content >ol {
+  font-size: 1.3em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.btn-course {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+
+/* ============================================================
+   CONTENT CURSO SECTION - DIV PRINCIPAL DE LOS CONTENIDOS DE CURSO (ASIDE + CONTENIDO)
+     - Se mantiene separado del #content general para evitar estilos heredados no deseados
+   ============================================================ */
+
+#content-curso {
+  flex:1;
+  background:#fff;
+  padding:20px;
+  border-radius:6px;
+  padding-top: 20px;
+  width: auto;
+  max-width: 1000px;
+  position: relative;
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   HERO BANNER
+   ============================================================ */
+
+#hero-banner {
+  background-color: var(--baby-blue-da);
+  color: #ffffff;
+  background: url('/img/texture-green.png');
+}
+
+/* Hero con imagen de fondo */
+#hero-banner.hero-full-background {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  width: 100%;
+  min-height: 480px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+
+/* Estructura interna */
+#hero-banner .row {
+  width: 100%;
+}
+
+/* Tipografía */
+#hero-banner h1 {
+  font-size: 3.2rem;
+  margin-bottom: 20px;
+}
+
+#hero-banner p {
+  font-size: 1.75rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: black;
+}
+
+/* Botón */
+#hero-banner .btn {
+  background-color: var(--green-730);
+  color: var(--gray);
+  padding: 10px 22px;
+  border: 1px solid var(--green-730);
+  border-radius: 5px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#hero-banner .btn:hover {
+  background-color: var(--white);
+  color: var(--gray);
+  border-color: var(--green-730);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #hero-banner.hero-full-background {
+    padding: 0 30px;
+    min-height: 380px;
+  }
+
+  #hero-banner .col-md-7 {
+    max-width: 100%;
+  }
+
+  #hero-banner h1 {
+    font-size: 2.2rem;
+  }
+
+  #hero-banner p {
+    font-size: 1.1rem;
+  }
+}
+
+
+/* ============================================================
+   HEADING & BREADCRUMBS SECTION - SECCIÓN DE ENCABEZADO Y "MIGAS DE PAN"
+   ============================================================ */
+
+#heading-breadcrumbs {
+  background: url('../img/texture-green.png') center center repeat;
+  margin-right: 0px;
+  padding-right: 0px;
+}
+#heading-breadcrumbs .row {
+  padding: 0 0;
+  margin: 0 0; 
+  position: relative;
+}
+#heading-breadcrumbs .row h1 {
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 30px;
+}
+#heading-breadcrumbs ul.breadcrumb {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+
+/* ============================================================
+   TOP BAR SECTION - SECCIÓN DE BARRA SUPERIOR (CONTACTO, REDES SOCIALES, LOGIN)
+   ============================================================ */
+
+#top {
+  background-color: var(--baby-blue-da);
+  color: var(--white);
+  padding: 10px 0;
+}
+#top p {
+  margin: 0;
+  font-size: 12px;
+}
+#top .social {
+  float: right;
+  text-align: right;
+}
+#top .social a {
+  color: #999999;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  line-height: 24px;
+  font-size: 12px;
+  text-align: center;
+}
+#top .social a:hover {
+  color: #fff;
+  background: var(--primary-accent);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+#top .login {
+  float: right;
+}
+#top .login a {
+  font-size: 12px;
+  color: #eeeeee;
+  margin-right: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+}
+#top .social a {
+  color: var(--white);
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+#top .social a:hover.whatsapp {
+  background-color: #4a7f45;
+}
+#top .social a:hover.facebook {
+  background-color: #4460ae;
+}
+#top .social a:hover.gplus {
+  background-color: #c21f25;
+}
+#top .social a:hover.twitter {
+  background-color: #3cf;
+}
+#top .social a:hover.instagram {
+  background-color: #cd4378;
+}
+#top .social a:hover.email {
+  background-color: #7f7645;
+}
+
+/* ============================================================
+   FEATURES SECTION - SECCIÓN DE CARACTERÍSTICAS PRODUCTOS/SERVICIOS
+   ============================================================ */
+
+#features {
+  padding: 15px 0;
+  background-color: var(--white);
+}
+#features h2 {
+  color: var(--green-730);
+  margin-bottom: 40px;
+}
+#features .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--green-730);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#features .image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#features .image-container h4 {
+  color: var(--green-730);
+  margin-bottom: 10px;
+}
+#features .image-container p {
+  color: var(--black);
+  line-height: 1.5;
+}
+#features .row .col-md-4,
+#features .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* ============================================================
+   SPECIALTIES SECTION - SECCIÓN DE ESPECIALIDADES PRODUCTOS/SERVICIOS
+   ============================================================ */
+
+#specialties {
+  padding: 15px 0;
+  background-color: var(--white);
+}
+#specialties h2 {
+  color: var(--green-730);
+  margin-bottom: 40px;
+}
+#specialties .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--green-730);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#specialties .image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#specialties .image-container h4 {
+  color: var(--green-730);
+  margin-bottom: 10px;
+}
+#specialties .image-container p {
+  color: var(--black);
+  line-height: 1.5;
+}
+#specialties .row .col-md-4,
+#specialties .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+/* ============================================================
+   HOW WE WORK SECTION - SECCIÓN DE CÓMO TRABAJAMOS
+   ============================================================ */
+
+#how-we-work {
+  padding: 15px 0;
+  background-color: var(--white);
+}
+#how-we-work h2 {
+  color: var(--green-730);
+  margin-bottom: 40px;
+}
+#how-we-work .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--green-730);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#how-we-work .image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#how-we-work .image-container h4 {
+  color: var(--green-730);
+  margin-bottom: 10px;
+}
+#how-we-work .image-container p {
+  color: var(--black);
+  line-height: 1.5;
+}
+#how-we-work .row .col-md-4,
+#how-we-work .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+/* ============================================================
+   BLOG POST SECTION - SECCIÓN DE ENTRADAS DE BLOG
+   ============================================================ */
+
+#blog-post {
+  padding: 50px 50px;
+  background-color: var(--white);
+  border: 1px solid var(--green-730);
+  border-bottom: 5px solid var(--green-730);
+  border-radius: 20px;
+}
+#blog-post h2 {
+  color: var(--black);
+  text-align: center;
+  margin-bottom: 40px;
+}
+#blog-post .image-container h4 {
+  color: var(--green-730);
+  margin-bottom: 10px;
+}
+#blog-post .image-container p {
+  color: var(--black);
+  line-height: 1.5;
+}
+#blog-post .btn {
+  background-color: var(--green-730);
+  color: var(--gray);
+  padding: 10px 20px;
+  border: 1px solid var(--green-730);
+  border-radius: 20px;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+#blog-post .btn:hover {
+  background-color: var(--white);
+  color: var(--gray);
+  border: 1px solid var(--green-730);
+}
+#blog-post .textbox {
+  margin: 15px 0;
+  display: flex;
+  justify-content: left;
+}
+#blog-post .textbox input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
+#blog-post .textbox input:focus {
+  border-color: var(--green-730);
+  outline: none;
+}
+#blog-post .row .col-md-4,
+#blog-post .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* ============================================================
+   BENEFITS SECTION - SECCIÓN DE BENEFICIOS DE PRODUCTOS/SERVICIOS
+   ============================================================ */
+
+#benefits {
+  padding: 15px 0;
+  background-color: var(--white);
+}
+#benefits h2 {
+  color: var(--green-730);
+  margin-bottom: 40px;
+}
+#benefits .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--green-730);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#benefits .image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#benefits .image-container h4 {
+  color: var(--green-730);
+  margin-bottom: 10px;
+}
+#benefits .image-container p {
+  color: var(--black);
+  line-height: 1.5;
+}
+#benefits .row .col-md-4,
+#benefits .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* ============================================================
+   DETAIL SERVICE SECTION - SECCIÓN DE DETALLE DE SERVICIO
+   ============================================================ */
+
+#detalle-servicio {
+  background-color: var(--white); /* Fondo en Baby Blue DA */
+  color: var(--black); /* Texto en negro para mejor legibilidad */
+  padding: 30px 15px;
+  border-radius: 10px; /* Bordes redondeados */
+  margin-top: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera para separación */
+}
+#detalle-servicio h2 {
+  color: var(--green-730); /* Título en Green 730 */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+#detalle-servicio p {
+  color: var(--black); /* Texto descriptivo en negro */
+  line-height: 1.6;
+}
+#detalle-servicio .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--green-730);
+  background-color: var(--white); /* Fondo blanco para las tarjetas */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltar las tarjetas */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones para hover */
+}
+#detalle-servicio .image-container:hover {
+  transform: translateY(-5px); /* Elevación al pasar el mouse */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* Aumenta la sombra */
+}
+#detalle-servicio h4 {
+  color: var(--green-730); /* Títulos de servicios en Red F45 */
+  font-weight: bold;
+  margin-top: 15px;
+}
+#detalle-servicio .row {
+  margin-bottom: 20px;
+}
+#detalle-servicio .btn {
+  background-color: var(--green-730);
+  color: var(--gray);
+  padding: 10px 20px;
+  border: 1px solid var(--green-730);
+  border-radius: 5px;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#detalle-servicio .btn:hover {
+  background-color: var(--white);
+  color: var(--gray);
+  border: 1px solid var(--green-730);
+}
+#detalle-servicio .row .col-md-4,
+#detalle-servicio .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+/* ============================================================
+   VIDEO GALLERY SECTION - SECCIÓN DE GALERÍA DE VIDEOS
+   ============================================================ */
+
+#video-gallery {
+  padding: 15px 0;
+  background-color: var(--white);
+}
+#video-gallery h2 {
+  color: var(--baby-blue-da);
+  margin-bottom: 20px;
+}
+#video-gallery p {
+  color: var(--black);
+  margin-bottom: 40px;
+}
+#video-gallery video {
+  border: 5px solid var(--baby-blue-da);
+  border-radius: 10px;
+  max-width: 100%;
+}
+#video-gallery img {
+  border-bottom: 3px solid var(--baby-blue-da);
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#video-gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#video-gallery .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--baby-blue-da);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#video-gallery .row .col-md-4,
+#video-gallery .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+/* ============================================================
+    COURSES SECTION - SECCIÓN DE CURSOS
+   ============================================================ */
+
+#courses {
+  padding: 15px 0;
+  background-color: var(--white);
+}
+#courses h2 {
+  color: var(--baby-blue-da);
+  margin-bottom: 20px;
+}
+#courses p {
+  color: var(--black);
+  margin-bottom: 40px;
+}
+#courses video {
+  border: 5px solid var(--baby-blue-da);
+  border-radius: 10px;
+  max-width: 100%;
+}
+#courses img {
+  border-bottom: 3px solid var(--baby-blue-da);
+  width: 150px;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#courses img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#courses .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--baby-blue-da);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#courses .image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#courses .row .col-md-4,
+#courses .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+/* ============================================================
+   RELATED PRODUCTS SECTION - SECCIÓN DE PRODUCTOS RELACIONADOS
+   ============================================================ */
+
+#related-products {
+  padding: 15px 0;
+  background-color: var(--white);
+}
+#related-products h2 {
+  color: var(--red-f45);
+  margin-bottom: 40px;
+}
+#related-products .image-container {
+  padding: 20px;
+  border-bottom: 3px solid var(--red-f45);
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#related-products .image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#related-products .image-container img {
+  margin-bottom: 15px;
+  border-bottom: 3px solid var(--red-f45);
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+#related-products .image-container img:hover {
+  transform: scale(1.05);
+}
+#related-products .image-container h4 {
+  color: var(--red-f45);
+  margin-bottom: 10px;
+}
+#related-products .image-container p {
+  color: var(--black);
+  line-height: 1.5;
+}
+#related-products .btn {
+  background-color: var(--red-f45);
+  color: var(--white);
+  padding: 8px 16px;
+  border: 1px solid var(--red-f45);
+  border-radius: 5px;
+  font-size: 1em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#related-products .btn:hover {
+  background-color: var(--white);
+  color: var(--gray);
+  border: 1px solid var(--red-f45);
+}
+#related-products .row .col-md-4,
+#related-products .row .col-md-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+/* ============================================================
+   MAP SECTION - SECCIÓN DE MAPA
+   ============================================================ */
+
+#map {
+  height: 300px;
+}
+#map.with-border {
+  border-top: solid 1px var(--primary-accent);
+  border-bottom: solid 1px var(--primary-accent);
+}
+
+
+/* ============================================================
+   CTA SECTION - SECCIÓN DE LLAMADO A LA ACCIÓN
+   ============================================================ */
+
+#cta {
+  padding: 10px 0;
+  color: var(--black);
+}
+#cta h2 {
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  color: var(--gray);
+}
+#cta p {
+  color: var(--gray);
+}
+#cta .btn {
+  background-color: var(--green-730);
+  color: var(--gray);
+  padding: 10px 20px;
+  border: 1px solid var(--green-730);
+  border-radius: 5px;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#cta .btn:hover {
+  background-color: var(--white);
+  color: var(--gray);
+  border: 1px solid var(--green-730);
+}
+
+
+/* ============================================================
+   FOOTER COPYRIGHT SECTION - SECCIÓN DE PIE DE PÁGINA COPYRIGHT
+   ============================================================ */
+
+#footer-copyright-container {
+  background-color: var(--black);
+  color: #CCCCCC;
+  padding: 15px 0;
+  text-align: center;
+}#footer-copyright-container p {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+
+/* ============================================================
+   ERROR PAGE SECTION - SECCIÓN DE PÁGINA DE ERROR
+   ============================================================ */
+
+#error-page {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+#error-page h4 {
+  margin-bottom: 40px;
+}
+#error-page p.buttons {
+  margin-top: 40px;
+}

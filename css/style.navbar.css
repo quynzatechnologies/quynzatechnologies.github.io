@@ -1,0 +1,754 @@
+/* ============================================================
+   NAVBAR - BARRA DE NAVEGACIÓN
+   ============================================================ */
+
+.navbar:before,
+.navbar:after,
+.navbar-header:before,
+.navbar-header:after {
+  content: " ";
+  display: table;
+}
+.navbar:after,
+.navbar-header:after {
+  clear: both;
+}
+.navbar {
+  position: relative;
+  min-height: 62px;
+  margin-bottom: 0;
+  border-bottom: 1px solid transparent;
+}
+@media (min-width: 768px) {
+  .navbar {
+    border-radius: 0px;
+  }
+}
+@media (min-width: 768px) {
+  .navbar-header {
+    float: left;
+  }
+}
+.navbar-collapse {
+  overflow-x: visible;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.navbar-collapse.in {
+  overflow-y: auto;
+}
+@media (min-width: 768px) {
+  .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .navbar-collapse.in {
+    overflow-y: visible;
+  }
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-static-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.navbar-fixed-top .navbar-collapse,
+.navbar-affixed-top .navbar-collapse,
+.navbar-fixed-bottom .navbar-collapse {
+  max-height: 340px;
+}
+@media (max-width: 480px) and (orientation: landscape) {
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-affixed-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    max-height: 200px;
+  }
+}
+.container > .navbar-header,
+.container-fluid > .navbar-header,
+.container > .navbar-collapse,
+.container-fluid > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+@media (min-width: 768px) {
+  .container > .navbar-header,
+  .container-fluid > .navbar-header,
+  .container > .navbar-collapse,
+  .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.navbar-static-top {
+  z-index: 1000;
+  border-width: 0 0 1px;
+}
+@media (min-width: 768px) {
+  .navbar-static-top {
+    border-radius: 0;
+  }
+}
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+@media (min-width: 768px) {
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    border-radius: 0;
+  }
+}
+.navbar-fixed-top {
+  top: 0;
+  border-width: 0 0 1px;
+}
+.navbar-fixed-bottom {
+  bottom: 0;
+  margin-bottom: 0;
+  border-width: 1px 0 0;
+}
+.navbar-brand {
+  float: left;
+  padding: 10px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 62px;
+}
+.navbar-brand:hover,
+.navbar-brand:focus {
+  text-decoration: none;
+}
+.navbar-brand img {
+  max-height: 42px;
+}
+@media (min-width: 768px) {
+  .navbar > .container .navbar-brand,
+  .navbar > .container-fluid .navbar-brand {
+    margin-left: -15px;
+  }
+}
+.navbar-toggle {
+  position: relative;
+  float: right;
+  margin-right: 15px;
+  padding: 9px 10px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+.navbar-toggle:focus {
+  outline: 0;
+}
+.navbar-nav {
+  margin: 10.5px -15px;
+}
+.navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+@media (max-width: 767px) {
+  .navbar-nav .open .dropdown-menu > li > a,
+  .navbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 5px 15px 5px 25px;
+  }
+  .navbar-nav .open .dropdown-menu > li > a {
+    line-height: 20px;
+  }
+  .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-nav .open .dropdown-menu > li > a:focus {
+    background-image: none;
+  }
+}
+@media (min-width: 768px) {
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .navbar-nav > li {
+    float: left;
+  }
+  .navbar-nav > li > a {
+    padding-top: 21px;
+    padding-bottom: 21px;
+  }
+  .navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+  }
+}
+@media (min-width: 768px) {
+  .navbar-left {
+    float: left !important;
+  }
+  .navbar-right {
+    float: right !important;
+  }
+}
+.navbar-form {
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 10px 15px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+@media (max-width: 767px) {
+  .navbar-form .form-group {
+    margin-bottom: 5px;
+  }
+}
+.contact-info ul {
+  color: var(--black);
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  color: var(--black)
+}
+@media (min-width: 768px) {
+  .navbar-form {
+    width: auto;
+    border: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .navbar-form.navbar-right:last-child {
+    margin-right: -15px;
+  }
+}
+.navbar-nav > li > .dropdown-menu {
+  margin-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.navbar-default {
+  background-color: #ffffff;
+  border-color: #cccccc;
+  border-bottom: none;
+}
+.navbar-default .navbar-brand {
+  color: #555555;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #3b3b3b;
+  background-color: transparent;
+}
+.navbar-default .navbar-text {
+  color: #777777;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #555555;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #555555;
+  background-color: var(--navbar-focus);
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: var(--primary-accent);
+}
+.navbar-default .navbar-nav > .disabled > a,
+.navbar-default .navbar-nav > .disabled > a:hover,
+.navbar-default .navbar-nav > .disabled > a:focus {
+  color: #cccccc;
+  background-color: transparent;
+}
+.navbar-default .navbar-toggle {
+  border-color: #dddddd;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: var(--primary-accent);
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #888888;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #cccccc;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color: var(--primary-accent);
+  color: #ffffff;
+}
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #555555;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: var(--primary-accent);
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: var(--primary-accent);
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #cccccc;
+    background-color: transparent;
+  }
+}
+.navbar-default .navbar-link {
+  color: #555555;
+}
+.navbar-default .navbar-link:hover {
+  color: #555555;
+}
+.navbar-default .btn-link {
+  color: #555555;
+}
+.navbar-default .btn-link:hover,
+.navbar-default .btn-link:focus {
+  color: #555555;
+}
+.navbar-default .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-default .btn-link:hover,
+.navbar-default .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-default .btn-link:focus {
+  color: #cccccc;
+}
+/* Header: Menú de Navegación */
+.navbar {
+  border: none;
+}
+.navbar ul.nav > li > a {
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  border-top: solid 5px transparent;
+}
+.navbar ul.nav > li > a:hover {
+  border-top: solid 5px var(--primary-accent);
+}
+.navbar ul.nav > li.active > a,
+.navbar ul.nav > li.open > a {
+  text-decoration: none !important;
+  border-top: solid 5px var(--navbar-border-top);
+}
+@media (max-width: 768px) {
+  .navbar ul.nav > li.active > a,
+  .navbar ul.nav > li.open > a {
+    border-top-color: transparent;
+  }
+  .navbar ul.nav > li > a:hover {
+    border-top-color: transparent;
+  }
+}
+.navbar.navbar-light ul.nav > li.active > a {
+  border-top: solid 5px var(--navbar-border-top);
+  background: #fff !important;
+  color: #555555 !important;
+}
+.navbar.navbar-light ul.nav > li.active > a:hover {
+  border-top: solid 5px var(--navbar-border-top);
+}
+.navbar.navbar-light ul.nav > li > a:hover,
+.navbar.navbar-light ul.nav > li.open > a:hover,
+.navbar.navbar-light ul.nav > li > a:focus,
+.navbar.navbar-light ul.nav > li.open > a:focus {
+  border-top: solid 5px var(--primary-accent);
+  background: #fff !important;
+  color: #555555 !important;
+}
+.navbar ul.dropdown-menu {
+  margin: 0;
+  padding: 0;
+}
+.navbar ul.dropdown-menu li {
+  list-style-type: none;
+  border-bottom: solid 1px #eeeeee;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 0;
+}
+.navbar ul.dropdown-menu li a {
+  position: relative;
+  color: #999999;
+  font-size: 12px;
+  display: block;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  left: 0;
+}
+.navbar ul.dropdown-menu li a:hover {
+  color: var(--primary-accent);
+  text-decoration: none;
+  background: none;
+  left: 2px;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+@media (max-width: 767px) {
+  .navbar ul.dropdown-menu li a:hover {
+    left: 0;
+  }
+}
+.navbar .yamm-content h3 {
+  font-size: 18px;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  margin-top: 5px;
+  border-bottom: dotted 1px #555555;
+  letter-spacing: 0.08em;
+}
+@media (max-width: 767px) {
+  .navbar .yamm-content h3 {
+    font-size: 14px;
+  }
+}
+.navbar .yamm-content h5 {
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  border-bottom: dotted 1px #555555;
+  letter-spacing: 0.08em;
+}
+.navbar .yamm-content ul {
+  margin: 0;
+  padding: 0;
+}
+.navbar .yamm-content ul li {
+  list-style-type: none;
+  border-bottom: solid 1px #eeeeee;
+  text-transform: uppercase;
+  padding: 4px 0;
+}
+.navbar .yamm-content ul li a {
+  position: relative;
+  color: var(--black);
+  font-size: 12px;
+  display: block;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.navbar .yamm-content ul li a:hover {
+  color: var(--primary-accent);
+  text-decoration: none;
+  padding-left: 2px;
+}
+.navbar .yamm-content .banner {
+  margin-bottom: 10px;
+}
+.navbar .yamm-fw .dropdown-menu {
+  padding: 0;
+}
+.navbar .navbar-buttons {
+  float: right;
+}
+.navbar .navbar-buttons button,
+.navbar .navbar-buttons a.btn,
+.navbar .navbar-buttons .btn-default.navbar-toggle {
+  margin-top: 11px;
+  margin-bottom: 11px;
+  margin-left: 0;
+  margin-right: 5px;
+}
+.navbar .btn-default,
+.navbar .btn-default.navbar-toggle {
+  color: #999999;
+  background-color: #fff;
+  margin-left: 7px;
+  margin-right: 0;
+}
+.navbar .btn-default:hover,
+.navbar .btn-default.navbar-toggle:hover,
+.navbar .btn-default:focus,
+.navbar .btn-default.navbar-toggle:focus {
+  background-color: #fff;
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+}
+.navbar #search {
+  clear: both;
+  border-top: solid 1px var(--primary-accent);
+  text-align: right;
+}
+.navbar #search form {
+  float: right;
+}
+.navbar #search form .input-group {
+  width: 500px;
+}
+@media (max-width: 768px) {
+  .navbar #search form .input-group {
+    width: 100%;
+  }
+}
+.navbar #basket-overview a {
+  margin-left: 7px;
+}
+.navbar-affixed-top {
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+.navbar-affixed-top.affix {
+  -webkit-box-shadow: 0 0 5px #cccccc;
+  box-shadow: 0 0 5px #cccccc;
+}
+.navbar-affixed-top.affix + section {
+  margin-top: 62px;
+}
+@supports (position: sticky) {
+  .navbar-affixed-top {
+    position: sticky;
+  }
+  .navbar-affixed-top.affix + section {
+    margin-top: 0;
+  }
+}
+
+
+#navbar {
+  background-color: var(--white);
+  border-bottom: 2px solid var(--baby-blue-da);
+  padding: 10px 0;
+}
+#navbar .navbar-nav > li > a {
+  color: var(--black);
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+#navbar .navbar-nav > li > a:hover {
+  color: var(--black);
+  border-bottom: 2px solid var(--black);
+}
+
+/* ============================================================
+   ASIDE NAVIGATION - NAVEGACIÓN LATERAL
+   ============================================================ */
+
+#aside-nav-curso-micropython-container, 
+#aside-nav-curso-iot-container, 
+#aside-nav-curso-logica-container {
+  flex:0 0 580px;
+  background:#f2f2f2;
+  border-radius:6px;
+  padding:10px;
+  transition:all .3s ease;
+}/* Colapso total */
+#aside-nav-curso-micropython-container.is-collapsed,
+#aside-nav-curso-iot-container.is-collapsed,
+#aside-nav-curso-logica-container.is-collapsed {
+  flex:0 0 0 !important;
+  width:0 !important;
+  padding:0 !important;
+  overflow:hidden;
+}
+/* --- MENÚ --- *//* Todos los li como bloque por defecto */
+#aside-nav-curso-micropython-container li,
+#aside-nav-curso-iot-container li,
+#aside-nav-curso-logica-container li {
+  display:block;
+  position:relative;
+}
+/* Solo los li con submenú usan flex (texto + flecha a la derecha) */
+#aside-nav-curso-micropython-container li.has-submenu,
+#aside-nav-curso-iot-container li.has-submenu,
+#aside-nav-curso-logica-container li.has-submenu {
+  align-items:center;
+  justify-content:space-between;
+}
+/* Texto recortado si es largo */
+#aside-nav-curso-micropython-container li.has-submenu > a,
+#aside-nav-curso-iot-container li.has-submenu > a,
+#aside-nav-curso-logica-container li.has-submenu > a {
+  flex:1 1 auto;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+/* Flecha fija a la derecha (sin float) */
+#aside-nav-curso-micropython-container .submenu-toggle,
+#aside-nav-curso-iot-container .submenu-toggle,
+#aside-nav-curso-logica-container .submenu-toggle {
+  flex:0 0 auto;
+  margin-left:8px;
+  cursor:pointer;
+  font-size:14px;
+  line-height:1;
+  user-select:none;
+  /* asegurar que anule floats anteriores si existían */
+  float:none !important;
+}
+#aside-nav-curso-micropython-container .submenu-toggle,
+#aside-nav-curso-iot-container .submenu-toggle,
+#aside-nav-curso-logica-container .submenu-toggle {
+  transform: rotate(0);
+  transition: transform .15s ease;
+}
+/* Submenús en bloque vertical */
+#aside-nav-curso-micropython-container li > ul,
+#aside-nav-curso-iot-container li > ul,
+#aside-nav-curso-logica-container li > ul {
+  display:none;
+  padding-left:15px;
+}
+#aside-nav-curso-micropython-container li.open > ul,
+#aside-nav-curso-iot-container li.open > ul,
+#aside-nav-curso-logica-container li.open > ul {
+  display:block;
+}
+/* Resalte opcional del ítem abierto */
+#aside-nav-curso-micropython-container li.open > a,
+#aside-nav-curso-iot-container li.open > a,
+#aside-nav-curso-logica-container li.open > a {
+  font-weight:700;
+}
+/* Cada fila de título (link + flecha) */
+#aside-nav-curso-micropython-container .menu-item-header,
+#aside-nav-curso-iot-container .menu-item-header,
+#aside-nav-curso-logica-container .menu-item-header {
+  position: relative;
+  display: block;                  /* no flex en el <li>, solo aquí */
+  border-radius: 4px;
+}
+/* Hover y cuando el li está abierto */
+#aside-nav-curso-micropython-container li.open > .menu-item-header,
+#aside-nav-curso-iot-container li.open > .menu-item-header,
+#aside-nav-curso-logica-container li.open > .menu-item-header,
+#aside-nav-curso-micropython-container .menu-item-header:hover,
+#aside-nav-curso-iot-container .menu-item-header:hover,
+#aside-nav-curso-logica-container .menu-item-header:hover {
+  background: rgba(255,255,255,0.18);
+}
+/* Texto: recorte con "..." si no cabe */
+#aside-nav-curso-micropython-container .menu-item-header > a,
+#aside-nav-curso-iot-container .menu-item-header > a,
+#aside-nav-curso-logica-container .menu-item-header > a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--black);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+/* Flecha pegada al borde derecho, centrada verticalmente */
+#aside-nav-curso-micropython-container .menu-item-header > .submenu-toggle,
+#aside-nav-curso-iot-container .menu-item-header > .submenu-toggle,
+#aside-nav-curso-logica-container .menu-item-header > .submenu-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0);
+  transition: transform .15s ease;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  line-height: 1;
+}
+#aside-nav-curso-micropython-container li.open > .menu-item-header > .submenu-toggle,
+#aside-nav-curso-iot-container li.open > .menu-item-header > .submenu-toggle,
+#aside-nav-curso-logica-container li.open > .menu-item-header > .submenu-toggle {
+  transform: rotate(90deg);
+}
+/* Submenús en bloque vertical, sin “caja” propia */
+#aside-nav-curso-micropython-container li > ul,
+#aside-nav-curso-iot-container li > ul,
+#aside-nav-curso-logica-container li > ul {
+  display: none;                /* se abre por JS añadiendo .open al li */
+  padding-left: 16px;
+  margin: 6px 0 0 0;
+  background: #cbcbcb;
+  border: 0;
+}
+#aside-nav-curso-micropython-container li.open > ul,
+#aside-nav-curso-iot-container li.open > ul,
+#aside-nav-curso-logica-container li.open > ul {
+  display: block;
+}
+/* Evita fondos heredados que crean bandas raras */
+#aside-nav-curso-micropython-container li,
+#aside-nav-curso-micropython-container ul,
+#aside-nav-curso-iot-container li,
+#aside-nav-curso-iot-container ul,
+#aside-nav-curso-logica-container li,
+#aside-nav-curso-logica-container ul {
+  background: transparent;
+  border: 0;
+}
+
+
+/* ============================================================
+   SIDEBAR TOGGLE BUTTONS - BOTONES DE TOGGLE PARA LOS ASIDES
+     (solo visibles en pantallas grandes, ocultos en móviles)
+   ============================================================ */
+
+#toggle-sidebar-micropython,
+#toggle-sidebar-iot,
+#toggle-sidebar-logica {
+  position:sticky;
+  top:20px;
+  align-self:flex-start;
+  background:#626262;
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  margin:10px;
+  border-radius:4px;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:200;
+}
+#toggle-sidebar-micropython:hover,
+#toggle-sidebar-iot:hover,
+#toggle-sidebar-logica:hover {
+  background:#4e4e4e; 
+}
+
+/* Responsive */
+@media (max-width: 992px){
+  .div-content{ flex-direction:column; }
+  #aside-nav-curso-micropython-container,
+  #aside-nav-curso-iot-container,
+  #aside-nav-curso-logica-container{ 
+    width:100%; 
+    flex:none; 
+  }
+  #content-curso{ width:100%; max-width:none; }
+}
